@@ -1,0 +1,8 @@
+{
+	"Product":"Parime",
+	"ProductVersion": "1.0.0",
+
+	"APIServerPort": 9999,
+
+	"OratorHTTPProxyDestinationURL": "http://127.0.0.1:8086/"
+}
