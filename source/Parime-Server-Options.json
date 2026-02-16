@@ -6,6 +6,8 @@
 
 	"ParimeBinaryStorageRoot": "./parime-binary-storage/",
 
+	"ParimeManagementWebAppPath": "./management_web_app_built/",
+
 	"RestifyConfiguration":
 	{
 		"strictNext": true,

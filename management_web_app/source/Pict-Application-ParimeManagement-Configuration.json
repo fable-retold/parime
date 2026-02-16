@@ -1,0 +1,15 @@
+{
+	"Name": "Parime Management Console",
+	"Hash": "ParimeManagement",
+
+	"MainViewportViewIdentifier": "ParimeManagement-Layout",
+
+	"AutoSolveAfterInitialize": true,
+	"AutoRenderMainViewportViewAfterInitialize": false,
+	"AutoRenderViewsAfterInitialize": false,
+
+	"pict_configuration":
+		{
+			"Product": "ParimeManagement-Pict-Application"
+		}
+}

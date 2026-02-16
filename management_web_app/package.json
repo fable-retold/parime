@@ -1,0 +1,43 @@
+{
+	"name": "parime-management",
+	"version": "1.0.0",
+	"description": "Parime Data Lake Management Console",
+	"main": "source/Pict-Application-ParimeManagement.js",
+	"scripts": {
+		"build": "npx quack build && npx quack copy",
+		"test": "echo \"Error: no test specified\" && exit 0"
+	},
+	"author": "steven velozo <steven@velozo.com>",
+	"license": "MIT",
+	"dependencies": {
+		"pict": "^1.0.343",
+		"pict-application": "^1.0.28",
+		"pict-router": "^1.0.4",
+		"pict-view": "^1.0.64",
+		"pict-provider": "^1.0.3"
+	},
+	"devDependencies": {
+		"quackage": "^1.0.41"
+	},
+	"copyFilesSettings": {
+		"whenFileExists": "overwrite"
+	},
+	"copyFiles": [
+		{
+			"from": "./html/*",
+			"to": "../management_web_app_built/"
+		},
+		{
+			"from": "./css/**",
+			"to": "../management_web_app_built/css/"
+		},
+		{
+			"from": "./node_modules/pict/dist/*",
+			"to": "../management_web_app_built/js/"
+		},
+		{
+			"from": "./dist/parime-management*",
+			"to": "../management_web_app_built/"
+		}
+	]
+}

@@ -1,4 +1,5 @@
 const libFableServiceBase = require('fable-serviceproviderbase');
+const libPath = require('path');
 
 const libOrator = require('orator');
 const libOratorServiceServerRestify = require('orator-serviceserver-restify');
@@ -23,6 +24,7 @@ const libEndpointRecordLake = require('./endpoints/Endpoint-RecordLake.js');
 const libEndpointBinaryLake = require('./endpoints/Endpoint-BinaryLake.js');
 const libEndpointCombinedLake = require('./endpoints/Endpoint-CombinedLake.js');
 const libEndpointWebSocket = require('./endpoints/Endpoint-WebSocket.js');
+const libEndpointServerInfo = require('./endpoints/Endpoint-ServerInfo.js');
 
 class ParimeWebServer extends libFableServiceBase
 {
@@ -128,6 +130,23 @@ class ParimeWebServer extends libFableServiceBase
 			(fStageComplete) =>
 			{
 				libOratorEndpoint.addEndpoint('WebSocket', libEndpointWebSocket, fStageComplete, _Orator);
+			});
+
+		// Register ServerInfo endpoint
+		tmpAnticipate.anticipate(
+			(fStageComplete) =>
+			{
+				libOratorEndpoint.addEndpoint('ServerInfo', libEndpointServerInfo, fStageComplete, _Orator);
+			});
+
+		// Serve the management web app static files
+		tmpAnticipate.anticipate(
+			(fStageComplete) =>
+			{
+				let tmpWebAppPath = libPath.resolve(__dirname, '..', this.options.ParimeManagementWebAppPath || './management_web_app_built/');
+				_Orator.addStaticRoute(tmpWebAppPath, 'index.html', '/1.0/ManagementApp/*', '/1.0/ManagementApp/');
+				this.fable.log.info(`Parime Management App served from [${tmpWebAppPath}].`);
+				return fStageComplete();
 			});
 
 		// Now start the service server.

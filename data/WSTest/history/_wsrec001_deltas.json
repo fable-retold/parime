@@ -1,1 +1,1 @@
-{"RecordGUID":"wsrec001","Deltas":[{"Delta":{"Greeting":"Hello from WebSocket"},"Ingest":1771212265001}]}
+{"RecordGUID":"wsrec001","Deltas":[{"Delta":{"Greeting":"Hello from WebSocket"},"Ingest":1771212265001},{"Delta":{"Greeting":"Hello from WebSocket"},"Ingest":1771214708396},{"Delta":{"Greeting":"Hello from WebSocket"},"Ingest":1771214970060},{"Delta":{"Greeting":"Hello from WebSocket"},"Ingest":1771215219257},{"Delta":{"Greeting":"Hello from WebSocket"},"Ingest":1771215541525},{"Delta":{"Greeting":"Hello from WebSocket"},"Ingest":1771215932204}]}

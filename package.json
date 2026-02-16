@@ -36,7 +36,7 @@
     },
     "dependencies": {
         "bibliograph": "^0.1.1",
-        "orator": "^5.0.2",
+        "orator": "^6.0.0",
         "orator-serviceserver-restify": "^2.0.5",
         "pict": "^1.0.345"
     }
