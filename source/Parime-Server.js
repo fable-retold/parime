@@ -1,7 +1,6 @@
 const libFableServiceBase = require('fable-serviceproviderbase');
 
 const libOrator = require('orator');
-const libOratorHTTPProxy = require(`orator-http-proxy`);
 const libOratorServiceServerRestify = require('orator-serviceserver-restify');
 
 // Pull in the default fable/pict options
@@ -12,35 +11,71 @@ libDefaultServerOptions._package = require('../package.json');
 libDefaultServerOptions.ProductVersion = libDefaultServerOptions._package.version;
 
 const libOratorEndpoint = require('./orator-extensions/Orator-Endpoint.js');
-const libParemeJSONPost = require('./endpoints/Parime-JSON-Post.js');
+
+// Services
+const libParimeLakeValidation = require('./services/Parime-LakeValidation.js');
+const libParimeBinaryStorage = require('./services/Parime-BinaryStorage.js');
+const libBibliograph = require('bibliograph');
+const libParimeBibliographHelpers = require('./services/Parime-BibliographHelpers.js');
+
+// Endpoints
+const libEndpointRecordLake = require('./endpoints/Endpoint-RecordLake.js');
+const libEndpointBinaryLake = require('./endpoints/Endpoint-BinaryLake.js');
+const libEndpointCombinedLake = require('./endpoints/Endpoint-CombinedLake.js');
+const libEndpointWebSocket = require('./endpoints/Endpoint-WebSocket.js');
 
 class ParimeWebServer extends libFableServiceBase
 {
 	constructor(pFable, pOptions, pServiceHash)
 	{
 		// Intersect default options, parent constructor, service information
-		let tmpOptions = Object.assign({}, JSON.parse(JSON.stringify(_DefaultOptions)), pOptions);
+		let tmpOptions = Object.assign({}, JSON.parse(JSON.stringify(libDefaultServerOptions)), pOptions);
 		super(pFable, tmpOptions, pServiceHash);
 
-		// TODO: This technically requires a pict object, not a fable object.
-		//       Discuss how we want to do this detection.
-		//       And.  If what was passed in is a fable, we should make a simple mechanism for "upcasting" it to pict within pict.
-
 		// Create the Restify ServiceServer service (this causes Orator to serve via the http protocol instead of ipc)
-		if (!'OratorServiceServer' in this.fable)
+		if (!('OratorServiceServer' in this.fable))
 		{
+			let tmpRestifyConfig = (typeof(this.options.RestifyConfiguration) === 'object')
+				? this.options.RestifyConfiguration
+				: { strictNext: true, handleUpgrades: true };
+
 			this.fable.addServiceType('OratorServiceServer', libOratorServiceServerRestify);
-			this.fable.instantiateServiceProvider('OratorServiceServer', 
+			this.fable.instantiateServiceProvider('OratorServiceServer',
 				{
-					RestifyConfiguration: { strictNext: true }
+					RestifyConfiguration: tmpRestifyConfig
 				});
 		}
 
 		// Load and add Orator
-		if (!'Orator' in this.fable)
+		if (!('Orator' in this.fable))
 		{
 			this.fable.serviceManager.addServiceType('Orator', libOrator);
 			this.fable.serviceManager.instantiateServiceProvider('Orator');
+		}
+
+		// Wire core services
+		if (!('ParimeLakeValidation' in this.fable))
+		{
+			this.fable.addServiceType('ParimeLakeValidation', libParimeLakeValidation);
+			this.fable.instantiateServiceProvider('ParimeLakeValidation');
+		}
+
+		if (!('ParimeBinaryStorage' in this.fable))
+		{
+			this.fable.addServiceType('ParimeBinaryStorage', libParimeBinaryStorage);
+			this.fable.instantiateServiceProvider('ParimeBinaryStorage');
+		}
+
+		if (!('Bibliograph' in this.fable))
+		{
+			this.fable.addServiceType('Bibliograph', libBibliograph);
+			this.fable.instantiateServiceProvider('Bibliograph');
+		}
+
+		if (!('ParimeBibliographHelpers' in this.fable))
+		{
+			this.fable.addServiceType('ParimeBibliographHelpers', libParimeBibliographHelpers);
+			this.fable.instantiateServiceProvider('ParimeBibliographHelpers');
 		}
 	}
 
@@ -53,63 +88,60 @@ class ParimeWebServer extends libFableServiceBase
 		// Initialize the Orator server
 		tmpAnticipate.anticipate(_Orator.initialize.bind(_Orator));
 
-		// Create a simple custom endpoint on the server.
-		tmpAnticipate.anticipate(
-			(fStageComplete)=>
-			{
-				// Create an endpoint.  This can also be done after the service is started.
-				_Orator.serviceServer.get
-				(
-					'/1.0/test/:hash',
-					(pRequest, pResponse, fNext) =>
-					{
-						// Send back the request parameters
-						pResponse.send(pRequest.params);
-						_Orator.fable.log.info(`Endpoint sent parameters object:`, pRequest.params);
-						return fNext();
-					}
-				);
-				return fStageComplete();
-			});
-
-		tmpAnticipate.anticipate(
-			(fStageComplete)=>
-			{
-				// Create an endpoint.  This can also be done after the service is started.
-				libOratorEndpoint.addEndpoint('JsonPost', libParemeJSONPost, fStageComplete, _Orator);
-			});
-
+		// Initialize Bibliograph
 		tmpAnticipate.anticipate(
 			(fStageComplete) =>
 			{
-				_Orator.addStaticRoute(`${__dirname}/`);
-				return fStageComplete();
-			}
-		)
+				this.fable.Bibliograph.initialize(fStageComplete);
+			});
 
-		// Add the http proxy service
-		this.fable.serviceManager.addServiceType('OratorHTTPProxy', libOratorHTTPProxy);
-		this.fable.serviceManager.instantiateServiceProvider('OratorHTTPProxy', {LogLevel: 2});
-		// Proxy all /1.0/ requests to the locally-running bookstore service (you need to run this from https://github.com/stevenvelozo/retold-harness ... it's a one-liner to start the service)
+		// Initialize Binary Storage
 		tmpAnticipate.anticipate(
-			(fNext)=>
+			(fStageComplete) =>
 			{
-				this.fable.OratorHTTPProxy.connectProxyRoutes();
-				return fNext();
+				this.fable.ParimeBinaryStorage.initialize(fStageComplete);
+			});
+
+		// Register Record Lake endpoints
+		tmpAnticipate.anticipate(
+			(fStageComplete) =>
+			{
+				libOratorEndpoint.addEndpoint('RecordLake', libEndpointRecordLake, fStageComplete, _Orator);
+			});
+
+		// Register Binary Lake endpoints
+		tmpAnticipate.anticipate(
+			(fStageComplete) =>
+			{
+				libOratorEndpoint.addEndpoint('BinaryLake', libEndpointBinaryLake, fStageComplete, _Orator);
+			});
+
+		// Register Combined Lake endpoints
+		tmpAnticipate.anticipate(
+			(fStageComplete) =>
+			{
+				libOratorEndpoint.addEndpoint('CombinedLake', libEndpointCombinedLake, fStageComplete, _Orator);
+			});
+
+		// Register WebSocket endpoint
+		tmpAnticipate.anticipate(
+			(fStageComplete) =>
+			{
+				libOratorEndpoint.addEndpoint('WebSocket', libEndpointWebSocket, fStageComplete, _Orator);
 			});
 
 		// Now start the service server.
 		tmpAnticipate.anticipate(_Orator.startService.bind(_Orator));
 
 		tmpAnticipate.wait(
-			(pError)=>
+			(pError) =>
 			{
 				if (pError)
 				{
-					this.fable.log.error('Error initializing Orator Service Server: '+pError.message, pError);
+					this.fable.log.error('Error initializing Parime Service Server: ' + pError.message, pError);
 					return fCallback(pError);
 				}
-				this.fable.log.info('Orator Service Server Initialized.');
+				this.fable.log.info('Parime Service Server Initialized.');
 				return fCallback();
 			});
 	}

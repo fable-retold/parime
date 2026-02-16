@@ -4,5 +4,11 @@
 
 	"APIServerPort": 9999,
 
-	"OratorHTTPProxyDestinationURL": "http://127.0.0.1:8086/"
+	"ParimeBinaryStorageRoot": "./parime-binary-storage/",
+
+	"RestifyConfiguration":
+	{
+		"strictNext": true,
+		"handleUpgrades": true
+	}
 }

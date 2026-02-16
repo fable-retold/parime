@@ -1,0 +1,115 @@
+{
+	"Generated": "2026-02-16T03:24:45.014Z",
+	"GitHubOrg": "stevenvelozo",
+	"DefaultBranch": "master",
+	"Groups": [
+		{
+			"Name": ".config",
+			"Key": ".config",
+			"Description": "",
+			"Modules": [
+				{
+					"Name": "code-server",
+					"Repo": "code-server",
+					"Group": ".config",
+					"Branch": "master",
+					"HasDocs": false,
+					"HasCover": false,
+					"Sidebar": [],
+					"DocFiles": []
+				}
+			]
+		},
+		{
+			"Name": "Data",
+			"Key": "data",
+			"Description": "",
+			"Modules": [
+				{
+					"Name": "CombCategory",
+					"Repo": "CombCategory",
+					"Group": "data",
+					"Branch": "master",
+					"HasDocs": false,
+					"HasCover": false,
+					"Sidebar": [],
+					"DocFiles": []
+				},
+				{
+					"Name": "TestCategory",
+					"Repo": "TestCategory",
+					"Group": "data",
+					"Branch": "master",
+					"HasDocs": false,
+					"HasCover": false,
+					"Sidebar": [],
+					"DocFiles": []
+				},
+				{
+					"Name": "WSTest",
+					"Repo": "WSTest",
+					"Group": "data",
+					"Branch": "master",
+					"HasDocs": false,
+					"HasCover": false,
+					"Sidebar": [],
+					"DocFiles": []
+				}
+			]
+		},
+		{
+			"Name": "Dist",
+			"Key": "dist",
+			"Description": "",
+			"Modules": [
+				{
+					"Name": "indoctrinate_content_staging",
+					"Repo": "indoctrinate_content_staging",
+					"Group": "dist",
+					"Branch": "master",
+					"HasDocs": false,
+					"HasCover": false,
+					"Sidebar": [],
+					"DocFiles": []
+				}
+			]
+		},
+		{
+			"Name": "Source",
+			"Key": "source",
+			"Description": "",
+			"Modules": [
+				{
+					"Name": "endpoints",
+					"Repo": "endpoints",
+					"Group": "source",
+					"Branch": "master",
+					"HasDocs": false,
+					"HasCover": false,
+					"Sidebar": [],
+					"DocFiles": []
+				},
+				{
+					"Name": "orator-extensions",
+					"Repo": "orator-extensions",
+					"Group": "source",
+					"Branch": "master",
+					"HasDocs": false,
+					"HasCover": false,
+					"Sidebar": [],
+					"DocFiles": []
+				},
+				{
+					"Name": "services",
+					"Repo": "services",
+					"Group": "source",
+					"Branch": "master",
+					"HasDocs": false,
+					"HasCover": false,
+					"Sidebar": [],
+					"DocFiles": []
+				}
+			]
+		}
+	]
+}

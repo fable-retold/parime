@@ -69,4 +69,4 @@ class ParimeJSONPost extends libOratorEndpoint
 }
 
 module.exports = ParimeJSONPost;
-module.exports.default_configuration = _DefaultOptions;
+module.exports.default_options = _DefaultOptions;
