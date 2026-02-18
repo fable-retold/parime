@@ -156,7 +156,13 @@ npm test
 ## Related Packages
 
 - [bibliograph](https://github.com/stevenvelozo/bibliograph) - Raw record filing and change tracking
-- [orator](https://github.com/stevenvelozo/orator) - API server abstraction for REST and IPC services
-- [orator-serviceserver-restify](https://github.com/stevenvelozo/orator-serviceserver-restify) - Restify service server implementation
-- [fable](https://github.com/stevenvelozo/fable) - Service provider framework
-- [meadow](https://github.com/stevenvelozo/meadow) - Data access layer with automatic REST endpoints
+- [orator](https://github.com/stevenvelozo/orator) - API server abstraction
+- [fable](https://github.com/stevenvelozo/fable) - Application services framework
+
+## License
+
+MIT
+
+## Contributing
+
+Pull requests are welcome. For details on our code of conduct, contribution process, and testing requirements, see the [Retold Contributing Guide](https://github.com/stevenvelozo/retold/blob/main/docs/contributing.md).
