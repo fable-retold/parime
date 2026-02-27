@@ -14,7 +14,7 @@
     "license": "MIT",
     "devDependencies": {
         "orator-http-proxy": "^1.0.1",
-        "quackage": "^1.0.51"
+        "quackage": "^1.0.59"
     },
     "mocha": {
         "diff": true,
