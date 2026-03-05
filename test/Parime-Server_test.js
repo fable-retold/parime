@@ -117,7 +117,7 @@ suite
 						ProductVersion: '1.0.0',
 						APIServerPort: SERVER_PORT,
 						ParimeBinaryStorageRoot: BINARY_STORAGE_ROOT,
-						BibliographStorageFolder: BIBLIOGRAPH_STORAGE_ROOT,
+						'Bibliograph-Storage-FS-Path': BIBLIOGRAPH_STORAGE_ROOT,
 						RestifyConfiguration:
 						{
 							strictNext: true,

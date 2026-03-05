@@ -3,6 +3,10 @@
     "version": "1.0.2",
     "description": "Simple generic data lake behaviors.",
     "main": "source/Parime-Server.js",
+    "exports": {
+        ".": "./source/Parime-Server.js",
+        "./storage": "./source/Parime-Storage.js"
+    },
     "scripts": {
         "start": "node source/Parime-Server.js",
         "test": "npx mocha -u tdd -R spec",

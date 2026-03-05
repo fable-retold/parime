@@ -18,6 +18,15 @@ class ParimeBinaryStorage extends libFableServiceBase
 		this.storageRoot = (typeof(this.fable.settings.ParimeBinaryStorageRoot) === 'string')
 			? this.fable.settings.ParimeBinaryStorageRoot
 			: './parime-binary-storage/';
+
+		// Sharding configuration: distributes files into subdirectories
+		// based on hash prefix segments to avoid huge flat directories.
+		let tmpShardConfig = this.fable.settings.ParimeBinarySharding || {};
+		this.shardingEnabled = !!(tmpShardConfig.Enabled);
+		this.shardSegmentSize = (typeof(tmpShardConfig.SegmentSize) === 'number')
+			? tmpShardConfig.SegmentSize : 2;
+		this.shardDepth = (typeof(tmpShardConfig.Depth) === 'number')
+			? tmpShardConfig.Depth : 4;
 	}
 
 	/**
@@ -48,8 +57,46 @@ class ParimeBinaryStorage extends libFableServiceBase
 	}
 
 	/**
+	 * Compute the shard subdirectory path for a given hash.
+	 *
+	 * When sharding is enabled, this extracts prefix segments from the hash
+	 * to produce a nested directory path.  For example, with SegmentSize=2
+	 * and Depth=4, hash '234381asf9af' yields '23/43/81/as'.
+	 *
+	 * @param {string} pHash - The hash string to compute shard path for.
+	 * @returns {string} The shard subdirectory path, or empty string if sharding is disabled.
+	 */
+	computeShardPath(pHash)
+	{
+		if (!this.shardingEnabled)
+		{
+			return '';
+		}
+
+		// Strip forward slashes — shard is computed from the hash prefix only,
+		// not from any nested key structure.
+		let tmpHashClean = pHash.replace(/\//g, '');
+		let tmpSegments = [];
+
+		for (let i = 0; i < this.shardDepth; i++)
+		{
+			let tmpStart = i * this.shardSegmentSize;
+			let tmpEnd = tmpStart + this.shardSegmentSize;
+			if (tmpEnd > tmpHashClean.length)
+			{
+				break;
+			}
+			tmpSegments.push(tmpHashClean.substring(tmpStart, tmpEnd));
+		}
+
+		return tmpSegments.join('/');
+	}
+
+	/**
 	 * Resolve a category + hash to an absolute filesystem path.
 	 * Forward slashes in pHash create nested subdirectories.
+	 * When sharding is enabled, shard prefix directories are inserted
+	 * between the category and the hash.
 	 *
 	 * @param {string} pCategory - The lake category.
 	 * @param {string} pHash - The record hash (may contain forward slashes).
@@ -57,6 +104,11 @@ class ParimeBinaryStorage extends libFableServiceBase
 	 */
 	resolvePath(pCategory, pHash)
 	{
+		let tmpShardPath = this.computeShardPath(pHash);
+		if (tmpShardPath)
+		{
+			return libPath.join(this.storageRoot, pCategory, tmpShardPath, pHash);
+		}
 		return libPath.join(this.storageRoot, pCategory, pHash);
 	}
 
@@ -228,6 +280,10 @@ class ParimeBinaryStorage extends libFableServiceBase
 	 * List all keys in a category, recursively walking nested directories.
 	 * Reconstructs forward-slash-separated keys from the directory structure.
 	 *
+	 * When sharding is enabled, shard prefix directories (those matching the
+	 * configured SegmentSize at the expected depth) are treated as structural
+	 * and stripped from the returned keys.
+	 *
 	 * @param {string} pCategory - The lake category.
 	 * @param {function} fCallback - Callback(pError, pKeys).
 	 */
@@ -241,8 +297,9 @@ class ParimeBinaryStorage extends libFableServiceBase
 		}
 
 		let tmpKeys = [];
+		let tmpSelf = this;
 
-		let tmpWalkDirectory = (pDirPath, pPrefix) =>
+		let tmpWalkDirectory = (pDirPath, pPrefix, pShardDepthRemaining) =>
 		{
 			let tmpEntries;
 			try
@@ -251,21 +308,31 @@ class ParimeBinaryStorage extends libFableServiceBase
 			}
 			catch (pError)
 			{
-				this.fable.log.error(`Error reading directory [${pDirPath}]: ${pError.message}`, pError);
+				tmpSelf.fable.log.error(`Error reading directory [${pDirPath}]: ${pError.message}`, pError);
 				return;
 			}
 
 			for (let i = 0; i < tmpEntries.length; i++)
 			{
 				let tmpEntry = tmpEntries[i];
-				let tmpKey = pPrefix ? `${pPrefix}/${tmpEntry.name}` : tmpEntry.name;
 
 				if (tmpEntry.isDirectory())
 				{
-					tmpWalkDirectory(libPath.join(pDirPath, tmpEntry.name), tmpKey);
+					if (pShardDepthRemaining > 0 && tmpEntry.name.length === tmpSelf.shardSegmentSize)
+					{
+						// This is a shard directory — descend without adding to key prefix
+						tmpWalkDirectory(libPath.join(pDirPath, tmpEntry.name), pPrefix, pShardDepthRemaining - 1);
+					}
+					else
+					{
+						// Regular directory — part of the key path
+						let tmpKey = pPrefix ? `${pPrefix}/${tmpEntry.name}` : tmpEntry.name;
+						tmpWalkDirectory(libPath.join(pDirPath, tmpEntry.name), tmpKey, 0);
+					}
 				}
 				else if (tmpEntry.isFile())
 				{
+					let tmpKey = pPrefix ? `${pPrefix}/${tmpEntry.name}` : tmpEntry.name;
 					tmpKeys.push(tmpKey);
 				}
 			}
@@ -273,12 +340,13 @@ class ParimeBinaryStorage extends libFableServiceBase
 
 		try
 		{
-			tmpWalkDirectory(tmpCategoryPath, '');
+			let tmpShardDepth = this.shardingEnabled ? this.shardDepth : 0;
+			tmpWalkDirectory(tmpCategoryPath, '', tmpShardDepth);
 			return fCallback(null, tmpKeys);
 		}
 		catch (pError)
 		{
-			this.fable.log.error(`Error listing binary keys for category [${pCategory}]: ${pError.message}`, pError);
+			tmpSelf.fable.log.error(`Error listing binary keys for category [${pCategory}]: ${pError.message}`, pError);
 			return fCallback(pError);
 		}
 	}

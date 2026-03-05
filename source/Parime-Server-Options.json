@@ -6,6 +6,13 @@
 
 	"ParimeBinaryStorageRoot": "./parime-binary-storage/",
 
+	"ParimeBinarySharding":
+	{
+		"Enabled": false,
+		"SegmentSize": 2,
+		"Depth": 4
+	},
+
 	"ParimeManagementWebAppPath": "./management_web_app_built/",
 
 	"RestifyConfiguration":
