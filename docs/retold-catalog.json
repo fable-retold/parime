@@ -1,5 +1,5 @@
 {
-	"Generated": "2026-02-18T03:29:39.338Z",
+	"Generated": "2026-04-09T23:23:41.010Z",
 	"GitHubOrg": "stevenvelozo",
 	"DefaultBranch": "master",
 	"Groups": [
@@ -101,16 +101,6 @@
 				{
 					"Name": "css",
 					"Repo": "css",
-					"Group": "management_web_app",
-					"Branch": "master",
-					"HasDocs": false,
-					"HasCover": false,
-					"Sidebar": [],
-					"DocFiles": []
-				},
-				{
-					"Name": "dist",
-					"Repo": "dist",
 					"Group": "management_web_app",
 					"Branch": "master",
 					"HasDocs": false,
