@@ -1,4 +1,4 @@
-# Parime <small>1</small>
+# Parime
 
 > Simple generic data lake behaviors for record, binary and combined storage
 
