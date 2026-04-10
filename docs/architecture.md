@@ -74,17 +74,17 @@ Handles WebSocket connections from raw TCP sockets after the Restify upgrade han
 
 ```
 HTTP Request
-  → Restify (routing, body parsing)
-    → Orator (service server abstraction)
-      → Endpoint (RecordLake, BinaryLake, CombinedLake)
-        → Validation (ParimeLakeValidation)
-          → Storage (Bibliograph or ParimeBinaryStorage)
-            → Response
+  -> Restify (routing, body parsing)
+    -> Orator (service server abstraction)
+      -> Endpoint (RecordLake, BinaryLake, CombinedLake)
+        -> Validation (ParimeLakeValidation)
+          -> Storage (Bibliograph or ParimeBinaryStorage)
+            -> Response
 
 WebSocket Upgrade Request
-  → Restify (route match, claimUpgrade)
-    → Endpoint-WebSocket (handshake)
-      → ParimeWebSocketHandler (frame parsing, message dispatch)
-        → Storage (Bibliograph or ParimeBinaryStorage)
-          → WebSocket Response Frame
+  -> Restify (route match, claimUpgrade)
+    -> Endpoint-WebSocket (handshake)
+      -> ParimeWebSocketHandler (frame parsing, message dispatch)
+        -> Storage (Bibliograph or ParimeBinaryStorage)
+          -> WebSocket Response Frame
 ```
