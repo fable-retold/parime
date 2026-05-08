@@ -19,7 +19,7 @@
     "devDependencies": {
         "orator-http-proxy": "^1.0.5",
         "pict-docuserve": "^0.1.5",
-        "quackage": "^1.1.2"
+        "quackage": "^1.2.3"
     },
     "mocha": {
         "diff": true,
@@ -40,9 +40,9 @@
         ]
     },
     "dependencies": {
-        "bibliograph": "^0.1.6",
-        "orator": "^6.1.0",
-        "orator-serviceserver-restify": "^2.0.10",
-        "pict": "^1.0.365"
+        "bibliograph": "^0.1.7",
+        "orator": "^6.1.2",
+        "orator-serviceserver-restify": "^2.0.11",
+        "pict": "^1.0.366"
     }
 }
