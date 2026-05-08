@@ -24,7 +24,7 @@ const _ViewConfiguration =
 			margin: 0 0 0.25em 0;
 			font-size: 1.75em;
 			font-weight: 400;
-			color: #3D3229;
+			color: var(--theme-color-text-primary, #3D3229);
 		}
 		.parime-dashboard-header p {
 			margin: 0;
@@ -38,7 +38,7 @@ const _ViewConfiguration =
 			margin-top: 1.5em;
 		}
 		.parime-card {
-			background: #fff;
+			background: var(--theme-color-background-panel, #fff);
 			border: 1px solid #DDD6CA;
 			border-radius: 6px;
 			padding: 1.5em;
@@ -55,7 +55,7 @@ const _ViewConfiguration =
 		.parime-card h3 {
 			margin: 0 0 0.5em 0;
 			font-size: 1.1em;
-			color: #3D3229;
+			color: var(--theme-color-text-primary, #3D3229);
 		}
 		.parime-card p {
 			margin: 0;

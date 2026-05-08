@@ -18,7 +18,7 @@ const _ViewConfiguration =
 			padding: 2em;
 		}
 		.parime-login-card {
-			background: #fff;
+			background: var(--theme-color-background-panel, #fff);
 			border: 1px solid #DDD6CA;
 			border-radius: 8px;
 			padding: 2.5em;
@@ -30,7 +30,7 @@ const _ViewConfiguration =
 			margin: 0 0 0.25em 0;
 			font-size: 1.5em;
 			font-weight: 600;
-			color: #3D3229;
+			color: var(--theme-color-text-primary, #3D3229);
 		}
 		.parime-login-card p {
 			margin: 0 0 1.5em 0;
@@ -45,7 +45,7 @@ const _ViewConfiguration =
 			margin-bottom: 0.35em;
 			font-size: 0.85em;
 			font-weight: 500;
-			color: #5E5549;
+			color: var(--theme-color-text-secondary, #5E5549);
 		}
 		.parime-login-field input {
 			width: 100%;
@@ -54,7 +54,7 @@ const _ViewConfiguration =
 			border-radius: 4px;
 			font-size: 0.95em;
 			color: #423D37;
-			background: #fff;
+			background: var(--theme-color-background-panel, #fff);
 			transition: border-color 0.15s;
 		}
 		.parime-login-field input:focus {
@@ -66,7 +66,7 @@ const _ViewConfiguration =
 			width: 100%;
 			padding: 0.7em;
 			background-color: #2E7D74;
-			color: #fff;
+			color: var(--theme-color-background-panel, #fff);
 			border: none;
 			border-radius: 4px;
 			font-size: 1em;

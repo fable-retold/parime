@@ -14,7 +14,7 @@ const _ViewConfiguration =
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			background-color: #F0ECE4;
+			background-color: var(--theme-color-background-secondary, #F0ECE4);
 			color: #8A7F72;
 			padding: 0.75em 1.5em;
 			font-size: 0.8em;

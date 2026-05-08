@@ -24,7 +24,7 @@ const _ViewConfiguration =
 			margin: 0 0 0.25em 0;
 			font-size: 1.75em;
 			font-weight: 400;
-			color: #3D3229;
+			color: var(--theme-color-text-primary, #3D3229);
 		}
 		.parime-config-header p {
 			margin: 0;
@@ -32,7 +32,7 @@ const _ViewConfiguration =
 			font-size: 1em;
 		}
 		.parime-config-section {
-			background: #fff;
+			background: var(--theme-color-background-panel, #fff);
 			border: 1px solid #DDD6CA;
 			border-radius: 6px;
 			margin-bottom: 1.25em;
@@ -40,8 +40,8 @@ const _ViewConfiguration =
 		}
 		.parime-config-section-header {
 			padding: 0.75em 1.25em;
-			background: #F0ECE4;
-			color: #5E5549;
+			background: var(--theme-color-background-secondary, #F0ECE4);
+			color: var(--theme-color-text-secondary, #5E5549);
 			font-size: 0.85em;
 			font-weight: 600;
 			text-transform: uppercase;
@@ -61,7 +61,7 @@ const _ViewConfiguration =
 			border-bottom: none;
 		}
 		.parime-config-table td:first-child {
-			color: #5E5549;
+			color: var(--theme-color-text-secondary, #5E5549);
 			font-weight: 500;
 			width: 200px;
 		}
@@ -72,13 +72,13 @@ const _ViewConfiguration =
 			font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
 			font-size: 0.85em;
 			color: #9E6B47;
-			background: #F0ECE4;
+			background: var(--theme-color-background-secondary, #F0ECE4);
 			padding: 0.15em 0.4em;
 			border-radius: 3px;
 		}
 		.parime-config-json {
 			padding: 1.25em;
-			background: #F0ECE4;
+			background: var(--theme-color-background-secondary, #F0ECE4);
 			font-family: "SF Mono", "Fira Code", "Fira Mono", Menlo, Consolas, monospace;
 			font-size: 0.85em;
 			color: #423D37;

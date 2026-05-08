@@ -14,7 +14,7 @@ const _ViewConfiguration =
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			background-color: #3D3229;
+			background-color: var(--theme-color-text-primary, #3D3229);
 			color: #F5F0E8;
 			padding: 0 1.5em;
 			height: 56px;
@@ -54,7 +54,7 @@ const _ViewConfiguration =
 		}
 		.parime-topbar-nav a.active {
 			background-color: #2E7D74;
-			color: #fff;
+			color: var(--theme-color-background-panel, #fff);
 		}
 		.parime-topbar-user {
 			display: flex;

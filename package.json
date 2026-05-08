@@ -1,6 +1,6 @@
 {
     "name": "parime",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Simple generic data lake behaviors.",
     "main": "source/Parime-Server.js",
     "exports": {

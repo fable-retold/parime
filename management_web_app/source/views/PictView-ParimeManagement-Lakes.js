@@ -24,7 +24,7 @@ const _ViewConfiguration =
 			margin: 0 0 0.25em 0;
 			font-size: 1.75em;
 			font-weight: 400;
-			color: #3D3229;
+			color: var(--theme-color-text-primary, #3D3229);
 		}
 		.parime-lakes-header p {
 			margin: 0;
@@ -52,7 +52,7 @@ const _ViewConfiguration =
 			border-right: none;
 		}
 		.parime-lakes-tab:hover {
-			color: #3D3229;
+			color: var(--theme-color-text-primary, #3D3229);
 		}
 		.parime-lakes-tab.active {
 			color: #2E7D74;
@@ -72,15 +72,15 @@ const _ViewConfiguration =
 			min-width: 0;
 		}
 		.parime-lakes-list {
-			background: #fff;
+			background: var(--theme-color-background-panel, #fff);
 			border: 1px solid #DDD6CA;
 			border-radius: 6px;
 			overflow: hidden;
 		}
 		.parime-lakes-list-header {
 			padding: 0.75em 1em;
-			background: #F0ECE4;
-			color: #5E5549;
+			background: var(--theme-color-background-secondary, #F0ECE4);
+			color: var(--theme-color-text-secondary, #5E5549);
 			font-size: 0.8em;
 			font-weight: 600;
 			text-transform: uppercase;
@@ -113,7 +113,7 @@ const _ViewConfiguration =
 			text-align: center;
 		}
 		.parime-lakes-detail {
-			background: #fff;
+			background: var(--theme-color-background-panel, #fff);
 			border: 1px solid #DDD6CA;
 			border-radius: 6px;
 			padding: 1.5em;
@@ -124,13 +124,13 @@ const _ViewConfiguration =
 			font-weight: 600;
 			text-transform: uppercase;
 			letter-spacing: 0.05em;
-			color: #5E5549;
+			color: var(--theme-color-text-secondary, #5E5549);
 			margin-bottom: 1em;
 			padding-bottom: 0.5em;
 			border-bottom: 1px solid #EAE3D8;
 		}
 		.parime-lakes-json {
-			background: #F0ECE4;
+			background: var(--theme-color-background-secondary, #F0ECE4);
 			border: 1px solid #DDD6CA;
 			border-radius: 4px;
 			padding: 1em;
