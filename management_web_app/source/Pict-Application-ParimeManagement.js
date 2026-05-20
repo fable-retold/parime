@@ -42,7 +42,7 @@ class ParimeManagementApplication extends libPictApplication
 		// and exposes Picker/ModeToggle/ScaleSelect controls for the settings overlay.
 		this.pict.addProvider('Theme-Section',
 			{
-				ApplyDefault: 'retold-default',
+				ApplyDefault: 'pict-default',
 				DefaultMode:  'system',
 				DefaultScale: 1.0,
 				Brand:        libParimeManagementBrand,

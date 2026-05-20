@@ -18,7 +18,7 @@
 		"pict-provider-theme": "^1.0.0",
 		"pict-router": "^1.0.4",
 		"pict-section-modal": "^1.1.1",
-		"pict-section-theme": "^1.0.2",
+		"pict-section-theme": "^1.0.5",
 		"pict-view": "^1.0.64"
 	},
 	"devDependencies": {
