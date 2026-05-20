@@ -1,4943 +1,2745 @@
-"use strict";
-
-function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
-function _superPropGet(t, o, e, r) { var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e); return 2 & r && "function" == typeof p ? function (t) { return p.apply(e, t); } : p; }
-function _get() { return _get = "undefined" != typeof Reflect && Reflect.get ? Reflect.get.bind() : function (e, t, r) { var p = _superPropBase(e, t); if (p) { var n = Object.getOwnPropertyDescriptor(p, t); return n.get ? n.get.call(arguments.length < 3 ? e : r) : n.value; } }, _get.apply(null, arguments); }
-function _superPropBase(t, o) { for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t));); return t; }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-(function (f) {
-  if ((typeof exports === "undefined" ? "undefined" : _typeof(exports)) === "object" && typeof module !== "undefined") {
-    module.exports = f();
-  } else if (typeof define === "function" && define.amd) {
-    define([], f);
-  } else {
-    var g;
-    if (typeof window !== "undefined") {
-      g = window;
-    } else if (typeof global !== "undefined") {
-      g = global;
-    } else if (typeof self !== "undefined") {
-      g = self;
-    } else {
-      g = this;
-    }
-    g.ParimeManagement = f();
-  }
-})(function () {
-  var define, module, exports;
-  return function () {
-    function r(e, n, t) {
-      function o(i, f) {
-        if (!n[i]) {
-          if (!e[i]) {
-            var c = "function" == typeof require && require;
-            if (!f && c) return c(i, !0);
-            if (u) return u(i, !0);
-            var a = new Error("Cannot find module '" + i + "'");
-            throw a.code = "MODULE_NOT_FOUND", a;
-          }
-          var p = n[i] = {
-            exports: {}
-          };
-          e[i][0].call(p.exports, function (r) {
-            var n = e[i][1][r];
-            return o(n || r);
-          }, p, p.exports, r, e, n, t);
-        }
-        return n[i].exports;
-      }
-      for (var u = "function" == typeof require && require, i = 0; i < t.length; i++) o(t[i]);
-      return o;
-    }
-    return r;
-  }()({
-    1: [function (require, module, exports) {
-      module.exports = {
-        "name": "fable-serviceproviderbase",
-        "version": "3.0.17",
-        "description": "Simple base classes for fable services.",
-        "main": "source/Fable-ServiceProviderBase.js",
-        "scripts": {
-          "start": "node source/Fable-ServiceProviderBase.js",
-          "test": "npx mocha -u tdd -R spec",
-          "tests": "npx mocha -u tdd --exit -R spec --grep",
-          "coverage": "npx nyc --reporter=lcov --reporter=text-lcov npx mocha -- -u tdd -R spec",
-          "build": "npx quack build",
-          "types": "tsc -p ./tsconfig.build.json",
-          "check": "tsc -p . --noEmit"
-        },
-        "types": "types/source/Fable-ServiceProviderBase.d.ts",
-        "mocha": {
-          "diff": true,
-          "extension": ["js"],
-          "package": "./package.json",
-          "reporter": "spec",
-          "slow": "75",
-          "timeout": "5000",
-          "ui": "tdd",
-          "watch-files": ["source/**/*.js", "test/**/*.js"],
-          "watch-ignore": ["lib/vendor"]
-        },
-        "repository": {
-          "type": "git",
-          "url": "https://github.com/stevenvelozo/fable-serviceproviderbase.git"
-        },
-        "keywords": ["entity", "behavior"],
-        "author": "Steven Velozo <steven@velozo.com> (http://velozo.com/)",
-        "license": "MIT",
-        "bugs": {
-          "url": "https://github.com/stevenvelozo/fable-serviceproviderbase/issues"
-        },
-        "homepage": "https://github.com/stevenvelozo/fable-serviceproviderbase",
-        "devDependencies": {
-          "@types/mocha": "^10.0.10",
-          "fable": "^3.1.51",
-          "quackage": "^1.0.45",
-          "typescript": "^5.9.3"
-        }
-      };
-    }, {}],
-    2: [function (require, module, exports) {
-      /**
-      * Fable Service Base
-      * @author <steven@velozo.com>
-      */
-
-      var libPackage = require('../package.json');
-      var FableServiceProviderBase = /*#__PURE__*/function () {
-        /**
-         * The constructor can be used in two ways:
-         * 1) With a fable, options object and service hash (the options object and service hash are optional)a
-         * 2) With an object or nothing as the first parameter, where it will be treated as the options object
-         *
-         * @param {import('fable')|Record<string, any>} [pFable] - (optional) The fable instance, or the options object if there is no fable
-         * @param {Record<string, any>|string} [pOptions] - (optional) The options object, or the service hash if there is no fable
-         * @param {string} [pServiceHash] - (optional) The service hash to identify this service instance
-         */
-        function FableServiceProviderBase(pFable, pOptions, pServiceHash) {
-          _classCallCheck(this, FableServiceProviderBase);
-          /** @type {import('fable')} */
-          this.fable;
-          /** @type {string} */
-          this.UUID;
-          /** @type {Record<string, any>} */
-          this.options;
-          /** @type {Record<string, any>} */
-          this.services;
-          /** @type {Record<string, any>} */
-          this.servicesMap;
-
-          // Check if a fable was passed in; connect it if so
-          if (_typeof(pFable) === 'object' && pFable.isFable) {
-            this.connectFable(pFable);
-          } else {
-            this.fable = false;
-          }
-
-          // Initialize the services map if it wasn't passed in
-          /** @type {Record<string, any>} */
-          this._PackageFableServiceProvider = libPackage;
-
-          // initialize options and UUID based on whether the fable was passed in or not.
-          if (this.fable) {
-            this.UUID = pFable.getUUID();
-            this.options = _typeof(pOptions) === 'object' ? pOptions : {};
-          } else {
-            // With no fable, check to see if there was an object passed into either of the first two
-            // Parameters, and if so, treat it as the options object
-            this.options = _typeof(pFable) === 'object' && !pFable.isFable ? pFable : _typeof(pOptions) === 'object' ? pOptions : {};
-            this.UUID = "CORE-SVC-".concat(Math.floor(Math.random() * (99999 - 10000) + 10000));
-          }
-
-          // It's expected that the deriving class will set this
-          this.serviceType = "Unknown-".concat(this.UUID);
-
-          // The service hash is used to identify the specific instantiation of the service in the services map
-          this.Hash = typeof pServiceHash === 'string' ? pServiceHash : !this.fable && typeof pOptions === 'string' ? pOptions : "".concat(this.UUID);
-        }
-
-        /**
-         * @param {import('fable')} pFable
-         */
-        return _createClass(FableServiceProviderBase, [{
-          key: "connectFable",
-          value: function connectFable(pFable) {
-            if (_typeof(pFable) !== 'object' || !pFable.isFable) {
-              var tmpErrorMessage = "Fable Service Provider Base: Cannot connect to Fable, invalid Fable object passed in.  The pFable parameter was a [".concat(_typeof(pFable), "].}");
-              console.log(tmpErrorMessage);
-              return new Error(tmpErrorMessage);
-            }
-            if (!this.fable) {
-              this.fable = pFable;
-            }
-            if (!this.log) {
-              this.log = this.fable.Logging;
-            }
-            if (!this.services) {
-              this.services = this.fable.services;
-            }
-            if (!this.servicesMap) {
-              this.servicesMap = this.fable.servicesMap;
-            }
-            return true;
-          }
-        }]);
-      }();
-      _defineProperty(FableServiceProviderBase, "isFableService", true);
-      module.exports = FableServiceProviderBase;
-
-      // This is left here in case we want to go back to having different code/base class for "core" services
-      module.exports.CoreServiceProviderBase = FableServiceProviderBase;
-    }, {
-      "../package.json": 1
-    }],
-    3: [function (require, module, exports) {
-      !function (t, n) {
-        "object" == _typeof(exports) && "object" == _typeof(module) ? module.exports = n() : "function" == typeof define && define.amd ? define("Navigo", [], n) : "object" == _typeof(exports) ? exports.Navigo = n() : t.Navigo = n();
-      }("undefined" != typeof self ? self : this, function () {
-        return function () {
-          "use strict";
-
-          var t = {
-              407: function _(t, n, e) {
-                e.d(n, {
-                  "default": function _default() {
-                    return N;
-                  }
-                });
-                var o = /([:*])(\w+)/g,
-                  r = /\*/g,
-                  i = /\/\?/g;
-                function a(t) {
-                  return void 0 === t && (t = "/"), v() ? location.pathname + location.search + location.hash : t;
-                }
-                function s(t) {
-                  return t.replace(/\/+$/, "").replace(/^\/+/, "");
-                }
-                function c(t) {
-                  return "string" == typeof t;
-                }
-                function u(t) {
-                  return t && t.indexOf("#") >= 0 && t.split("#").pop() || "";
-                }
-                function h(t) {
-                  var n = s(t).split(/\?(.*)?$/);
-                  return [s(n[0]), n.slice(1).join("")];
-                }
-                function f(t) {
-                  for (var n = {}, e = t.split("&"), o = 0; o < e.length; o++) {
-                    var r = e[o].split("=");
-                    if ("" !== r[0]) {
-                      var i = decodeURIComponent(r[0]);
-                      n[i] ? (Array.isArray(n[i]) || (n[i] = [n[i]]), n[i].push(decodeURIComponent(r[1] || ""))) : n[i] = decodeURIComponent(r[1] || "");
-                    }
-                  }
-                  return n;
-                }
-                function l(t, n) {
-                  var e,
-                    a = h(s(t.currentLocationPath)),
-                    l = a[0],
-                    p = a[1],
-                    d = "" === p ? null : f(p),
-                    v = [];
-                  if (c(n.path)) {
-                    if (e = "(?:/^|^)" + s(n.path).replace(o, function (t, n, e) {
-                      return v.push(e), "([^/]+)";
-                    }).replace(r, "?(?:.*)").replace(i, "/?([^/]+|)") + "$", "" === s(n.path) && "" === s(l)) return {
-                      url: l,
-                      queryString: p,
-                      hashString: u(t.to),
-                      route: n,
-                      data: null,
-                      params: d
-                    };
-                  } else e = n.path;
-                  var g = new RegExp(e, ""),
-                    m = l.match(g);
-                  if (m) {
-                    var y = c(n.path) ? function (t, n) {
-                      return 0 === n.length ? null : t ? t.slice(1, t.length).reduce(function (t, e, o) {
-                        return null === t && (t = {}), t[n[o]] = decodeURIComponent(e), t;
-                      }, null) : null;
-                    }(m, v) : m.groups ? m.groups : m.slice(1);
-                    return {
-                      url: s(l.replace(new RegExp("^" + t.instance.root), "")),
-                      queryString: p,
-                      hashString: u(t.to),
-                      route: n,
-                      data: y,
-                      params: d
-                    };
-                  }
-                  return !1;
-                }
-                function p() {
-                  return !("undefined" == typeof window || !window.history || !window.history.pushState);
-                }
-                function d(t, n) {
-                  return void 0 === t[n] || !0 === t[n];
-                }
-                function v() {
-                  return "undefined" != typeof window;
-                }
-                function g(t, n) {
-                  return void 0 === t && (t = []), void 0 === n && (n = {}), t.filter(function (t) {
-                    return t;
-                  }).forEach(function (t) {
-                    ["before", "after", "already", "leave"].forEach(function (e) {
-                      t[e] && (n[e] || (n[e] = []), n[e].push(t[e]));
-                    });
-                  }), n;
-                }
-                function m(t, n, e) {
-                  var o = n || {},
-                    r = 0;
-                  !function n() {
-                    t[r] ? Array.isArray(t[r]) ? (t.splice.apply(t, [r, 1].concat(t[r][0](o) ? t[r][1] : t[r][2])), n()) : t[r](o, function (t) {
-                      void 0 === t || !0 === t ? (r += 1, n()) : e && e(o);
-                    }) : e && e(o);
-                  }();
-                }
-                function y(t, n) {
-                  void 0 === t.currentLocationPath && (t.currentLocationPath = t.to = a(t.instance.root)), t.currentLocationPath = t.instance._checkForAHash(t.currentLocationPath), n();
-                }
-                function _(t, n) {
-                  for (var e = 0; e < t.instance.routes.length; e++) {
-                    var o = l(t, t.instance.routes[e]);
-                    if (o && (t.matches || (t.matches = []), t.matches.push(o), "ONE" === t.resolveOptions.strategy)) return void n();
-                  }
-                  n();
-                }
-                function k(t, n) {
-                  t.navigateOptions && (void 0 !== t.navigateOptions.shouldResolve && console.warn('"shouldResolve" is deprecated. Please check the documentation.'), void 0 !== t.navigateOptions.silent && console.warn('"silent" is deprecated. Please check the documentation.')), n();
-                }
-                function O(t, n) {
-                  !0 === t.navigateOptions.force ? (t.instance._setCurrent([t.instance._pathToMatchObject(t.to)]), n(!1)) : n();
-                }
-                m["if"] = function (t, n, e) {
-                  return Array.isArray(n) || (n = [n]), Array.isArray(e) || (e = [e]), [t, n, e];
-                };
-                var w = v(),
-                  L = p();
-                function b(t, n) {
-                  if (d(t.navigateOptions, "updateBrowserURL")) {
-                    var e = ("/" + t.to).replace(/\/\//g, "/"),
-                      o = w && t.resolveOptions && !0 === t.resolveOptions.hash;
-                    L ? (history[t.navigateOptions.historyAPIMethod || "pushState"](t.navigateOptions.stateObj || {}, t.navigateOptions.title || "", o ? "#" + e : e), location && location.hash && (t.instance.__freezeListening = !0, setTimeout(function () {
-                      if (!o) {
-                        var n = location.hash;
-                        location.hash = "", location.hash = n;
-                      }
-                      t.instance.__freezeListening = !1;
-                    }, 1))) : w && (window.location.href = t.to);
-                  }
-                  n();
-                }
-                function A(t, n) {
-                  var e = t.instance;
-                  e.lastResolved() ? m(e.lastResolved().map(function (n) {
-                    return function (e, o) {
-                      if (n.route.hooks && n.route.hooks.leave) {
-                        var r = !1,
-                          i = t.instance.matchLocation(n.route.path, t.currentLocationPath, !1);
-                        r = "*" !== n.route.path ? !i : !(t.matches && t.matches.find(function (t) {
-                          return n.route.path === t.route.path;
-                        })), d(t.navigateOptions, "callHooks") && r ? m(n.route.hooks.leave.map(function (n) {
-                          return function (e, o) {
-                            return n(function (n) {
-                              !1 === n ? t.instance.__markAsClean(t) : o();
-                            }, t.matches && t.matches.length > 0 ? 1 === t.matches.length ? t.matches[0] : t.matches : void 0);
-                          };
-                        }).concat([function () {
-                          return o();
-                        }])) : o();
-                      } else o();
-                    };
-                  }), {}, function () {
-                    return n();
-                  }) : n();
-                }
-                function P(t, n) {
-                  d(t.navigateOptions, "updateState") && t.instance._setCurrent(t.matches), n();
-                }
-                var R = [function (t, n) {
-                    var e = t.instance.lastResolved();
-                    if (e && e[0] && e[0].route === t.match.route && e[0].url === t.match.url && e[0].queryString === t.match.queryString) return e.forEach(function (n) {
-                      n.route.hooks && n.route.hooks.already && d(t.navigateOptions, "callHooks") && n.route.hooks.already.forEach(function (n) {
-                        return n(t.match);
-                      });
-                    }), void n(!1);
-                    n();
-                  }, function (t, n) {
-                    t.match.route.hooks && t.match.route.hooks.before && d(t.navigateOptions, "callHooks") ? m(t.match.route.hooks.before.map(function (n) {
-                      return function (e, o) {
-                        return n(function (n) {
-                          !1 === n ? t.instance.__markAsClean(t) : o();
-                        }, t.match);
-                      };
-                    }).concat([function () {
-                      return n();
-                    }])) : n();
-                  }, function (t, n) {
-                    d(t.navigateOptions, "callHandler") && t.match.route.handler(t.match), t.instance.updatePageLinks(), n();
-                  }, function (t, n) {
-                    t.match.route.hooks && t.match.route.hooks.after && d(t.navigateOptions, "callHooks") && t.match.route.hooks.after.forEach(function (n) {
-                      return n(t.match);
-                    }), n();
-                  }],
-                  S = [A, function (t, n) {
-                    var e = t.instance._notFoundRoute;
-                    if (e) {
-                      t.notFoundHandled = !0;
-                      var o = h(t.currentLocationPath),
-                        r = o[0],
-                        i = o[1],
-                        a = u(t.to);
-                      e.path = s(r);
-                      var c = {
-                        url: e.path,
-                        queryString: i,
-                        hashString: a,
-                        data: null,
-                        route: e,
-                        params: "" !== i ? f(i) : null
-                      };
-                      t.matches = [c], t.match = c;
-                    }
-                    n();
-                  }, m["if"](function (t) {
-                    return t.notFoundHandled;
-                  }, R.concat([P]), [function (t, n) {
-                    t.resolveOptions && !1 !== t.resolveOptions.noMatchWarning && void 0 !== t.resolveOptions.noMatchWarning || console.warn('Navigo: "' + t.currentLocationPath + "\" didn't match any of the registered routes."), n();
-                  }, function (t, n) {
-                    t.instance._setCurrent(null), n();
-                  }])];
-                function E() {
-                  return (E = Object.assign || function (t) {
-                    for (var n = 1; n < arguments.length; n++) {
-                      var e = arguments[n];
-                      for (var o in e) Object.prototype.hasOwnProperty.call(e, o) && (t[o] = e[o]);
-                    }
-                    return t;
-                  }).apply(this, arguments);
-                }
-                function x(t, n) {
-                  var e = 0;
-                  A(t, function o() {
-                    e !== t.matches.length ? m(R, E({}, t, {
-                      match: t.matches[e]
-                    }), function () {
-                      e += 1, o();
-                    }) : P(t, n);
-                  });
-                }
-                function H(t) {
-                  t.instance.__markAsClean(t);
-                }
-                function j() {
-                  return (j = Object.assign || function (t) {
-                    for (var n = 1; n < arguments.length; n++) {
-                      var e = arguments[n];
-                      for (var o in e) Object.prototype.hasOwnProperty.call(e, o) && (t[o] = e[o]);
-                    }
-                    return t;
-                  }).apply(this, arguments);
-                }
-                var C = "[data-navigo]";
-                function N(t, n) {
-                  var e,
-                    o = n || {
-                      strategy: "ONE",
-                      hash: !1,
-                      noMatchWarning: !1,
-                      linksSelector: C
-                    },
-                    r = this,
-                    i = "/",
-                    d = null,
-                    w = [],
-                    L = !1,
-                    A = p(),
-                    P = v();
-                  function R(t) {
-                    return t.indexOf("#") >= 0 && (t = !0 === o.hash ? t.split("#")[1] || "/" : t.split("#")[0]), t;
-                  }
-                  function E(t) {
-                    return s(i + "/" + s(t));
-                  }
-                  function N(t, n, e, o) {
-                    return t = c(t) ? E(t) : t, {
-                      name: o || s(String(t)),
-                      path: t,
-                      handler: n,
-                      hooks: g(e)
-                    };
-                  }
-                  function U(t, n) {
-                    if (!r.__dirty) {
-                      r.__dirty = !0, t = t ? s(i) + "/" + s(t) : void 0;
-                      var e = {
-                        instance: r,
-                        to: t,
-                        currentLocationPath: t,
-                        navigateOptions: {},
-                        resolveOptions: j({}, o, n)
-                      };
-                      return m([y, _, m["if"](function (t) {
-                        var n = t.matches;
-                        return n && n.length > 0;
-                      }, x, S)], e, H), !!e.matches && e.matches;
-                    }
-                    r.__waiting.push(function () {
-                      return r.resolve(t, n);
-                    });
-                  }
-                  function q(t, n) {
-                    if (r.__dirty) r.__waiting.push(function () {
-                      return r.navigate(t, n);
-                    });else {
-                      r.__dirty = !0, t = s(i) + "/" + s(t);
-                      var e = {
-                        instance: r,
-                        to: t,
-                        navigateOptions: n || {},
-                        resolveOptions: n && n.resolveOptions ? n.resolveOptions : o,
-                        currentLocationPath: R(t)
-                      };
-                      m([k, O, _, m["if"](function (t) {
-                        var n = t.matches;
-                        return n && n.length > 0;
-                      }, x, S), b, H], e, H);
-                    }
-                  }
-                  function F() {
-                    if (P) return (P ? [].slice.call(document.querySelectorAll(o.linksSelector || C)) : []).forEach(function (t) {
-                      "false" !== t.getAttribute("data-navigo") && "_blank" !== t.getAttribute("target") ? t.hasListenerAttached || (t.hasListenerAttached = !0, t.navigoHandler = function (n) {
-                        if ((n.ctrlKey || n.metaKey) && "a" === n.target.tagName.toLowerCase()) return !1;
-                        var e = t.getAttribute("href");
-                        if (null == e) return !1;
-                        if (e.match(/^(http|https)/) && "undefined" != typeof URL) try {
-                          var o = new URL(e);
-                          e = o.pathname + o.search;
-                        } catch (t) {}
-                        var i = function (t) {
-                          if (!t) return {};
-                          var n,
-                            e = t.split(","),
-                            o = {};
-                          return e.forEach(function (t) {
-                            var e = t.split(":").map(function (t) {
-                              return t.replace(/(^ +| +$)/g, "");
-                            });
-                            switch (e[0]) {
-                              case "historyAPIMethod":
-                                o.historyAPIMethod = e[1];
-                                break;
-                              case "resolveOptionsStrategy":
-                                n || (n = {}), n.strategy = e[1];
-                                break;
-                              case "resolveOptionsHash":
-                                n || (n = {}), n.hash = "true" === e[1];
-                                break;
-                              case "updateBrowserURL":
-                              case "callHandler":
-                              case "updateState":
-                              case "force":
-                                o[e[0]] = "true" === e[1];
-                            }
-                          }), n && (o.resolveOptions = n), o;
-                        }(t.getAttribute("data-navigo-options"));
-                        L || (n.preventDefault(), n.stopPropagation(), r.navigate(s(e), i));
-                      }, t.addEventListener("click", t.navigoHandler)) : t.hasListenerAttached && t.removeEventListener("click", t.navigoHandler);
-                    }), r;
-                  }
-                  function I(t, n, e) {
-                    var o = w.find(function (n) {
-                        return n.name === t;
-                      }),
-                      r = null;
-                    if (o) {
-                      if (r = o.path, n) for (var a in n) r = r.replace(":" + a, n[a]);
-                      r = r.match(/^\//) ? r : "/" + r;
-                    }
-                    return r && e && !e.includeRoot && (r = r.replace(new RegExp("^/" + i), "")), r;
-                  }
-                  function M(t) {
-                    var n = h(s(t)),
-                      o = n[0],
-                      r = n[1],
-                      i = "" === r ? null : f(r);
-                    return {
-                      url: o,
-                      queryString: r,
-                      hashString: u(t),
-                      route: N(o, function () {}, [e], o),
-                      data: null,
-                      params: i
-                    };
-                  }
-                  function T(t, n, e) {
-                    return "string" == typeof n && (n = z(n)), n ? (n.hooks[t] || (n.hooks[t] = []), n.hooks[t].push(e), function () {
-                      n.hooks[t] = n.hooks[t].filter(function (t) {
-                        return t !== e;
-                      });
-                    }) : (console.warn("Route doesn't exists: " + n), function () {});
-                  }
-                  function z(t) {
-                    return "string" == typeof t ? w.find(function (n) {
-                      return n.name === E(t);
-                    }) : w.find(function (n) {
-                      return n.handler === t;
-                    });
-                  }
-                  t ? i = s(t) : console.warn('Navigo requires a root path in its constructor. If not provided will use "/" as default.'), this.root = i, this.routes = w, this.destroyed = L, this.current = d, this.__freezeListening = !1, this.__waiting = [], this.__dirty = !1, this.__markAsClean = function (t) {
-                    t.instance.__dirty = !1, t.instance.__waiting.length > 0 && t.instance.__waiting.shift()();
-                  }, this.on = function (t, n, o) {
-                    var r = this;
-                    return "object" != _typeof(t) || t instanceof RegExp ? ("function" == typeof t && (o = n, n = t, t = i), w.push(N(t, n, [e, o])), this) : (Object.keys(t).forEach(function (n) {
-                      if ("function" == typeof t[n]) r.on(n, t[n]);else {
-                        var o = t[n],
-                          i = o.uses,
-                          a = o.as,
-                          s = o.hooks;
-                        w.push(N(n, i, [e, s], a));
-                      }
-                    }), this);
-                  }, this.off = function (t) {
-                    return this.routes = w = w.filter(function (n) {
-                      return c(t) ? s(n.path) !== s(t) : "function" == typeof t ? t !== n.handler : String(n.path) !== String(t);
-                    }), this;
-                  }, this.resolve = U, this.navigate = q, this.navigateByName = function (t, n, e) {
-                    var o = I(t, n);
-                    return null !== o && (q(o.replace(new RegExp("^/?" + i), ""), e), !0);
-                  }, this.destroy = function () {
-                    this.routes = w = [], A && window.removeEventListener("popstate", this.__popstateListener), this.destroyed = L = !0;
-                  }, this.notFound = function (t, n) {
-                    return r._notFoundRoute = N("*", t, [e, n], "__NOT_FOUND__"), this;
-                  }, this.updatePageLinks = F, this.link = function (t) {
-                    return "/" + i + "/" + s(t);
-                  }, this.hooks = function (t) {
-                    return e = t, this;
-                  }, this.extractGETParameters = function (t) {
-                    return h(R(t));
-                  }, this.lastResolved = function () {
-                    return d;
-                  }, this.generate = I, this.getLinkPath = function (t) {
-                    return t.getAttribute("href");
-                  }, this.match = function (t) {
-                    var n = {
-                      instance: r,
-                      currentLocationPath: t,
-                      to: t,
-                      navigateOptions: {},
-                      resolveOptions: o
-                    };
-                    return _(n, function () {}), !!n.matches && n.matches;
-                  }, this.matchLocation = function (t, n, e) {
-                    void 0 === n || void 0 !== e && !e || (n = E(n));
-                    var o = {
-                      instance: r,
-                      to: n,
-                      currentLocationPath: n
-                    };
-                    return y(o, function () {}), "string" == typeof t && (t = void 0 === e || e ? E(t) : t), l(o, {
-                      name: String(t),
-                      path: t,
-                      handler: function handler() {},
-                      hooks: {}
-                    }) || !1;
-                  }, this.getCurrentLocation = function () {
-                    return M(s(a(i)).replace(new RegExp("^" + i), ""));
-                  }, this.addBeforeHook = T.bind(this, "before"), this.addAfterHook = T.bind(this, "after"), this.addAlreadyHook = T.bind(this, "already"), this.addLeaveHook = T.bind(this, "leave"), this.getRoute = z, this._pathToMatchObject = M, this._clean = s, this._checkForAHash = R, this._setCurrent = function (t) {
-                    return d = r.current = t;
-                  }, function () {
-                    A && (this.__popstateListener = function () {
-                      r.__freezeListening || U();
-                    }, window.addEventListener("popstate", this.__popstateListener));
-                  }.call(this), F.call(this);
-                }
-              }
-            },
-            n = {};
-          function e(o) {
-            if (n[o]) return n[o].exports;
-            var r = n[o] = {
-              exports: {}
-            };
-            return t[o](r, r.exports, e), r.exports;
-          }
-          return e.d = function (t, n) {
-            for (var o in n) e.o(n, o) && !e.o(t, o) && Object.defineProperty(t, o, {
-              enumerable: !0,
-              get: n[o]
-            });
-          }, e.o = function (t, n) {
-            return Object.prototype.hasOwnProperty.call(t, n);
-          }, e(407);
-        }()["default"];
-      });
-    }, {}],
-    4: [function (require, module, exports) {
-      module.exports = {
-        "name": "pict-application",
-        "version": "1.0.30",
-        "description": "Application base class for a pict view-based application",
-        "main": "source/Pict-Application.js",
-        "scripts": {
-          "test": "npx mocha -u tdd -R spec",
-          "start": "node source/Pict-Application.js",
-          "coverage": "npx nyc --reporter=lcov --reporter=text-lcov npx mocha -- -u tdd -R spec",
-          "build": "npx quack build",
-          "docker-dev-build": "docker build ./ -f Dockerfile_LUXURYCode -t pict-application-image:local",
-          "docker-dev-run": "docker run -it -d --name pict-application-dev -p 30001:8080 -p 38086:8086 -v \"$PWD/.config:/home/coder/.config\"  -v \"$PWD:/home/coder/pict-application\" -u \"$(id -u):$(id -g)\" -e \"DOCKER_USER=$USER\" pict-application-image:local",
-          "docker-dev-shell": "docker exec -it pict-application-dev /bin/bash",
-          "tests": "npx mocha -u tdd --exit -R spec --grep",
-          "lint": "eslint source/**",
-          "types": "tsc -p ."
-        },
-        "types": "types/source/Pict-Application.d.ts",
-        "repository": {
-          "type": "git",
-          "url": "git+https://github.com/stevenvelozo/pict-application.git"
-        },
-        "author": "steven velozo <steven@velozo.com>",
-        "license": "MIT",
-        "bugs": {
-          "url": "https://github.com/stevenvelozo/pict-application/issues"
-        },
-        "homepage": "https://github.com/stevenvelozo/pict-application#readme",
-        "devDependencies": {
-          "@eslint/js": "^9.28.0",
-          "browser-env": "^3.3.0",
-          "eslint": "^9.28.0",
-          "pict": "^1.0.343",
-          "pict-provider": "^1.0.7",
-          "pict-view": "^1.0.64",
-          "quackage": "^1.0.45",
-          "typescript": "^5.9.3"
-        },
-        "mocha": {
-          "diff": true,
-          "extension": ["js"],
-          "package": "./package.json",
-          "reporter": "spec",
-          "slow": "75",
-          "timeout": "5000",
-          "ui": "tdd",
-          "watch-files": ["source/**/*.js", "test/**/*.js"],
-          "watch-ignore": ["lib/vendor"]
-        },
-        "dependencies": {
-          "fable-serviceproviderbase": "^3.0.15"
-        }
-      };
-    }, {}],
-    5: [function (require, module, exports) {
-      var libFableServiceBase = require('fable-serviceproviderbase');
-      var libPackage = require('../package.json');
-      var defaultPictSettings = {
-        Name: 'DefaultPictApplication',
-        // The main "viewport" is the view that is used to host our application
-        MainViewportViewIdentifier: 'Default-View',
-        MainViewportRenderableHash: false,
-        MainViewportDestinationAddress: false,
-        MainViewportDefaultDataAddress: false,
-        // Whether or not we should automatically render the main viewport and other autorender views after we initialize the pict application
-        AutoSolveAfterInitialize: true,
-        AutoRenderMainViewportViewAfterInitialize: true,
-        AutoRenderViewsAfterInitialize: false,
-        AutoLoginAfterInitialize: false,
-        AutoLoadDataAfterLogin: false,
-        ConfigurationOnlyViews: [],
-        Manifests: {},
-        // The prefix to prepend on all template destination hashes
-        IdentifierAddressPrefix: 'PICT-'
-      };
-
-      /**
-       * Base class for pict applications.
-       */
-      var PictApplication = /*#__PURE__*/function (_libFableServiceBase) {
-        /**
-         * @param {import('fable')} pFable
-         * @param {Record<string, any>} [pOptions]
-         * @param {string} [pServiceHash]
-         */
-        function PictApplication(pFable, pOptions, pServiceHash) {
-          var _this;
-          _classCallCheck(this, PictApplication);
-          var tmpCarryOverConfiguration = _typeof(pFable.settings.PictApplicationConfiguration) === 'object' ? pFable.settings.PictApplicationConfiguration : {};
-          var tmpOptions = Object.assign({}, JSON.parse(JSON.stringify(defaultPictSettings)), tmpCarryOverConfiguration, pOptions);
-          _this = _callSuper(this, PictApplication, [pFable, tmpOptions, pServiceHash]);
-
-          /** @type {any} */
-          _this.options;
-          /** @type {any} */
-          _this.log;
-          /** @type {import('pict') & import('fable')} */
-          _this.fable;
-          /** @type {string} */
-          _this.UUID;
-          /** @type {string} */
-          _this.Hash;
-          /**
-           * @type {{ [key: string]: any }}
-           */
-          _this.servicesMap;
-          _this.serviceType = 'PictApplication';
-          /** @type {Record<string, any>} */
-          _this._Package = libPackage;
-
-          // Convenience and consistency naming
-          _this.pict = _this.fable;
-          // Wire in the essential Pict state
-          /** @type {Record<string, any>} */
-          _this.AppData = _this.fable.AppData;
-          /** @type {Record<string, any>} */
-          _this.Bundle = _this.fable.Bundle;
-
-          /** @type {number} */
-          _this.initializeTimestamp;
-          /** @type {number} */
-          _this.lastSolvedTimestamp;
-          /** @type {number} */
-          _this.lastLoginTimestamp;
-          /** @type {number} */
-          _this.lastMarshalFromViewsTimestamp;
-          /** @type {number} */
-          _this.lastMarshalToViewsTimestamp;
-          /** @type {number} */
-          _this.lastAutoRenderTimestamp;
-          /** @type {number} */
-          _this.lastLoadDataTimestamp;
-
-          // Load all the manifests for the application
-          var tmpManifestKeys = Object.keys(_this.options.Manifests);
-          if (tmpManifestKeys.length > 0) {
-            for (var i = 0; i < tmpManifestKeys.length; i++) {
-              // Load each manifest
-              var tmpManifestKey = tmpManifestKeys[i];
-              _this.fable.instantiateServiceProvider('Manifest', _this.options.Manifests[tmpManifestKey], tmpManifestKey);
-            }
-          }
-          return _this;
-        }
-
-        /* -------------------------------------------------------------------------- */
-        /*                     Code Section: Solve All Views                          */
-        /* -------------------------------------------------------------------------- */
-        /**
-         * @return {boolean}
-         */
-        _inherits(PictApplication, _libFableServiceBase);
-        return _createClass(PictApplication, [{
-          key: "onPreSolve",
-          value: function onPreSolve() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onPreSolve:"));
-            }
-            return true;
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onPreSolveAsync",
-          value: function onPreSolveAsync(fCallback) {
-            this.onPreSolve();
-            return fCallback();
-          }
-
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "onBeforeSolve",
-          value: function onBeforeSolve() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onBeforeSolve:"));
-            }
-            return true;
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onBeforeSolveAsync",
-          value: function onBeforeSolveAsync(fCallback) {
-            this.onBeforeSolve();
-            return fCallback();
-          }
-
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "onSolve",
-          value: function onSolve() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onSolve:"));
-            }
-            return true;
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onSolveAsync",
-          value: function onSolveAsync(fCallback) {
-            this.onSolve();
-            return fCallback();
-          }
-
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "solve",
-          value: function solve() {
-            if (this.pict.LogNoisiness > 2) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " executing solve() function..."));
-            }
-
-            // Walk through any loaded providers and solve them as well.
-            var tmpLoadedProviders = Object.keys(this.pict.providers);
-            var tmpProvidersToSolve = [];
-            for (var i = 0; i < tmpLoadedProviders.length; i++) {
-              var tmpProvider = this.pict.providers[tmpLoadedProviders[i]];
-              if (tmpProvider.options.AutoSolveWithApp) {
-                tmpProvidersToSolve.push(tmpProvider);
-              }
-            }
-            // Sort the providers by their priority (if they are all priority 0, it will end up being add order due to JSON Object Property Key order stuff)
-            tmpProvidersToSolve.sort(function (a, b) {
-              return a.options.AutoSolveOrdinal - b.options.AutoSolveOrdinal;
-            });
-            for (var _i = 0; _i < tmpProvidersToSolve.length; _i++) {
-              tmpProvidersToSolve[_i].solve(tmpProvidersToSolve[_i]);
-            }
-            this.onBeforeSolve();
-            // Now walk through any loaded views and initialize them as well.
-            var tmpLoadedViews = Object.keys(this.pict.views);
-            var tmpViewsToSolve = [];
-            for (var _i2 = 0; _i2 < tmpLoadedViews.length; _i2++) {
-              var tmpView = this.pict.views[tmpLoadedViews[_i2]];
-              if (tmpView.options.AutoInitialize) {
-                tmpViewsToSolve.push(tmpView);
-              }
-            }
-            // Sort the views by their priority (if they are all priority 0, it will end up being add order due to JSON Object Property Key order stuff)
-            tmpViewsToSolve.sort(function (a, b) {
-              return a.options.AutoInitializeOrdinal - b.options.AutoInitializeOrdinal;
-            });
-            for (var _i3 = 0; _i3 < tmpViewsToSolve.length; _i3++) {
-              tmpViewsToSolve[_i3].solve();
-            }
-            this.onSolve();
-            this.onAfterSolve();
-            this.lastSolvedTimestamp = this.fable.log.getTimeStamp();
-            return true;
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "solveAsync",
-          value: function solveAsync(fCallback) {
-            var _this2 = this;
-            var tmpAnticipate = this.fable.instantiateServiceProviderWithoutRegistration('Anticipate');
-            tmpAnticipate.anticipate(this.onBeforeSolveAsync.bind(this));
-
-            // Allow the callback to be passed in as the last parameter no matter what
-            var tmpCallback = typeof fCallback === 'function' ? fCallback : false;
-            if (!tmpCallback) {
-              this.log.warn("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " solveAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));
-              tmpCallback = function tmpCallback(pError) {
-                if (pError) {
-                  _this2.log.error("PictApp [".concat(_this2.UUID, "]::[").concat(_this2.Hash, "] ").concat(_this2.options.Name, " solveAsync Auto Callback Error: ").concat(pError), pError);
-                }
-              };
-            }
-            // Walk through any loaded providers and solve them as well.
-            var tmpLoadedProviders = Object.keys(this.pict.providers);
-            var tmpProvidersToSolve = [];
-            for (var i = 0; i < tmpLoadedProviders.length; i++) {
-              var tmpProvider = this.pict.providers[tmpLoadedProviders[i]];
-              if (tmpProvider.options.AutoSolveWithApp) {
-                tmpProvidersToSolve.push(tmpProvider);
-              }
-            }
-            // Sort the providers by their priority (if they are all priority 0, it will end up being add order due to JSON Object Property Key order stuff)
-            tmpProvidersToSolve.sort(function (a, b) {
-              return a.options.AutoSolveOrdinal - b.options.AutoSolveOrdinal;
-            });
-            for (var _i4 = 0; _i4 < tmpProvidersToSolve.length; _i4++) {
-              tmpAnticipate.anticipate(tmpProvidersToSolve[_i4].solveAsync.bind(tmpProvidersToSolve[_i4]));
-            }
-
-            // Walk through any loaded views and solve them as well.
-            var tmpLoadedViews = Object.keys(this.pict.views);
-            var tmpViewsToSolve = [];
-            for (var _i5 = 0; _i5 < tmpLoadedViews.length; _i5++) {
-              var tmpView = this.pict.views[tmpLoadedViews[_i5]];
-              if (tmpView.options.AutoSolveWithApp) {
-                tmpViewsToSolve.push(tmpView);
-              }
-            }
-            // Sort the views by their priority (if they are all priority 0, it will end up being add order due to JSON Object Property Key order stuff)
-            tmpViewsToSolve.sort(function (a, b) {
-              return a.options.AutoSolveOrdinal - b.options.AutoSolveOrdinal;
-            });
-            for (var _i6 = 0; _i6 < tmpViewsToSolve.length; _i6++) {
-              tmpAnticipate.anticipate(tmpViewsToSolve[_i6].solveAsync.bind(tmpViewsToSolve[_i6]));
-            }
-            tmpAnticipate.anticipate(this.onSolveAsync.bind(this));
-            tmpAnticipate.anticipate(this.onAfterSolveAsync.bind(this));
-            tmpAnticipate.wait(function (pError) {
-              if (_this2.pict.LogNoisiness > 2) {
-                _this2.log.trace("PictApp [".concat(_this2.UUID, "]::[").concat(_this2.Hash, "] ").concat(_this2.options.Name, " solveAsync() complete."));
-              }
-              _this2.lastSolvedTimestamp = _this2.fable.log.getTimeStamp();
-              return tmpCallback(pError);
-            });
-          }
-
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "onAfterSolve",
-          value: function onAfterSolve() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onAfterSolve:"));
-            }
-            return true;
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onAfterSolveAsync",
-          value: function onAfterSolveAsync(fCallback) {
-            this.onAfterSolve();
-            return fCallback();
-          }
-
-          /* -------------------------------------------------------------------------- */
-          /*                     Code Section: Application Login                        */
-          /* -------------------------------------------------------------------------- */
-
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onBeforeLoginAsync",
-          value: function onBeforeLoginAsync(fCallback) {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onBeforeLoginAsync:"));
-            }
-            return fCallback();
-          }
-
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onLoginAsync",
-          value: function onLoginAsync(fCallback) {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onLoginAsync:"));
-            }
-            return fCallback();
-          }
-
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "loginAsync",
-          value: function loginAsync(fCallback) {
-            var _this3 = this;
-            var tmpAnticipate = this.fable.instantiateServiceProviderWithoutRegistration('Anticipate');
-            var tmpCallback = fCallback;
-            if (typeof tmpCallback !== 'function') {
-              this.log.warn("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " loginAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));
-              tmpCallback = function tmpCallback(pError) {
-                if (pError) {
-                  _this3.log.error("PictApp [".concat(_this3.UUID, "]::[").concat(_this3.Hash, "] ").concat(_this3.options.Name, " loginAsync Auto Callback Error: ").concat(pError), pError);
-                }
-              };
-            }
-            tmpAnticipate.anticipate(this.onBeforeLoginAsync.bind(this));
-            tmpAnticipate.anticipate(this.onLoginAsync.bind(this));
-            tmpAnticipate.anticipate(this.onAfterLoginAsync.bind(this));
-
-            // check and see if we should automatically trigger a data load
-            if (this.options.AutoLoadDataAfterLogin) {
-              tmpAnticipate.anticipate(function (fNext) {
-                if (!_this3.isLoggedIn()) {
-                  return fNext();
-                }
-                if (_this3.pict.LogNoisiness > 1) {
-                  _this3.log.trace("PictApp [".concat(_this3.UUID, "]::[").concat(_this3.Hash, "] ").concat(_this3.options.Name, " auto loading data after login..."));
-                }
-                //TODO: should data load errors funnel here? this creates a weird coupling between login and data load callbacks
-                _this3.loadDataAsync(function (pError) {
-                  fNext(pError);
-                });
-              });
-            }
-            tmpAnticipate.wait(function (pError) {
-              if (_this3.pict.LogNoisiness > 2) {
-                _this3.log.trace("PictApp [".concat(_this3.UUID, "]::[").concat(_this3.Hash, "] ").concat(_this3.options.Name, " loginAsync() complete."));
-              }
-              _this3.lastLoginTimestamp = _this3.fable.log.getTimeStamp();
-              return tmpCallback(pError);
-            });
-          }
-
-          /**
-           * Check if the application state is logged in. Defaults to true. Override this method in your application based on login requirements.
-           *
-           * @return {boolean}
-           */
-        }, {
-          key: "isLoggedIn",
-          value: function isLoggedIn() {
-            return true;
-          }
-
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onAfterLoginAsync",
-          value: function onAfterLoginAsync(fCallback) {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onAfterLoginAsync:"));
-            }
-            return fCallback();
-          }
-
-          /* -------------------------------------------------------------------------- */
-          /*                     Code Section: Application LoadData                     */
-          /* -------------------------------------------------------------------------- */
-
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onBeforeLoadDataAsync",
-          value: function onBeforeLoadDataAsync(fCallback) {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onBeforeLoadDataAsync:"));
-            }
-            return fCallback();
-          }
-
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onLoadDataAsync",
-          value: function onLoadDataAsync(fCallback) {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onLoadDataAsync:"));
-            }
-            return fCallback();
-          }
-
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "loadDataAsync",
-          value: function loadDataAsync(fCallback) {
-            var _this4 = this;
-            var tmpAnticipate = this.fable.instantiateServiceProviderWithoutRegistration('Anticipate');
-            var tmpCallback = fCallback;
-            if (typeof tmpCallback !== 'function') {
-              this.log.warn("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " loadDataAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));
-              tmpCallback = function tmpCallback(pError) {
-                if (pError) {
-                  _this4.log.error("PictApp [".concat(_this4.UUID, "]::[").concat(_this4.Hash, "] ").concat(_this4.options.Name, " loadDataAsync Auto Callback Error: ").concat(pError), pError);
-                }
-              };
-            }
-            tmpAnticipate.anticipate(this.onBeforeLoadDataAsync.bind(this));
-
-            // Walk through any loaded providers and load their data as well.
-            var tmpLoadedProviders = Object.keys(this.pict.providers);
-            var tmpProvidersToLoadData = [];
-            for (var i = 0; i < tmpLoadedProviders.length; i++) {
-              var tmpProvider = this.pict.providers[tmpLoadedProviders[i]];
-              if (tmpProvider.options.AutoLoadDataWithApp) {
-                tmpProvidersToLoadData.push(tmpProvider);
-              }
-            }
-            // Sort the providers by their priority (if they are all priority 0, it will end up being add order due to JSON Object Property Key order stuff)
-            tmpProvidersToLoadData.sort(function (a, b) {
-              return a.options.AutoLoadDataOrdinal - b.options.AutoLoadDataOrdinal;
-            });
-            for (var _i7 = 0, _tmpProvidersToLoadDa = tmpProvidersToLoadData; _i7 < _tmpProvidersToLoadDa.length; _i7++) {
-              var _tmpProvider = _tmpProvidersToLoadDa[_i7];
-              tmpAnticipate.anticipate(_tmpProvider.onBeforeLoadDataAsync.bind(_tmpProvider));
-            }
-            tmpAnticipate.anticipate(this.onLoadDataAsync.bind(this));
-
-            //TODO: think about ways to parallelize these
-            for (var _i8 = 0, _tmpProvidersToLoadDa2 = tmpProvidersToLoadData; _i8 < _tmpProvidersToLoadDa2.length; _i8++) {
-              var _tmpProvider2 = _tmpProvidersToLoadDa2[_i8];
-              tmpAnticipate.anticipate(_tmpProvider2.onLoadDataAsync.bind(_tmpProvider2));
-            }
-            tmpAnticipate.anticipate(this.onAfterLoadDataAsync.bind(this));
-            for (var _i9 = 0, _tmpProvidersToLoadDa3 = tmpProvidersToLoadData; _i9 < _tmpProvidersToLoadDa3.length; _i9++) {
-              var _tmpProvider3 = _tmpProvidersToLoadDa3[_i9];
-              tmpAnticipate.anticipate(_tmpProvider3.onAfterLoadDataAsync.bind(_tmpProvider3));
-            }
-            tmpAnticipate.wait(/** @param {Error} [pError] */
-            function (pError) {
-              if (_this4.pict.LogNoisiness > 2) {
-                _this4.log.trace("PictApp [".concat(_this4.UUID, "]::[").concat(_this4.Hash, "] ").concat(_this4.options.Name, " loadDataAsync() complete."));
-              }
-              _this4.lastLoadDataTimestamp = _this4.fable.log.getTimeStamp();
-              return tmpCallback(pError);
-            });
-          }
-
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onAfterLoadDataAsync",
-          value: function onAfterLoadDataAsync(fCallback) {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onAfterLoadDataAsync:"));
-            }
-            return fCallback();
-          }
-
-          /* -------------------------------------------------------------------------- */
-          /*                     Code Section: Application SaveData                     */
-          /* -------------------------------------------------------------------------- */
-
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onBeforeSaveDataAsync",
-          value: function onBeforeSaveDataAsync(fCallback) {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onBeforeSaveDataAsync:"));
-            }
-            return fCallback();
-          }
-
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onSaveDataAsync",
-          value: function onSaveDataAsync(fCallback) {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onSaveDataAsync:"));
-            }
-            return fCallback();
-          }
-
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "saveDataAsync",
-          value: function saveDataAsync(fCallback) {
-            var _this5 = this;
-            var tmpAnticipate = this.fable.instantiateServiceProviderWithoutRegistration('Anticipate');
-            var tmpCallback = fCallback;
-            if (typeof tmpCallback !== 'function') {
-              this.log.warn("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " saveDataAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));
-              tmpCallback = function tmpCallback(pError) {
-                if (pError) {
-                  _this5.log.error("PictApp [".concat(_this5.UUID, "]::[").concat(_this5.Hash, "] ").concat(_this5.options.Name, " saveDataAsync Auto Callback Error: ").concat(pError), pError);
-                }
-              };
-            }
-            tmpAnticipate.anticipate(this.onBeforeSaveDataAsync.bind(this));
-
-            // Walk through any loaded providers and load their data as well.
-            var tmpLoadedProviders = Object.keys(this.pict.providers);
-            var tmpProvidersToSaveData = [];
-            for (var i = 0; i < tmpLoadedProviders.length; i++) {
-              var tmpProvider = this.pict.providers[tmpLoadedProviders[i]];
-              if (tmpProvider.options.AutoSaveDataWithApp) {
-                tmpProvidersToSaveData.push(tmpProvider);
-              }
-            }
-            // Sort the providers by their priority (if they are all priority 0, it will end up being add order due to JSON Object Property Key order stuff)
-            tmpProvidersToSaveData.sort(function (a, b) {
-              return a.options.AutoSaveDataOrdinal - b.options.AutoSaveDataOrdinal;
-            });
-            for (var _i0 = 0, _tmpProvidersToSaveDa = tmpProvidersToSaveData; _i0 < _tmpProvidersToSaveDa.length; _i0++) {
-              var _tmpProvider4 = _tmpProvidersToSaveDa[_i0];
-              tmpAnticipate.anticipate(_tmpProvider4.onBeforeSaveDataAsync.bind(_tmpProvider4));
-            }
-            tmpAnticipate.anticipate(this.onSaveDataAsync.bind(this));
-
-            //TODO: think about ways to parallelize these
-            for (var _i1 = 0, _tmpProvidersToSaveDa2 = tmpProvidersToSaveData; _i1 < _tmpProvidersToSaveDa2.length; _i1++) {
-              var _tmpProvider5 = _tmpProvidersToSaveDa2[_i1];
-              tmpAnticipate.anticipate(_tmpProvider5.onSaveDataAsync.bind(_tmpProvider5));
-            }
-            tmpAnticipate.anticipate(this.onAfterSaveDataAsync.bind(this));
-            for (var _i10 = 0, _tmpProvidersToSaveDa3 = tmpProvidersToSaveData; _i10 < _tmpProvidersToSaveDa3.length; _i10++) {
-              var _tmpProvider6 = _tmpProvidersToSaveDa3[_i10];
-              tmpAnticipate.anticipate(_tmpProvider6.onAfterSaveDataAsync.bind(_tmpProvider6));
-            }
-            tmpAnticipate.wait(/** @param {Error} [pError] */
-            function (pError) {
-              if (_this5.pict.LogNoisiness > 2) {
-                _this5.log.trace("PictApp [".concat(_this5.UUID, "]::[").concat(_this5.Hash, "] ").concat(_this5.options.Name, " saveDataAsync() complete."));
-              }
-              _this5.lastSaveDataTimestamp = _this5.fable.log.getTimeStamp();
-              return tmpCallback(pError);
-            });
-          }
-
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onAfterSaveDataAsync",
-          value: function onAfterSaveDataAsync(fCallback) {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onAfterSaveDataAsync:"));
-            }
-            return fCallback();
-          }
-
-          /* -------------------------------------------------------------------------- */
-          /*                     Code Section: Initialize Application                   */
-          /* -------------------------------------------------------------------------- */
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "onBeforeInitialize",
-          value: function onBeforeInitialize() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onBeforeInitialize:"));
-            }
-            return true;
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onBeforeInitializeAsync",
-          value: function onBeforeInitializeAsync(fCallback) {
-            this.onBeforeInitialize();
-            return fCallback();
-          }
-
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "onInitialize",
-          value: function onInitialize() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onInitialize:"));
-            }
-            return true;
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onInitializeAsync",
-          value: function onInitializeAsync(fCallback) {
-            this.onInitialize();
-            return fCallback();
-          }
-
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "initialize",
-          value: function initialize() {
-            if (this.pict.LogControlFlow) {
-              this.log.trace("PICT-ControlFlow APPLICATION [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " initialize:"));
-            }
-            if (!this.initializeTimestamp) {
-              this.onBeforeInitialize();
-              if ('ConfigurationOnlyViews' in this.options) {
-                // Load all the configuration only views
-                for (var i = 0; i < this.options.ConfigurationOnlyViews.length; i++) {
-                  var tmpViewIdentifier = typeof this.options.ConfigurationOnlyViews[i].ViewIdentifier === 'undefined' ? "AutoView-".concat(this.fable.getUUID()) : this.options.ConfigurationOnlyViews[i].ViewIdentifier;
-                  this.log.info("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " adding configuration only view: ").concat(tmpViewIdentifier));
-                  this.pict.addView(tmpViewIdentifier, this.options.ConfigurationOnlyViews[i]);
-                }
-              }
-              this.onInitialize();
-
-              // Walk through any loaded providers and initialize them as well.
-              var tmpLoadedProviders = Object.keys(this.pict.providers);
-              var tmpProvidersToInitialize = [];
-              for (var _i11 = 0; _i11 < tmpLoadedProviders.length; _i11++) {
-                var tmpProvider = this.pict.providers[tmpLoadedProviders[_i11]];
-                if (tmpProvider.options.AutoInitialize) {
-                  tmpProvidersToInitialize.push(tmpProvider);
-                }
-              }
-              // Sort the providers by their priority (if they are all priority 0, it will end up being add order due to JSON Object Property Key order stuff)
-              tmpProvidersToInitialize.sort(function (a, b) {
-                return a.options.AutoInitializeOrdinal - b.options.AutoInitializeOrdinal;
-              });
-              for (var _i12 = 0; _i12 < tmpProvidersToInitialize.length; _i12++) {
-                tmpProvidersToInitialize[_i12].initialize();
-              }
-
-              // Now walk through any loaded views and initialize them as well.
-              var tmpLoadedViews = Object.keys(this.pict.views);
-              var tmpViewsToInitialize = [];
-              for (var _i13 = 0; _i13 < tmpLoadedViews.length; _i13++) {
-                var tmpView = this.pict.views[tmpLoadedViews[_i13]];
-                if (tmpView.options.AutoInitialize) {
-                  tmpViewsToInitialize.push(tmpView);
-                }
-              }
-              // Sort the views by their priority (if they are all priority 0, it will end up being add order due to JSON Object Property Key order stuff)
-              tmpViewsToInitialize.sort(function (a, b) {
-                return a.options.AutoInitializeOrdinal - b.options.AutoInitializeOrdinal;
-              });
-              for (var _i14 = 0; _i14 < tmpViewsToInitialize.length; _i14++) {
-                tmpViewsToInitialize[_i14].initialize();
-              }
-              this.onAfterInitialize();
-              if (this.options.AutoSolveAfterInitialize) {
-                if (this.pict.LogNoisiness > 1) {
-                  this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " auto solving after initialization..."));
-                }
-                // Solve the template synchronously
-                this.solve();
-              }
-              // Now check and see if we should automatically render as well
-              if (this.options.AutoRenderMainViewportViewAfterInitialize) {
-                if (this.pict.LogNoisiness > 1) {
-                  this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " auto rendering after initialization..."));
-                }
-                // Render the template synchronously
-                this.render();
-              }
-              this.initializeTimestamp = this.fable.log.getTimeStamp();
-              this.onCompletionOfInitialize();
-              return true;
-            } else {
-              this.log.warn("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " initialize called but initialization is already completed.  Aborting."));
-              return false;
-            }
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "initializeAsync",
-          value: function initializeAsync(fCallback) {
-            var _this6 = this;
-            if (this.pict.LogControlFlow) {
-              this.log.trace("PICT-ControlFlow APPLICATION [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " initializeAsync:"));
-            }
-
-            // Allow the callback to be passed in as the last parameter no matter what
-            var tmpCallback = typeof fCallback === 'function' ? fCallback : false;
-            if (!tmpCallback) {
-              this.log.warn("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " initializeAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));
-              tmpCallback = function tmpCallback(pError) {
-                if (pError) {
-                  _this6.log.error("PictApp [".concat(_this6.UUID, "]::[").concat(_this6.Hash, "] ").concat(_this6.options.Name, " initializeAsync Auto Callback Error: ").concat(pError), pError);
-                }
-              };
-            }
-            if (!this.initializeTimestamp) {
-              var tmpAnticipate = this.fable.instantiateServiceProviderWithoutRegistration('Anticipate');
-              if (this.pict.LogNoisiness > 3) {
-                this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " beginning initialization..."));
-              }
-              if ('ConfigurationOnlyViews' in this.options) {
-                // Load all the configuration only views
-                for (var i = 0; i < this.options.ConfigurationOnlyViews.length; i++) {
-                  var tmpViewIdentifier = typeof this.options.ConfigurationOnlyViews[i].ViewIdentifier === 'undefined' ? "AutoView-".concat(this.fable.getUUID()) : this.options.ConfigurationOnlyViews[i].ViewIdentifier;
-                  this.log.info("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " adding configuration only view: ").concat(tmpViewIdentifier));
-                  this.pict.addView(tmpViewIdentifier, this.options.ConfigurationOnlyViews[i]);
-                }
-              }
-              tmpAnticipate.anticipate(this.onBeforeInitializeAsync.bind(this));
-              tmpAnticipate.anticipate(this.onInitializeAsync.bind(this));
-
-              // Walk through any loaded providers and solve them as well.
-              var tmpLoadedProviders = Object.keys(this.pict.providers);
-              var tmpProvidersToInitialize = [];
-              for (var _i15 = 0; _i15 < tmpLoadedProviders.length; _i15++) {
-                var tmpProvider = this.pict.providers[tmpLoadedProviders[_i15]];
-                if (tmpProvider.options.AutoInitialize) {
-                  tmpProvidersToInitialize.push(tmpProvider);
-                }
-              }
-              // Sort the providers by their priority (if they are all priority 0, it will end up being add order due to JSON Object Property Key order stuff)
-              tmpProvidersToInitialize.sort(function (a, b) {
-                return a.options.AutoInitializeOrdinal - b.options.AutoInitializeOrdinal;
-              });
-              for (var _i16 = 0; _i16 < tmpProvidersToInitialize.length; _i16++) {
-                tmpAnticipate.anticipate(tmpProvidersToInitialize[_i16].initializeAsync.bind(tmpProvidersToInitialize[_i16]));
-              }
-
-              // Now walk through any loaded views and initialize them as well.
-              // TODO: Some optimization cleverness could be gained by grouping them into a parallelized async operation, by ordinal.
-              var tmpLoadedViews = Object.keys(this.pict.views);
-              var tmpViewsToInitialize = [];
-              for (var _i17 = 0; _i17 < tmpLoadedViews.length; _i17++) {
-                var tmpView = this.pict.views[tmpLoadedViews[_i17]];
-                if (tmpView.options.AutoInitialize) {
-                  tmpViewsToInitialize.push(tmpView);
-                }
-              }
-              // Sort the views by their priority
-              // If they are all the default priority 0, it will end up being add order due to JSON Object Property Key order stuff
-              tmpViewsToInitialize.sort(function (a, b) {
-                return a.options.AutoInitializeOrdinal - b.options.AutoInitializeOrdinal;
-              });
-              for (var _i18 = 0; _i18 < tmpViewsToInitialize.length; _i18++) {
-                var _tmpView = tmpViewsToInitialize[_i18];
-                tmpAnticipate.anticipate(_tmpView.initializeAsync.bind(_tmpView));
-              }
-              tmpAnticipate.anticipate(this.onAfterInitializeAsync.bind(this));
-              if (this.options.AutoLoginAfterInitialize) {
-                if (this.pict.LogNoisiness > 1) {
-                  this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " auto login (asynchronously) after initialization..."));
-                }
-                tmpAnticipate.anticipate(this.loginAsync.bind(this));
-              }
-              if (this.options.AutoSolveAfterInitialize) {
-                if (this.pict.LogNoisiness > 1) {
-                  this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " auto solving (asynchronously) after initialization..."));
-                }
-                tmpAnticipate.anticipate(this.solveAsync.bind(this));
-              }
-              if (this.options.AutoRenderMainViewportViewAfterInitialize) {
-                if (this.pict.LogNoisiness > 1) {
-                  this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " auto rendering (asynchronously) after initialization..."));
-                }
-                tmpAnticipate.anticipate(this.renderMainViewportAsync.bind(this));
-              }
-              tmpAnticipate.wait(function (pError) {
-                if (pError) {
-                  _this6.log.error("PictApp [".concat(_this6.UUID, "]::[").concat(_this6.Hash, "] ").concat(_this6.options.Name, " initializeAsync Error: ").concat(pError.message || pError), {
-                    stack: pError.stack
-                  });
-                }
-                _this6.initializeTimestamp = _this6.fable.log.getTimeStamp();
-                if (_this6.pict.LogNoisiness > 2) {
-                  _this6.log.trace("PictApp [".concat(_this6.UUID, "]::[").concat(_this6.Hash, "] ").concat(_this6.options.Name, " initialization complete."));
-                }
-                return tmpCallback();
-              });
-            } else {
-              this.log.warn("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " async initialize called but initialization is already completed.  Aborting."));
-              // TODO: Should this be an error?
-              return this.onCompletionOfInitializeAsync(tmpCallback);
-            }
-          }
-
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "onAfterInitialize",
-          value: function onAfterInitialize() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onAfterInitialize:"));
-            }
-            return true;
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onAfterInitializeAsync",
-          value: function onAfterInitializeAsync(fCallback) {
-            this.onAfterInitialize();
-            return fCallback();
-          }
-
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "onCompletionOfInitialize",
-          value: function onCompletionOfInitialize() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onCompletionOfInitialize:"));
-            }
-            return true;
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onCompletionOfInitializeAsync",
-          value: function onCompletionOfInitializeAsync(fCallback) {
-            this.onCompletionOfInitialize();
-            return fCallback();
-          }
-
-          /* -------------------------------------------------------------------------- */
-          /*                     Code Section: Marshal Data From All Views              */
-          /* -------------------------------------------------------------------------- */
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "onBeforeMarshalFromViews",
-          value: function onBeforeMarshalFromViews() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onBeforeMarshalFromViews:"));
-            }
-            return true;
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onBeforeMarshalFromViewsAsync",
-          value: function onBeforeMarshalFromViewsAsync(fCallback) {
-            this.onBeforeMarshalFromViews();
-            return fCallback();
-          }
-
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "onMarshalFromViews",
-          value: function onMarshalFromViews() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onMarshalFromViews:"));
-            }
-            return true;
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onMarshalFromViewsAsync",
-          value: function onMarshalFromViewsAsync(fCallback) {
-            this.onMarshalFromViews();
-            return fCallback();
-          }
-
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "marshalFromViews",
-          value: function marshalFromViews() {
-            if (this.pict.LogNoisiness > 2) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " executing marshalFromViews() function..."));
-            }
-            this.onBeforeMarshalFromViews();
-            // Now walk through any loaded views and initialize them as well.
-            var tmpLoadedViews = Object.keys(this.pict.views);
-            var tmpViewsToMarshalFromViews = [];
-            for (var i = 0; i < tmpLoadedViews.length; i++) {
-              var tmpView = this.pict.views[tmpLoadedViews[i]];
-              tmpViewsToMarshalFromViews.push(tmpView);
-            }
-            for (var _i19 = 0; _i19 < tmpViewsToMarshalFromViews.length; _i19++) {
-              tmpViewsToMarshalFromViews[_i19].marshalFromView();
-            }
-            this.onMarshalFromViews();
-            this.onAfterMarshalFromViews();
-            this.lastMarshalFromViewsTimestamp = this.fable.log.getTimeStamp();
-            return true;
-          }
-
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "marshalFromViewsAsync",
-          value: function marshalFromViewsAsync(fCallback) {
-            var _this7 = this;
-            var tmpAnticipate = this.fable.instantiateServiceProviderWithoutRegistration('Anticipate');
-
-            // Allow the callback to be passed in as the last parameter no matter what
-            var tmpCallback = typeof fCallback === 'function' ? fCallback : false;
-            if (!tmpCallback) {
-              this.log.warn("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " marshalFromViewsAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));
-              tmpCallback = function tmpCallback(pError) {
-                if (pError) {
-                  _this7.log.error("PictApp [".concat(_this7.UUID, "]::[").concat(_this7.Hash, "] ").concat(_this7.options.Name, " marshalFromViewsAsync Auto Callback Error: ").concat(pError), pError);
-                }
-              };
-            }
-            tmpAnticipate.anticipate(this.onBeforeMarshalFromViewsAsync.bind(this));
-            // Walk through any loaded views and marshalFromViews them as well.
-            var tmpLoadedViews = Object.keys(this.pict.views);
-            var tmpViewsToMarshalFromViews = [];
-            for (var i = 0; i < tmpLoadedViews.length; i++) {
-              var tmpView = this.pict.views[tmpLoadedViews[i]];
-              tmpViewsToMarshalFromViews.push(tmpView);
-            }
-            for (var _i20 = 0; _i20 < tmpViewsToMarshalFromViews.length; _i20++) {
-              tmpAnticipate.anticipate(tmpViewsToMarshalFromViews[_i20].marshalFromViewAsync.bind(tmpViewsToMarshalFromViews[_i20]));
-            }
-            tmpAnticipate.anticipate(this.onMarshalFromViewsAsync.bind(this));
-            tmpAnticipate.anticipate(this.onAfterMarshalFromViewsAsync.bind(this));
-            tmpAnticipate.wait(function (pError) {
-              if (_this7.pict.LogNoisiness > 2) {
-                _this7.log.trace("PictApp [".concat(_this7.UUID, "]::[").concat(_this7.Hash, "] ").concat(_this7.options.Name, " marshalFromViewsAsync() complete."));
-              }
-              _this7.lastMarshalFromViewsTimestamp = _this7.fable.log.getTimeStamp();
-              return tmpCallback(pError);
-            });
-          }
-
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "onAfterMarshalFromViews",
-          value: function onAfterMarshalFromViews() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onAfterMarshalFromViews:"));
-            }
-            return true;
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onAfterMarshalFromViewsAsync",
-          value: function onAfterMarshalFromViewsAsync(fCallback) {
-            this.onAfterMarshalFromViews();
-            return fCallback();
-          }
-
-          /* -------------------------------------------------------------------------- */
-          /*                     Code Section: Marshal Data To All Views                */
-          /* -------------------------------------------------------------------------- */
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "onBeforeMarshalToViews",
-          value: function onBeforeMarshalToViews() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onBeforeMarshalToViews:"));
-            }
-            return true;
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onBeforeMarshalToViewsAsync",
-          value: function onBeforeMarshalToViewsAsync(fCallback) {
-            this.onBeforeMarshalToViews();
-            return fCallback();
-          }
-
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "onMarshalToViews",
-          value: function onMarshalToViews() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onMarshalToViews:"));
-            }
-            return true;
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onMarshalToViewsAsync",
-          value: function onMarshalToViewsAsync(fCallback) {
-            this.onMarshalToViews();
-            return fCallback();
-          }
-
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "marshalToViews",
-          value: function marshalToViews() {
-            if (this.pict.LogNoisiness > 2) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " executing marshalToViews() function..."));
-            }
-            this.onBeforeMarshalToViews();
-            // Now walk through any loaded views and initialize them as well.
-            var tmpLoadedViews = Object.keys(this.pict.views);
-            var tmpViewsToMarshalToViews = [];
-            for (var i = 0; i < tmpLoadedViews.length; i++) {
-              var tmpView = this.pict.views[tmpLoadedViews[i]];
-              tmpViewsToMarshalToViews.push(tmpView);
-            }
-            for (var _i21 = 0; _i21 < tmpViewsToMarshalToViews.length; _i21++) {
-              tmpViewsToMarshalToViews[_i21].marshalToView();
-            }
-            this.onMarshalToViews();
-            this.onAfterMarshalToViews();
-            this.lastMarshalToViewsTimestamp = this.fable.log.getTimeStamp();
-            return true;
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "marshalToViewsAsync",
-          value: function marshalToViewsAsync(fCallback) {
-            var _this8 = this;
-            var tmpAnticipate = this.fable.instantiateServiceProviderWithoutRegistration('Anticipate');
-
-            // Allow the callback to be passed in as the last parameter no matter what
-            var tmpCallback = typeof fCallback === 'function' ? fCallback : false;
-            if (!tmpCallback) {
-              this.log.warn("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " marshalToViewsAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));
-              tmpCallback = function tmpCallback(pError) {
-                if (pError) {
-                  _this8.log.error("PictApp [".concat(_this8.UUID, "]::[").concat(_this8.Hash, "] ").concat(_this8.options.Name, " marshalToViewsAsync Auto Callback Error: ").concat(pError), pError);
-                }
-              };
-            }
-            tmpAnticipate.anticipate(this.onBeforeMarshalToViewsAsync.bind(this));
-            // Walk through any loaded views and marshalToViews them as well.
-            var tmpLoadedViews = Object.keys(this.pict.views);
-            var tmpViewsToMarshalToViews = [];
-            for (var i = 0; i < tmpLoadedViews.length; i++) {
-              var tmpView = this.pict.views[tmpLoadedViews[i]];
-              tmpViewsToMarshalToViews.push(tmpView);
-            }
-            for (var _i22 = 0; _i22 < tmpViewsToMarshalToViews.length; _i22++) {
-              tmpAnticipate.anticipate(tmpViewsToMarshalToViews[_i22].marshalToViewAsync.bind(tmpViewsToMarshalToViews[_i22]));
-            }
-            tmpAnticipate.anticipate(this.onMarshalToViewsAsync.bind(this));
-            tmpAnticipate.anticipate(this.onAfterMarshalToViewsAsync.bind(this));
-            tmpAnticipate.wait(function (pError) {
-              if (_this8.pict.LogNoisiness > 2) {
-                _this8.log.trace("PictApp [".concat(_this8.UUID, "]::[").concat(_this8.Hash, "] ").concat(_this8.options.Name, " marshalToViewsAsync() complete."));
-              }
-              _this8.lastMarshalToViewsTimestamp = _this8.fable.log.getTimeStamp();
-              return tmpCallback(pError);
-            });
-          }
-
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "onAfterMarshalToViews",
-          value: function onAfterMarshalToViews() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onAfterMarshalToViews:"));
-            }
-            return true;
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onAfterMarshalToViewsAsync",
-          value: function onAfterMarshalToViewsAsync(fCallback) {
-            this.onAfterMarshalToViews();
-            return fCallback();
-          }
-
-          /* -------------------------------------------------------------------------- */
-          /*                     Code Section: Render View                              */
-          /* -------------------------------------------------------------------------- */
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "onBeforeRender",
-          value: function onBeforeRender() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onBeforeRender:"));
-            }
-            return true;
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onBeforeRenderAsync",
-          value: function onBeforeRenderAsync(fCallback) {
-            this.onBeforeRender();
-            return fCallback();
-          }
-
-          /**
-           * @param {string} [pViewIdentifier] - The hash of the view to render. By default, the main viewport view is rendered.
-           * @param {string} [pRenderableHash] - The hash of the renderable to render.
-           * @param {string} [pRenderDestinationAddress] - The address where the renderable will be rendered.
-           * @param {string} [pTemplateDataAddress] - The address where the data for the template is stored.
-           *
-           * TODO: Should we support objects for pTemplateDataAddress for parity with pict-view?
-           */
-        }, {
-          key: "render",
-          value: function render(pViewIdentifier, pRenderableHash, pRenderDestinationAddress, pTemplateDataAddress) {
-            var tmpViewIdentifier = typeof pViewIdentifier !== 'string' ? this.options.MainViewportViewIdentifier : pViewIdentifier;
-            var tmpRenderableHash = typeof pRenderableHash !== 'string' ? this.options.MainViewportRenderableHash : pRenderableHash;
-            var tmpRenderDestinationAddress = typeof pRenderDestinationAddress !== 'string' ? this.options.MainViewportDestinationAddress : pRenderDestinationAddress;
-            var tmpTemplateDataAddress = typeof pTemplateDataAddress !== 'string' ? this.options.MainViewportDefaultDataAddress : pTemplateDataAddress;
-            if (this.pict.LogControlFlow) {
-              this.log.trace("PICT-ControlFlow APPLICATION [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " VIEW Renderable[").concat(tmpRenderableHash, "] Destination[").concat(tmpRenderDestinationAddress, "] TemplateDataAddress[").concat(tmpTemplateDataAddress, "] render:"));
-            }
-            this.onBeforeRender();
-
-            // Now get the view (by hash) from the loaded views
-            var tmpView = typeof tmpViewIdentifier === 'string' ? this.servicesMap.PictView[tmpViewIdentifier] : false;
-            if (!tmpView) {
-              this.log.error("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " could not render from View ").concat(tmpViewIdentifier, " because it is not a valid view."));
-              return false;
-            }
-            this.onRender();
-            tmpView.render(tmpRenderableHash, tmpRenderDestinationAddress, tmpTemplateDataAddress);
-            this.onAfterRender();
-            return true;
-          }
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "onRender",
-          value: function onRender() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onRender:"));
-            }
-            return true;
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onRenderAsync",
-          value: function onRenderAsync(fCallback) {
-            this.onRender();
-            return fCallback();
-          }
-
-          /**
-           * @param {string|((error?: Error) => void)} pViewIdentifier - The hash of the view to render. By default, the main viewport view is rendered. (or the callback)
-           * @param {string|((error?: Error) => void)} [pRenderableHash] - The hash of the renderable to render. (or the callback)
-           * @param {string|((error?: Error) => void)} [pRenderDestinationAddress] - The address where the renderable will be rendered. (or the callback)
-           * @param {string|((error?: Error) => void)} [pTemplateDataAddress] - The address where the data for the template is stored. (or the callback)
-           * @param {(error?: Error) => void} [fCallback] - The callback, if all other parameters are provided.
-           *
-           * TODO: Should we support objects for pTemplateDataAddress for parity with pict-view?
-           */
-        }, {
-          key: "renderAsync",
-          value: function renderAsync(pViewIdentifier, pRenderableHash, pRenderDestinationAddress, pTemplateDataAddress, fCallback) {
-            var _this9 = this;
-            var tmpViewIdentifier = typeof pViewIdentifier !== 'string' ? this.options.MainViewportViewIdentifier : pViewIdentifier;
-            var tmpRenderableHash = typeof pRenderableHash !== 'string' ? this.options.MainViewportRenderableHash : pRenderableHash;
-            var tmpRenderDestinationAddress = typeof pRenderDestinationAddress !== 'string' ? this.options.MainViewportDestinationAddress : pRenderDestinationAddress;
-            var tmpTemplateDataAddress = typeof pTemplateDataAddress !== 'string' ? this.options.MainViewportDefaultDataAddress : pTemplateDataAddress;
-
-            // Allow the callback to be passed in as the last parameter no matter what
-            var tmpCallback = typeof fCallback === 'function' ? fCallback : typeof pTemplateDataAddress === 'function' ? pTemplateDataAddress : typeof pRenderDestinationAddress === 'function' ? pRenderDestinationAddress : typeof pRenderableHash === 'function' ? pRenderableHash : typeof pViewIdentifier === 'function' ? pViewIdentifier : false;
-            if (!tmpCallback) {
-              this.log.warn("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " renderAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));
-              tmpCallback = function tmpCallback(pError) {
-                if (pError) {
-                  _this9.log.error("PictApp [".concat(_this9.UUID, "]::[").concat(_this9.Hash, "] ").concat(_this9.options.Name, " renderAsync Auto Callback Error: ").concat(pError), pError);
-                }
-              };
-            }
-            if (this.pict.LogControlFlow) {
-              this.log.trace("PICT-ControlFlow APPLICATION [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " VIEW Renderable[").concat(tmpRenderableHash, "] Destination[").concat(tmpRenderDestinationAddress, "] TemplateDataAddress[").concat(tmpTemplateDataAddress, "] renderAsync:"));
-            }
-            var tmpRenderAnticipate = this.fable.newAnticipate();
-            tmpRenderAnticipate.anticipate(this.onBeforeRenderAsync.bind(this));
-            var tmpView = typeof tmpViewIdentifier === 'string' ? this.servicesMap.PictView[tmpViewIdentifier] : false;
-            if (!tmpView) {
-              var tmpErrorMessage = "PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " could not asynchronously render from View ").concat(tmpViewIdentifier, " because it is not a valid view.");
-              if (this.pict.LogNoisiness > 3) {
-                this.log.error(tmpErrorMessage);
-              }
-              return tmpCallback(new Error(tmpErrorMessage));
-            }
-            tmpRenderAnticipate.anticipate(this.onRenderAsync.bind(this));
-            tmpRenderAnticipate.anticipate(function (fNext) {
-              tmpView.renderAsync.call(tmpView, tmpRenderableHash, tmpRenderDestinationAddress, tmpTemplateDataAddress, fNext);
-            });
-            tmpRenderAnticipate.anticipate(this.onAfterRenderAsync.bind(this));
-            return tmpRenderAnticipate.wait(tmpCallback);
-          }
-
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "onAfterRender",
-          value: function onAfterRender() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " onAfterRender:"));
-            }
-            return true;
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "onAfterRenderAsync",
-          value: function onAfterRenderAsync(fCallback) {
-            this.onAfterRender();
-            return fCallback();
-          }
-
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "renderMainViewport",
-          value: function renderMainViewport() {
-            if (this.pict.LogControlFlow) {
-              this.log.trace("PICT-ControlFlow APPLICATION [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " renderMainViewport:"));
-            }
-            return this.render();
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "renderMainViewportAsync",
-          value: function renderMainViewportAsync(fCallback) {
-            if (this.pict.LogControlFlow) {
-              this.log.trace("PICT-ControlFlow APPLICATION [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " renderMainViewportAsync:"));
-            }
-            return this.renderAsync(fCallback);
-          }
-          /**
-           * @return {void}
-           */
-        }, {
-          key: "renderAutoViews",
-          value: function renderAutoViews() {
-            var _this0 = this;
-            if (this.pict.LogNoisiness > 0) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " beginning renderAutoViews..."));
-            }
-            // Now walk through any loaded views and sort them by the AutoRender ordinal
-            var tmpLoadedViews = Object.keys(this.pict.views);
-            // Sort the views by their priority
-            // If they are all the default priority 0, it will end up being add order due to JSON Object Property Key order stuff
-            tmpLoadedViews.sort(function (a, b) {
-              return _this0.pict.views[a].options.AutoRenderOrdinal - _this0.pict.views[b].options.AutoRenderOrdinal;
-            });
-            for (var i = 0; i < tmpLoadedViews.length; i++) {
-              var tmpView = this.pict.views[tmpLoadedViews[i]];
-              if (tmpView.options.AutoRender) {
-                tmpView.render();
-              }
-            }
-            if (this.pict.LogNoisiness > 0) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " renderAutoViewsAsync complete."));
-            }
-          }
-          /**
-           * @param {(error?: Error) => void} fCallback
-           */
-        }, {
-          key: "renderAutoViewsAsync",
-          value: function renderAutoViewsAsync(fCallback) {
-            var _this1 = this;
-            var tmpAnticipate = this.fable.instantiateServiceProviderWithoutRegistration('Anticipate');
-
-            // Allow the callback to be passed in as the last parameter no matter what
-            var tmpCallback = typeof fCallback === 'function' ? fCallback : false;
-            if (!tmpCallback) {
-              this.log.warn("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " renderAutoViewsAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));
-              tmpCallback = function tmpCallback(pError) {
-                if (pError) {
-                  _this1.log.error("PictApp [".concat(_this1.UUID, "]::[").concat(_this1.Hash, "] ").concat(_this1.options.Name, " renderAutoViewsAsync Auto Callback Error: ").concat(pError), pError);
-                }
-              };
-            }
-            if (this.pict.LogNoisiness > 0) {
-              this.log.trace("PictApp [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " beginning renderAutoViewsAsync..."));
-            }
-
-            // Now walk through any loaded views and sort them by the AutoRender ordinal
-            // TODO: Some optimization cleverness could be gained by grouping them into a parallelized async operation, by ordinal.
-            var tmpLoadedViews = Object.keys(this.pict.views);
-            // Sort the views by their priority
-            // If they are all the default priority 0, it will end up being add order due to JSON Object Property Key order stuff
-            tmpLoadedViews.sort(function (a, b) {
-              return _this1.pict.views[a].options.AutoRenderOrdinal - _this1.pict.views[b].options.AutoRenderOrdinal;
-            });
-            for (var i = 0; i < tmpLoadedViews.length; i++) {
-              var tmpView = this.pict.views[tmpLoadedViews[i]];
-              if (tmpView.options.AutoRender) {
-                tmpAnticipate.anticipate(tmpView.renderAsync.bind(tmpView));
-              }
-            }
-            tmpAnticipate.wait(function (pError) {
-              _this1.lastAutoRenderTimestamp = _this1.fable.log.getTimeStamp();
-              if (_this1.pict.LogNoisiness > 0) {
-                _this1.log.trace("PictApp [".concat(_this1.UUID, "]::[").concat(_this1.Hash, "] ").concat(_this1.options.Name, " renderAutoViewsAsync complete."));
-              }
-              return tmpCallback(pError);
-            });
-          }
-
-          /**
-           * @return {boolean}
-           */
-        }, {
-          key: "isPictApplication",
-          get: function get() {
-            return true;
-          }
-        }]);
-      }(libFableServiceBase);
-      module.exports = PictApplication;
-    }, {
-      "../package.json": 4,
-      "fable-serviceproviderbase": 2
-    }],
-    6: [function (require, module, exports) {
-      module.exports = {
-        "name": "pict-provider",
-        "version": "1.0.9",
-        "description": "Pict Provider Base Class",
-        "main": "source/Pict-Provider.js",
-        "scripts": {
-          "start": "node source/Pict-Provider.js",
-          "test": "npx mocha -u tdd -R spec",
-          "tests": "npx mocha -u tdd --exit -R spec --grep",
-          "coverage": "npx nyc --reporter=lcov --reporter=text-lcov npx mocha -- -u tdd -R spec",
-          "build": "npx quack build",
-          "docker-dev-build": "docker build ./ -f Dockerfile_LUXURYCode -t pict-provider-image:local",
-          "docker-dev-run": "docker run -it -d --name pict-provider-dev -p 24125:8080 -p 30027:8086 -v \"$PWD/.config:/home/coder/.config\"  -v \"$PWD:/home/coder/pict-provider\" -u \"$(id -u):$(id -g)\" -e \"DOCKER_USER=$USER\" pict-provider-image:local",
-          "docker-dev-shell": "docker exec -it pict-provider-dev /bin/bash",
-          "lint": "eslint source/**",
-          "types": "tsc -p ."
-        },
-        "types": "types/source/Pict-Provider.d.ts",
-        "repository": {
-          "type": "git",
-          "url": "git+https://github.com/stevenvelozo/pict-provider.git"
-        },
-        "author": "steven velozo <steven@velozo.com>",
-        "license": "MIT",
-        "bugs": {
-          "url": "https://github.com/stevenvelozo/pict-provider/issues"
-        },
-        "homepage": "https://github.com/stevenvelozo/pict-provider#readme",
-        "devDependencies": {
-          "@eslint/js": "^9.39.1",
-          "eslint": "^9.39.1",
-          "pict": "^1.0.345",
-          "quackage": "^1.0.48",
-          "typescript": "^5.9.3"
-        },
-        "dependencies": {
-          "fable-serviceproviderbase": "^3.0.16"
-        },
-        "mocha": {
-          "diff": true,
-          "extension": ["js"],
-          "package": "./package.json",
-          "reporter": "spec",
-          "slow": "75",
-          "timeout": "5000",
-          "ui": "tdd",
-          "watch-files": ["source/**/*.js", "test/**/*.js"],
-          "watch-ignore": ["lib/vendor"]
-        }
-      };
-    }, {}],
-    7: [function (require, module, exports) {
-      var libFableServiceBase = require('fable-serviceproviderbase');
-      var libPackage = require('../package.json');
-      var defaultPictProviderSettings = {
-        ProviderIdentifier: false,
-        // If this is set to true, when the App initializes this will.
-        // After the App initializes, initialize will be called as soon as it's added.
-        AutoInitialize: true,
-        AutoInitializeOrdinal: 0,
-        AutoLoadDataWithApp: true,
-        AutoSolveWithApp: true,
-        AutoSolveOrdinal: 0,
-        Manifests: {},
-        Templates: []
-      };
-      var PictProvider = /*#__PURE__*/function (_libFableServiceBase2) {
-        /**
-         * @param {import('fable')} pFable - The Fable instance.
-         * @param {Record<string, any>} [pOptions] - The options for the provider.
-         * @param {string} [pServiceHash] - The service hash for the provider.
-         */
-        function PictProvider(pFable, pOptions, pServiceHash) {
-          var _this10;
-          _classCallCheck(this, PictProvider);
-          // Intersect default options, parent constructor, service information
-          var tmpOptions = Object.assign({}, JSON.parse(JSON.stringify(defaultPictProviderSettings)), pOptions);
-          _this10 = _callSuper(this, PictProvider, [pFable, tmpOptions, pServiceHash]);
-
-          /** @type {import('fable') & import('pict') & { instantiateServiceProviderWithoutRegistration(pServiceType: string, pOptions?: Record<string, any>, pCustomServiceHash?: string): any }} */
-          _this10.fable;
-          /** @type {import('fable') & import('pict') & { instantiateServiceProviderWithoutRegistration(pServiceType: string, pOptions?: Record<string, any>, pCustomServiceHash?: string): any }} */
-          _this10.pict;
-          /** @type {any} */
-          _this10.log;
-          /** @type {Record<string, any>} */
-          _this10.options;
-          /** @type {string} */
-          _this10.UUID;
-          /** @type {string} */
-          _this10.Hash;
-          if (!_this10.options.ProviderIdentifier) {
-            _this10.options.ProviderIdentifier = "AutoProviderID-".concat(_this10.fable.getUUID());
-          }
-          _this10.serviceType = 'PictProvider';
-          /** @type {Record<string, any>} */
-          _this10._Package = libPackage;
-
-          // Convenience and consistency naming
-          _this10.pict = _this10.fable;
-
-          // Wire in the essential Pict application state
-          /** @type {Record<string, any>} */
-          _this10.AppData = _this10.pict.AppData;
-          /** @type {Record<string, any>} */
-          _this10.Bundle = _this10.pict.Bundle;
-          _this10.initializeTimestamp = false;
-          _this10.lastSolvedTimestamp = false;
-          for (var i = 0; i < _this10.options.Templates.length; i++) {
-            var tmpDefaultTemplate = _this10.options.Templates[i];
-            if (!tmpDefaultTemplate.hasOwnProperty('Postfix') || !tmpDefaultTemplate.hasOwnProperty('Template')) {
-              _this10.log.error("PictProvider [".concat(_this10.UUID, "]::[").concat(_this10.Hash, "] ").concat(_this10.options.ProviderIdentifier, " could not load Default Template ").concat(i, " in the options array."), tmpDefaultTemplate);
-            } else {
-              if (!tmpDefaultTemplate.Source) {
-                tmpDefaultTemplate.Source = "PictProvider [".concat(_this10.UUID, "]::[").concat(_this10.Hash, "] ").concat(_this10.options.ProviderIdentifier, " options object.");
-              }
-              _this10.pict.TemplateProvider.addDefaultTemplate(tmpDefaultTemplate.Prefix, tmpDefaultTemplate.Postfix, tmpDefaultTemplate.Template, tmpDefaultTemplate.Source);
-            }
-          }
-          return _this10;
-        }
-
-        /* -------------------------------------------------------------------------- */
-        /*                        Code Section: Initialization                        */
-        /* -------------------------------------------------------------------------- */
-        _inherits(PictProvider, _libFableServiceBase2);
-        return _createClass(PictProvider, [{
-          key: "onBeforeInitialize",
-          value: function onBeforeInitialize() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictProvider [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ProviderIdentifier, " onBeforeInitialize:"));
-            }
-            return true;
-          }
-
-          /**
-           * @param {(pError?: Error) => void} fCallback - The callback to call after pre-pinitialization.
-           *
-           * @return {void}
-           */
-        }, {
-          key: "onBeforeInitializeAsync",
-          value: function onBeforeInitializeAsync(fCallback) {
-            this.onBeforeInitialize();
-            return fCallback();
-          }
-        }, {
-          key: "onInitialize",
-          value: function onInitialize() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictProvider [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ProviderIdentifier, " onInitialize:"));
-            }
-            return true;
-          }
-
-          /**
-           * @param {(pError?: Error) => void} fCallback - The callback to call after initialization.
-           *
-           * @return {void}
-           */
-        }, {
-          key: "onInitializeAsync",
-          value: function onInitializeAsync(fCallback) {
-            this.onInitialize();
-            return fCallback();
-          }
-        }, {
-          key: "initialize",
-          value: function initialize() {
-            if (this.pict.LogControlFlow) {
-              this.log.trace("PICT-ControlFlow PROVIDER [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ProviderIdentifier, " initialize:"));
-            }
-            if (!this.initializeTimestamp) {
-              this.onBeforeInitialize();
-              this.onInitialize();
-              this.onAfterInitialize();
-              this.initializeTimestamp = this.pict.log.getTimeStamp();
-              return true;
-            } else {
-              this.log.warn("PictProvider [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ProviderIdentifier, " initialize called but initialization is already completed.  Aborting."));
-              return false;
-            }
-          }
-
-          /**
-           * @param {(pError?: Error) => void} fCallback - The callback to call after initialization.
-           *
-           * @return {void}
-           */
-        }, {
-          key: "initializeAsync",
-          value: function initializeAsync(fCallback) {
-            var _this11 = this;
-            if (this.pict.LogControlFlow) {
-              this.log.trace("PICT-ControlFlow PROVIDER [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ProviderIdentifier, " initializeAsync:"));
-            }
-            if (!this.initializeTimestamp) {
-              var tmpAnticipate = this.pict.instantiateServiceProviderWithoutRegistration('Anticipate');
-              if (this.pict.LogNoisiness > 0) {
-                this.log.info("PictProvider [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ProviderIdentifier, " beginning initialization..."));
-              }
-              tmpAnticipate.anticipate(this.onBeforeInitializeAsync.bind(this));
-              tmpAnticipate.anticipate(this.onInitializeAsync.bind(this));
-              tmpAnticipate.anticipate(this.onAfterInitializeAsync.bind(this));
-              tmpAnticipate.wait(function (pError) {
-                _this11.initializeTimestamp = _this11.pict.log.getTimeStamp();
-                if (pError) {
-                  _this11.log.error("PictProvider [".concat(_this11.UUID, "]::[").concat(_this11.Hash, "] ").concat(_this11.options.ProviderIdentifier, " initialization failed: ").concat(pError.message || pError), {
-                    Stack: pError.stack
-                  });
-                } else if (_this11.pict.LogNoisiness > 0) {
-                  _this11.log.info("PictProvider [".concat(_this11.UUID, "]::[").concat(_this11.Hash, "] ").concat(_this11.options.ProviderIdentifier, " initialization complete."));
-                }
-                return fCallback();
-              });
-            } else {
-              this.log.warn("PictProvider [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ProviderIdentifier, " async initialize called but initialization is already completed.  Aborting."));
-              // TODO: Should this be an error?
-              return fCallback();
-            }
-          }
-        }, {
-          key: "onAfterInitialize",
-          value: function onAfterInitialize() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictProvider [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ProviderIdentifier, " onAfterInitialize:"));
-            }
-            return true;
-          }
-
-          /**
-           * @param {(pError?: Error) => void} fCallback - The callback to call after initialization.
-           *
-           * @return {void}
-           */
-        }, {
-          key: "onAfterInitializeAsync",
-          value: function onAfterInitializeAsync(fCallback) {
-            this.onAfterInitialize();
-            return fCallback();
-          }
-        }, {
-          key: "onPreRender",
-          value: function onPreRender() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictProvider [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ProviderIdentifier, " onPreRender:"));
-            }
-            return true;
-          }
-
-          /**
-           * @param {(pError?: Error) => void} fCallback - The callback to call after pre-render.
-           *
-           * @return {void}
-           */
-        }, {
-          key: "onPreRenderAsync",
-          value: function onPreRenderAsync(fCallback) {
-            this.onPreRender();
-            return fCallback();
-          }
-        }, {
-          key: "render",
-          value: function render() {
-            return this.onPreRender();
-          }
-
-          /**
-           * @param {(pError?: Error) => void} fCallback - The callback to call after render.
-           *
-           * @return {void}
-           */
-        }, {
-          key: "renderAsync",
-          value: function renderAsync(fCallback) {
-            this.onPreRender();
-            return fCallback();
-          }
-        }, {
-          key: "onPreSolve",
-          value: function onPreSolve() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictProvider [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ProviderIdentifier, " onPreSolve:"));
-            }
-            return true;
-          }
-
-          /**
-           * @param {(pError?: Error) => void} fCallback - The callback to call after pre-solve.
-           *
-           * @return {void}
-           */
-        }, {
-          key: "onPreSolveAsync",
-          value: function onPreSolveAsync(fCallback) {
-            this.onPreSolve();
-            return fCallback();
-          }
-        }, {
-          key: "solve",
-          value: function solve() {
-            return this.onPreSolve();
-          }
-
-          /**
-           * @param {(pError?: Error) => void} fCallback - The callback to call after solve.
-           *
-           * @return {void}
-           */
-        }, {
-          key: "solveAsync",
-          value: function solveAsync(fCallback) {
-            this.onPreSolve();
-            return fCallback();
-          }
-
-          /**
-           * @param {(pError?: Error) => void} fCallback - The callback to call after the data pre-load.
-           */
-        }, {
-          key: "onBeforeLoadDataAsync",
-          value: function onBeforeLoadDataAsync(fCallback) {
-            return fCallback();
-          }
-
-          /**
-           * Hook to allow the provider to load data during application data load.
-           *
-           * @param {(pError?: Error) => void} fCallback - The callback to call after the data load.
-           */
-        }, {
-          key: "onLoadDataAsync",
-          value: function onLoadDataAsync(fCallback) {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictProvider [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ProviderIdentifier, " onLoadDataAsync:"));
-            }
-            return fCallback();
-          }
-
-          /**
-           * @param {(pError?: Error) => void} fCallback - The callback to call after the data post-load.
-           */
-        }, {
-          key: "onAfterLoadDataAsync",
-          value: function onAfterLoadDataAsync(fCallback) {
-            return fCallback();
-          }
-
-          /**
-           * @param {(pError?: Error) => void} fCallback - The callback to call after the data pre-load.
-           *
-           * @return {void}
-           */
-        }, {
-          key: "onBeforeSaveDataAsync",
-          value: function onBeforeSaveDataAsync(fCallback) {
-            return fCallback();
-          }
-
-          /**
-           * Hook to allow the provider to load data during application data load.
-           *
-           * @param {(pError?: Error) => void} fCallback - The callback to call after the data load.
-           *
-           * @return {void}
-           */
-        }, {
-          key: "onSaveDataAsync",
-          value: function onSaveDataAsync(fCallback) {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictProvider [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ProviderIdentifier, " onSaveDataAsync:"));
-            }
-            return fCallback();
-          }
-
-          /**
-           * @param {(pError?: Error) => void} fCallback - The callback to call after the data post-load.
-           *
-           * @return {void}
-           */
-        }, {
-          key: "onAfterSaveDataAsync",
-          value: function onAfterSaveDataAsync(fCallback) {
-            return fCallback();
-          }
-        }]);
-      }(libFableServiceBase);
-      module.exports = PictProvider;
-    }, {
-      "../package.json": 6,
-      "fable-serviceproviderbase": 2
-    }],
-    8: [function (require, module, exports) {
-      var libPictProvider = require('pict-provider');
-      var libNavigo = require('navigo');
-      var _DEFAULT_PROVIDER_CONFIGURATION = {
-        ProviderIdentifier: 'Pict-Router',
-        AutoInitialize: true,
-        AutoInitializeOrdinal: 0
-      };
-      var PictRouter = /*#__PURE__*/function (_libPictProvider) {
-        function PictRouter(pFable, pOptions, pServiceHash) {
-          var _this12;
-          _classCallCheck(this, PictRouter);
-          var tmpOptions = Object.assign({}, _DEFAULT_PROVIDER_CONFIGURATION, pOptions);
-          _this12 = _callSuper(this, PictRouter, [pFable, tmpOptions, pServiceHash]);
-
-          // Initialize the navigo router and set the base path to '/'
-          _this12.router = new libNavigo('/', {
-            strategy: 'ONE',
-            hash: true
-          });
-          if (_this12.options.Routes) {
-            for (var i = 0; i < _this12.options.Routes.length; i++) {
-              if (_this12.options.Routes[i].path && _this12.options.Routes[i].template) {
-                _this12.addRoute(_this12.options.Routes[i].path, _this12.options.Routes[i].template);
-              } else if (_this12.options.Routes[i].path && _this12.options.Routes[i].render) {
-                _this12.addRoute(_this12.options.Routes[i].path, _this12.options.Routes[i].render);
-              } else {
-                _this12.pict.log.warn("Route ".concat(i, " is missing a render function or template string."));
-              }
-            }
-          }
-
-          // This is the route to render after load
-          _this12.afterPersistView = '/Manyfest/Overview';
-          return _this12;
-        }
-        _inherits(PictRouter, _libPictProvider);
-        return _createClass(PictRouter, [{
-          key: "currentScope",
-          get: function get() {
-            var _this$AppData$Manyfes, _this$AppData;
-            return (_this$AppData$Manyfes = (_this$AppData = this.AppData) === null || _this$AppData === void 0 || (_this$AppData = _this$AppData.ManyfestRecord) === null || _this$AppData === void 0 ? void 0 : _this$AppData.Scope) !== null && _this$AppData$Manyfes !== void 0 ? _this$AppData$Manyfes : 'Default';
-          }
-        }, {
-          key: "forwardToScopedRoute",
-          value: function forwardToScopedRoute(pData) {
-            this.navigate("".concat(pData.url, "/").concat(this.currentScope));
-          }
-        }, {
-          key: "onInitializeAsync",
-          value: function onInitializeAsync(fCallback) {
-            return _superPropGet(PictRouter, "onInitializeAsync", this, 3)([fCallback]);
-          }
-
-          /**
-           * Add a route to the router.
-           */
-        }, {
-          key: "addRoute",
-          value: function addRoute(pRoute, pRenderable) {
-            var _this13 = this;
-            if (typeof pRenderable === 'function') {
-              this.router.on(pRoute, pRenderable);
-              this.resolve();
-            } else if (typeof pRenderable === 'string') {
-              // Run this as a template, allowing some whack things with functions in template expressions.
-              this.router.on(pRoute, function (pData) {
-                _this13.pict.parseTemplate(pRenderable, pData, null, _this13.pict);
-              });
-              this.resolve();
-            } else {
-              // renderable isn't usable!
-              this.pict.log.warn("Route ".concat(pRoute, " has an invalid renderable."));
-            }
-          }
-
-          /**
-           * Navigate to a given route (set the browser URL string, add to history, trigger router)
-           * 
-           * @param {string} pRoute - The route to navigate to
-           */
-        }, {
-          key: "navigate",
-          value: function navigate(pRoute) {
-            this.router.navigate(pRoute);
-          }
-
-          /**
-           * Trigger the router resolving logic; this is expected to be called after all routes are added (to go to the default route).
-           *
-           */
-        }, {
-          key: "resolve",
-          value: function resolve() {
-            this.router.resolve();
-          }
-        }]);
-      }(libPictProvider);
-      module.exports = PictRouter;
-      module.exports.default_configuration = _DEFAULT_PROVIDER_CONFIGURATION;
-    }, {
-      "navigo": 3,
-      "pict-provider": 7
-    }],
-    9: [function (require, module, exports) {
-      module.exports = {
-        "name": "pict-view",
-        "version": "1.0.64",
-        "description": "Pict View Base Class",
-        "main": "source/Pict-View.js",
-        "scripts": {
-          "test": "mocha -u tdd -R spec",
-          "tests": "mocha -u tdd -R spec -g",
-          "start": "node source/Pict-View.js",
-          "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
-          "build": "npx quack build",
-          "docker-dev-build": "docker build ./ -f Dockerfile_LUXURYCode -t pict-view-image:local",
-          "docker-dev-run": "docker run -it -d --name pict-view-dev -p 30001:8080 -p 38086:8086 -v \"$PWD/.config:/home/coder/.config\"  -v \"$PWD:/home/coder/pict-view\" -u \"$(id -u):$(id -g)\" -e \"DOCKER_USER=$USER\" pict-view-image:local",
-          "docker-dev-shell": "docker exec -it pict-view-dev /bin/bash",
-          "types": "tsc -p .",
-          "lint": "eslint source/**"
-        },
-        "types": "types/source/Pict-View.d.ts",
-        "repository": {
-          "type": "git",
-          "url": "git+https://github.com/stevenvelozo/pict-view.git"
-        },
-        "author": "steven velozo <steven@velozo.com>",
-        "license": "MIT",
-        "bugs": {
-          "url": "https://github.com/stevenvelozo/pict-view/issues"
-        },
-        "homepage": "https://github.com/stevenvelozo/pict-view#readme",
-        "devDependencies": {
-          "@eslint/js": "^9.39.1",
-          "browser-env": "^3.3.0",
-          "eslint": "^9.39.1",
-          "pict": "^1.0.337",
-          "quackage": "^1.0.45",
-          "typescript": "^5.9.3"
-        },
-        "mocha": {
-          "diff": true,
-          "extension": ["js"],
-          "package": "./package.json",
-          "reporter": "spec",
-          "slow": "75",
-          "timeout": "5000",
-          "ui": "tdd",
-          "watch-files": ["source/**/*.js", "test/**/*.js"],
-          "watch-ignore": ["lib/vendor"]
-        },
-        "dependencies": {
-          "fable": "^3.1.46",
-          "fable-serviceproviderbase": "^3.0.15"
-        }
-      };
-    }, {}],
-    10: [function (require, module, exports) {
-      var libFableServiceBase = require('fable-serviceproviderbase');
-      var libPackage = require('../package.json');
-      var defaultPictViewSettings = {
-        DefaultRenderable: false,
-        DefaultDestinationAddress: false,
-        DefaultTemplateRecordAddress: false,
-        ViewIdentifier: false,
-        // If this is set to true, when the App initializes this will.
-        // After the App initializes, initialize will be called as soon as it's added.
-        AutoInitialize: true,
-        AutoInitializeOrdinal: 0,
-        // If this is set to true, when the App autorenders (on load) this will.
-        // After the App initializes, render will be called as soon as it's added.
-        AutoRender: true,
-        AutoRenderOrdinal: 0,
-        AutoSolveWithApp: true,
-        AutoSolveOrdinal: 0,
-        CSSHash: false,
-        CSS: false,
-        CSSProvider: false,
-        CSSPriority: 500,
-        Templates: [],
-        DefaultTemplates: [],
-        Renderables: [],
-        Manifests: {}
-      };
-
-      /** @typedef {(error?: Error) => void} ErrorCallback */
-      /** @typedef {number | boolean} PictTimestamp */
-
-      /**
-       * @typedef {'replace' | 'append' | 'prepend' | 'append_once' | 'virtual-assignment'} RenderMethod
-       */
-      /**
-       * @typedef {Object} Renderable
-       *
-       * @property {string} RenderableHash - A unique hash for the renderable.
-       * @property {string} TemplateHash - The hash of the template to use for rendering this renderable.
-       * @property {string} [DefaultTemplateRecordAddress] - The default address for resolving the data record for this renderable.
-       * @property {string} [ContentDestinationAddress] - The default address (DOM CSS selector) for rendering the content of this renderable.
-       * @property {RenderMethod} [RenderMethod=replace] - The method to use when projecting the renderable to the DOM ('replace', 'append', 'prepend', 'append_once', 'virtual-assignment').
-       * @property {string} [TestAddress] - The address to use for testing the renderable.
-       * @property {string} [TransactionHash] - The transaction hash for the root renderable.
-       * @property {string} [RootRenderableViewHash] - The hash of the root renderable.
-       * @property {string} [Content] - The rendered content for this renderable, if applicable.
-       */
-
-      /**
-       * Represents a view in the Pict ecosystem.
-       */
-      var PictView = /*#__PURE__*/function (_libFableServiceBase3) {
-        /**
-         * @param {any} pFable - The Fable object that this service is attached to.
-         * @param {any} [pOptions] - (optional) The options for this service.
-         * @param {string} [pServiceHash] - (optional) The hash of the service.
-         */
-        function PictView(pFable, pOptions, pServiceHash) {
-          var _this14;
-          _classCallCheck(this, PictView);
-          // Intersect default options, parent constructor, service information
-          var tmpOptions = Object.assign({}, JSON.parse(JSON.stringify(defaultPictViewSettings)), pOptions);
-          _this14 = _callSuper(this, PictView, [pFable, tmpOptions, pServiceHash]);
-          //FIXME: add types to fable and ancillaries
-          /** @type {any} */
-          _this14.fable;
-          /** @type {any} */
-          _this14.options;
-          /** @type {String} */
-          _this14.UUID;
-          /** @type {String} */
-          _this14.Hash;
-          /** @type {any} */
-          _this14.log;
-          var tmpHashIsUUID = _this14.Hash === _this14.UUID;
-          //NOTE: since many places are using the view UUID as the HTML element ID, we prefix it to avoid starting with a number
-          _this14.UUID = "V-".concat(_this14.UUID);
-          if (tmpHashIsUUID) {
-            _this14.Hash = _this14.UUID;
-          }
-          if (!_this14.options.ViewIdentifier) {
-            _this14.options.ViewIdentifier = "AutoViewID-".concat(_this14.fable.getUUID());
-          }
-          _this14.serviceType = 'PictView';
-          /** @type {Record<string, any>} */
-          _this14._Package = libPackage;
-          // Convenience and consistency naming
-          /** @type {import('pict') & { log: any, instantiateServiceProviderWithoutRegistration: (hash: String) => any, instantiateServiceProviderIfNotExists: (hash: string) => any, TransactionTracking: import('pict/types/source/services/Fable-Service-TransactionTracking') }} */
-          _this14.pict = _this14.fable;
-          // Wire in the essential Pict application state
-          _this14.AppData = _this14.pict.AppData;
-          _this14.Bundle = _this14.pict.Bundle;
-
-          /** @type {PictTimestamp} */
-          _this14.initializeTimestamp = false;
-          /** @type {PictTimestamp} */
-          _this14.lastSolvedTimestamp = false;
-          /** @type {PictTimestamp} */
-          _this14.lastRenderedTimestamp = false;
-          /** @type {PictTimestamp} */
-          _this14.lastMarshalFromViewTimestamp = false;
-          /** @type {PictTimestamp} */
-          _this14.lastMarshalToViewTimestamp = false;
-          _this14.pict.instantiateServiceProviderIfNotExists('TransactionTracking');
-
-          // Load all templates from the array in the options
-          // Templates are in the form of {Hash:'Some-Template-Hash',Template:'Template content',Source:'TemplateSource'}
-          for (var i = 0; i < _this14.options.Templates.length; i++) {
-            var tmpTemplate = _this14.options.Templates[i];
-            if (!('Hash' in tmpTemplate) || !('Template' in tmpTemplate)) {
-              _this14.log.error("PictView [".concat(_this14.UUID, "]::[").concat(_this14.Hash, "] ").concat(_this14.options.ViewIdentifier, " could not load Template ").concat(i, " in the options array."), tmpTemplate);
-            } else {
-              if (!tmpTemplate.Source) {
-                tmpTemplate.Source = "PictView [".concat(_this14.UUID, "]::[").concat(_this14.Hash, "] ").concat(_this14.options.ViewIdentifier, " options object.");
-              }
-              _this14.pict.TemplateProvider.addTemplate(tmpTemplate.Hash, tmpTemplate.Template, tmpTemplate.Source);
-            }
-          }
-
-          // Load all default templates from the array in the options
-          // Templates are in the form of {Prefix:'',Postfix:'-List-Row',Template:'Template content',Source:'TemplateSourceString'}
-          for (var _i23 = 0; _i23 < _this14.options.DefaultTemplates.length; _i23++) {
-            var tmpDefaultTemplate = _this14.options.DefaultTemplates[_i23];
-            if (!('Postfix' in tmpDefaultTemplate) || !('Template' in tmpDefaultTemplate)) {
-              _this14.log.error("PictView [".concat(_this14.UUID, "]::[").concat(_this14.Hash, "] ").concat(_this14.options.ViewIdentifier, " could not load Default Template ").concat(_i23, " in the options array."), tmpDefaultTemplate);
-            } else {
-              if (!tmpDefaultTemplate.Source) {
-                tmpDefaultTemplate.Source = "PictView [".concat(_this14.UUID, "]::[").concat(_this14.Hash, "] ").concat(_this14.options.ViewIdentifier, " options object.");
-              }
-              _this14.pict.TemplateProvider.addDefaultTemplate(tmpDefaultTemplate.Prefix, tmpDefaultTemplate.Postfix, tmpDefaultTemplate.Template, tmpDefaultTemplate.Source);
-            }
-          }
-
-          // Load the CSS if it's available
-          if (_this14.options.CSS) {
-            var tmpCSSHash = _this14.options.CSSHash ? _this14.options.CSSHash : "View-".concat(_this14.options.ViewIdentifier);
-            var tmpCSSProvider = _this14.options.CSSProvider ? _this14.options.CSSProvider : tmpCSSHash;
-            _this14.pict.CSSMap.addCSS(tmpCSSHash, _this14.options.CSS, tmpCSSProvider, _this14.options.CSSPriority);
-          }
-
-          // Load all renderables
-          // Renderables are launchable renderable instructions with templates
-          // They look as such: {Identifier:'ContentEntry', TemplateHash:'Content-Entry-Section-Main', ContentDestinationAddress:'#ContentSection', RecordAddress:'AppData.Content.DefaultText', ManifestTransformation:'ManyfestHash', ManifestDestinationAddress:'AppData.Content.DataToTransformContent'}
-          // The only parts that are necessary are Identifier and Template
-          // A developer can then do render('ContentEntry') and it just kinda works.  Or they can override the ContentDestinationAddress
-          /** @type {Record<String, Renderable>} */
-          _this14.renderables = {};
-          for (var _i24 = 0; _i24 < _this14.options.Renderables.length; _i24++) {
-            /** @type {Renderable} */
-            var tmpRenderable = _this14.options.Renderables[_i24];
-            _this14.addRenderable(tmpRenderable);
-          }
-          return _this14;
-        }
-
-        /**
-         * Adds a renderable to the view.
-         *
-         * @param {string | Renderable} pRenderableHash - The hash of the renderable, or a renderable object.
-         * @param {string} [pTemplateHash] - (optional) The hash of the template for the renderable.
-         * @param {string} [pDefaultTemplateRecordAddress] - (optional) The default data address for the template.
-         * @param {string} [pDefaultDestinationAddress] - (optional) The default destination address for the renderable.
-         * @param {RenderMethod} [pRenderMethod=replace] - (optional) The method to use when rendering the renderable (ex. 'replace').
-         */
-        _inherits(PictView, _libFableServiceBase3);
-        return _createClass(PictView, [{
-          key: "addRenderable",
-          value: function addRenderable(pRenderableHash, pTemplateHash, pDefaultTemplateRecordAddress, pDefaultDestinationAddress, pRenderMethod) {
-            /** @type {Renderable} */
-            var tmpRenderable;
-            if (_typeof(pRenderableHash) == 'object') {
-              // The developer passed in the renderable as an object.
-              // Use theirs instead!
-              tmpRenderable = pRenderableHash;
-            } else {
-              /** @type {RenderMethod} */
-              var tmpRenderMethod = typeof pRenderMethod !== 'string' ? pRenderMethod : 'replace';
-              tmpRenderable = {
-                RenderableHash: pRenderableHash,
-                TemplateHash: pTemplateHash,
-                DefaultTemplateRecordAddress: pDefaultTemplateRecordAddress,
-                ContentDestinationAddress: pDefaultDestinationAddress,
-                RenderMethod: tmpRenderMethod
-              };
-            }
-            if (typeof tmpRenderable.RenderableHash != 'string' || typeof tmpRenderable.TemplateHash != 'string') {
-              this.log.error("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " could not load Renderable; RenderableHash or TemplateHash are invalid."), tmpRenderable);
-            } else {
-              if (this.pict.LogNoisiness > 0) {
-                this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " adding renderable [").concat(tmpRenderable.RenderableHash, "] pointed to template ").concat(tmpRenderable.TemplateHash, "."));
-              }
-              this.renderables[tmpRenderable.RenderableHash] = tmpRenderable;
-            }
-          }
-
-          /* -------------------------------------------------------------------------- */
-          /*                        Code Section: Initialization                        */
-          /* -------------------------------------------------------------------------- */
-          /**
-           * Lifecycle hook that triggers before the view is initialized.
-           */
-        }, {
-          key: "onBeforeInitialize",
-          value: function onBeforeInitialize() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " onBeforeInitialize:"));
-            }
-            return true;
-          }
-
-          /**
-           * Lifecycle hook that triggers before the view is initialized (async flow).
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           */
-        }, {
-          key: "onBeforeInitializeAsync",
-          value: function onBeforeInitializeAsync(fCallback) {
-            this.onBeforeInitialize();
-            return fCallback();
-          }
-
-          /**
-           * Lifecycle hook that triggers when the view is initialized.
-           */
-        }, {
-          key: "onInitialize",
-          value: function onInitialize() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " onInitialize:"));
-            }
-            return true;
-          }
-
-          /**
-           * Lifecycle hook that triggers when the view is initialized (async flow).
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           */
-        }, {
-          key: "onInitializeAsync",
-          value: function onInitializeAsync(fCallback) {
-            this.onInitialize();
-            return fCallback();
-          }
-
-          /**
-           * Performs view initialization.
-           */
-        }, {
-          key: "initialize",
-          value: function initialize() {
-            if (this.pict.LogControlFlow) {
-              this.log.trace("PICT-ControlFlow VIEW [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " initialize:"));
-            }
-            if (!this.initializeTimestamp) {
-              this.onBeforeInitialize();
-              this.onInitialize();
-              this.onAfterInitialize();
-              this.initializeTimestamp = this.pict.log.getTimeStamp();
-              return true;
-            } else {
-              this.log.warn("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " initialize called but initialization is already completed.  Aborting."));
-              return false;
-            }
-          }
-
-          /**
-           * Performs view initialization (async flow).
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           */
-        }, {
-          key: "initializeAsync",
-          value: function initializeAsync(fCallback) {
-            var _this15 = this;
-            if (this.pict.LogControlFlow) {
-              this.log.trace("PICT-ControlFlow VIEW [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " initializeAsync:"));
-            }
-            if (!this.initializeTimestamp) {
-              var tmpAnticipate = this.pict.instantiateServiceProviderWithoutRegistration('Anticipate');
-              if (this.pict.LogNoisiness > 0) {
-                this.log.info("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " beginning initialization..."));
-              }
-              tmpAnticipate.anticipate(this.onBeforeInitializeAsync.bind(this));
-              tmpAnticipate.anticipate(this.onInitializeAsync.bind(this));
-              tmpAnticipate.anticipate(this.onAfterInitializeAsync.bind(this));
-              tmpAnticipate.wait(/** @param {Error} pError */
-              function (pError) {
-                if (pError) {
-                  _this15.log.error("PictView [".concat(_this15.UUID, "]::[").concat(_this15.Hash, "] ").concat(_this15.options.ViewIdentifier, " initialization failed: ").concat(pError.message || pError), {
-                    stack: pError.stack
-                  });
-                }
-                _this15.initializeTimestamp = _this15.pict.log.getTimeStamp();
-                if (_this15.pict.LogNoisiness > 0) {
-                  _this15.log.info("PictView [".concat(_this15.UUID, "]::[").concat(_this15.Hash, "] ").concat(_this15.options.ViewIdentifier, " initialization complete."));
-                }
-                return fCallback();
-              });
-            } else {
-              this.log.warn("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " async initialize called but initialization is already completed.  Aborting."));
-              // TODO: Should this be an error?
-              return fCallback();
-            }
-          }
-        }, {
-          key: "onAfterInitialize",
-          value: function onAfterInitialize() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " onAfterInitialize:"));
-            }
-            return true;
-          }
-
-          /**
-           * Lifecycle hook that triggers after the view is initialized (async flow).
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           */
-        }, {
-          key: "onAfterInitializeAsync",
-          value: function onAfterInitializeAsync(fCallback) {
-            this.onAfterInitialize();
-            return fCallback();
-          }
-
-          /* -------------------------------------------------------------------------- */
-          /*                            Code Section: Render                            */
-          /* -------------------------------------------------------------------------- */
-          /**
-           * Lifecycle hook that triggers before the view is rendered.
-           *
-           * @param {Renderable} pRenderable - The renderable that will be rendered.
-           */
-        }, {
-          key: "onBeforeRender",
-          value: function onBeforeRender(pRenderable) {
-            // Overload this to mess with stuff before the content gets generated from the template
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " onBeforeRender:"));
-            }
-            return true;
-          }
-
-          /**
-           * Lifecycle hook that triggers before the view is rendered (async flow).
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           * @param {Renderable} pRenderable - The renderable that will be rendered.
-           */
-        }, {
-          key: "onBeforeRenderAsync",
-          value: function onBeforeRenderAsync(fCallback, pRenderable) {
-            this.onBeforeRender(pRenderable);
-            return fCallback();
-          }
-
-          /**
-           * Lifecycle hook that triggers before the view is projected into the DOM.
-           *
-           * @param {Renderable} pRenderable - The renderable that will be projected.
-           */
-        }, {
-          key: "onBeforeProject",
-          value: function onBeforeProject(pRenderable) {
-            // Overload this to mess with stuff before the content gets generated from the template
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " onBeforeProject:"));
-            }
-            return true;
-          }
-
-          /**
-           * Lifecycle hook that triggers before the view is projected into the DOM (async flow).
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           * @param {Renderable} pRenderable - The renderable that will be projected.
-           */
-        }, {
-          key: "onBeforeProjectAsync",
-          value: function onBeforeProjectAsync(fCallback, pRenderable) {
-            this.onBeforeProject(pRenderable);
-            return fCallback();
-          }
-
-          /**
-           * Builds the render options for a renderable.
-           *
-           * For DRY purposes on the three flavors of render.
-           *
-           * @param {string|ErrorCallback} [pRenderableHash] - The hash of the renderable to render.
-           * @param {string|ErrorCallback} [pRenderDestinationAddress] - The address where the renderable will be rendered.
-           * @param {string|object|ErrorCallback} [pTemplateRecordAddress] - The address of (or actual obejct) where the data for the template is stored.
-           */
-        }, {
-          key: "buildRenderOptions",
-          value: function buildRenderOptions(pRenderableHash, pRenderDestinationAddress, pTemplateRecordAddress) {
-            var tmpRenderOptions = {
-              Valid: true
-            };
-            tmpRenderOptions.RenderableHash = typeof pRenderableHash === 'string' ? pRenderableHash : typeof this.options.DefaultRenderable == 'string' ? this.options.DefaultRenderable : false;
-            if (!tmpRenderOptions.RenderableHash) {
-              this.log.error("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " could not find a suitable RenderableHash ").concat(tmpRenderOptions.RenderableHash, " (param ").concat(pRenderableHash, "because it is not a valid renderable."));
-              tmpRenderOptions.Valid = false;
-            }
-            tmpRenderOptions.Renderable = this.renderables[tmpRenderOptions.RenderableHash];
-            if (!tmpRenderOptions.Renderable) {
-              this.log.error("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " could not render ").concat(tmpRenderOptions.RenderableHash, " (param ").concat(pRenderableHash, ") because it does not exist."));
-              tmpRenderOptions.Valid = false;
-            }
-            tmpRenderOptions.DestinationAddress = typeof pRenderDestinationAddress === 'string' ? pRenderDestinationAddress : typeof tmpRenderOptions.Renderable.ContentDestinationAddress === 'string' ? tmpRenderOptions.Renderable.ContentDestinationAddress : typeof this.options.DefaultDestinationAddress === 'string' ? this.options.DefaultDestinationAddress : false;
-            if (!tmpRenderOptions.DestinationAddress) {
-              this.log.error("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " could not render ").concat(tmpRenderOptions.RenderableHash, " (param ").concat(pRenderableHash, ") because it does not have a valid destination address (param ").concat(pRenderDestinationAddress, ")."));
-              tmpRenderOptions.Valid = false;
-            }
-            if (_typeof(pTemplateRecordAddress) === 'object') {
-              tmpRenderOptions.RecordAddress = 'Passed in as object';
-              tmpRenderOptions.Record = pTemplateRecordAddress;
-            } else {
-              tmpRenderOptions.RecordAddress = typeof pTemplateRecordAddress === 'string' ? pTemplateRecordAddress : typeof tmpRenderOptions.Renderable.DefaultTemplateRecordAddress === 'string' ? tmpRenderOptions.Renderable.DefaultTemplateRecordAddress : typeof this.options.DefaultTemplateRecordAddress === 'string' ? this.options.DefaultTemplateRecordAddress : false;
-              tmpRenderOptions.Record = typeof tmpRenderOptions.RecordAddress === 'string' ? this.pict.DataProvider.getDataByAddress(tmpRenderOptions.RecordAddress) : undefined;
-            }
-            return tmpRenderOptions;
-          }
-
-          /**
-           * Assigns the content to the destination address.
-           *
-           * For DRY purposes on the three flavors of render.
-           *
-           * @param {Renderable} pRenderable - The renderable to render.
-           * @param {string} pRenderDestinationAddress - The address where the renderable will be rendered.
-           * @param {string} pContent - The content to render.
-           * @returns {boolean} - Returns true if the content was assigned successfully.
-           * @memberof PictView
-           */
-        }, {
-          key: "assignRenderContent",
-          value: function assignRenderContent(pRenderable, pRenderDestinationAddress, pContent) {
-            return this.pict.ContentAssignment.projectContent(pRenderable.RenderMethod, pRenderDestinationAddress, pContent, pRenderable.TestAddress);
-          }
-
-          /**
-           * Render a renderable from this view.
-           *
-           * @param {string} [pRenderableHash] - The hash of the renderable to render.
-           * @param {string} [pRenderDestinationAddress] - The address where the renderable will be rendered.
-           * @param {string|object} [pTemplateRecordAddress] - The address where the data for the template is stored.
-           * @param {Renderable} [pRootRenderable] - The root renderable for the render operation, if applicable.
-           * @return {boolean}
-           */
-        }, {
-          key: "render",
-          value: function render(pRenderableHash, pRenderDestinationAddress, pTemplateRecordAddress, pRootRenderable) {
-            return this.renderWithScope(this, pRenderableHash, pRenderDestinationAddress, pTemplateRecordAddress, pRootRenderable);
-          }
-
-          /**
-           * Render a renderable from this view, providing a specifici scope for the template.
-           *
-           * @param {any} pScope - The scope to use for the template rendering.
-           * @param {string} [pRenderableHash] - The hash of the renderable to render.
-           * @param {string} [pRenderDestinationAddress] - The address where the renderable will be rendered.
-           * @param {string|object} [pTemplateRecordAddress] - The address where the data for the template is stored.
-           * @param {Renderable} [pRootRenderable] - The root renderable for the render operation, if applicable.
-           * @return {boolean}
-           */
-        }, {
-          key: "renderWithScope",
-          value: function renderWithScope(pScope, pRenderableHash, pRenderDestinationAddress, pTemplateRecordAddress, pRootRenderable) {
-            var tmpRenderableHash = typeof pRenderableHash === 'string' ? pRenderableHash : typeof this.options.DefaultRenderable == 'string' ? this.options.DefaultRenderable : false;
-            if (!tmpRenderableHash) {
-              this.log.error("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " could not render ").concat(tmpRenderableHash, " (param ").concat(pRenderableHash, ") because it is not a valid renderable."));
-              return false;
-            }
-
-            /** @type {Renderable} */
-            var tmpRenderable;
-            if (tmpRenderableHash == '__Virtual') {
-              tmpRenderable = {
-                RenderableHash: '__Virtual',
-                TemplateHash: this.renderables[this.options.DefaultRenderable].TemplateHash,
-                ContentDestinationAddress: typeof pRenderDestinationAddress === 'string' ? pRenderDestinationAddress : typeof tmpRenderable.ContentDestinationAddress === 'string' ? tmpRenderable.ContentDestinationAddress : typeof this.options.DefaultDestinationAddress === 'string' ? this.options.DefaultDestinationAddress : null,
-                RenderMethod: 'virtual-assignment',
-                TransactionHash: pRootRenderable && pRootRenderable.TransactionHash,
-                RootRenderableViewHash: pRootRenderable && pRootRenderable.RootRenderableViewHash
-              };
-            } else {
-              tmpRenderable = Object.assign({}, this.renderables[tmpRenderableHash]);
-              tmpRenderable.ContentDestinationAddress = typeof pRenderDestinationAddress === 'string' ? pRenderDestinationAddress : typeof tmpRenderable.ContentDestinationAddress === 'string' ? tmpRenderable.ContentDestinationAddress : typeof this.options.DefaultDestinationAddress === 'string' ? this.options.DefaultDestinationAddress : null;
-            }
-            if (!tmpRenderable.TransactionHash) {
-              tmpRenderable.TransactionHash = "ViewRender-V-".concat(this.options.ViewIdentifier, "-R-").concat(tmpRenderableHash, "-U-").concat(this.pict.getUUID());
-              tmpRenderable.RootRenderableViewHash = this.Hash;
-              this.pict.TransactionTracking.registerTransaction(tmpRenderable.TransactionHash);
-            }
-            if (!tmpRenderable) {
-              this.log.error("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " could not render ").concat(tmpRenderableHash, " (param ").concat(pRenderableHash, ") because it does not exist."));
-              return false;
-            }
-            if (!tmpRenderable.ContentDestinationAddress) {
-              this.log.error("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " could not render ").concat(tmpRenderableHash, " (param ").concat(pRenderableHash, ") because it does not have a valid destination address."));
-              return false;
-            }
-            var tmpRecordAddress;
-            var tmpRecord;
-            if (_typeof(pTemplateRecordAddress) === 'object') {
-              tmpRecord = pTemplateRecordAddress;
-              tmpRecordAddress = 'Passed in as object';
-            } else {
-              tmpRecordAddress = typeof pTemplateRecordAddress === 'string' ? pTemplateRecordAddress : typeof tmpRenderable.DefaultTemplateRecordAddress === 'string' ? tmpRenderable.DefaultTemplateRecordAddress : typeof this.options.DefaultTemplateRecordAddress === 'string' ? this.options.DefaultTemplateRecordAddress : false;
-              tmpRecord = typeof tmpRecordAddress === 'string' ? this.pict.DataProvider.getDataByAddress(tmpRecordAddress) : undefined;
-            }
-
-            // Execute the developer-overridable pre-render behavior
-            this.onBeforeRender(tmpRenderable);
-            if (this.pict.LogControlFlow) {
-              this.log.trace("PICT-ControlFlow VIEW [".concat(this.UUID, "]::[").concat(this.Hash, "] Renderable[").concat(tmpRenderableHash, "] Destination[").concat(tmpRenderable.ContentDestinationAddress, "] TemplateRecordAddress[").concat(tmpRecordAddress, "] render:"));
-            }
-            if (this.pict.LogNoisiness > 0) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " Beginning Render of Renderable[").concat(tmpRenderableHash, "] to Destination [").concat(tmpRenderable.ContentDestinationAddress, "]..."));
-            }
-            // Generate the content output from the template and data
-            tmpRenderable.Content = this.pict.parseTemplateByHash(tmpRenderable.TemplateHash, tmpRecord, null, [this], pScope, {
-              RootRenderable: _typeof(pRootRenderable) === 'object' ? pRootRenderable : tmpRenderable
-            });
-            if (this.pict.LogNoisiness > 0) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " Assigning Renderable[").concat(tmpRenderableHash, "] content length ").concat(tmpRenderable.Content.length, " to Destination [").concat(tmpRenderable.ContentDestinationAddress, "] using render method [").concat(tmpRenderable.RenderMethod, "]."));
-            }
-            this.onBeforeProject(tmpRenderable);
-            this.onProject(tmpRenderable);
-            if (tmpRenderable.RenderMethod !== 'virtual-assignment') {
-              this.onAfterProject(tmpRenderable);
-
-              // Execute the developer-overridable post-render behavior
-              this.onAfterRender(tmpRenderable);
-            }
-            return true;
-          }
-
-          /**
-           * Render a renderable from this view.
-           *
-           * @param {string|ErrorCallback} [pRenderableHash] - The hash of the renderable to render.
-           * @param {string|ErrorCallback} [pRenderDestinationAddress] - The address where the renderable will be rendered.
-           * @param {string|object|ErrorCallback} [pTemplateRecordAddress] - The address where the data for the template is stored.
-           * @param {Renderable|ErrorCallback} [pRootRenderable] - The root renderable for the render operation, if applicable.
-           * @param {ErrorCallback} [fCallback] - The callback to call when the async operation is complete.
-           *
-           * @return {void}
-           */
-        }, {
-          key: "renderAsync",
-          value: function renderAsync(pRenderableHash, pRenderDestinationAddress, pTemplateRecordAddress, pRootRenderable, fCallback) {
-            return this.renderWithScopeAsync(this, pRenderableHash, pRenderDestinationAddress, pTemplateRecordAddress, pRootRenderable, fCallback);
-          }
-
-          /**
-           * Render a renderable from this view.
-           *
-           * @param {any} pScope - The scope to use for the template rendering.
-           * @param {string|ErrorCallback} [pRenderableHash] - The hash of the renderable to render.
-           * @param {string|ErrorCallback} [pRenderDestinationAddress] - The address where the renderable will be rendered.
-           * @param {string|object|ErrorCallback} [pTemplateRecordAddress] - The address where the data for the template is stored.
-           * @param {Renderable|ErrorCallback} [pRootRenderable] - The root renderable for the render operation, if applicable.
-           * @param {ErrorCallback} [fCallback] - The callback to call when the async operation is complete.
-           *
-           * @return {void}
-           */
-        }, {
-          key: "renderWithScopeAsync",
-          value: function renderWithScopeAsync(pScope, pRenderableHash, pRenderDestinationAddress, pTemplateRecordAddress, pRootRenderable, fCallback) {
-            var _this16 = this;
-            var tmpRenderableHash = typeof pRenderableHash === 'string' ? pRenderableHash : typeof this.options.DefaultRenderable == 'string' ? this.options.DefaultRenderable : false;
-
-            // Allow the callback to be passed in as the last parameter no matter what
-            /** @type {ErrorCallback} */
-            var tmpCallback = typeof fCallback === 'function' ? fCallback : typeof pTemplateRecordAddress === 'function' ? pTemplateRecordAddress : typeof pRenderDestinationAddress === 'function' ? pRenderDestinationAddress : typeof pRenderableHash === 'function' ? pRenderableHash : typeof pRootRenderable === 'function' ? pRootRenderable : null;
-            if (!tmpCallback) {
-              this.log.warn("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " renderAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));
-              tmpCallback = function tmpCallback(pError) {
-                if (pError) {
-                  _this16.log.error("PictView [".concat(_this16.UUID, "]::[").concat(_this16.Hash, "] ").concat(_this16.options.Name, " renderAsync Auto Callback Error: ").concat(pError), pError);
-                }
-              };
-            }
-            if (!tmpRenderableHash) {
-              this.log.error("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " could not asynchronously render ").concat(tmpRenderableHash, " (param ").concat(pRenderableHash, "because it is not a valid renderable."));
-              return tmpCallback(new Error("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " could not asynchronously render ").concat(tmpRenderableHash, " (param ").concat(pRenderableHash, "because it is not a valid renderable.")));
-            }
-
-            /** @type {Renderable} */
-            var tmpRenderable;
-            if (tmpRenderableHash == '__Virtual') {
-              tmpRenderable = {
-                RenderableHash: '__Virtual',
-                TemplateHash: this.renderables[this.options.DefaultRenderable].TemplateHash,
-                ContentDestinationAddress: typeof pRenderDestinationAddress === 'string' ? pRenderDestinationAddress : typeof this.options.DefaultDestinationAddress === 'string' ? this.options.DefaultDestinationAddress : null,
-                RenderMethod: 'virtual-assignment',
-                TransactionHash: pRootRenderable && typeof pRootRenderable !== 'function' && pRootRenderable.TransactionHash,
-                RootRenderableViewHash: pRootRenderable && typeof pRootRenderable !== 'function' && pRootRenderable.RootRenderableViewHash
-              };
-            } else {
-              tmpRenderable = Object.assign({}, this.renderables[tmpRenderableHash]);
-              tmpRenderable.ContentDestinationAddress = typeof pRenderDestinationAddress === 'string' ? pRenderDestinationAddress : typeof tmpRenderable.ContentDestinationAddress === 'string' ? tmpRenderable.ContentDestinationAddress : typeof this.options.DefaultDestinationAddress === 'string' ? this.options.DefaultDestinationAddress : null;
-            }
-            if (!tmpRenderable.TransactionHash) {
-              tmpRenderable.TransactionHash = "ViewRender-V-".concat(this.options.ViewIdentifier, "-R-").concat(tmpRenderableHash, "-U-").concat(this.pict.getUUID());
-              tmpRenderable.RootRenderableViewHash = this.Hash;
-              this.pict.TransactionTracking.registerTransaction(tmpRenderable.TransactionHash);
-            }
-            if (!tmpRenderable) {
-              this.log.error("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " could not render ").concat(tmpRenderableHash, " (param ").concat(pRenderableHash, ") because it does not exist."));
-              return tmpCallback(new Error("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " could not render ").concat(tmpRenderableHash, " (param ").concat(pRenderableHash, ") because it does not exist.")));
-            }
-            if (!tmpRenderable.ContentDestinationAddress) {
-              this.log.error("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " could not render ").concat(tmpRenderableHash, " (param ").concat(pRenderableHash, ") because it does not have a valid destination address."));
-              return tmpCallback(new Error("Could not render ".concat(tmpRenderableHash)));
-            }
-            var tmpRecordAddress;
-            var tmpRecord;
-            if (_typeof(pTemplateRecordAddress) === 'object') {
-              tmpRecord = pTemplateRecordAddress;
-              tmpRecordAddress = 'Passed in as object';
-            } else {
-              tmpRecordAddress = typeof pTemplateRecordAddress === 'string' ? pTemplateRecordAddress : typeof tmpRenderable.DefaultTemplateRecordAddress === 'string' ? tmpRenderable.DefaultTemplateRecordAddress : typeof this.options.DefaultTemplateRecordAddress === 'string' ? this.options.DefaultTemplateRecordAddress : false;
-              tmpRecord = typeof tmpRecordAddress === 'string' ? this.pict.DataProvider.getDataByAddress(tmpRecordAddress) : undefined;
-            }
-            if (this.pict.LogControlFlow) {
-              this.log.trace("PICT-ControlFlow VIEW [".concat(this.UUID, "]::[").concat(this.Hash, "] Renderable[").concat(tmpRenderableHash, "] Destination[").concat(tmpRenderable.ContentDestinationAddress, "] TemplateRecordAddress[").concat(tmpRecordAddress, "] renderAsync:"));
-            }
-            if (this.pict.LogNoisiness > 2) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " Beginning Asynchronous Render (callback-style)..."));
-            }
-            var tmpAnticipate = this.fable.newAnticipate();
-            tmpAnticipate.anticipate(function (fOnBeforeRenderCallback) {
-              _this16.onBeforeRenderAsync(fOnBeforeRenderCallback, tmpRenderable);
-            });
-            tmpAnticipate.anticipate(function (fAsyncTemplateCallback) {
-              // Render the template (asynchronously)
-              _this16.pict.parseTemplateByHash(tmpRenderable.TemplateHash, tmpRecord, function (pError, pContent) {
-                if (pError) {
-                  _this16.log.error("PictView [".concat(_this16.UUID, "]::[").concat(_this16.Hash, "] ").concat(_this16.options.ViewIdentifier, " could not render (asynchronously) ").concat(tmpRenderableHash, " (param ").concat(pRenderableHash, ") because it did not parse the template."), pError);
-                  return fAsyncTemplateCallback(pError);
-                }
-                tmpRenderable.Content = pContent;
-                return fAsyncTemplateCallback();
-              }, [_this16], pScope, {
-                RootRenderable: _typeof(pRootRenderable) === 'object' ? pRootRenderable : tmpRenderable
-              });
-            });
-            tmpAnticipate.anticipate(function (fNext) {
-              _this16.onBeforeProjectAsync(fNext, tmpRenderable);
-            });
-            tmpAnticipate.anticipate(function (fNext) {
-              _this16.onProjectAsync(fNext, tmpRenderable);
-            });
-            if (tmpRenderable.RenderMethod !== 'virtual-assignment') {
-              tmpAnticipate.anticipate(function (fNext) {
-                _this16.onAfterProjectAsync(fNext, tmpRenderable);
-              });
-
-              // Execute the developer-overridable post-render behavior
-              tmpAnticipate.anticipate(function (fNext) {
-                _this16.onAfterRenderAsync(fNext, tmpRenderable);
-              });
-            }
-            tmpAnticipate.wait(tmpCallback);
-          }
-
-          /**
-           * Renders the default renderable.
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           */
-        }, {
-          key: "renderDefaultAsync",
-          value: function renderDefaultAsync(fCallback) {
-            // Render the default renderable
-            this.renderAsync(fCallback);
-          }
-
-          /**
-           * @param {string} [pRenderableHash] - The hash of the renderable to render.
-           * @param {string} [pRenderDestinationAddress] - The address where the renderable will be rendered.
-           * @param {string|object} [pTemplateRecordAddress] - The address of (or actual obejct) where the data for the template is stored.
-           */
-        }, {
-          key: "basicRender",
-          value: function basicRender(pRenderableHash, pRenderDestinationAddress, pTemplateRecordAddress) {
-            return this.basicRenderWithScope(this, pRenderableHash, pRenderDestinationAddress, pTemplateRecordAddress);
-          }
-
-          /**
-           * @param {any} pScope - The scope to use for the template rendering.
-           * @param {string} [pRenderableHash] - The hash of the renderable to render.
-           * @param {string} [pRenderDestinationAddress] - The address where the renderable will be rendered.
-           * @param {string|object} [pTemplateRecordAddress] - The address of (or actual obejct) where the data for the template is stored.
-           */
-        }, {
-          key: "basicRenderWithScope",
-          value: function basicRenderWithScope(pScope, pRenderableHash, pRenderDestinationAddress, pTemplateRecordAddress) {
-            var tmpRenderOptions = this.buildRenderOptions(pRenderableHash, pRenderDestinationAddress, pTemplateRecordAddress);
-            if (tmpRenderOptions.Valid) {
-              this.assignRenderContent(tmpRenderOptions.Renderable, tmpRenderOptions.DestinationAddress, this.pict.parseTemplateByHash(tmpRenderOptions.Renderable.TemplateHash, tmpRenderOptions.Record, null, [this], pScope, {
-                RootRenderable: tmpRenderOptions.Renderable
-              }));
-              return true;
-            } else {
-              this.log.error("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " could not perform a basic render of ").concat(tmpRenderOptions.RenderableHash, " because it is not valid."));
-              return false;
-            }
-          }
-
-          /**
-           * @param {string|ErrorCallback} [pRenderableHash] - The hash of the renderable to render.
-           * @param {string|ErrorCallback} [pRenderDestinationAddress] - The address where the renderable will be rendered.
-           * @param {string|Object|ErrorCallback} [pTemplateRecordAddress] - The address of (or actual obejct) where the data for the template is stored.
-           * @param {ErrorCallback} [fCallback] - The callback to call when the async operation is complete.
-           */
-        }, {
-          key: "basicRenderAsync",
-          value: function basicRenderAsync(pRenderableHash, pRenderDestinationAddress, pTemplateRecordAddress, fCallback) {
-            return this.basicRenderWithScopeAsync(this, pRenderableHash, pRenderDestinationAddress, pTemplateRecordAddress, fCallback);
-          }
-
-          /**
-           * @param {any} pScope - The scope to use for the template rendering.
-           * @param {string|ErrorCallback} [pRenderableHash] - The hash of the renderable to render.
-           * @param {string|ErrorCallback} [pRenderDestinationAddress] - The address where the renderable will be rendered.
-           * @param {string|Object|ErrorCallback} [pTemplateRecordAddress] - The address of (or actual obejct) where the data for the template is stored.
-           * @param {ErrorCallback} [fCallback] - The callback to call when the async operation is complete.
-           */
-        }, {
-          key: "basicRenderWithScopeAsync",
-          value: function basicRenderWithScopeAsync(pScope, pRenderableHash, pRenderDestinationAddress, pTemplateRecordAddress, fCallback) {
-            var _this17 = this;
-            // Allow the callback to be passed in as the last parameter no matter what
-            /** @type {ErrorCallback} */
-            var tmpCallback = typeof fCallback === 'function' ? fCallback : typeof pTemplateRecordAddress === 'function' ? pTemplateRecordAddress : typeof pRenderDestinationAddress === 'function' ? pRenderDestinationAddress : typeof pRenderableHash === 'function' ? pRenderableHash : null;
-            if (!tmpCallback) {
-              this.log.warn("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " basicRenderAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));
-              tmpCallback = function tmpCallback(pError) {
-                if (pError) {
-                  _this17.log.error("PictView [".concat(_this17.UUID, "]::[").concat(_this17.Hash, "] ").concat(_this17.options.Name, " basicRenderAsync Auto Callback Error: ").concat(pError), pError);
-                }
-              };
-            }
-            var tmpRenderOptions = this.buildRenderOptions(pRenderableHash, pRenderDestinationAddress, pTemplateRecordAddress);
-            if (tmpRenderOptions.Valid) {
-              this.pict.parseTemplateByHash(tmpRenderOptions.Renderable.TemplateHash, tmpRenderOptions.Record,
-              /**
-               * @param {Error} [pError] - The error that occurred during template parsing.
-               * @param {string} [pContent] - The content that was rendered from the template.
-               */
-              function (pError, pContent) {
-                if (pError) {
-                  _this17.log.error("PictView [".concat(_this17.UUID, "]::[").concat(_this17.Hash, "] ").concat(_this17.options.ViewIdentifier, " could not render (asynchronously) ").concat(tmpRenderOptions.RenderableHash, " because it did not parse the template."), pError);
-                  return tmpCallback(pError);
-                }
-                _this17.assignRenderContent(tmpRenderOptions.Renderable, tmpRenderOptions.DestinationAddress, pContent);
-                return tmpCallback();
-              }, [this], pScope, {
-                RootRenderable: tmpRenderOptions.Renderable
-              });
-            } else {
-              var tmpErrorMessage = "PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " could not perform a basic render of ").concat(tmpRenderOptions.RenderableHash, " because it is not valid.");
-              this.log.error(tmpErrorMessage);
-              return tmpCallback(new Error(tmpErrorMessage));
-            }
-          }
-
-          /**
-           * @param {Renderable} pRenderable - The renderable that was rendered.
-           */
-        }, {
-          key: "onProject",
-          value: function onProject(pRenderable) {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " onProject:"));
-            }
-            if (pRenderable.RenderMethod === 'virtual-assignment') {
-              this.pict.TransactionTracking.pushToTransactionQueue(pRenderable.TransactionHash, {
-                ViewHash: this.Hash,
-                Renderable: pRenderable
-              }, 'Deferred-Post-Content-Assignment');
-            }
-            if (this.pict.LogNoisiness > 0) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " Assigning Renderable[").concat(pRenderable.RenderableHash, "] content length ").concat(pRenderable.Content.length, " to Destination [").concat(pRenderable.ContentDestinationAddress, "] using Async render method ").concat(pRenderable.RenderMethod, "."));
-            }
-
-            // Assign the content to the destination address
-            this.pict.ContentAssignment.projectContent(pRenderable.RenderMethod, pRenderable.ContentDestinationAddress, pRenderable.Content, pRenderable.TestAddress);
-            this.lastRenderedTimestamp = this.pict.log.getTimeStamp();
-          }
-
-          /**
-           * Lifecycle hook that triggers after the view is projected into the DOM (async flow).
-           *
-           * @param {(error?: Error, content?: string) => void} fCallback - The callback to call when the async operation is complete.
-           * @param {Renderable} pRenderable - The renderable that is being projected.
-           */
-        }, {
-          key: "onProjectAsync",
-          value: function onProjectAsync(fCallback, pRenderable) {
-            this.onProject(pRenderable);
-            return fCallback();
-          }
-
-          /**
-           * Lifecycle hook that triggers after the view is rendered.
-           *
-           * @param {Renderable} pRenderable - The renderable that was rendered.
-           */
-        }, {
-          key: "onAfterRender",
-          value: function onAfterRender(pRenderable) {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " onAfterRender:"));
-            }
-            if (pRenderable && pRenderable.RootRenderableViewHash === this.Hash) {
-              var tmpTransactionQueue = this.pict.TransactionTracking.clearTransactionQueue(pRenderable.TransactionHash) || [];
-              var _iterator = _createForOfIteratorHelper(tmpTransactionQueue),
-                _step;
-              try {
-                for (_iterator.s(); !(_step = _iterator.n()).done;) {
-                  var tmpEvent = _step.value;
-                  var tmpView = this.pict.views[tmpEvent.Data.ViewHash];
-                  if (!tmpView) {
-                    this.log.error("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " onAfterRender: Could not find view for transaction hash ").concat(pRenderable.TransactionHash, " and ViewHash ").concat(tmpEvent.Data.ViewHash, "."));
-                    continue;
-                  }
-                  tmpView.onAfterProject();
-
-                  // Execute the developer-overridable post-render behavior
-                  tmpView.onAfterRender(tmpEvent.Data.Renderable);
-                }
-              } catch (err) {
-                _iterator.e(err);
-              } finally {
-                _iterator.f();
-              }
-            }
-            return true;
-          }
-
-          /**
-           * Lifecycle hook that triggers after the view is rendered (async flow).
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           * @param {Renderable} pRenderable - The renderable that was rendered.
-           */
-        }, {
-          key: "onAfterRenderAsync",
-          value: function onAfterRenderAsync(fCallback, pRenderable) {
-            var _this18 = this;
-            this.onAfterRender(pRenderable);
-            var tmpAnticipate = this.fable.newAnticipate();
-            if (pRenderable && pRenderable.RootRenderableViewHash === this.Hash) {
-              var queue = this.pict.TransactionTracking.clearTransactionQueue(pRenderable.TransactionHash) || [];
-              var _iterator2 = _createForOfIteratorHelper(queue),
-                _step2;
-              try {
-                var _loop = function _loop() {
-                  var event = _step2.value;
-                  /** @type {PictView} */
-                  var tmpView = _this18.pict.views[event.Data.ViewHash];
-                  if (!tmpView) {
-                    _this18.log.error("PictView [".concat(_this18.UUID, "]::[").concat(_this18.Hash, "] ").concat(_this18.options.ViewIdentifier, " onAfterRenderAsync: Could not find view for transaction hash ").concat(pRenderable.TransactionHash, " and ViewHash ").concat(event.Data.ViewHash, "."));
-                    return 1; // continue
-                  }
-                  tmpAnticipate.anticipate(tmpView.onAfterProjectAsync.bind(tmpView));
-                  tmpAnticipate.anticipate(function (fNext) {
-                    tmpView.onAfterRenderAsync(fNext, event.Data.Renderable);
-                  });
-
-                  // Execute the developer-overridable post-render behavior
-                };
-                for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-                  if (_loop()) continue;
-                }
-              } catch (err) {
-                _iterator2.e(err);
-              } finally {
-                _iterator2.f();
-              }
-            }
-            return tmpAnticipate.wait(fCallback);
-          }
-
-          /**
-           * Lifecycle hook that triggers after the view is projected into the DOM.
-           *
-           * @param {Renderable} pRenderable - The renderable that was projected.
-           */
-        }, {
-          key: "onAfterProject",
-          value: function onAfterProject(pRenderable) {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " onAfterProject:"));
-            }
-            return true;
-          }
-
-          /**
-           * Lifecycle hook that triggers after the view is projected into the DOM (async flow).
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           * @param {Renderable} pRenderable - The renderable that was projected.
-           */
-        }, {
-          key: "onAfterProjectAsync",
-          value: function onAfterProjectAsync(fCallback, pRenderable) {
-            return fCallback();
-          }
-
-          /* -------------------------------------------------------------------------- */
-          /*                            Code Section: Solver                            */
-          /* -------------------------------------------------------------------------- */
-          /**
-           * Lifecycle hook that triggers before the view is solved.
-           */
-        }, {
-          key: "onBeforeSolve",
-          value: function onBeforeSolve() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " onBeforeSolve:"));
-            }
-            return true;
-          }
-
-          /**
-           * Lifecycle hook that triggers before the view is solved (async flow).
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           */
-        }, {
-          key: "onBeforeSolveAsync",
-          value: function onBeforeSolveAsync(fCallback) {
-            this.onBeforeSolve();
-            return fCallback();
-          }
-
-          /**
-           * Lifecycle hook that triggers when the view is solved.
-           */
-        }, {
-          key: "onSolve",
-          value: function onSolve() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " onSolve:"));
-            }
-            return true;
-          }
-
-          /**
-           * Lifecycle hook that triggers when the view is solved (async flow).
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           */
-        }, {
-          key: "onSolveAsync",
-          value: function onSolveAsync(fCallback) {
-            this.onSolve();
-            return fCallback();
-          }
-
-          /**
-           * Performs view solving and triggers lifecycle hooks.
-           *
-           * @return {boolean} - True if the view was solved successfully, false otherwise.
-           */
-        }, {
-          key: "solve",
-          value: function solve() {
-            if (this.pict.LogNoisiness > 2) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " executing solve() function..."));
-            }
-            this.onBeforeSolve();
-            this.onSolve();
-            this.onAfterSolve();
-            this.lastSolvedTimestamp = this.pict.log.getTimeStamp();
-            return true;
-          }
-
-          /**
-           * Performs view solving and triggers lifecycle hooks (async flow).
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           */
-        }, {
-          key: "solveAsync",
-          value: function solveAsync(fCallback) {
-            var _this19 = this;
-            var tmpAnticipate = this.pict.instantiateServiceProviderWithoutRegistration('Anticipate');
-
-            /** @type {ErrorCallback} */
-            var tmpCallback = typeof fCallback === 'function' ? fCallback : null;
-            if (!tmpCallback) {
-              this.log.warn("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " solveAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));
-              tmpCallback = function tmpCallback(pError) {
-                if (pError) {
-                  _this19.log.error("PictView [".concat(_this19.UUID, "]::[").concat(_this19.Hash, "] ").concat(_this19.options.Name, " solveAsync Auto Callback Error: ").concat(pError), pError);
-                }
-              };
-            }
-            tmpAnticipate.anticipate(this.onBeforeSolveAsync.bind(this));
-            tmpAnticipate.anticipate(this.onSolveAsync.bind(this));
-            tmpAnticipate.anticipate(this.onAfterSolveAsync.bind(this));
-            tmpAnticipate.wait(function (pError) {
-              if (_this19.pict.LogNoisiness > 2) {
-                _this19.log.trace("PictView [".concat(_this19.UUID, "]::[").concat(_this19.Hash, "] ").concat(_this19.options.ViewIdentifier, " solveAsync() complete."));
-              }
-              _this19.lastSolvedTimestamp = _this19.pict.log.getTimeStamp();
-              return tmpCallback(pError);
-            });
-          }
-
-          /**
-           * Lifecycle hook that triggers after the view is solved.
-           */
-        }, {
-          key: "onAfterSolve",
-          value: function onAfterSolve() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " onAfterSolve:"));
-            }
-            return true;
-          }
-
-          /**
-           * Lifecycle hook that triggers after the view is solved (async flow).
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           */
-        }, {
-          key: "onAfterSolveAsync",
-          value: function onAfterSolveAsync(fCallback) {
-            this.onAfterSolve();
-            return fCallback();
-          }
-
-          /* -------------------------------------------------------------------------- */
-          /*                     Code Section: Marshal From View                        */
-          /* -------------------------------------------------------------------------- */
-          /**
-           * Lifecycle hook that triggers before data is marshaled from the view.
-           *
-           * @return {boolean} - True if the operation was successful, false otherwise.
-           */
-        }, {
-          key: "onBeforeMarshalFromView",
-          value: function onBeforeMarshalFromView() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " onBeforeMarshalFromView:"));
-            }
-            return true;
-          }
-
-          /**
-           * Lifecycle hook that triggers before data is marshaled from the view (async flow).
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           */
-        }, {
-          key: "onBeforeMarshalFromViewAsync",
-          value: function onBeforeMarshalFromViewAsync(fCallback) {
-            this.onBeforeMarshalFromView();
-            return fCallback();
-          }
-
-          /**
-           * Lifecycle hook that triggers when data is marshaled from the view.
-           */
-        }, {
-          key: "onMarshalFromView",
-          value: function onMarshalFromView() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " onMarshalFromView:"));
-            }
-            return true;
-          }
-
-          /**
-           * Lifecycle hook that triggers when data is marshaled from the view (async flow).
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           */
-        }, {
-          key: "onMarshalFromViewAsync",
-          value: function onMarshalFromViewAsync(fCallback) {
-            this.onMarshalFromView();
-            return fCallback();
-          }
-
-          /**
-           * Marshals data from the view.
-           *
-           * @return {boolean} - True if the operation was successful, false otherwise.
-           */
-        }, {
-          key: "marshalFromView",
-          value: function marshalFromView() {
-            if (this.pict.LogNoisiness > 2) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " executing solve() function..."));
-            }
-            this.onBeforeMarshalFromView();
-            this.onMarshalFromView();
-            this.onAfterMarshalFromView();
-            this.lastMarshalFromViewTimestamp = this.pict.log.getTimeStamp();
-            return true;
-          }
-
-          /**
-           * Marshals data from the view (async flow).
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           */
-        }, {
-          key: "marshalFromViewAsync",
-          value: function marshalFromViewAsync(fCallback) {
-            var _this20 = this;
-            var tmpAnticipate = this.pict.instantiateServiceProviderWithoutRegistration('Anticipate');
-
-            /** @type {ErrorCallback} */
-            var tmpCallback = typeof fCallback === 'function' ? fCallback : null;
-            if (!tmpCallback) {
-              this.log.warn("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " marshalFromViewAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));
-              tmpCallback = function tmpCallback(pError) {
-                if (pError) {
-                  _this20.log.error("PictView [".concat(_this20.UUID, "]::[").concat(_this20.Hash, "] ").concat(_this20.options.Name, " marshalFromViewAsync Auto Callback Error: ").concat(pError), pError);
-                }
-              };
-            }
-            tmpAnticipate.anticipate(this.onBeforeMarshalFromViewAsync.bind(this));
-            tmpAnticipate.anticipate(this.onMarshalFromViewAsync.bind(this));
-            tmpAnticipate.anticipate(this.onAfterMarshalFromViewAsync.bind(this));
-            tmpAnticipate.wait(function (pError) {
-              if (_this20.pict.LogNoisiness > 2) {
-                _this20.log.trace("PictView [".concat(_this20.UUID, "]::[").concat(_this20.Hash, "] ").concat(_this20.options.ViewIdentifier, " marshalFromViewAsync() complete."));
-              }
-              _this20.lastMarshalFromViewTimestamp = _this20.pict.log.getTimeStamp();
-              return tmpCallback(pError);
-            });
-          }
-
-          /**
-           * Lifecycle hook that triggers after data is marshaled from the view.
-           */
-        }, {
-          key: "onAfterMarshalFromView",
-          value: function onAfterMarshalFromView() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " onAfterMarshalFromView:"));
-            }
-            return true;
-          }
-
-          /**
-           * Lifecycle hook that triggers after data is marshaled from the view (async flow).
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           */
-        }, {
-          key: "onAfterMarshalFromViewAsync",
-          value: function onAfterMarshalFromViewAsync(fCallback) {
-            this.onAfterMarshalFromView();
-            return fCallback();
-          }
-
-          /* -------------------------------------------------------------------------- */
-          /*                     Code Section: Marshal To View                          */
-          /* -------------------------------------------------------------------------- */
-          /**
-           * Lifecycle hook that triggers before data is marshaled into the view.
-           */
-        }, {
-          key: "onBeforeMarshalToView",
-          value: function onBeforeMarshalToView() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " onBeforeMarshalToView:"));
-            }
-            return true;
-          }
-
-          /**
-           * Lifecycle hook that triggers before data is marshaled into the view (async flow).
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           */
-        }, {
-          key: "onBeforeMarshalToViewAsync",
-          value: function onBeforeMarshalToViewAsync(fCallback) {
-            this.onBeforeMarshalToView();
-            return fCallback();
-          }
-
-          /**
-           * Lifecycle hook that triggers when data is marshaled into the view.
-           */
-        }, {
-          key: "onMarshalToView",
-          value: function onMarshalToView() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " onMarshalToView:"));
-            }
-            return true;
-          }
-
-          /**
-           * Lifecycle hook that triggers when data is marshaled into the view (async flow).
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           */
-        }, {
-          key: "onMarshalToViewAsync",
-          value: function onMarshalToViewAsync(fCallback) {
-            this.onMarshalToView();
-            return fCallback();
-          }
-
-          /**
-           * Marshals data into the view.
-           *
-           * @return {boolean} - True if the operation was successful, false otherwise.
-           */
-        }, {
-          key: "marshalToView",
-          value: function marshalToView() {
-            if (this.pict.LogNoisiness > 2) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " executing solve() function..."));
-            }
-            this.onBeforeMarshalToView();
-            this.onMarshalToView();
-            this.onAfterMarshalToView();
-            this.lastMarshalToViewTimestamp = this.pict.log.getTimeStamp();
-            return true;
-          }
-
-          /**
-           * Marshals data into the view (async flow).
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           */
-        }, {
-          key: "marshalToViewAsync",
-          value: function marshalToViewAsync(fCallback) {
-            var _this21 = this;
-            var tmpAnticipate = this.pict.instantiateServiceProviderWithoutRegistration('Anticipate');
-
-            /** @type {ErrorCallback} */
-            var tmpCallback = typeof fCallback === 'function' ? fCallback : null;
-            if (!tmpCallback) {
-              this.log.warn("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.Name, " marshalToViewAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));
-              tmpCallback = function tmpCallback(pError) {
-                if (pError) {
-                  _this21.log.error("PictView [".concat(_this21.UUID, "]::[").concat(_this21.Hash, "] ").concat(_this21.options.Name, " marshalToViewAsync Auto Callback Error: ").concat(pError), pError);
-                }
-              };
-            }
-            tmpAnticipate.anticipate(this.onBeforeMarshalToViewAsync.bind(this));
-            tmpAnticipate.anticipate(this.onMarshalToViewAsync.bind(this));
-            tmpAnticipate.anticipate(this.onAfterMarshalToViewAsync.bind(this));
-            tmpAnticipate.wait(function (pError) {
-              if (_this21.pict.LogNoisiness > 2) {
-                _this21.log.trace("PictView [".concat(_this21.UUID, "]::[").concat(_this21.Hash, "] ").concat(_this21.options.ViewIdentifier, " marshalToViewAsync() complete."));
-              }
-              _this21.lastMarshalToViewTimestamp = _this21.pict.log.getTimeStamp();
-              return tmpCallback(pError);
-            });
-          }
-
-          /**
-           * Lifecycle hook that triggers after data is marshaled into the view.
-           */
-        }, {
-          key: "onAfterMarshalToView",
-          value: function onAfterMarshalToView() {
-            if (this.pict.LogNoisiness > 3) {
-              this.log.trace("PictView [".concat(this.UUID, "]::[").concat(this.Hash, "] ").concat(this.options.ViewIdentifier, " onAfterMarshalToView:"));
-            }
-            return true;
-          }
-
-          /**
-           * Lifecycle hook that triggers after data is marshaled into the view (async flow).
-           *
-           * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
-           */
-        }, {
-          key: "onAfterMarshalToViewAsync",
-          value: function onAfterMarshalToViewAsync(fCallback) {
-            this.onAfterMarshalToView();
-            return fCallback();
-          }
-
-          /** @return {boolean} - True if the object is a PictView. */
-        }, {
-          key: "isPictView",
-          get: function get() {
-            return true;
-          }
-        }]);
-      }(libFableServiceBase);
-      module.exports = PictView;
-    }, {
-      "../package.json": 9,
-      "fable-serviceproviderbase": 2
-    }],
-    11: [function (require, module, exports) {
-      module.exports = {
-        "Name": "Parime Management Console",
-        "Hash": "ParimeManagement",
-        "MainViewportViewIdentifier": "ParimeManagement-Layout",
-        "AutoSolveAfterInitialize": true,
-        "AutoRenderMainViewportViewAfterInitialize": false,
-        "AutoRenderViewsAfterInitialize": false,
-        "pict_configuration": {
-          "Product": "ParimeManagement-Pict-Application"
-        }
-      };
-    }, {}],
-    12: [function (require, module, exports) {
-      var libPictApplication = require('pict-application');
-      var libPictRouter = require('pict-router');
-
-      // Views
-      var libViewLayout = require('./views/PictView-ParimeManagement-Layout.js');
-      var libViewTopBar = require('./views/PictView-ParimeManagement-TopBar.js');
-      var libViewBottomBar = require('./views/PictView-ParimeManagement-BottomBar.js');
-      var libViewLogin = require('./views/PictView-ParimeManagement-Login.js');
-      var libViewDashboard = require('./views/PictView-ParimeManagement-Dashboard.js');
-      var libViewLakes = require('./views/PictView-ParimeManagement-Lakes.js');
-      var libViewConfiguration = require('./views/PictView-ParimeManagement-Configuration.js');
-      var ParimeManagementApplication = /*#__PURE__*/function (_libPictApplication) {
-        function ParimeManagementApplication(pFable, pOptions, pServiceHash) {
-          var _this22;
-          _classCallCheck(this, ParimeManagementApplication);
-          _this22 = _callSuper(this, ParimeManagementApplication, [pFable, pOptions, pServiceHash]);
-
-          // Add the router provider with routes
-          _this22.pict.addProvider('PictRouter', require('./providers/PictRouter-ParimeManagement-Configuration.json'), libPictRouter);
-
-          // Add the layout view (the shell that contains top bar, workspace, bottom bar)
-          _this22.pict.addView('ParimeManagement-Layout', libViewLayout.default_configuration, libViewLayout);
-
-          // Add the top bar and bottom bar views
-          _this22.pict.addView('ParimeManagement-TopBar', libViewTopBar.default_configuration, libViewTopBar);
-          _this22.pict.addView('ParimeManagement-BottomBar', libViewBottomBar.default_configuration, libViewBottomBar);
-
-          // Add the content views
-          _this22.pict.addView('ParimeManagement-Login', libViewLogin.default_configuration, libViewLogin);
-          _this22.pict.addView('ParimeManagement-Dashboard', libViewDashboard.default_configuration, libViewDashboard);
-          _this22.pict.addView('ParimeManagement-Lakes', libViewLakes.default_configuration, libViewLakes);
-          _this22.pict.addView('ParimeManagement-Configuration', libViewConfiguration.default_configuration, libViewConfiguration);
-          return _this22;
-        }
-        _inherits(ParimeManagementApplication, _libPictApplication);
-        return _createClass(ParimeManagementApplication, [{
-          key: "onAfterInitializeAsync",
-          value: function onAfterInitializeAsync(fCallback) {
-            // Initialize application state
-            this.pict.AppData.ParimeManagement = {
-              User: {
-                LoggedIn: false,
-                UserName: '',
-                DisplayName: ''
-              },
-              CurrentRoute: 'Dashboard',
-              ServerInfo: {
-                Product: '',
-                Version: '',
-                Port: 0,
-                Uptime: '',
-                StartTime: ''
-              },
-              Lakes: {
-                Record: [],
-                Binary: [],
-                Combined: []
-              },
-              Configuration: {},
-              LakeBrowser: {
-                ActiveTab: 'Record',
-                SelectedCategory: '',
-                SelectedKey: '',
-                CategoryKeys: [],
-                KeyData: null
-              }
-            };
-
-            // Render the layout shell first, then the initial content
-            this.pict.views['ParimeManagement-Layout'].render();
-            return _superPropGet(ParimeManagementApplication, "onAfterInitializeAsync", this, 3)([fCallback]);
-          }
-
-          /**
-           * Navigate to a route using the pict-router.
-           *
-           * @param {string} pRoute - The route path to navigate to (e.g. '/Dashboard')
-           */
-        }, {
-          key: "navigateTo",
-          value: function navigateTo(pRoute) {
-            this.pict.providers.PictRouter.navigate(pRoute);
-          }
-
-          /**
-           * Render a specific content view into the main workspace area.
-           * This is called by the router when a route is matched.
-           *
-           * @param {string} pViewIdentifier - The view identifier to render
-           */
-        }, {
-          key: "showView",
-          value: function showView(pViewIdentifier) {
-            if (pViewIdentifier in this.pict.views) {
-              this.pict.AppData.ParimeManagement.CurrentRoute = pViewIdentifier;
-              this.pict.views[pViewIdentifier].render();
-              // Re-render top bar to update active nav state
-              this.pict.views['ParimeManagement-TopBar'].render();
-            } else {
-              this.pict.log.warn("View [".concat(pViewIdentifier, "] not found; falling back to dashboard."));
-              this.pict.views['ParimeManagement-Dashboard'].render();
-            }
-          }
-
-          /**
-           * Handle user login attempt.
-           *
-           * @param {string} pUserName - The username
-           * @param {string} pPassword - The password
-           */
-        }, {
-          key: "attemptLogin",
-          value: function attemptLogin(pUserName, pPassword) {
-            this.pict.log.info("Login attempt for user [".concat(pUserName, "]"));
-
-            // Accept any non-empty credentials for now
-            if (pUserName && pPassword) {
-              this.pict.AppData.ParimeManagement.User.LoggedIn = true;
-              this.pict.AppData.ParimeManagement.User.UserName = pUserName;
-              this.pict.AppData.ParimeManagement.User.DisplayName = pUserName;
-
-              // Re-render the top bar to show logged-in state, then navigate to dashboard
-              this.pict.views['ParimeManagement-TopBar'].render();
-              this.navigateTo('/Dashboard');
-            } else {
-              this.pict.log.warn('Login failed: username and password are required.');
-            }
-          }
-
-          /**
-           * Handle user logout.
-           */
-        }, {
-          key: "logout",
-          value: function logout() {
-            this.pict.AppData.ParimeManagement.User.LoggedIn = false;
-            this.pict.AppData.ParimeManagement.User.UserName = '';
-            this.pict.AppData.ParimeManagement.User.DisplayName = '';
-
-            // Re-render the top bar and navigate to login
-            this.pict.views['ParimeManagement-TopBar'].render();
-            this.navigateTo('/Login');
-          }
-
-          /**
-           * Fetch server info from the API and update AppData.
-           *
-           * @param {function} fCallback - Optional callback when data is loaded.
-           */
-        }, {
-          key: "refreshServerInfo",
-          value: function refreshServerInfo(fCallback) {
-            var _this23 = this;
-            var tmpXHR = new XMLHttpRequest();
-            tmpXHR.open('GET', '/1.0/ServerInfo', true);
-            tmpXHR.onreadystatechange = function () {
-              if (tmpXHR.readyState === 4) {
-                if (tmpXHR.status === 200) {
-                  try {
-                    var tmpData = JSON.parse(tmpXHR.responseText);
-                    _this23.pict.AppData.ParimeManagement.ServerInfo = tmpData;
-                  } catch (pError) {
-                    _this23.pict.log.warn('Failed to parse server info response.');
-                  }
-                }
-                if (typeof fCallback === 'function') {
-                  fCallback();
-                }
-              }
-            };
-            tmpXHR.send();
-          }
-
-          /**
-           * Fetch lake summary from the API and update AppData.
-           *
-           * @param {function} fCallback - Optional callback when data is loaded.
-           */
-        }, {
-          key: "refreshLakesSummary",
-          value: function refreshLakesSummary(fCallback) {
-            var _this24 = this;
-            var tmpXHR = new XMLHttpRequest();
-            tmpXHR.open('GET', '/1.0/ServerInfo/Lakes', true);
-            tmpXHR.onreadystatechange = function () {
-              if (tmpXHR.readyState === 4) {
-                if (tmpXHR.status === 200) {
-                  try {
-                    var tmpData = JSON.parse(tmpXHR.responseText);
-                    if (tmpData.Lakes) {
-                      _this24.pict.AppData.ParimeManagement.Lakes = tmpData.Lakes;
-                    }
-                  } catch (pError) {
-                    _this24.pict.log.warn('Failed to parse lakes summary response.');
-                  }
-                }
-                if (typeof fCallback === 'function') {
-                  fCallback();
-                }
-              }
-            };
-            tmpXHR.send();
-          }
-
-          /**
-           * Fetch configuration from the API and update AppData.
-           *
-           * @param {function} fCallback - Optional callback when data is loaded.
-           */
-        }, {
-          key: "refreshConfiguration",
-          value: function refreshConfiguration(fCallback) {
-            var _this25 = this;
-            var tmpXHR = new XMLHttpRequest();
-            tmpXHR.open('GET', '/1.0/ServerInfo', true);
-            tmpXHR.onreadystatechange = function () {
-              if (tmpXHR.readyState === 4) {
-                if (tmpXHR.status === 200) {
-                  try {
-                    var tmpData = JSON.parse(tmpXHR.responseText);
-                    _this25.pict.AppData.ParimeManagement.Configuration = tmpData;
-                  } catch (pError) {
-                    _this25.pict.log.warn('Failed to parse configuration response.');
-                  }
-                }
-                if (typeof fCallback === 'function') {
-                  fCallback();
-                }
-              }
-            };
-            tmpXHR.send();
-          }
-
-          /**
-           * Fetch keys for a specific lake category.
-           *
-           * @param {string} pLakeType - 'Record', 'Binary', or 'Combined'
-           * @param {string} pCategory - The category name
-           * @param {function} fCallback - Callback(pKeys)
-           */
-        }, {
-          key: "fetchCategoryKeys",
-          value: function fetchCategoryKeys(pLakeType, pCategory, fCallback) {
-            var tmpXHR = new XMLHttpRequest();
-            tmpXHR.open('GET', "/1.0/".concat(pLakeType, "/").concat(pCategory), true);
-            tmpXHR.onreadystatechange = function () {
-              if (tmpXHR.readyState === 4) {
-                if (tmpXHR.status === 200) {
-                  try {
-                    var tmpData = JSON.parse(tmpXHR.responseText);
-                    fCallback(tmpData.Keys || []);
-                  } catch (pError) {
-                    fCallback([]);
-                  }
-                } else {
-                  fCallback([]);
-                }
-              }
-            };
-            tmpXHR.send();
-          }
-
-          /**
-           * Fetch a specific record from the API.
-           *
-           * @param {string} pCategory - The category name
-           * @param {string} pKey - The record key
-           * @param {function} fCallback - Callback(pData)
-           */
-        }, {
-          key: "fetchRecord",
-          value: function fetchRecord(pCategory, pKey, fCallback) {
-            var tmpXHR = new XMLHttpRequest();
-            tmpXHR.open('GET', "/1.0/Record/".concat(pCategory, "/").concat(pKey), true);
-            tmpXHR.onreadystatechange = function () {
-              if (tmpXHR.readyState === 4) {
-                if (tmpXHR.status === 200) {
-                  try {
-                    fCallback(JSON.parse(tmpXHR.responseText));
-                  } catch (pError) {
-                    fCallback(null);
-                  }
-                } else {
-                  fCallback(null);
-                }
-              }
-            };
-            tmpXHR.send();
-          }
-        }]);
-      }(libPictApplication);
-      module.exports = ParimeManagementApplication;
-      module.exports.default_configuration = require('./Pict-Application-ParimeManagement-Configuration.json');
-    }, {
-      "./Pict-Application-ParimeManagement-Configuration.json": 11,
-      "./providers/PictRouter-ParimeManagement-Configuration.json": 13,
-      "./views/PictView-ParimeManagement-BottomBar.js": 14,
-      "./views/PictView-ParimeManagement-Configuration.js": 15,
-      "./views/PictView-ParimeManagement-Dashboard.js": 16,
-      "./views/PictView-ParimeManagement-Lakes.js": 17,
-      "./views/PictView-ParimeManagement-Layout.js": 18,
-      "./views/PictView-ParimeManagement-Login.js": 19,
-      "./views/PictView-ParimeManagement-TopBar.js": 20,
-      "pict-application": 5,
-      "pict-router": 8
-    }],
-    13: [function (require, module, exports) {
-      module.exports = {
-        "ProviderIdentifier": "Pict-Router",
-        "AutoInitialize": true,
-        "AutoInitializeOrdinal": 0,
-        "Routes": [{
-          "path": "/Dashboard",
-          "template": "{~LV:Pict.PictApplication.showView(`ParimeManagement-Dashboard`)~}"
-        }, {
-          "path": "/Lakes",
-          "template": "{~LV:Pict.PictApplication.showView(`ParimeManagement-Lakes`)~}"
-        }, {
-          "path": "/Configuration",
-          "template": "{~LV:Pict.PictApplication.showView(`ParimeManagement-Configuration`)~}"
-        }, {
-          "path": "/Login",
-          "template": "{~LV:Pict.PictApplication.showView(`ParimeManagement-Login`)~}"
-        }]
-      };
-    }, {}],
-    14: [function (require, module, exports) {
-      var libPictView = require('pict-view');
-      var _ViewConfiguration = {
-        ViewIdentifier: "ParimeManagement-BottomBar",
-        DefaultRenderable: "ParimeManagement-BottomBar-Content",
-        DefaultDestinationAddress: "#ParimeManagement-BottomBar-Container",
-        AutoRender: false,
-        CSS: /*css*/"\n\t\t.parime-bottombar {\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tjustify-content: center;\n\t\t\tbackground-color: var(--theme-color-background-secondary, #F0ECE4);\n\t\t\tcolor: #8A7F72;\n\t\t\tpadding: 0.75em 1.5em;\n\t\t\tfont-size: 0.8em;\n\t\t\tborder-top: 1px solid #DDD6CA;\n\t\t}\n\t\t.parime-bottombar a {\n\t\t\tcolor: #2E7D74;\n\t\t\tmargin-left: 0.5em;\n\t\t}\n\t\t.parime-bottombar a:hover {\n\t\t\tcolor: #256861;\n\t\t}\n\t",
-        Templates: [{
-          Hash: "ParimeManagement-BottomBar-Template",
-          Template: /*html*/"\n<div class=\"parime-bottombar\">\n\tParime Data Lake &mdash; Management Console &mdash;\n\t<a href=\"https://github.com/stevenvelozo/parime\" target=\"_blank\">GitHub</a>\n</div>\n"
-        }],
-        Renderables: [{
-          RenderableHash: "ParimeManagement-BottomBar-Content",
-          TemplateHash: "ParimeManagement-BottomBar-Template",
-          DestinationAddress: "#ParimeManagement-BottomBar-Container",
-          RenderMethod: "replace"
-        }]
-      };
-      var ParimeManagementBottomBarView = /*#__PURE__*/function (_libPictView) {
-        function ParimeManagementBottomBarView(pFable, pOptions, pServiceHash) {
-          _classCallCheck(this, ParimeManagementBottomBarView);
-          return _callSuper(this, ParimeManagementBottomBarView, [pFable, pOptions, pServiceHash]);
-        }
-        _inherits(ParimeManagementBottomBarView, _libPictView);
-        return _createClass(ParimeManagementBottomBarView);
-      }(libPictView);
-      module.exports = ParimeManagementBottomBarView;
-      module.exports.default_configuration = _ViewConfiguration;
-    }, {
-      "pict-view": 10
-    }],
-    15: [function (require, module, exports) {
-      var libPictView = require('pict-view');
-      var _ViewConfiguration = {
-        ViewIdentifier: "ParimeManagement-Configuration",
-        DefaultRenderable: "ParimeManagement-Configuration-Content",
-        DefaultDestinationAddress: "#ParimeManagement-Content-Container",
-        AutoRender: false,
-        CSS: /*css*/"\n\t\t.parime-config {\n\t\t\tpadding: 2em;\n\t\t\tmax-width: 1200px;\n\t\t\tmargin: 0 auto;\n\t\t}\n\t\t.parime-config-header {\n\t\t\tmargin: 0 0 1.5em 0;\n\t\t\tpadding-bottom: 1em;\n\t\t\tborder-bottom: 1px solid #DDD6CA;\n\t\t}\n\t\t.parime-config-header h1 {\n\t\t\tmargin: 0 0 0.25em 0;\n\t\t\tfont-size: 1.75em;\n\t\t\tfont-weight: 400;\n\t\t\tcolor: #3D3229;\n\t\t}\n\t\t.parime-config-header p {\n\t\t\tmargin: 0;\n\t\t\tcolor: #7A7568;\n\t\t\tfont-size: 1em;\n\t\t}\n\t\t.parime-config-section {\n\t\t\tbackground: #fff;\n\t\t\tborder: 1px solid #DDD6CA;\n\t\t\tborder-radius: 6px;\n\t\t\tmargin-bottom: 1.25em;\n\t\t\toverflow: hidden;\n\t\t}\n\t\t.parime-config-section-header {\n\t\t\tpadding: 0.75em 1.25em;\n\t\t\tbackground: #F0ECE4;\n\t\t\tcolor: #5E5549;\n\t\t\tfont-size: 0.85em;\n\t\t\tfont-weight: 600;\n\t\t\ttext-transform: uppercase;\n\t\t\tletter-spacing: 0.05em;\n\t\t\tborder-bottom: 1px solid #DDD6CA;\n\t\t}\n\t\t.parime-config-table {\n\t\t\twidth: 100%;\n\t\t\tborder-collapse: collapse;\n\t\t}\n\t\t.parime-config-table td {\n\t\t\tpadding: 0.6em 1.25em;\n\t\t\tborder-bottom: 1px solid #EAE3D8;\n\t\t\tfont-size: 0.9em;\n\t\t}\n\t\t.parime-config-table tr:last-child td {\n\t\t\tborder-bottom: none;\n\t\t}\n\t\t.parime-config-table td:first-child {\n\t\t\tcolor: #5E5549;\n\t\t\tfont-weight: 500;\n\t\t\twidth: 200px;\n\t\t}\n\t\t.parime-config-table td:last-child {\n\t\t\tcolor: #423D37;\n\t\t}\n\t\t.parime-config-value-code {\n\t\t\tfont-family: \"SF Mono\", \"Fira Code\", \"Fira Mono\", Menlo, Consolas, monospace;\n\t\t\tfont-size: 0.85em;\n\t\t\tcolor: #9E6B47;\n\t\t\tbackground: #F0ECE4;\n\t\t\tpadding: 0.15em 0.4em;\n\t\t\tborder-radius: 3px;\n\t\t}\n\t\t.parime-config-json {\n\t\t\tpadding: 1.25em;\n\t\t\tbackground: #F0ECE4;\n\t\t\tfont-family: \"SF Mono\", \"Fira Code\", \"Fira Mono\", Menlo, Consolas, monospace;\n\t\t\tfont-size: 0.85em;\n\t\t\tcolor: #423D37;\n\t\t\twhite-space: pre-wrap;\n\t\t\tword-break: break-word;\n\t\t\tmargin: 0;\n\t\t}\n\t\t.parime-config-endpoints {\n\t\t\tpadding: 1.25em;\n\t\t}\n\t\t.parime-config-endpoint-item {\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tgap: 0.75em;\n\t\t\tpadding: 0.4em 0;\n\t\t\tfont-size: 0.9em;\n\t\t}\n\t\t.parime-config-endpoint-badge {\n\t\t\tdisplay: inline-block;\n\t\t\tpadding: 0.15em 0.5em;\n\t\t\tborder-radius: 3px;\n\t\t\tfont-size: 0.75em;\n\t\t\tfont-weight: 600;\n\t\t\ttext-transform: uppercase;\n\t\t\tletter-spacing: 0.03em;\n\t\t\tbackground: #E0EDEB;\n\t\t\tcolor: #2E7D74;\n\t\t}\n\t",
-        Templates: [{
-          Hash: "ParimeManagement-Configuration-Template",
-          Template: /*html*/"\n<div class=\"parime-config\">\n\t<div class=\"parime-config-header\">\n\t\t<h1>Configuration</h1>\n\t\t<p>Current server configuration and endpoint status.</p>\n\t</div>\n\t<div id=\"ParimeManagement-Configuration-Body\">\n\t\t<p style=\"color: #8A7F72;\">Loading configuration...</p>\n\t</div>\n</div>\n"
-        }],
-        Renderables: [{
-          RenderableHash: "ParimeManagement-Configuration-Content",
-          TemplateHash: "ParimeManagement-Configuration-Template",
-          DestinationAddress: "#ParimeManagement-Content-Container",
-          RenderMethod: "replace"
-        }]
-      };
-      var ParimeManagementConfigurationView = /*#__PURE__*/function (_libPictView2) {
-        function ParimeManagementConfigurationView(pFable, pOptions, pServiceHash) {
-          _classCallCheck(this, ParimeManagementConfigurationView);
-          return _callSuper(this, ParimeManagementConfigurationView, [pFable, pOptions, pServiceHash]);
-        }
-        _inherits(ParimeManagementConfigurationView, _libPictView2);
-        return _createClass(ParimeManagementConfigurationView, [{
-          key: "onAfterRender",
-          value: function onAfterRender(pRenderable, pRenderDestinationAddress, pRecord, pContent) {
-            var _this26 = this;
-            this.pict.PictApplication.refreshConfiguration(function () {
-              var tmpConfig = _this26.pict.AppData.ParimeManagement.Configuration;
-              var tmpHTML = '';
-
-              // Server section
-              tmpHTML += '<div class="parime-config-section">';
-              tmpHTML += '<div class="parime-config-section-header">Server</div>';
-              tmpHTML += '<table class="parime-config-table">';
-              tmpHTML += "<tr><td>Product</td><td>".concat(_this26.escapeHTML(tmpConfig.Product || 'Parime'), "</td></tr>");
-              tmpHTML += "<tr><td>Version</td><td><span class=\"parime-config-value-code\">".concat(_this26.escapeHTML(tmpConfig.Version || '?'), "</span></td></tr>");
-              tmpHTML += "<tr><td>Port</td><td><span class=\"parime-config-value-code\">".concat(tmpConfig.Port || '?', "</span></td></tr>");
-              if (tmpConfig.Uptime) {
-                tmpHTML += "<tr><td>Uptime</td><td>".concat(_this26.escapeHTML(tmpConfig.Uptime), "</td></tr>");
-              }
-              if (tmpConfig.StartTime) {
-                tmpHTML += "<tr><td>Start Time</td><td>".concat(_this26.escapeHTML(tmpConfig.StartTime), "</td></tr>");
-              }
-              tmpHTML += '</table>';
-              tmpHTML += '</div>';
-
-              // Storage section
-              tmpHTML += '<div class="parime-config-section">';
-              tmpHTML += '<div class="parime-config-section-header">Storage</div>';
-              tmpHTML += '<table class="parime-config-table">';
-              tmpHTML += "<tr><td>Binary Storage Root</td><td><span class=\"parime-config-value-code\">".concat(_this26.escapeHTML(tmpConfig.BinaryStorageRoot || '?'), "</span></td></tr>");
-              tmpHTML += '</table>';
-              tmpHTML += '</div>';
-
-              // Restify section
-              if (tmpConfig.RestifyConfiguration) {
-                tmpHTML += '<div class="parime-config-section">';
-                tmpHTML += '<div class="parime-config-section-header">Restify Configuration</div>';
-                tmpHTML += "<pre class=\"parime-config-json\">".concat(_this26.escapeHTML(JSON.stringify(tmpConfig.RestifyConfiguration, null, 2)), "</pre>");
-                tmpHTML += '</div>';
-              }
-
-              // Endpoints section
-              tmpHTML += '<div class="parime-config-section">';
-              tmpHTML += '<div class="parime-config-section-header">Endpoints</div>';
-              tmpHTML += '<div class="parime-config-endpoints">';
-              var tmpEndpoints = [{
-                Name: 'Record Lake',
-                Path: '/1.0/Record/:category/:hash'
-              }, {
-                Name: 'Binary Lake',
-                Path: '/1.0/Binary/:category/:hash'
-              }, {
-                Name: 'Combined Lake',
-                Path: '/1.0/Combined/:category/:hash'
-              }, {
-                Name: 'WebSocket',
-                Path: '/1.0/WebSocket/Lake'
-              }, {
-                Name: 'Server Info',
-                Path: '/1.0/ServerInfo'
-              }];
-              for (var i = 0; i < tmpEndpoints.length; i++) {
-                var tmpEndpoint = tmpEndpoints[i];
-                tmpHTML += "<div class=\"parime-config-endpoint-item\"><span class=\"parime-config-endpoint-badge\">Active</span> <strong>".concat(_this26.escapeHTML(tmpEndpoint.Name), "</strong> &mdash; <span class=\"parime-config-value-code\">").concat(_this26.escapeHTML(tmpEndpoint.Path), "</span></div>");
-              }
-              tmpHTML += '</div>';
-              tmpHTML += '</div>';
-              _this26.pict.ContentAssignment.assignContent('#ParimeManagement-Configuration-Body', tmpHTML);
-            });
-            return _superPropGet(ParimeManagementConfigurationView, "onAfterRender", this, 3)([pRenderable, pRenderDestinationAddress, pRecord, pContent]);
-          }
-        }, {
-          key: "escapeHTML",
-          value: function escapeHTML(pString) {
-            if (typeof pString !== 'string') {
-              return String(pString);
-            }
-            return pString.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-          }
-        }]);
-      }(libPictView);
-      module.exports = ParimeManagementConfigurationView;
-      module.exports.default_configuration = _ViewConfiguration;
-    }, {
-      "pict-view": 10
-    }],
-    16: [function (require, module, exports) {
-      var libPictView = require('pict-view');
-      var _ViewConfiguration = {
-        ViewIdentifier: "ParimeManagement-Dashboard",
-        DefaultRenderable: "ParimeManagement-Dashboard-Content",
-        DefaultDestinationAddress: "#ParimeManagement-Content-Container",
-        AutoRender: false,
-        CSS: /*css*/"\n\t\t.parime-dashboard {\n\t\t\tpadding: 2em;\n\t\t\tmax-width: 1200px;\n\t\t\tmargin: 0 auto;\n\t\t}\n\t\t.parime-dashboard-header {\n\t\t\tmargin: 0 0 1.5em 0;\n\t\t\tpadding-bottom: 1em;\n\t\t\tborder-bottom: 1px solid #DDD6CA;\n\t\t}\n\t\t.parime-dashboard-header h1 {\n\t\t\tmargin: 0 0 0.25em 0;\n\t\t\tfont-size: 1.75em;\n\t\t\tfont-weight: 400;\n\t\t\tcolor: #3D3229;\n\t\t}\n\t\t.parime-dashboard-header p {\n\t\t\tmargin: 0;\n\t\t\tcolor: #7A7568;\n\t\t\tfont-size: 1em;\n\t\t}\n\t\t.parime-dashboard-cards {\n\t\t\tdisplay: grid;\n\t\t\tgrid-template-columns: repeat(auto-fill, minmax(280px, 1fr));\n\t\t\tgap: 1.25em;\n\t\t\tmargin-top: 1.5em;\n\t\t}\n\t\t.parime-card {\n\t\t\tbackground: #fff;\n\t\t\tborder: 1px solid #DDD6CA;\n\t\t\tborder-radius: 6px;\n\t\t\tpadding: 1.5em;\n\t\t\ttransition: box-shadow 0.2s, border-color 0.2s;\n\t\t}\n\t\t.parime-card:hover {\n\t\t\tbox-shadow: 0 4px 12px rgba(61, 50, 41, 0.08);\n\t\t\tborder-color: #B5AA9A;\n\t\t}\n\t\t.parime-card-icon {\n\t\t\tfont-size: 1.75em;\n\t\t\tmargin-bottom: 0.5em;\n\t\t}\n\t\t.parime-card h3 {\n\t\t\tmargin: 0 0 0.5em 0;\n\t\t\tfont-size: 1.1em;\n\t\t\tcolor: #3D3229;\n\t\t}\n\t\t.parime-card p {\n\t\t\tmargin: 0;\n\t\t\tcolor: #7A7568;\n\t\t\tfont-size: 0.9em;\n\t\t\tline-height: 1.5;\n\t\t}\n\t\t.parime-card-value {\n\t\t\tfont-size: 1.75em;\n\t\t\tfont-weight: 600;\n\t\t\tcolor: #2E7D74;\n\t\t\tmargin: 0.25em 0;\n\t\t}\n\t\t.parime-card-label {\n\t\t\tfont-size: 0.8em;\n\t\t\tcolor: #8A7F72;\n\t\t\ttext-transform: uppercase;\n\t\t\tletter-spacing: 0.05em;\n\t\t}\n\t",
-        Templates: [{
-          Hash: "ParimeManagement-Dashboard-Template",
-          Template: /*html*/"\n<div class=\"parime-dashboard\">\n\t<div class=\"parime-dashboard-header\">\n\t\t<h1>Dashboard</h1>\n\t\t<p>Overview of your Parime data lake server.</p>\n\t</div>\n\t<div class=\"parime-dashboard-cards\" id=\"ParimeManagement-Dashboard-Cards\">\n\t\t<div class=\"parime-card\">\n\t\t\t<div class=\"parime-card-icon\">&#9881;</div>\n\t\t\t<h3>Server Status</h3>\n\t\t\t<div id=\"ParimeManagement-Dashboard-ServerStatus\">\n\t\t\t\t<p>Loading...</p>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"parime-card\">\n\t\t\t<div class=\"parime-card-icon\">&#128203;</div>\n\t\t\t<h3>Record Lakes</h3>\n\t\t\t<div id=\"ParimeManagement-Dashboard-RecordLakes\">\n\t\t\t\t<p>Loading...</p>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"parime-card\">\n\t\t\t<div class=\"parime-card-icon\">&#128190;</div>\n\t\t\t<h3>Binary Lakes</h3>\n\t\t\t<div id=\"ParimeManagement-Dashboard-BinaryLakes\">\n\t\t\t\t<p>Loading...</p>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"parime-card\">\n\t\t\t<div class=\"parime-card-icon\">&#128451;</div>\n\t\t\t<h3>Combined Lakes</h3>\n\t\t\t<div id=\"ParimeManagement-Dashboard-CombinedLakes\">\n\t\t\t\t<p>Loading...</p>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"parime-card\">\n\t\t\t<div class=\"parime-card-icon\">&#128268;</div>\n\t\t\t<h3>WebSocket</h3>\n\t\t\t<div id=\"ParimeManagement-Dashboard-WebSocket\">\n\t\t\t\t<p class=\"parime-card-label\">Endpoint</p>\n\t\t\t\t<p>/1.0/WebSocket/Lake</p>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>\n"
-        }],
-        Renderables: [{
-          RenderableHash: "ParimeManagement-Dashboard-Content",
-          TemplateHash: "ParimeManagement-Dashboard-Template",
-          DestinationAddress: "#ParimeManagement-Content-Container",
-          RenderMethod: "replace"
-        }]
-      };
-      var ParimeManagementDashboardView = /*#__PURE__*/function (_libPictView3) {
-        function ParimeManagementDashboardView(pFable, pOptions, pServiceHash) {
-          _classCallCheck(this, ParimeManagementDashboardView);
-          return _callSuper(this, ParimeManagementDashboardView, [pFable, pOptions, pServiceHash]);
-        }
-        _inherits(ParimeManagementDashboardView, _libPictView3);
-        return _createClass(ParimeManagementDashboardView, [{
-          key: "onAfterRender",
-          value: function onAfterRender(pRenderable, pRenderDestinationAddress, pRecord, pContent) {
-            var _this27 = this;
-            // Fetch server info and update the dashboard cards
-            this.pict.PictApplication.refreshServerInfo(function () {
-              var tmpInfo = _this27.pict.AppData.ParimeManagement.ServerInfo;
-              var tmpServerHTML = '';
-              tmpServerHTML += "<p class=\"parime-card-label\">Product</p>";
-              tmpServerHTML += "<p>".concat(tmpInfo.Product || 'Parime', " v").concat(tmpInfo.Version || '?', "</p>");
-              tmpServerHTML += "<p class=\"parime-card-label\">Port</p>";
-              tmpServerHTML += "<p>".concat(tmpInfo.Port || '?', "</p>");
-              if (tmpInfo.Uptime) {
-                tmpServerHTML += "<p class=\"parime-card-label\">Uptime</p>";
-                tmpServerHTML += "<p>".concat(tmpInfo.Uptime, "</p>");
-              }
-              _this27.pict.ContentAssignment.assignContent('#ParimeManagement-Dashboard-ServerStatus', tmpServerHTML);
-            });
-
-            // Fetch lake summary and update the lake cards
-            this.pict.PictApplication.refreshLakesSummary(function () {
-              var tmpLakes = _this27.pict.AppData.ParimeManagement.Lakes;
-
-              // Record Lakes
-              var tmpRecordLakes = tmpLakes.Record || [];
-              var tmpRecordHTML = "<div class=\"parime-card-value\">".concat(tmpRecordLakes.length, "</div>");
-              tmpRecordHTML += "<p class=\"parime-card-label\">Categories</p>";
-              if (tmpRecordLakes.length > 0) {
-                tmpRecordHTML += "<p>".concat(tmpRecordLakes.join(', '), "</p>");
-              }
-              _this27.pict.ContentAssignment.assignContent('#ParimeManagement-Dashboard-RecordLakes', tmpRecordHTML);
-
-              // Binary Lakes
-              var tmpBinaryLakes = tmpLakes.Binary || [];
-              var tmpBinaryHTML = "<div class=\"parime-card-value\">".concat(tmpBinaryLakes.length, "</div>");
-              tmpBinaryHTML += "<p class=\"parime-card-label\">Categories</p>";
-              if (tmpBinaryLakes.length > 0) {
-                tmpBinaryHTML += "<p>".concat(tmpBinaryLakes.join(', '), "</p>");
-              }
-              _this27.pict.ContentAssignment.assignContent('#ParimeManagement-Dashboard-BinaryLakes', tmpBinaryHTML);
-
-              // Combined Lakes
-              var tmpCombinedLakes = tmpLakes.Combined || [];
-              var tmpCombinedHTML = "<div class=\"parime-card-value\">".concat(tmpCombinedLakes.length, "</div>");
-              tmpCombinedHTML += "<p class=\"parime-card-label\">Categories</p>";
-              if (tmpCombinedLakes.length > 0) {
-                tmpCombinedHTML += "<p>".concat(tmpCombinedLakes.join(', '), "</p>");
-              }
-              _this27.pict.ContentAssignment.assignContent('#ParimeManagement-Dashboard-CombinedLakes', tmpCombinedHTML);
-            });
-            return _superPropGet(ParimeManagementDashboardView, "onAfterRender", this, 3)([pRenderable, pRenderDestinationAddress, pRecord, pContent]);
-          }
-        }]);
-      }(libPictView);
-      module.exports = ParimeManagementDashboardView;
-      module.exports.default_configuration = _ViewConfiguration;
-    }, {
-      "pict-view": 10
-    }],
-    17: [function (require, module, exports) {
-      var libPictView = require('pict-view');
-      var _ViewConfiguration = {
-        ViewIdentifier: "ParimeManagement-Lakes",
-        DefaultRenderable: "ParimeManagement-Lakes-Content",
-        DefaultDestinationAddress: "#ParimeManagement-Content-Container",
-        AutoRender: false,
-        CSS: /*css*/"\n\t\t.parime-lakes {\n\t\t\tpadding: 2em;\n\t\t\tmax-width: 1200px;\n\t\t\tmargin: 0 auto;\n\t\t}\n\t\t.parime-lakes-header {\n\t\t\tmargin: 0 0 1.5em 0;\n\t\t\tpadding-bottom: 1em;\n\t\t\tborder-bottom: 1px solid #DDD6CA;\n\t\t}\n\t\t.parime-lakes-header h1 {\n\t\t\tmargin: 0 0 0.25em 0;\n\t\t\tfont-size: 1.75em;\n\t\t\tfont-weight: 400;\n\t\t\tcolor: #3D3229;\n\t\t}\n\t\t.parime-lakes-header p {\n\t\t\tmargin: 0;\n\t\t\tcolor: #7A7568;\n\t\t\tfont-size: 1em;\n\t\t}\n\t\t.parime-lakes-tabs {\n\t\t\tdisplay: flex;\n\t\t\tgap: 0;\n\t\t\tborder-bottom: 2px solid #DDD6CA;\n\t\t\tmargin-bottom: 1.5em;\n\t\t}\n\t\t.parime-lakes-tab {\n\t\t\tpadding: 0.6em 1.25em;\n\t\t\tcursor: pointer;\n\t\t\tcolor: #7A7568;\n\t\t\tfont-size: 0.95em;\n\t\t\tfont-weight: 500;\n\t\t\tborder-bottom: 2px solid transparent;\n\t\t\tmargin-bottom: -2px;\n\t\t\ttransition: color 0.15s, border-color 0.15s;\n\t\t\tbackground: none;\n\t\t\tborder-top: none;\n\t\t\tborder-left: none;\n\t\t\tborder-right: none;\n\t\t}\n\t\t.parime-lakes-tab:hover {\n\t\t\tcolor: #3D3229;\n\t\t}\n\t\t.parime-lakes-tab.active {\n\t\t\tcolor: #2E7D74;\n\t\t\tborder-bottom-color: #2E7D74;\n\t\t}\n\t\t.parime-lakes-body {\n\t\t\tdisplay: flex;\n\t\t\tgap: 1.5em;\n\t\t\tmin-height: 400px;\n\t\t}\n\t\t.parime-lakes-sidebar {\n\t\t\twidth: 260px;\n\t\t\tflex-shrink: 0;\n\t\t}\n\t\t.parime-lakes-main {\n\t\t\tflex: 1;\n\t\t\tmin-width: 0;\n\t\t}\n\t\t.parime-lakes-list {\n\t\t\tbackground: #fff;\n\t\t\tborder: 1px solid #DDD6CA;\n\t\t\tborder-radius: 6px;\n\t\t\toverflow: hidden;\n\t\t}\n\t\t.parime-lakes-list-header {\n\t\t\tpadding: 0.75em 1em;\n\t\t\tbackground: #F0ECE4;\n\t\t\tcolor: #5E5549;\n\t\t\tfont-size: 0.8em;\n\t\t\tfont-weight: 600;\n\t\t\ttext-transform: uppercase;\n\t\t\tletter-spacing: 0.05em;\n\t\t\tborder-bottom: 1px solid #DDD6CA;\n\t\t}\n\t\t.parime-lakes-list-item {\n\t\t\tpadding: 0.6em 1em;\n\t\t\tcursor: pointer;\n\t\t\tborder-bottom: 1px solid #EAE3D8;\n\t\t\tcolor: #423D37;\n\t\t\tfont-size: 0.9em;\n\t\t\ttransition: background-color 0.1s;\n\t\t}\n\t\t.parime-lakes-list-item:hover {\n\t\t\tbackground-color: #F7F5F0;\n\t\t}\n\t\t.parime-lakes-list-item.active {\n\t\t\tbackground-color: #E0EDEB;\n\t\t\tcolor: #2E7D74;\n\t\t\tfont-weight: 500;\n\t\t}\n\t\t.parime-lakes-list-item:last-child {\n\t\t\tborder-bottom: none;\n\t\t}\n\t\t.parime-lakes-list-empty {\n\t\t\tpadding: 1.5em 1em;\n\t\t\tcolor: #8A7F72;\n\t\t\tfont-size: 0.9em;\n\t\t\ttext-align: center;\n\t\t}\n\t\t.parime-lakes-detail {\n\t\t\tbackground: #fff;\n\t\t\tborder: 1px solid #DDD6CA;\n\t\t\tborder-radius: 6px;\n\t\t\tpadding: 1.5em;\n\t\t\tmin-height: 300px;\n\t\t}\n\t\t.parime-lakes-detail-header {\n\t\t\tfont-size: 0.8em;\n\t\t\tfont-weight: 600;\n\t\t\ttext-transform: uppercase;\n\t\t\tletter-spacing: 0.05em;\n\t\t\tcolor: #5E5549;\n\t\t\tmargin-bottom: 1em;\n\t\t\tpadding-bottom: 0.5em;\n\t\t\tborder-bottom: 1px solid #EAE3D8;\n\t\t}\n\t\t.parime-lakes-json {\n\t\t\tbackground: #F0ECE4;\n\t\t\tborder: 1px solid #DDD6CA;\n\t\t\tborder-radius: 4px;\n\t\t\tpadding: 1em;\n\t\t\tfont-family: \"SF Mono\", \"Fira Code\", \"Fira Mono\", Menlo, Consolas, monospace;\n\t\t\tfont-size: 0.85em;\n\t\t\tcolor: #423D37;\n\t\t\twhite-space: pre-wrap;\n\t\t\tword-break: break-word;\n\t\t\toverflow-x: auto;\n\t\t\tmax-height: 500px;\n\t\t\toverflow-y: auto;\n\t\t}\n\t\t.parime-lakes-placeholder {\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tjustify-content: center;\n\t\t\tmin-height: 300px;\n\t\t\tcolor: #8A7F72;\n\t\t\tfont-size: 0.95em;\n\t\t}\n\t",
-        Templates: [{
-          Hash: "ParimeManagement-Lakes-Template",
-          Template: /*html*/"\n<div class=\"parime-lakes\">\n\t<div class=\"parime-lakes-header\">\n\t\t<h1>Lakes</h1>\n\t\t<p>Browse and inspect record, binary and combined lake data.</p>\n\t</div>\n\t<div class=\"parime-lakes-tabs\" id=\"ParimeManagement-Lakes-Tabs\"></div>\n\t<div class=\"parime-lakes-body\">\n\t\t<div class=\"parime-lakes-sidebar\">\n\t\t\t<div class=\"parime-lakes-list\" id=\"ParimeManagement-Lakes-CategoryList\">\n\t\t\t\t<div class=\"parime-lakes-list-header\">Categories</div>\n\t\t\t\t<div class=\"parime-lakes-list-empty\">Loading...</div>\n\t\t\t</div>\n\t\t\t<div class=\"parime-lakes-list\" id=\"ParimeManagement-Lakes-KeyList\" style=\"margin-top: 1em; display: none;\">\n\t\t\t\t<div class=\"parime-lakes-list-header\">Keys</div>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"parime-lakes-main\">\n\t\t\t<div class=\"parime-lakes-detail\" id=\"ParimeManagement-Lakes-Detail\">\n\t\t\t\t<div class=\"parime-lakes-placeholder\">Select a category and key to view data.</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>\n"
-        }],
-        Renderables: [{
-          RenderableHash: "ParimeManagement-Lakes-Content",
-          TemplateHash: "ParimeManagement-Lakes-Template",
-          DestinationAddress: "#ParimeManagement-Content-Container",
-          RenderMethod: "replace"
-        }]
-      };
-      var ParimeManagementLakesView = /*#__PURE__*/function (_libPictView4) {
-        function ParimeManagementLakesView(pFable, pOptions, pServiceHash) {
-          _classCallCheck(this, ParimeManagementLakesView);
-          return _callSuper(this, ParimeManagementLakesView, [pFable, pOptions, pServiceHash]);
-        }
-        _inherits(ParimeManagementLakesView, _libPictView4);
-        return _createClass(ParimeManagementLakesView, [{
-          key: "onAfterRender",
-          value: function onAfterRender(pRenderable, pRenderDestinationAddress, pRecord, pContent) {
-            var _this28 = this;
-            var tmpBrowser = this.pict.AppData.ParimeManagement.LakeBrowser;
-            var tmpPictRef = this.pict.getClientSideReferenceForPict();
-
-            // Render tabs
-            var tmpTabs = ['Record', 'Binary', 'Combined'];
-            var tmpTabsHTML = '';
-            for (var i = 0; i < tmpTabs.length; i++) {
-              var tmpTab = tmpTabs[i];
-              var tmpActiveClass = tmpBrowser.ActiveTab === tmpTab ? ' active' : '';
-              tmpTabsHTML += "<button class=\"parime-lakes-tab".concat(tmpActiveClass, "\" onclick=\"").concat(tmpPictRef, ".views['ParimeManagement-Lakes'].switchTab('").concat(tmpTab, "')\">").concat(tmpTab, "</button>");
-            }
-            this.pict.ContentAssignment.assignContent('#ParimeManagement-Lakes-Tabs', tmpTabsHTML);
-
-            // Fetch lake categories
-            this.pict.PictApplication.refreshLakesSummary(function () {
-              _this28.renderCategoryList();
-            });
-            return _superPropGet(ParimeManagementLakesView, "onAfterRender", this, 3)([pRenderable, pRenderDestinationAddress, pRecord, pContent]);
-          }
-        }, {
-          key: "switchTab",
-          value: function switchTab(pTab) {
-            var tmpBrowser = this.pict.AppData.ParimeManagement.LakeBrowser;
-            tmpBrowser.ActiveTab = pTab;
-            tmpBrowser.SelectedCategory = '';
-            tmpBrowser.SelectedKey = '';
-            tmpBrowser.CategoryKeys = [];
-            tmpBrowser.KeyData = null;
-            this.render();
-          }
-        }, {
-          key: "renderCategoryList",
-          value: function renderCategoryList() {
-            var tmpBrowser = this.pict.AppData.ParimeManagement.LakeBrowser;
-            var tmpLakes = this.pict.AppData.ParimeManagement.Lakes;
-            var tmpCategories = tmpLakes[tmpBrowser.ActiveTab] || [];
-            var tmpPictRef = this.pict.getClientSideReferenceForPict();
-            var tmpHTML = '<div class="parime-lakes-list-header">Categories</div>';
-            if (tmpCategories.length === 0) {
-              tmpHTML += '<div class="parime-lakes-list-empty">No categories found.</div>';
-            } else {
-              for (var i = 0; i < tmpCategories.length; i++) {
-                var tmpCategory = tmpCategories[i];
-                var tmpActiveClass = tmpBrowser.SelectedCategory === tmpCategory ? ' active' : '';
-                tmpHTML += "<div class=\"parime-lakes-list-item".concat(tmpActiveClass, "\" onclick=\"").concat(tmpPictRef, ".views['ParimeManagement-Lakes'].selectCategory('").concat(tmpCategory, "')\">").concat(tmpCategory, "</div>");
-              }
-            }
-            this.pict.ContentAssignment.assignContent('#ParimeManagement-Lakes-CategoryList', tmpHTML);
-
-            // Hide key list and detail when no category selected
-            var tmpKeyListEl = document.getElementById('ParimeManagement-Lakes-KeyList');
-            if (tmpKeyListEl) {
-              tmpKeyListEl.style.display = tmpBrowser.SelectedCategory ? 'block' : 'none';
-            }
-          }
-        }, {
-          key: "selectCategory",
-          value: function selectCategory(pCategory) {
-            var _this29 = this;
-            var tmpBrowser = this.pict.AppData.ParimeManagement.LakeBrowser;
-            tmpBrowser.SelectedCategory = pCategory;
-            tmpBrowser.SelectedKey = '';
-            tmpBrowser.KeyData = null;
-
-            // Update the category list to show active state
-            this.renderCategoryList();
-
-            // Show loading in key list
-            var tmpKeyListEl = document.getElementById('ParimeManagement-Lakes-KeyList');
-            if (tmpKeyListEl) {
-              tmpKeyListEl.style.display = 'block';
-            }
-            this.pict.ContentAssignment.assignContent('#ParimeManagement-Lakes-KeyList', '<div class="parime-lakes-list-header">Keys</div><div class="parime-lakes-list-empty">Loading...</div>');
-
-            // Clear detail
-            this.pict.ContentAssignment.assignContent('#ParimeManagement-Lakes-Detail', '<div class="parime-lakes-placeholder">Select a key to view data.</div>');
-
-            // Fetch keys for this category
-            this.pict.PictApplication.fetchCategoryKeys(tmpBrowser.ActiveTab, pCategory, function (pKeys) {
-              tmpBrowser.CategoryKeys = pKeys;
-              _this29.renderKeyList();
-            });
-          }
-        }, {
-          key: "renderKeyList",
-          value: function renderKeyList() {
-            var tmpBrowser = this.pict.AppData.ParimeManagement.LakeBrowser;
-            var tmpKeys = tmpBrowser.CategoryKeys || [];
-            var tmpPictRef = this.pict.getClientSideReferenceForPict();
-            var tmpHTML = '<div class="parime-lakes-list-header">Keys</div>';
-            if (tmpKeys.length === 0) {
-              tmpHTML += '<div class="parime-lakes-list-empty">No keys found.</div>';
-            } else {
-              for (var i = 0; i < tmpKeys.length; i++) {
-                var tmpKey = tmpKeys[i];
-                // Combined lake keys are objects with a Key property
-                var tmpKeyDisplay = _typeof(tmpKey) === 'object' && tmpKey.Key ? tmpKey.Key : tmpKey;
-                var tmpActiveClass = tmpBrowser.SelectedKey === tmpKeyDisplay ? ' active' : '';
-                var tmpEscapedKey = tmpKeyDisplay.replace(/'/g, "\\'");
-                tmpHTML += "<div class=\"parime-lakes-list-item".concat(tmpActiveClass, "\" onclick=\"").concat(tmpPictRef, ".views['ParimeManagement-Lakes'].selectKey('").concat(tmpEscapedKey, "')\">").concat(tmpKeyDisplay, "</div>");
-              }
-            }
-            this.pict.ContentAssignment.assignContent('#ParimeManagement-Lakes-KeyList', tmpHTML);
-          }
-        }, {
-          key: "selectKey",
-          value: function selectKey(pKey) {
-            var _this30 = this;
-            var tmpBrowser = this.pict.AppData.ParimeManagement.LakeBrowser;
-            tmpBrowser.SelectedKey = pKey;
-            this.renderKeyList();
-
-            // Show loading in detail
-            this.pict.ContentAssignment.assignContent('#ParimeManagement-Lakes-Detail', '<div class="parime-lakes-detail-header">Loading...</div>');
-            if (tmpBrowser.ActiveTab === 'Record') {
-              this.pict.PictApplication.fetchRecord(tmpBrowser.SelectedCategory, pKey, function (pData) {
-                tmpBrowser.KeyData = pData;
-                _this30.renderDetail();
-              });
-            } else if (tmpBrowser.ActiveTab === 'Binary') {
-              // For binary, fetch stat info
-              var tmpXHR = new XMLHttpRequest();
-              tmpXHR.open('GET', "/1.0/Binary/".concat(tmpBrowser.SelectedCategory, "/").concat(pKey, "/Stat"), true);
-              tmpXHR.onreadystatechange = function () {
-                if (tmpXHR.readyState === 4) {
-                  if (tmpXHR.status === 200) {
-                    try {
-                      tmpBrowser.KeyData = JSON.parse(tmpXHR.responseText);
-                    } catch (pError) {
-                      tmpBrowser.KeyData = {
-                        Error: 'Failed to parse response.'
-                      };
-                    }
-                  } else {
-                    tmpBrowser.KeyData = {
-                      Error: "HTTP ".concat(tmpXHR.status)
-                    };
-                  }
-                  _this30.renderDetail();
-                }
-              };
-              tmpXHR.send();
-            } else if (tmpBrowser.ActiveTab === 'Combined') {
-              // For combined, fetch the record sub-endpoint
-              this.pict.PictApplication.fetchRecord(tmpBrowser.SelectedCategory, "".concat(pKey), function (pData) {
-                tmpBrowser.KeyData = pData;
-                _this30.renderDetail();
-              });
-            }
-          }
-        }, {
-          key: "renderDetail",
-          value: function renderDetail() {
-            var tmpBrowser = this.pict.AppData.ParimeManagement.LakeBrowser;
-            var tmpData = tmpBrowser.KeyData;
-            var tmpHTML = '';
-            tmpHTML += "<div class=\"parime-lakes-detail-header\">".concat(tmpBrowser.ActiveTab, " / ").concat(tmpBrowser.SelectedCategory, " / ").concat(tmpBrowser.SelectedKey, "</div>");
-            if (tmpData) {
-              tmpHTML += "<div class=\"parime-lakes-json\">".concat(JSON.stringify(tmpData, null, 2), "</div>");
-            } else {
-              tmpHTML += '<p style="color: #8A7F72;">No data available.</p>';
-            }
-            this.pict.ContentAssignment.assignContent('#ParimeManagement-Lakes-Detail', tmpHTML);
-          }
-        }]);
-      }(libPictView);
-      module.exports = ParimeManagementLakesView;
-      module.exports.default_configuration = _ViewConfiguration;
-    }, {
-      "pict-view": 10
-    }],
-    18: [function (require, module, exports) {
-      var libPictView = require('pict-view');
-      var _ViewConfiguration = {
-        ViewIdentifier: "ParimeManagement-Layout",
-        DefaultRenderable: "ParimeManagement-Layout-Shell",
-        DefaultDestinationAddress: "#ParimeManagement-Application-Container",
-        AutoRender: false,
-        CSS: /*css*/"\n\t\t#ParimeManagement-Application-Container {\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\tmin-height: 100vh;\n\t\t}\n\t\t#ParimeManagement-TopBar-Container {\n\t\t\tflex-shrink: 0;\n\t\t}\n\t\t#ParimeManagement-Content-Container {\n\t\t\tflex: 1;\n\t\t}\n\t\t#ParimeManagement-BottomBar-Container {\n\t\t\tflex-shrink: 0;\n\t\t}\n\t",
-        Templates: [{
-          Hash: "ParimeManagement-Layout-Shell-Template",
-          Template: /*html*/"\n<div id=\"ParimeManagement-TopBar-Container\"></div>\n<div id=\"ParimeManagement-Content-Container\"></div>\n<div id=\"ParimeManagement-BottomBar-Container\"></div>\n"
-        }],
-        Renderables: [{
-          RenderableHash: "ParimeManagement-Layout-Shell",
-          TemplateHash: "ParimeManagement-Layout-Shell-Template",
-          DestinationAddress: "#ParimeManagement-Application-Container",
-          RenderMethod: "replace"
-        }]
-      };
-      var ParimeManagementLayoutView = /*#__PURE__*/function (_libPictView5) {
-        function ParimeManagementLayoutView(pFable, pOptions, pServiceHash) {
-          _classCallCheck(this, ParimeManagementLayoutView);
-          return _callSuper(this, ParimeManagementLayoutView, [pFable, pOptions, pServiceHash]);
-        }
-        _inherits(ParimeManagementLayoutView, _libPictView5);
-        return _createClass(ParimeManagementLayoutView, [{
-          key: "onAfterRender",
-          value: function onAfterRender(pRenderable, pRenderDestinationAddress, pRecord, pContent) {
-            // After the layout shell is rendered, render the child views into their containers
-            this.pict.views['ParimeManagement-TopBar'].render();
-            this.pict.views['ParimeManagement-BottomBar'].render();
-
-            // Render initial content -- the dashboard by default
-            this.pict.views['ParimeManagement-Dashboard'].render();
-
-            // Inject all view CSS into the PICT-CSS style element
-            this.pict.CSSMap.injectCSS();
-
-            // Now resolve the router so it picks up the current hash URL
-            if (this.pict.providers.PictRouter) {
-              this.pict.providers.PictRouter.resolve();
-            }
-            return _superPropGet(ParimeManagementLayoutView, "onAfterRender", this, 3)([pRenderable, pRenderDestinationAddress, pRecord, pContent]);
-          }
-        }]);
-      }(libPictView);
-      module.exports = ParimeManagementLayoutView;
-      module.exports.default_configuration = _ViewConfiguration;
-    }, {
-      "pict-view": 10
-    }],
-    19: [function (require, module, exports) {
-      var libPictView = require('pict-view');
-      var _ViewConfiguration = {
-        ViewIdentifier: "ParimeManagement-Login",
-        DefaultRenderable: "ParimeManagement-Login-Content",
-        DefaultDestinationAddress: "#ParimeManagement-Content-Container",
-        AutoRender: false,
-        CSS: /*css*/"\n\t\t.parime-login {\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tjustify-content: center;\n\t\t\tmin-height: calc(100vh - 56px - 48px);\n\t\t\tpadding: 2em;\n\t\t}\n\t\t.parime-login-card {\n\t\t\tbackground: #fff;\n\t\t\tborder: 1px solid #DDD6CA;\n\t\t\tborder-radius: 8px;\n\t\t\tpadding: 2.5em;\n\t\t\twidth: 100%;\n\t\t\tmax-width: 400px;\n\t\t\tbox-shadow: 0 2px 8px rgba(61, 50, 41, 0.08);\n\t\t}\n\t\t.parime-login-card h2 {\n\t\t\tmargin: 0 0 0.25em 0;\n\t\t\tfont-size: 1.5em;\n\t\t\tfont-weight: 600;\n\t\t\tcolor: #3D3229;\n\t\t}\n\t\t.parime-login-card p {\n\t\t\tmargin: 0 0 1.5em 0;\n\t\t\tcolor: #7A7568;\n\t\t\tfont-size: 0.9em;\n\t\t}\n\t\t.parime-login-field {\n\t\t\tmargin-bottom: 1em;\n\t\t}\n\t\t.parime-login-field label {\n\t\t\tdisplay: block;\n\t\t\tmargin-bottom: 0.35em;\n\t\t\tfont-size: 0.85em;\n\t\t\tfont-weight: 500;\n\t\t\tcolor: #5E5549;\n\t\t}\n\t\t.parime-login-field input {\n\t\t\twidth: 100%;\n\t\t\tpadding: 0.6em 0.75em;\n\t\t\tborder: 1px solid #DDD6CA;\n\t\t\tborder-radius: 4px;\n\t\t\tfont-size: 0.95em;\n\t\t\tcolor: #423D37;\n\t\t\tbackground: #fff;\n\t\t\ttransition: border-color 0.15s;\n\t\t}\n\t\t.parime-login-field input:focus {\n\t\t\toutline: none;\n\t\t\tborder-color: #2E7D74;\n\t\t\tbox-shadow: 0 0 0 2px #E0EDEB;\n\t\t}\n\t\t.parime-login-button {\n\t\t\twidth: 100%;\n\t\t\tpadding: 0.7em;\n\t\t\tbackground-color: #2E7D74;\n\t\t\tcolor: #fff;\n\t\t\tborder: none;\n\t\t\tborder-radius: 4px;\n\t\t\tfont-size: 1em;\n\t\t\tfont-weight: 500;\n\t\t\tcursor: pointer;\n\t\t\ttransition: background-color 0.15s;\n\t\t\tmargin-top: 0.5em;\n\t\t}\n\t\t.parime-login-button:hover {\n\t\t\tbackground-color: #256861;\n\t\t}\n\t",
-        Templates: [{
-          Hash: "ParimeManagement-Login-Template",
-          Template: /*html*/"\n<div class=\"parime-login\">\n\t<div class=\"parime-login-card\">\n\t\t<h2>Parime Management</h2>\n\t\t<p>Sign in to manage your data lake.</p>\n\t\t<div class=\"parime-login-field\">\n\t\t\t<label for=\"parime-login-username\">Username</label>\n\t\t\t<input type=\"text\" id=\"parime-login-username\" placeholder=\"Enter username\" />\n\t\t</div>\n\t\t<div class=\"parime-login-field\">\n\t\t\t<label for=\"parime-login-password\">Password</label>\n\t\t\t<input type=\"password\" id=\"parime-login-password\" placeholder=\"Enter password\" />\n\t\t</div>\n\t\t<button class=\"parime-login-button\" id=\"parime-login-submit\">Sign In</button>\n\t</div>\n</div>\n"
-        }],
-        Renderables: [{
-          RenderableHash: "ParimeManagement-Login-Content",
-          TemplateHash: "ParimeManagement-Login-Template",
-          DestinationAddress: "#ParimeManagement-Content-Container",
-          RenderMethod: "replace"
-        }]
-      };
-      var ParimeManagementLoginView = /*#__PURE__*/function (_libPictView6) {
-        function ParimeManagementLoginView(pFable, pOptions, pServiceHash) {
-          _classCallCheck(this, ParimeManagementLoginView);
-          return _callSuper(this, ParimeManagementLoginView, [pFable, pOptions, pServiceHash]);
-        }
-        _inherits(ParimeManagementLoginView, _libPictView6);
-        return _createClass(ParimeManagementLoginView, [{
-          key: "onAfterRender",
-          value: function onAfterRender(pRenderable, pRenderDestinationAddress, pRecord, pContent) {
-            var _this31 = this;
-            // Wire up the login button click handler
-            var tmpLoginButton = document.getElementById('parime-login-submit');
-            if (tmpLoginButton) {
-              tmpLoginButton.addEventListener('click', function () {
-                var tmpUserName = document.getElementById('parime-login-username').value;
-                var tmpPassword = document.getElementById('parime-login-password').value;
-                _this31.pict.PictApplication.attemptLogin(tmpUserName, tmpPassword);
-              });
-            }
-
-            // Wire up Enter key on password field
-            var tmpPasswordField = document.getElementById('parime-login-password');
-            if (tmpPasswordField) {
-              tmpPasswordField.addEventListener('keypress', function (pEvent) {
-                if (pEvent.key === 'Enter') {
-                  var tmpUserName = document.getElementById('parime-login-username').value;
-                  var tmpPassword = document.getElementById('parime-login-password').value;
-                  _this31.pict.PictApplication.attemptLogin(tmpUserName, tmpPassword);
-                }
-              });
-            }
-            return _superPropGet(ParimeManagementLoginView, "onAfterRender", this, 3)([pRenderable, pRenderDestinationAddress, pRecord, pContent]);
-          }
-        }]);
-      }(libPictView);
-      module.exports = ParimeManagementLoginView;
-      module.exports.default_configuration = _ViewConfiguration;
-    }, {
-      "pict-view": 10
-    }],
-    20: [function (require, module, exports) {
-      var libPictView = require('pict-view');
-      var _ViewConfiguration = {
-        ViewIdentifier: "ParimeManagement-TopBar",
-        DefaultRenderable: "ParimeManagement-TopBar-Content",
-        DefaultDestinationAddress: "#ParimeManagement-TopBar-Container",
-        AutoRender: false,
-        CSS: /*css*/"\n\t\t.parime-topbar {\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tjustify-content: space-between;\n\t\t\tbackground-color: var(--theme-color-text-primary, #3D3229);\n\t\t\tcolor: #F5F0E8;\n\t\t\tpadding: 0 1.5em;\n\t\t\theight: 56px;\n\t\t\tbox-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);\n\t\t\tposition: sticky;\n\t\t\ttop: 0;\n\t\t\tz-index: 100;\n\t\t}\n\t\t.parime-topbar-brand {\n\t\t\tfont-size: 1.25em;\n\t\t\tfont-weight: 600;\n\t\t\tletter-spacing: 0.02em;\n\t\t\tcolor: #2E7D74;\n\t\t\ttext-decoration: none;\n\t\t\tcursor: pointer;\n\t\t}\n\t\t.parime-topbar-brand:hover {\n\t\t\tcolor: #3A9E93;\n\t\t}\n\t\t.parime-topbar-nav {\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tgap: 0.25em;\n\t\t}\n\t\t.parime-topbar-nav a {\n\t\t\tcolor: #B5AA9A;\n\t\t\ttext-decoration: none;\n\t\t\tpadding: 0.5em 0.75em;\n\t\t\tborder-radius: 4px;\n\t\t\tfont-size: 0.9em;\n\t\t\ttransition: background-color 0.15s, color 0.15s;\n\t\t\tcursor: pointer;\n\t\t}\n\t\t.parime-topbar-nav a:hover {\n\t\t\tbackground-color: #524438;\n\t\t\tcolor: #F5F0E8;\n\t\t}\n\t\t.parime-topbar-nav a.active {\n\t\t\tbackground-color: #2E7D74;\n\t\t\tcolor: #fff;\n\t\t}\n\t\t.parime-topbar-user {\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tgap: 0.75em;\n\t\t\tfont-size: 0.9em;\n\t\t}\n\t\t.parime-topbar-user span {\n\t\t\tcolor: #8A7F72;\n\t\t}\n\t\t.parime-topbar-user a {\n\t\t\tcolor: #B5AA9A;\n\t\t\ttext-decoration: none;\n\t\t\tcursor: pointer;\n\t\t\tpadding: 0.4em 0.6em;\n\t\t\tborder-radius: 4px;\n\t\t\ttransition: background-color 0.15s, color 0.15s;\n\t\t}\n\t\t.parime-topbar-user a:hover {\n\t\t\tbackground-color: #524438;\n\t\t\tcolor: #F5F0E8;\n\t\t}\n\t",
-        Templates: [{
-          Hash: "ParimeManagement-TopBar-Template",
-          Template: /*html*/"\n<div class=\"parime-topbar\">\n\t<a class=\"parime-topbar-brand\" onclick=\"{~P~}.PictApplication.navigateTo('/Dashboard')\">Parime</a>\n\t<div class=\"parime-topbar-nav\" id=\"ParimeManagement-TopBar-Nav\"></div>\n\t<div class=\"parime-topbar-user\" id=\"ParimeManagement-TopBar-UserArea\"></div>\n</div>\n"
-        }, {
-          Hash: "ParimeManagement-TopBar-LoggedIn-Template",
-          Template: /*html*/"<span>{~D:AppData.ParimeManagement.User.DisplayName~}</span><a onclick=\"{~P~}.PictApplication.logout()\">Logout</a>"
-        }, {
-          Hash: "ParimeManagement-TopBar-LoggedOut-Template",
-          Template: /*html*/"<a onclick=\"{~P~}.PictApplication.navigateTo('/Login')\">Login</a>"
-        }],
-        Renderables: [{
-          RenderableHash: "ParimeManagement-TopBar-Content",
-          TemplateHash: "ParimeManagement-TopBar-Template",
-          DestinationAddress: "#ParimeManagement-TopBar-Container",
-          RenderMethod: "replace"
-        }]
-      };
-      var ParimeManagementTopBarView = /*#__PURE__*/function (_libPictView7) {
-        function ParimeManagementTopBarView(pFable, pOptions, pServiceHash) {
-          _classCallCheck(this, ParimeManagementTopBarView);
-          return _callSuper(this, ParimeManagementTopBarView, [pFable, pOptions, pServiceHash]);
-        }
-        _inherits(ParimeManagementTopBarView, _libPictView7);
-        return _createClass(ParimeManagementTopBarView, [{
-          key: "onAfterRender",
-          value: function onAfterRender(pRenderable, pRenderDestinationAddress, pRecord, pContent) {
-            var tmpAppData = this.pict.AppData.ParimeManagement;
-            var tmpCurrentRoute = tmpAppData && tmpAppData.CurrentRoute || '';
-
-            // Build navigation links with active state
-            var tmpNavLinks = [{
-              Route: '/Dashboard',
-              Label: 'Dashboard',
-              View: 'ParimeManagement-Dashboard'
-            }, {
-              Route: '/Lakes',
-              Label: 'Lakes',
-              View: 'ParimeManagement-Lakes'
-            }, {
-              Route: '/Configuration',
-              Label: 'Configuration',
-              View: 'ParimeManagement-Configuration'
-            }];
-            var tmpNavHTML = '';
-            for (var i = 0; i < tmpNavLinks.length; i++) {
-              var tmpLink = tmpNavLinks[i];
-              var tmpActiveClass = tmpCurrentRoute === tmpLink.View ? ' class="active"' : '';
-              tmpNavHTML += "<a".concat(tmpActiveClass, " onclick=\"").concat(this.pict.getClientSideReferenceForPict(), ".PictApplication.navigateTo('").concat(tmpLink.Route, "')\">").concat(tmpLink.Label, "</a>");
-            }
-            this.pict.ContentAssignment.assignContent('#ParimeManagement-TopBar-Nav', tmpNavHTML);
-
-            // Conditionally render the user area based on login state
-            var tmpUserData = tmpAppData && tmpAppData.User;
-            var tmpTemplateHash = tmpUserData && tmpUserData.LoggedIn ? 'ParimeManagement-TopBar-LoggedIn-Template' : 'ParimeManagement-TopBar-LoggedOut-Template';
-            var tmpUserAreaContent = this.pict.parseTemplateByHash(tmpTemplateHash, {}, null, this.pict);
-            this.pict.ContentAssignment.assignContent('#ParimeManagement-TopBar-UserArea', tmpUserAreaContent);
-            return _superPropGet(ParimeManagementTopBarView, "onAfterRender", this, 3)([pRenderable, pRenderDestinationAddress, pRecord, pContent]);
-          }
-        }]);
-      }(libPictView);
-      module.exports = ParimeManagementTopBarView;
-      module.exports.default_configuration = _ViewConfiguration;
-    }, {
-      "pict-view": 10
-    }]
-  }, {}, [12])(12);
-});
+"use strict";function _createForOfIteratorHelper(r,e){var t="undefined"!=typeof Symbol&&r[Symbol.iterator]||r["@@iterator"];if(!t){if(Array.isArray(r)||(t=_unsupportedIterableToArray(r))||e&&r&&"number"==typeof r.length){t&&(r=t);var _n=0,F=function F(){};return{s:F,n:function n(){return _n>=r.length?{done:!0}:{done:!1,value:r[_n++]};},e:function e(r){throw r;},f:F};}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var o,a=!0,u=!1;return{s:function s(){t=t.call(r);},n:function n(){var r=t.next();return a=r.done,r;},e:function e(r){u=!0,o=r;},f:function f(){try{a||null==t["return"]||t["return"]();}finally{if(u)throw o;}}};}function _unsupportedIterableToArray(r,a){if(r){if("string"==typeof r)return _arrayLikeToArray(r,a);var t={}.toString.call(r).slice(8,-1);return"Object"===t&&r.constructor&&(t=r.constructor.name),"Map"===t||"Set"===t?Array.from(r):"Arguments"===t||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)?_arrayLikeToArray(r,a):void 0;}}function _arrayLikeToArray(r,a){(null==a||a>r.length)&&(a=r.length);for(var e=0,n=Array(a);e<a;e++)n[e]=r[e];return n;}function _regenerator(){/*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */var e,t,r="function"==typeof Symbol?Symbol:{},n=r.iterator||"@@iterator",o=r.toStringTag||"@@toStringTag";function i(r,n,o,i){var c=n&&n.prototype instanceof Generator?n:Generator,u=Object.create(c.prototype);return _regeneratorDefine2(u,"_invoke",function(r,n,o){var i,c,u,f=0,p=o||[],y=!1,G={p:0,n:0,v:e,a:d,f:d.bind(e,4),d:function d(t,r){return i=t,c=0,u=e,G.n=r,a;}};function d(r,n){for(c=r,u=n,t=0;!y&&f&&!o&&t<p.length;t++){var o,i=p[t],d=G.p,l=i[2];r>3?(o=l===n)&&(u=i[(c=i[4])?5:(c=3,3)],i[4]=i[5]=e):i[0]<=d&&((o=r<2&&d<i[1])?(c=0,G.v=n,G.n=i[1]):d<l&&(o=r<3||i[0]>n||n>l)&&(i[4]=r,i[5]=n,G.n=l,c=0));}if(o||r>1)return a;throw y=!0,n;}return function(o,p,l){if(f>1)throw TypeError("Generator is already running");for(y&&1===p&&d(p,l),c=p,u=l;(t=c<2?e:u)||!y;){i||(c?c<3?(c>1&&(G.n=-1),d(c,u)):G.n=u:G.v=u);try{if(f=2,i){if(c||(o="next"),t=i[o]){if(!(t=t.call(i,u)))throw TypeError("iterator result is not an object");if(!t.done)return t;u=t.value,c<2&&(c=0);}else 1===c&&(t=i["return"])&&t.call(i),c<2&&(u=TypeError("The iterator does not provide a '"+o+"' method"),c=1);i=e;}else if((t=(y=G.n<0)?u:r.call(n,G))!==a)break;}catch(t){i=e,c=1,u=t;}finally{f=1;}}return{value:t,done:y};};}(r,o,i),!0),u;}var a={};function Generator(){}function GeneratorFunction(){}function GeneratorFunctionPrototype(){}t=Object.getPrototypeOf;var c=[][n]?t(t([][n]())):(_regeneratorDefine2(t={},n,function(){return this;}),t),u=GeneratorFunctionPrototype.prototype=Generator.prototype=Object.create(c);function f(e){return Object.setPrototypeOf?Object.setPrototypeOf(e,GeneratorFunctionPrototype):(e.__proto__=GeneratorFunctionPrototype,_regeneratorDefine2(e,o,"GeneratorFunction")),e.prototype=Object.create(u),e;}return GeneratorFunction.prototype=GeneratorFunctionPrototype,_regeneratorDefine2(u,"constructor",GeneratorFunctionPrototype),_regeneratorDefine2(GeneratorFunctionPrototype,"constructor",GeneratorFunction),GeneratorFunction.displayName="GeneratorFunction",_regeneratorDefine2(GeneratorFunctionPrototype,o,"GeneratorFunction"),_regeneratorDefine2(u),_regeneratorDefine2(u,o,"Generator"),_regeneratorDefine2(u,n,function(){return this;}),_regeneratorDefine2(u,"toString",function(){return"[object Generator]";}),(_regenerator=function _regenerator(){return{w:i,m:f};})();}function _regeneratorDefine2(e,r,n,t){var i=Object.defineProperty;try{i({},"",{});}catch(e){i=0;}_regeneratorDefine2=function _regeneratorDefine(e,r,n,t){function o(r,n){_regeneratorDefine2(e,r,function(e){return this._invoke(r,n,e);});}r?i?i(e,r,{value:n,enumerable:!t,configurable:!t,writable:!t}):e[r]=n:(o("next",0),o("throw",1),o("return",2));},_regeneratorDefine2(e,r,n,t);}function asyncGeneratorStep(n,t,e,r,o,a,c){try{var i=n[a](c),u=i.value;}catch(n){return void e(n);}i.done?t(u):Promise.resolve(u).then(r,o);}function _asyncToGenerator(n){return function(){var t=this,e=arguments;return new Promise(function(r,o){var a=n.apply(t,e);function _next(n){asyncGeneratorStep(a,r,o,_next,_throw,"next",n);}function _throw(n){asyncGeneratorStep(a,r,o,_next,_throw,"throw",n);}_next(void 0);});};}function _superPropGet(t,o,e,r){var p=_get(_getPrototypeOf(1&r?t.prototype:t),o,e);return 2&r&&"function"==typeof p?function(t){return p.apply(e,t);}:p;}function _get(){return _get="undefined"!=typeof Reflect&&Reflect.get?Reflect.get.bind():function(e,t,r){var p=_superPropBase(e,t);if(p){var n=Object.getOwnPropertyDescriptor(p,t);return n.get?n.get.call(arguments.length<3?e:r):n.value;}},_get.apply(null,arguments);}function _superPropBase(t,o){for(;!{}.hasOwnProperty.call(t,o)&&null!==(t=_getPrototypeOf(t)););return t;}function _callSuper(t,o,e){return o=_getPrototypeOf(o),_possibleConstructorReturn(t,_isNativeReflectConstruct()?Reflect.construct(o,e||[],_getPrototypeOf(t).constructor):o.apply(t,e));}function _possibleConstructorReturn(t,e){if(e&&("object"==_typeof(e)||"function"==typeof e))return e;if(void 0!==e)throw new TypeError("Derived constructors may only return object or undefined");return _assertThisInitialized(t);}function _assertThisInitialized(e){if(void 0===e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return e;}function _isNativeReflectConstruct(){try{var t=!Boolean.prototype.valueOf.call(Reflect.construct(Boolean,[],function(){}));}catch(t){}return(_isNativeReflectConstruct=function _isNativeReflectConstruct(){return!!t;})();}function _getPrototypeOf(t){return _getPrototypeOf=Object.setPrototypeOf?Object.getPrototypeOf.bind():function(t){return t.__proto__||Object.getPrototypeOf(t);},_getPrototypeOf(t);}function _inherits(t,e){if("function"!=typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function");t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,writable:!0,configurable:!0}}),Object.defineProperty(t,"prototype",{writable:!1}),e&&_setPrototypeOf(t,e);}function _setPrototypeOf(t,e){return _setPrototypeOf=Object.setPrototypeOf?Object.setPrototypeOf.bind():function(t,e){return t.__proto__=e,t;},_setPrototypeOf(t,e);}function _classCallCheck(a,n){if(!(a instanceof n))throw new TypeError("Cannot call a class as a function");}function _defineProperties(e,r){for(var t=0;t<r.length;t++){var o=r[t];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,_toPropertyKey(o.key),o);}}function _createClass(e,r,t){return r&&_defineProperties(e.prototype,r),t&&_defineProperties(e,t),Object.defineProperty(e,"prototype",{writable:!1}),e;}function _defineProperty(e,r,t){return(r=_toPropertyKey(r))in e?Object.defineProperty(e,r,{value:t,enumerable:!0,configurable:!0,writable:!0}):e[r]=t,e;}function _toPropertyKey(t){var i=_toPrimitive(t,"string");return"symbol"==_typeof(i)?i:i+"";}function _toPrimitive(t,r){if("object"!=_typeof(t)||!t)return t;var e=t[Symbol.toPrimitive];if(void 0!==e){var i=e.call(t,r||"default");if("object"!=_typeof(i))return i;throw new TypeError("@@toPrimitive must return a primitive value.");}return("string"===r?String:Number)(t);}function _typeof(o){"@babel/helpers - typeof";return _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(o){return typeof o;}:function(o){return o&&"function"==typeof Symbol&&o.constructor===Symbol&&o!==Symbol.prototype?"symbol":typeof o;},_typeof(o);}(function(f){if((typeof exports==="undefined"?"undefined":_typeof(exports))==="object"&&typeof module!=="undefined"){module.exports=f();}else if(typeof define==="function"&&define.amd){define([],f);}else{var g;if(typeof window!=="undefined"){g=window;}else if(typeof global!=="undefined"){g=global;}else if(typeof self!=="undefined"){g=self;}else{g=this;}g.ParimeManagement=f();}})(function(){var define,module,exports;return function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a;}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r);},p,p.exports,r,e,n,t);}return n[i].exports;}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o;}return r;}()({1:[function(require,module,exports){module.exports={"name":"fable-serviceproviderbase","version":"3.0.19","description":"Simple base classes for fable services.","main":"source/Fable-ServiceProviderBase.js","scripts":{"start":"node source/Fable-ServiceProviderBase.js","test":"npx quack test","tests":"npx quack test -g","coverage":"npx quack coverage","build":"npx quack build","types":"tsc -p ./tsconfig.build.json","check":"tsc -p . --noEmit"},"types":"types/source/Fable-ServiceProviderBase.d.ts","mocha":{"diff":true,"extension":["js"],"package":"./package.json","reporter":"spec","slow":"75","timeout":"5000","ui":"tdd","watch-files":["source/**/*.js","test/**/*.js"],"watch-ignore":["lib/vendor"]},"repository":{"type":"git","url":"https://github.com/stevenvelozo/fable-serviceproviderbase.git"},"keywords":["entity","behavior"],"author":"Steven Velozo <steven@velozo.com> (http://velozo.com/)","license":"MIT","bugs":{"url":"https://github.com/stevenvelozo/fable-serviceproviderbase/issues"},"homepage":"https://github.com/stevenvelozo/fable-serviceproviderbase","devDependencies":{"@types/mocha":"^10.0.10","fable":"^3.1.62","quackage":"^1.0.58","typescript":"^5.9.3"}};},{}],2:[function(require,module,exports){/**
+* Fable Service Base
+* @author <steven@velozo.com>
+*/var libPackage=require('../package.json');var FableServiceProviderBase=/*#__PURE__*/function(){/**
+	 * The constructor can be used in two ways:
+	 * 1) With a fable, options object and service hash (the options object and service hash are optional)a
+	 * 2) With an object or nothing as the first parameter, where it will be treated as the options object
+	 *
+	 * @param {import('fable')|Record<string, any>} [pFable] - (optional) The fable instance, or the options object if there is no fable
+	 * @param {Record<string, any>|string} [pOptions] - (optional) The options object, or the service hash if there is no fable
+	 * @param {string} [pServiceHash] - (optional) The service hash to identify this service instance
+	 */function FableServiceProviderBase(pFable,pOptions,pServiceHash){_classCallCheck(this,FableServiceProviderBase);/** @type {import('fable')} */this.fable;/** @type {string} */this.UUID;/** @type {Record<string, any>} */this.options;/** @type {Record<string, any>} */this.services;/** @type {Record<string, any>} */this.servicesMap;// Check if a fable was passed in; connect it if so
+if(_typeof(pFable)==='object'&&pFable.isFable){this.connectFable(pFable);}else{this.fable=false;}// Initialize the services map if it wasn't passed in
+/** @type {Record<string, any>} */this._PackageFableServiceProvider=libPackage;// initialize options and UUID based on whether the fable was passed in or not.
+if(this.fable){this.UUID=pFable.getUUID();this.options=_typeof(pOptions)==='object'?pOptions:{};}else{// With no fable, check to see if there was an object passed into either of the first two
+// Parameters, and if so, treat it as the options object
+this.options=_typeof(pFable)==='object'&&!pFable.isFable?pFable:_typeof(pOptions)==='object'?pOptions:{};this.UUID="CORE-SVC-".concat(Math.floor(Math.random()*(99999-10000)+10000));}// It's expected that the deriving class will set this
+this.serviceType="Unknown-".concat(this.UUID);// The service hash is used to identify the specific instantiation of the service in the services map
+this.Hash=typeof pServiceHash==='string'?pServiceHash:!this.fable&&typeof pOptions==='string'?pOptions:"".concat(this.UUID);}/**
+	 * @param {import('fable')} pFable
+	 */return _createClass(FableServiceProviderBase,[{key:"connectFable",value:function connectFable(pFable){if(_typeof(pFable)!=='object'||!pFable.isFable){var tmpErrorMessage="Fable Service Provider Base: Cannot connect to Fable, invalid Fable object passed in.  The pFable parameter was a [".concat(_typeof(pFable),"].}");console.log(tmpErrorMessage);return new Error(tmpErrorMessage);}if(!this.fable){this.fable=pFable;}if(!this.log){this.log=this.fable.Logging;}if(!this.services){this.services=this.fable.services;}if(!this.servicesMap){this.servicesMap=this.fable.servicesMap;}return true;}}]);}();_defineProperty(FableServiceProviderBase,"isFableService",true);module.exports=FableServiceProviderBase;// This is left here in case we want to go back to having different code/base class for "core" services
+module.exports.CoreServiceProviderBase=FableServiceProviderBase;},{"../package.json":1}],3:[function(require,module,exports){!function(t,n){"object"==_typeof(exports)&&"object"==_typeof(module)?module.exports=n():"function"==typeof define&&define.amd?define("Navigo",[],n):"object"==_typeof(exports)?exports.Navigo=n():t.Navigo=n();}("undefined"!=typeof self?self:this,function(){return function(){"use strict";var t={407:function _(t,n,e){e.d(n,{"default":function _default(){return N;}});var o=/([:*])(\w+)/g,r=/\*/g,i=/\/\?/g;function a(t){return void 0===t&&(t="/"),v()?location.pathname+location.search+location.hash:t;}function s(t){return t.replace(/\/+$/,"").replace(/^\/+/,"");}function c(t){return"string"==typeof t;}function u(t){return t&&t.indexOf("#")>=0&&t.split("#").pop()||"";}function h(t){var n=s(t).split(/\?(.*)?$/);return[s(n[0]),n.slice(1).join("")];}function f(t){for(var n={},e=t.split("&"),o=0;o<e.length;o++){var r=e[o].split("=");if(""!==r[0]){var i=decodeURIComponent(r[0]);n[i]?(Array.isArray(n[i])||(n[i]=[n[i]]),n[i].push(decodeURIComponent(r[1]||""))):n[i]=decodeURIComponent(r[1]||"");}}return n;}function l(t,n){var e,a=h(s(t.currentLocationPath)),l=a[0],p=a[1],d=""===p?null:f(p),v=[];if(c(n.path)){if(e="(?:/^|^)"+s(n.path).replace(o,function(t,n,e){return v.push(e),"([^/]+)";}).replace(r,"?(?:.*)").replace(i,"/?([^/]+|)")+"$",""===s(n.path)&&""===s(l))return{url:l,queryString:p,hashString:u(t.to),route:n,data:null,params:d};}else e=n.path;var g=new RegExp(e,""),m=l.match(g);if(m){var y=c(n.path)?function(t,n){return 0===n.length?null:t?t.slice(1,t.length).reduce(function(t,e,o){return null===t&&(t={}),t[n[o]]=decodeURIComponent(e),t;},null):null;}(m,v):m.groups?m.groups:m.slice(1);return{url:s(l.replace(new RegExp("^"+t.instance.root),"")),queryString:p,hashString:u(t.to),route:n,data:y,params:d};}return!1;}function p(){return!("undefined"==typeof window||!window.history||!window.history.pushState);}function d(t,n){return void 0===t[n]||!0===t[n];}function v(){return"undefined"!=typeof window;}function g(t,n){return void 0===t&&(t=[]),void 0===n&&(n={}),t.filter(function(t){return t;}).forEach(function(t){["before","after","already","leave"].forEach(function(e){t[e]&&(n[e]||(n[e]=[]),n[e].push(t[e]));});}),n;}function m(t,n,e){var o=n||{},r=0;!function n(){t[r]?Array.isArray(t[r])?(t.splice.apply(t,[r,1].concat(t[r][0](o)?t[r][1]:t[r][2])),n()):t[r](o,function(t){void 0===t||!0===t?(r+=1,n()):e&&e(o);}):e&&e(o);}();}function y(t,n){void 0===t.currentLocationPath&&(t.currentLocationPath=t.to=a(t.instance.root)),t.currentLocationPath=t.instance._checkForAHash(t.currentLocationPath),n();}function _(t,n){for(var e=0;e<t.instance.routes.length;e++){var o=l(t,t.instance.routes[e]);if(o&&(t.matches||(t.matches=[]),t.matches.push(o),"ONE"===t.resolveOptions.strategy))return void n();}n();}function k(t,n){t.navigateOptions&&(void 0!==t.navigateOptions.shouldResolve&&console.warn('"shouldResolve" is deprecated. Please check the documentation.'),void 0!==t.navigateOptions.silent&&console.warn('"silent" is deprecated. Please check the documentation.')),n();}function O(t,n){!0===t.navigateOptions.force?(t.instance._setCurrent([t.instance._pathToMatchObject(t.to)]),n(!1)):n();}m["if"]=function(t,n,e){return Array.isArray(n)||(n=[n]),Array.isArray(e)||(e=[e]),[t,n,e];};var w=v(),L=p();function b(t,n){if(d(t.navigateOptions,"updateBrowserURL")){var e=("/"+t.to).replace(/\/\//g,"/"),o=w&&t.resolveOptions&&!0===t.resolveOptions.hash;L?(history[t.navigateOptions.historyAPIMethod||"pushState"](t.navigateOptions.stateObj||{},t.navigateOptions.title||"",o?"#"+e:e),location&&location.hash&&(t.instance.__freezeListening=!0,setTimeout(function(){if(!o){var n=location.hash;location.hash="",location.hash=n;}t.instance.__freezeListening=!1;},1))):w&&(window.location.href=t.to);}n();}function A(t,n){var e=t.instance;e.lastResolved()?m(e.lastResolved().map(function(n){return function(e,o){if(n.route.hooks&&n.route.hooks.leave){var r=!1,i=t.instance.matchLocation(n.route.path,t.currentLocationPath,!1);r="*"!==n.route.path?!i:!(t.matches&&t.matches.find(function(t){return n.route.path===t.route.path;})),d(t.navigateOptions,"callHooks")&&r?m(n.route.hooks.leave.map(function(n){return function(e,o){return n(function(n){!1===n?t.instance.__markAsClean(t):o();},t.matches&&t.matches.length>0?1===t.matches.length?t.matches[0]:t.matches:void 0);};}).concat([function(){return o();}])):o();}else o();};}),{},function(){return n();}):n();}function P(t,n){d(t.navigateOptions,"updateState")&&t.instance._setCurrent(t.matches),n();}var R=[function(t,n){var e=t.instance.lastResolved();if(e&&e[0]&&e[0].route===t.match.route&&e[0].url===t.match.url&&e[0].queryString===t.match.queryString)return e.forEach(function(n){n.route.hooks&&n.route.hooks.already&&d(t.navigateOptions,"callHooks")&&n.route.hooks.already.forEach(function(n){return n(t.match);});}),void n(!1);n();},function(t,n){t.match.route.hooks&&t.match.route.hooks.before&&d(t.navigateOptions,"callHooks")?m(t.match.route.hooks.before.map(function(n){return function(e,o){return n(function(n){!1===n?t.instance.__markAsClean(t):o();},t.match);};}).concat([function(){return n();}])):n();},function(t,n){d(t.navigateOptions,"callHandler")&&t.match.route.handler(t.match),t.instance.updatePageLinks(),n();},function(t,n){t.match.route.hooks&&t.match.route.hooks.after&&d(t.navigateOptions,"callHooks")&&t.match.route.hooks.after.forEach(function(n){return n(t.match);}),n();}],S=[A,function(t,n){var e=t.instance._notFoundRoute;if(e){t.notFoundHandled=!0;var o=h(t.currentLocationPath),r=o[0],i=o[1],a=u(t.to);e.path=s(r);var c={url:e.path,queryString:i,hashString:a,data:null,route:e,params:""!==i?f(i):null};t.matches=[c],t.match=c;}n();},m["if"](function(t){return t.notFoundHandled;},R.concat([P]),[function(t,n){t.resolveOptions&&!1!==t.resolveOptions.noMatchWarning&&void 0!==t.resolveOptions.noMatchWarning||console.warn('Navigo: "'+t.currentLocationPath+"\" didn't match any of the registered routes."),n();},function(t,n){t.instance._setCurrent(null),n();}])];function E(){return(E=Object.assign||function(t){for(var n=1;n<arguments.length;n++){var e=arguments[n];for(var o in e)Object.prototype.hasOwnProperty.call(e,o)&&(t[o]=e[o]);}return t;}).apply(this,arguments);}function x(t,n){var e=0;A(t,function o(){e!==t.matches.length?m(R,E({},t,{match:t.matches[e]}),function(){e+=1,o();}):P(t,n);});}function H(t){t.instance.__markAsClean(t);}function j(){return(j=Object.assign||function(t){for(var n=1;n<arguments.length;n++){var e=arguments[n];for(var o in e)Object.prototype.hasOwnProperty.call(e,o)&&(t[o]=e[o]);}return t;}).apply(this,arguments);}var C="[data-navigo]";function N(t,n){var e,o=n||{strategy:"ONE",hash:!1,noMatchWarning:!1,linksSelector:C},r=this,i="/",d=null,w=[],L=!1,A=p(),P=v();function R(t){return t.indexOf("#")>=0&&(t=!0===o.hash?t.split("#")[1]||"/":t.split("#")[0]),t;}function E(t){return s(i+"/"+s(t));}function N(t,n,e,o){return t=c(t)?E(t):t,{name:o||s(String(t)),path:t,handler:n,hooks:g(e)};}function U(t,n){if(!r.__dirty){r.__dirty=!0,t=t?s(i)+"/"+s(t):void 0;var e={instance:r,to:t,currentLocationPath:t,navigateOptions:{},resolveOptions:j({},o,n)};return m([y,_,m["if"](function(t){var n=t.matches;return n&&n.length>0;},x,S)],e,H),!!e.matches&&e.matches;}r.__waiting.push(function(){return r.resolve(t,n);});}function q(t,n){if(r.__dirty)r.__waiting.push(function(){return r.navigate(t,n);});else{r.__dirty=!0,t=s(i)+"/"+s(t);var e={instance:r,to:t,navigateOptions:n||{},resolveOptions:n&&n.resolveOptions?n.resolveOptions:o,currentLocationPath:R(t)};m([k,O,_,m["if"](function(t){var n=t.matches;return n&&n.length>0;},x,S),b,H],e,H);}}function F(){if(P)return(P?[].slice.call(document.querySelectorAll(o.linksSelector||C)):[]).forEach(function(t){"false"!==t.getAttribute("data-navigo")&&"_blank"!==t.getAttribute("target")?t.hasListenerAttached||(t.hasListenerAttached=!0,t.navigoHandler=function(n){if((n.ctrlKey||n.metaKey)&&"a"===n.target.tagName.toLowerCase())return!1;var e=t.getAttribute("href");if(null==e)return!1;if(e.match(/^(http|https)/)&&"undefined"!=typeof URL)try{var o=new URL(e);e=o.pathname+o.search;}catch(t){}var i=function(t){if(!t)return{};var n,e=t.split(","),o={};return e.forEach(function(t){var e=t.split(":").map(function(t){return t.replace(/(^ +| +$)/g,"");});switch(e[0]){case"historyAPIMethod":o.historyAPIMethod=e[1];break;case"resolveOptionsStrategy":n||(n={}),n.strategy=e[1];break;case"resolveOptionsHash":n||(n={}),n.hash="true"===e[1];break;case"updateBrowserURL":case"callHandler":case"updateState":case"force":o[e[0]]="true"===e[1];}}),n&&(o.resolveOptions=n),o;}(t.getAttribute("data-navigo-options"));L||(n.preventDefault(),n.stopPropagation(),r.navigate(s(e),i));},t.addEventListener("click",t.navigoHandler)):t.hasListenerAttached&&t.removeEventListener("click",t.navigoHandler);}),r;}function I(t,n,e){var o=w.find(function(n){return n.name===t;}),r=null;if(o){if(r=o.path,n)for(var a in n)r=r.replace(":"+a,n[a]);r=r.match(/^\//)?r:"/"+r;}return r&&e&&!e.includeRoot&&(r=r.replace(new RegExp("^/"+i),"")),r;}function M(t){var n=h(s(t)),o=n[0],r=n[1],i=""===r?null:f(r);return{url:o,queryString:r,hashString:u(t),route:N(o,function(){},[e],o),data:null,params:i};}function T(t,n,e){return"string"==typeof n&&(n=z(n)),n?(n.hooks[t]||(n.hooks[t]=[]),n.hooks[t].push(e),function(){n.hooks[t]=n.hooks[t].filter(function(t){return t!==e;});}):(console.warn("Route doesn't exists: "+n),function(){});}function z(t){return"string"==typeof t?w.find(function(n){return n.name===E(t);}):w.find(function(n){return n.handler===t;});}t?i=s(t):console.warn('Navigo requires a root path in its constructor. If not provided will use "/" as default.'),this.root=i,this.routes=w,this.destroyed=L,this.current=d,this.__freezeListening=!1,this.__waiting=[],this.__dirty=!1,this.__markAsClean=function(t){t.instance.__dirty=!1,t.instance.__waiting.length>0&&t.instance.__waiting.shift()();},this.on=function(t,n,o){var r=this;return"object"!=_typeof(t)||t instanceof RegExp?("function"==typeof t&&(o=n,n=t,t=i),w.push(N(t,n,[e,o])),this):(Object.keys(t).forEach(function(n){if("function"==typeof t[n])r.on(n,t[n]);else{var o=t[n],i=o.uses,a=o.as,s=o.hooks;w.push(N(n,i,[e,s],a));}}),this);},this.off=function(t){return this.routes=w=w.filter(function(n){return c(t)?s(n.path)!==s(t):"function"==typeof t?t!==n.handler:String(n.path)!==String(t);}),this;},this.resolve=U,this.navigate=q,this.navigateByName=function(t,n,e){var o=I(t,n);return null!==o&&(q(o.replace(new RegExp("^/?"+i),""),e),!0);},this.destroy=function(){this.routes=w=[],A&&window.removeEventListener("popstate",this.__popstateListener),this.destroyed=L=!0;},this.notFound=function(t,n){return r._notFoundRoute=N("*",t,[e,n],"__NOT_FOUND__"),this;},this.updatePageLinks=F,this.link=function(t){return"/"+i+"/"+s(t);},this.hooks=function(t){return e=t,this;},this.extractGETParameters=function(t){return h(R(t));},this.lastResolved=function(){return d;},this.generate=I,this.getLinkPath=function(t){return t.getAttribute("href");},this.match=function(t){var n={instance:r,currentLocationPath:t,to:t,navigateOptions:{},resolveOptions:o};return _(n,function(){}),!!n.matches&&n.matches;},this.matchLocation=function(t,n,e){void 0===n||void 0!==e&&!e||(n=E(n));var o={instance:r,to:n,currentLocationPath:n};return y(o,function(){}),"string"==typeof t&&(t=void 0===e||e?E(t):t),l(o,{name:String(t),path:t,handler:function handler(){},hooks:{}})||!1;},this.getCurrentLocation=function(){return M(s(a(i)).replace(new RegExp("^"+i),""));},this.addBeforeHook=T.bind(this,"before"),this.addAfterHook=T.bind(this,"after"),this.addAlreadyHook=T.bind(this,"already"),this.addLeaveHook=T.bind(this,"leave"),this.getRoute=z,this._pathToMatchObject=M,this._clean=s,this._checkForAHash=R,this._setCurrent=function(t){return d=r.current=t;},function(){A&&(this.__popstateListener=function(){r.__freezeListening||U();},window.addEventListener("popstate",this.__popstateListener));}.call(this),F.call(this);}}},n={};function e(o){if(n[o])return n[o].exports;var r=n[o]={exports:{}};return t[o](r,r.exports,e),r.exports;}return e.d=function(t,n){for(var o in n)e.o(n,o)&&!e.o(t,o)&&Object.defineProperty(t,o,{enumerable:!0,get:n[o]});},e.o=function(t,n){return Object.prototype.hasOwnProperty.call(t,n);},e(407);}()["default"];});},{}],4:[function(require,module,exports){module.exports={"name":"pict-application","version":"1.0.34","description":"Application base class for a pict view-based application","main":"source/Pict-Application.js","scripts":{"test":"npx quack test","start":"node source/Pict-Application.js","coverage":"npx quack coverage","build":"npx quack build","docker-dev-build":"docker build ./ -f Dockerfile_LUXURYCode -t pict-application-image:local","docker-dev-run":"docker run -it -d --name pict-application-dev -p 30001:8080 -p 38086:8086 -v \"$PWD/.config:/home/coder/.config\"  -v \"$PWD:/home/coder/pict-application\" -u \"$(id -u):$(id -g)\" -e \"DOCKER_USER=$USER\" pict-application-image:local","docker-dev-shell":"docker exec -it pict-application-dev /bin/bash","tests":"npx quack test -g","lint":"eslint source/**","types":"tsc -p ."},"types":"types/source/Pict-Application.d.ts","repository":{"type":"git","url":"git+https://github.com/stevenvelozo/pict-application.git"},"author":"steven velozo <steven@velozo.com>","license":"MIT","bugs":{"url":"https://github.com/stevenvelozo/pict-application/issues"},"homepage":"https://github.com/stevenvelozo/pict-application#readme","devDependencies":{"@eslint/js":"^9.28.0","browser-env":"^3.3.0","eslint":"^9.28.0","pict":"^1.0.348","pict-docuserve":"^0.1.5","pict-provider":"^1.0.10","pict-view":"^1.0.66","quackage":"^1.1.0","typescript":"^5.9.3"},"mocha":{"diff":true,"extension":["js"],"package":"./package.json","reporter":"spec","slow":"75","timeout":"5000","ui":"tdd","watch-files":["source/**/*.js","test/**/*.js"],"watch-ignore":["lib/vendor"]},"dependencies":{"fable-serviceproviderbase":"^3.0.19"}};},{}],5:[function(require,module,exports){var libFableServiceBase=require('fable-serviceproviderbase');var libPackage=require('../package.json');var defaultPictSettings={Name:'DefaultPictApplication',// The main "viewport" is the view that is used to host our application
+MainViewportViewIdentifier:'Default-View',MainViewportRenderableHash:false,MainViewportDestinationAddress:false,MainViewportDefaultDataAddress:false,// Whether or not we should automatically render the main viewport and other autorender views after we initialize the pict application
+AutoSolveAfterInitialize:true,AutoRenderMainViewportViewAfterInitialize:true,AutoRenderViewsAfterInitialize:false,AutoLoginAfterInitialize:false,AutoLoadDataAfterLogin:false,ConfigurationOnlyViews:[],Manifests:{},// The prefix to prepend on all template destination hashes
+IdentifierAddressPrefix:'PICT-'};/**
+ * Base class for pict applications.
+ */var PictApplication=/*#__PURE__*/function(_libFableServiceBase){/**
+	 * @param {import('fable')} pFable
+	 * @param {Record<string, any>} [pOptions]
+	 * @param {string} [pServiceHash]
+	 */function PictApplication(pFable,pOptions,pServiceHash){var _this;_classCallCheck(this,PictApplication);var tmpCarryOverConfiguration=_typeof(pFable.settings.PictApplicationConfiguration)==='object'?pFable.settings.PictApplicationConfiguration:{};var tmpOptions=Object.assign({},JSON.parse(JSON.stringify(defaultPictSettings)),tmpCarryOverConfiguration,pOptions);_this=_callSuper(this,PictApplication,[pFable,tmpOptions,pServiceHash]);/** @type {any} */_this.options;/** @type {any} */_this.log;/** @type {import('pict') & import('fable')} */_this.fable;/** @type {string} */_this.UUID;/** @type {string} */_this.Hash;/**
+		 * @type {{ [key: string]: any }}
+		 */_this.servicesMap;_this.serviceType='PictApplication';/** @type {Record<string, any>} */_this._Package=libPackage;// Convenience and consistency naming
+_this.pict=_this.fable;// Wire in the essential Pict state
+/** @type {Record<string, any>} */_this.AppData=_this.fable.AppData;/** @type {Record<string, any>} */_this.Bundle=_this.fable.Bundle;/** @type {number} */_this.initializeTimestamp;/** @type {number} */_this.lastSolvedTimestamp;/** @type {number} */_this.lastLoginTimestamp;/** @type {number} */_this.lastMarshalFromViewsTimestamp;/** @type {number} */_this.lastMarshalToViewsTimestamp;/** @type {number} */_this.lastAutoRenderTimestamp;/** @type {number} */_this.lastLoadDataTimestamp;// Load all the manifests for the application
+var tmpManifestKeys=Object.keys(_this.options.Manifests);if(tmpManifestKeys.length>0){for(var i=0;i<tmpManifestKeys.length;i++){// Load each manifest
+var tmpManifestKey=tmpManifestKeys[i];_this.fable.instantiateServiceProvider('Manifest',_this.options.Manifests[tmpManifestKey],tmpManifestKey);}}return _this;}/* -------------------------------------------------------------------------- *//*                     Code Section: Solve All Views                          *//* -------------------------------------------------------------------------- *//**
+	 * @return {boolean}
+	 */_inherits(PictApplication,_libFableServiceBase);return _createClass(PictApplication,[{key:"onPreSolve",value:function onPreSolve(){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onPreSolve:"));}return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onPreSolveAsync",value:function onPreSolveAsync(fCallback){this.onPreSolve();return fCallback();}/**
+	 * @return {boolean}
+	 */},{key:"onBeforeSolve",value:function onBeforeSolve(){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onBeforeSolve:"));}return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onBeforeSolveAsync",value:function onBeforeSolveAsync(fCallback){this.onBeforeSolve();return fCallback();}/**
+	 * @return {boolean}
+	 */},{key:"onSolve",value:function onSolve(){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onSolve:"));}return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onSolveAsync",value:function onSolveAsync(fCallback){this.onSolve();return fCallback();}/**
+	 * @return {boolean}
+	 */},{key:"solve",value:function solve(){if(this.pict.LogNoisiness>2){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," executing solve() function..."));}// Walk through any loaded providers and solve them as well.
+var tmpLoadedProviders=Object.keys(this.pict.providers);var tmpProvidersToSolve=[];for(var i=0;i<tmpLoadedProviders.length;i++){var tmpProvider=this.pict.providers[tmpLoadedProviders[i]];if(tmpProvider.options.AutoSolveWithApp){tmpProvidersToSolve.push(tmpProvider);}}// Sort the providers by their priority (if they are all priority 0, it will end up being add order due to JSON Object Property Key order stuff)
+tmpProvidersToSolve.sort(function(a,b){return a.options.AutoSolveOrdinal-b.options.AutoSolveOrdinal;});for(var _i=0;_i<tmpProvidersToSolve.length;_i++){tmpProvidersToSolve[_i].solve(tmpProvidersToSolve[_i]);}this.onBeforeSolve();// Now walk through any loaded views and initialize them as well.
+var tmpLoadedViews=Object.keys(this.pict.views);var tmpViewsToSolve=[];for(var _i2=0;_i2<tmpLoadedViews.length;_i2++){var tmpView=this.pict.views[tmpLoadedViews[_i2]];if(tmpView.options.AutoInitialize){tmpViewsToSolve.push(tmpView);}}// Sort the views by their priority (if they are all priority 0, it will end up being add order due to JSON Object Property Key order stuff)
+tmpViewsToSolve.sort(function(a,b){return a.options.AutoInitializeOrdinal-b.options.AutoInitializeOrdinal;});for(var _i3=0;_i3<tmpViewsToSolve.length;_i3++){tmpViewsToSolve[_i3].solve();}this.onSolve();this.onAfterSolve();this.lastSolvedTimestamp=this.fable.log.getTimeStamp();return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"solveAsync",value:function solveAsync(fCallback){var _this2=this;var tmpAnticipate=this.fable.instantiateServiceProviderWithoutRegistration('Anticipate');tmpAnticipate.anticipate(this.onBeforeSolveAsync.bind(this));// Allow the callback to be passed in as the last parameter no matter what
+var tmpCallback=typeof fCallback==='function'?fCallback:false;if(!tmpCallback){this.log.warn("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," solveAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));tmpCallback=function tmpCallback(pError){if(pError){_this2.log.error("PictApp [".concat(_this2.UUID,"]::[").concat(_this2.Hash,"] ").concat(_this2.options.Name," solveAsync Auto Callback Error: ").concat(pError),pError);}};}// Walk through any loaded providers and solve them as well.
+var tmpLoadedProviders=Object.keys(this.pict.providers);var tmpProvidersToSolve=[];for(var i=0;i<tmpLoadedProviders.length;i++){var tmpProvider=this.pict.providers[tmpLoadedProviders[i]];if(tmpProvider.options.AutoSolveWithApp){tmpProvidersToSolve.push(tmpProvider);}}// Sort the providers by their priority (if they are all priority 0, it will end up being add order due to JSON Object Property Key order stuff)
+tmpProvidersToSolve.sort(function(a,b){return a.options.AutoSolveOrdinal-b.options.AutoSolveOrdinal;});for(var _i4=0;_i4<tmpProvidersToSolve.length;_i4++){tmpAnticipate.anticipate(tmpProvidersToSolve[_i4].solveAsync.bind(tmpProvidersToSolve[_i4]));}// Walk through any loaded views and solve them as well.
+var tmpLoadedViews=Object.keys(this.pict.views);var tmpViewsToSolve=[];for(var _i5=0;_i5<tmpLoadedViews.length;_i5++){var tmpView=this.pict.views[tmpLoadedViews[_i5]];if(tmpView.options.AutoSolveWithApp){tmpViewsToSolve.push(tmpView);}}// Sort the views by their priority (if they are all priority 0, it will end up being add order due to JSON Object Property Key order stuff)
+tmpViewsToSolve.sort(function(a,b){return a.options.AutoSolveOrdinal-b.options.AutoSolveOrdinal;});for(var _i6=0;_i6<tmpViewsToSolve.length;_i6++){tmpAnticipate.anticipate(tmpViewsToSolve[_i6].solveAsync.bind(tmpViewsToSolve[_i6]));}tmpAnticipate.anticipate(this.onSolveAsync.bind(this));tmpAnticipate.anticipate(this.onAfterSolveAsync.bind(this));tmpAnticipate.wait(function(pError){if(_this2.pict.LogNoisiness>2){_this2.log.trace("PictApp [".concat(_this2.UUID,"]::[").concat(_this2.Hash,"] ").concat(_this2.options.Name," solveAsync() complete."));}_this2.lastSolvedTimestamp=_this2.fable.log.getTimeStamp();return tmpCallback(pError);});}/**
+	 * @return {boolean}
+	 */},{key:"onAfterSolve",value:function onAfterSolve(){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onAfterSolve:"));}return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onAfterSolveAsync",value:function onAfterSolveAsync(fCallback){this.onAfterSolve();return fCallback();}/* -------------------------------------------------------------------------- *//*                     Code Section: Application Login                        *//* -------------------------------------------------------------------------- *//**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onBeforeLoginAsync",value:function onBeforeLoginAsync(fCallback){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onBeforeLoginAsync:"));}return fCallback();}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onLoginAsync",value:function onLoginAsync(fCallback){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onLoginAsync:"));}return fCallback();}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"loginAsync",value:function loginAsync(fCallback){var _this3=this;var tmpAnticipate=this.fable.instantiateServiceProviderWithoutRegistration('Anticipate');var tmpCallback=fCallback;if(typeof tmpCallback!=='function'){this.log.warn("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," loginAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));tmpCallback=function tmpCallback(pError){if(pError){_this3.log.error("PictApp [".concat(_this3.UUID,"]::[").concat(_this3.Hash,"] ").concat(_this3.options.Name," loginAsync Auto Callback Error: ").concat(pError),pError);}};}tmpAnticipate.anticipate(this.onBeforeLoginAsync.bind(this));tmpAnticipate.anticipate(this.onLoginAsync.bind(this));tmpAnticipate.anticipate(this.onAfterLoginAsync.bind(this));// check and see if we should automatically trigger a data load
+if(this.options.AutoLoadDataAfterLogin){tmpAnticipate.anticipate(function(fNext){if(!_this3.isLoggedIn()){return fNext();}if(_this3.pict.LogNoisiness>1){_this3.log.trace("PictApp [".concat(_this3.UUID,"]::[").concat(_this3.Hash,"] ").concat(_this3.options.Name," auto loading data after login..."));}//TODO: should data load errors funnel here? this creates a weird coupling between login and data load callbacks
+_this3.loadDataAsync(function(pError){fNext(pError);});});}tmpAnticipate.wait(function(pError){if(_this3.pict.LogNoisiness>2){_this3.log.trace("PictApp [".concat(_this3.UUID,"]::[").concat(_this3.Hash,"] ").concat(_this3.options.Name," loginAsync() complete."));}_this3.lastLoginTimestamp=_this3.fable.log.getTimeStamp();return tmpCallback(pError);});}/**
+	 * Check if the application state is logged in. Defaults to true. Override this method in your application based on login requirements.
+	 *
+	 * @return {boolean}
+	 */},{key:"isLoggedIn",value:function isLoggedIn(){return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onAfterLoginAsync",value:function onAfterLoginAsync(fCallback){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onAfterLoginAsync:"));}return fCallback();}/* -------------------------------------------------------------------------- *//*                     Code Section: Application LoadData                     *//* -------------------------------------------------------------------------- *//**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onBeforeLoadDataAsync",value:function onBeforeLoadDataAsync(fCallback){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onBeforeLoadDataAsync:"));}return fCallback();}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onLoadDataAsync",value:function onLoadDataAsync(fCallback){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onLoadDataAsync:"));}return fCallback();}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"loadDataAsync",value:function loadDataAsync(fCallback){var _this4=this;var tmpAnticipate=this.fable.instantiateServiceProviderWithoutRegistration('Anticipate');var tmpCallback=fCallback;if(typeof tmpCallback!=='function'){this.log.warn("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," loadDataAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));tmpCallback=function tmpCallback(pError){if(pError){_this4.log.error("PictApp [".concat(_this4.UUID,"]::[").concat(_this4.Hash,"] ").concat(_this4.options.Name," loadDataAsync Auto Callback Error: ").concat(pError),pError);}};}tmpAnticipate.anticipate(this.onBeforeLoadDataAsync.bind(this));// Walk through any loaded providers and load their data as well.
+var tmpLoadedProviders=Object.keys(this.pict.providers);var tmpProvidersToLoadData=[];for(var i=0;i<tmpLoadedProviders.length;i++){var tmpProvider=this.pict.providers[tmpLoadedProviders[i]];if(tmpProvider.options.AutoLoadDataWithApp){tmpProvidersToLoadData.push(tmpProvider);}}// Sort the providers by their priority (if they are all priority 0, it will end up being add order due to JSON Object Property Key order stuff)
+tmpProvidersToLoadData.sort(function(a,b){return a.options.AutoLoadDataOrdinal-b.options.AutoLoadDataOrdinal;});for(var _i7=0,_tmpProvidersToLoadDa=tmpProvidersToLoadData;_i7<_tmpProvidersToLoadDa.length;_i7++){var _tmpProvider=_tmpProvidersToLoadDa[_i7];tmpAnticipate.anticipate(_tmpProvider.onBeforeLoadDataAsync.bind(_tmpProvider));}tmpAnticipate.anticipate(this.onLoadDataAsync.bind(this));//TODO: think about ways to parallelize these
+for(var _i8=0,_tmpProvidersToLoadDa2=tmpProvidersToLoadData;_i8<_tmpProvidersToLoadDa2.length;_i8++){var _tmpProvider2=_tmpProvidersToLoadDa2[_i8];tmpAnticipate.anticipate(_tmpProvider2.onLoadDataAsync.bind(_tmpProvider2));}tmpAnticipate.anticipate(this.onAfterLoadDataAsync.bind(this));for(var _i9=0,_tmpProvidersToLoadDa3=tmpProvidersToLoadData;_i9<_tmpProvidersToLoadDa3.length;_i9++){var _tmpProvider3=_tmpProvidersToLoadDa3[_i9];tmpAnticipate.anticipate(_tmpProvider3.onAfterLoadDataAsync.bind(_tmpProvider3));}tmpAnticipate.wait(/** @param {Error} [pError] */function(pError){if(_this4.pict.LogNoisiness>2){_this4.log.trace("PictApp [".concat(_this4.UUID,"]::[").concat(_this4.Hash,"] ").concat(_this4.options.Name," loadDataAsync() complete."));}_this4.lastLoadDataTimestamp=_this4.fable.log.getTimeStamp();return tmpCallback(pError);});}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onAfterLoadDataAsync",value:function onAfterLoadDataAsync(fCallback){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onAfterLoadDataAsync:"));}return fCallback();}/* -------------------------------------------------------------------------- *//*                     Code Section: Application SaveData                     *//* -------------------------------------------------------------------------- *//**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onBeforeSaveDataAsync",value:function onBeforeSaveDataAsync(fCallback){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onBeforeSaveDataAsync:"));}return fCallback();}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onSaveDataAsync",value:function onSaveDataAsync(fCallback){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onSaveDataAsync:"));}return fCallback();}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"saveDataAsync",value:function saveDataAsync(fCallback){var _this5=this;var tmpAnticipate=this.fable.instantiateServiceProviderWithoutRegistration('Anticipate');var tmpCallback=fCallback;if(typeof tmpCallback!=='function'){this.log.warn("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," saveDataAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));tmpCallback=function tmpCallback(pError){if(pError){_this5.log.error("PictApp [".concat(_this5.UUID,"]::[").concat(_this5.Hash,"] ").concat(_this5.options.Name," saveDataAsync Auto Callback Error: ").concat(pError),pError);}};}tmpAnticipate.anticipate(this.onBeforeSaveDataAsync.bind(this));// Walk through any loaded providers and load their data as well.
+var tmpLoadedProviders=Object.keys(this.pict.providers);var tmpProvidersToSaveData=[];for(var i=0;i<tmpLoadedProviders.length;i++){var tmpProvider=this.pict.providers[tmpLoadedProviders[i]];if(tmpProvider.options.AutoSaveDataWithApp){tmpProvidersToSaveData.push(tmpProvider);}}// Sort the providers by their priority (if they are all priority 0, it will end up being add order due to JSON Object Property Key order stuff)
+tmpProvidersToSaveData.sort(function(a,b){return a.options.AutoSaveDataOrdinal-b.options.AutoSaveDataOrdinal;});for(var _i0=0,_tmpProvidersToSaveDa=tmpProvidersToSaveData;_i0<_tmpProvidersToSaveDa.length;_i0++){var _tmpProvider4=_tmpProvidersToSaveDa[_i0];tmpAnticipate.anticipate(_tmpProvider4.onBeforeSaveDataAsync.bind(_tmpProvider4));}tmpAnticipate.anticipate(this.onSaveDataAsync.bind(this));//TODO: think about ways to parallelize these
+for(var _i1=0,_tmpProvidersToSaveDa2=tmpProvidersToSaveData;_i1<_tmpProvidersToSaveDa2.length;_i1++){var _tmpProvider5=_tmpProvidersToSaveDa2[_i1];tmpAnticipate.anticipate(_tmpProvider5.onSaveDataAsync.bind(_tmpProvider5));}tmpAnticipate.anticipate(this.onAfterSaveDataAsync.bind(this));for(var _i10=0,_tmpProvidersToSaveDa3=tmpProvidersToSaveData;_i10<_tmpProvidersToSaveDa3.length;_i10++){var _tmpProvider6=_tmpProvidersToSaveDa3[_i10];tmpAnticipate.anticipate(_tmpProvider6.onAfterSaveDataAsync.bind(_tmpProvider6));}tmpAnticipate.wait(/** @param {Error} [pError] */function(pError){if(_this5.pict.LogNoisiness>2){_this5.log.trace("PictApp [".concat(_this5.UUID,"]::[").concat(_this5.Hash,"] ").concat(_this5.options.Name," saveDataAsync() complete."));}_this5.lastSaveDataTimestamp=_this5.fable.log.getTimeStamp();return tmpCallback(pError);});}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onAfterSaveDataAsync",value:function onAfterSaveDataAsync(fCallback){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onAfterSaveDataAsync:"));}return fCallback();}/* -------------------------------------------------------------------------- *//*                     Code Section: Initialize Application                   *//* -------------------------------------------------------------------------- *//**
+	 * @return {boolean}
+	 */},{key:"onBeforeInitialize",value:function onBeforeInitialize(){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onBeforeInitialize:"));}return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onBeforeInitializeAsync",value:function onBeforeInitializeAsync(fCallback){this.onBeforeInitialize();return fCallback();}/**
+	 * @return {boolean}
+	 */},{key:"onInitialize",value:function onInitialize(){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onInitialize:"));}return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onInitializeAsync",value:function onInitializeAsync(fCallback){this.onInitialize();return fCallback();}/**
+	 * @return {boolean}
+	 */},{key:"initialize",value:function initialize(){if(this.pict.LogControlFlow){this.log.trace("PICT-ControlFlow APPLICATION [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," initialize:"));}if(!this.initializeTimestamp){this.onBeforeInitialize();if('ConfigurationOnlyViews'in this.options){// Load all the configuration only views
+for(var i=0;i<this.options.ConfigurationOnlyViews.length;i++){var tmpViewIdentifier=typeof this.options.ConfigurationOnlyViews[i].ViewIdentifier==='undefined'?"AutoView-".concat(this.fable.getUUID()):this.options.ConfigurationOnlyViews[i].ViewIdentifier;this.log.info("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," adding configuration only view: ").concat(tmpViewIdentifier));this.pict.addView(tmpViewIdentifier,this.options.ConfigurationOnlyViews[i]);}}this.onInitialize();// Walk through any loaded providers and initialize them as well.
+var tmpLoadedProviders=Object.keys(this.pict.providers);var tmpProvidersToInitialize=[];for(var _i11=0;_i11<tmpLoadedProviders.length;_i11++){var tmpProvider=this.pict.providers[tmpLoadedProviders[_i11]];if(tmpProvider.options.AutoInitialize){tmpProvidersToInitialize.push(tmpProvider);}}// Sort the providers by their priority (if they are all priority 0, it will end up being add order due to JSON Object Property Key order stuff)
+tmpProvidersToInitialize.sort(function(a,b){return a.options.AutoInitializeOrdinal-b.options.AutoInitializeOrdinal;});for(var _i12=0;_i12<tmpProvidersToInitialize.length;_i12++){tmpProvidersToInitialize[_i12].initialize();}// Now walk through any loaded views and initialize them as well.
+var tmpLoadedViews=Object.keys(this.pict.views);var tmpViewsToInitialize=[];for(var _i13=0;_i13<tmpLoadedViews.length;_i13++){var tmpView=this.pict.views[tmpLoadedViews[_i13]];if(tmpView.options.AutoInitialize){tmpViewsToInitialize.push(tmpView);}}// Sort the views by their priority (if they are all priority 0, it will end up being add order due to JSON Object Property Key order stuff)
+tmpViewsToInitialize.sort(function(a,b){return a.options.AutoInitializeOrdinal-b.options.AutoInitializeOrdinal;});for(var _i14=0;_i14<tmpViewsToInitialize.length;_i14++){tmpViewsToInitialize[_i14].initialize();}this.onAfterInitialize();if(this.options.AutoSolveAfterInitialize){if(this.pict.LogNoisiness>1){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," auto solving after initialization..."));}// Solve the template synchronously
+this.solve();}// Now check and see if we should automatically render as well
+if(this.options.AutoRenderMainViewportViewAfterInitialize){if(this.pict.LogNoisiness>1){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," auto rendering after initialization..."));}// Render the template synchronously
+this.render();}this.initializeTimestamp=this.fable.log.getTimeStamp();this.onCompletionOfInitialize();return true;}else{this.log.warn("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," initialize called but initialization is already completed.  Aborting."));return false;}}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"initializeAsync",value:function initializeAsync(fCallback){var _this6=this;if(this.pict.LogControlFlow){this.log.trace("PICT-ControlFlow APPLICATION [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," initializeAsync:"));}// Allow the callback to be passed in as the last parameter no matter what
+var tmpCallback=typeof fCallback==='function'?fCallback:false;if(!tmpCallback){this.log.warn("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," initializeAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));tmpCallback=function tmpCallback(pError){if(pError){_this6.log.error("PictApp [".concat(_this6.UUID,"]::[").concat(_this6.Hash,"] ").concat(_this6.options.Name," initializeAsync Auto Callback Error: ").concat(pError),pError);}};}if(!this.initializeTimestamp){var tmpAnticipate=this.fable.instantiateServiceProviderWithoutRegistration('Anticipate');if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," beginning initialization..."));}if('ConfigurationOnlyViews'in this.options){// Load all the configuration only views
+for(var i=0;i<this.options.ConfigurationOnlyViews.length;i++){var tmpViewIdentifier=typeof this.options.ConfigurationOnlyViews[i].ViewIdentifier==='undefined'?"AutoView-".concat(this.fable.getUUID()):this.options.ConfigurationOnlyViews[i].ViewIdentifier;this.log.info("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," adding configuration only view: ").concat(tmpViewIdentifier));this.pict.addView(tmpViewIdentifier,this.options.ConfigurationOnlyViews[i]);}}tmpAnticipate.anticipate(this.onBeforeInitializeAsync.bind(this));tmpAnticipate.anticipate(this.onInitializeAsync.bind(this));// Walk through any loaded providers and solve them as well.
+var tmpLoadedProviders=Object.keys(this.pict.providers);var tmpProvidersToInitialize=[];for(var _i15=0;_i15<tmpLoadedProviders.length;_i15++){var tmpProvider=this.pict.providers[tmpLoadedProviders[_i15]];if(tmpProvider.options.AutoInitialize){tmpProvidersToInitialize.push(tmpProvider);}}// Sort the providers by their priority (if they are all priority 0, it will end up being add order due to JSON Object Property Key order stuff)
+tmpProvidersToInitialize.sort(function(a,b){return a.options.AutoInitializeOrdinal-b.options.AutoInitializeOrdinal;});for(var _i16=0;_i16<tmpProvidersToInitialize.length;_i16++){tmpAnticipate.anticipate(tmpProvidersToInitialize[_i16].initializeAsync.bind(tmpProvidersToInitialize[_i16]));}// Now walk through any loaded views and initialize them as well.
+// TODO: Some optimization cleverness could be gained by grouping them into a parallelized async operation, by ordinal.
+var tmpLoadedViews=Object.keys(this.pict.views);var tmpViewsToInitialize=[];for(var _i17=0;_i17<tmpLoadedViews.length;_i17++){var tmpView=this.pict.views[tmpLoadedViews[_i17]];if(tmpView.options.AutoInitialize){tmpViewsToInitialize.push(tmpView);}}// Sort the views by their priority
+// If they are all the default priority 0, it will end up being add order due to JSON Object Property Key order stuff
+tmpViewsToInitialize.sort(function(a,b){return a.options.AutoInitializeOrdinal-b.options.AutoInitializeOrdinal;});for(var _i18=0;_i18<tmpViewsToInitialize.length;_i18++){var _tmpView=tmpViewsToInitialize[_i18];tmpAnticipate.anticipate(_tmpView.initializeAsync.bind(_tmpView));}tmpAnticipate.anticipate(this.onAfterInitializeAsync.bind(this));if(this.options.AutoLoginAfterInitialize){if(this.pict.LogNoisiness>1){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," auto login (asynchronously) after initialization..."));}tmpAnticipate.anticipate(this.loginAsync.bind(this));}if(this.options.AutoSolveAfterInitialize){if(this.pict.LogNoisiness>1){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," auto solving (asynchronously) after initialization..."));}tmpAnticipate.anticipate(this.solveAsync.bind(this));}if(this.options.AutoRenderMainViewportViewAfterInitialize){if(this.pict.LogNoisiness>1){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," auto rendering (asynchronously) after initialization..."));}tmpAnticipate.anticipate(this.renderMainViewportAsync.bind(this));}tmpAnticipate.wait(function(pError){if(pError){_this6.log.error("PictApp [".concat(_this6.UUID,"]::[").concat(_this6.Hash,"] ").concat(_this6.options.Name," initializeAsync Error: ").concat(pError.message||pError),{stack:pError.stack});}_this6.initializeTimestamp=_this6.fable.log.getTimeStamp();if(_this6.pict.LogNoisiness>2){_this6.log.trace("PictApp [".concat(_this6.UUID,"]::[").concat(_this6.Hash,"] ").concat(_this6.options.Name," initialization complete."));}return tmpCallback();});}else{this.log.warn("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," async initialize called but initialization is already completed.  Aborting."));// TODO: Should this be an error?
+return this.onCompletionOfInitializeAsync(tmpCallback);}}/**
+	 * @return {boolean}
+	 */},{key:"onAfterInitialize",value:function onAfterInitialize(){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onAfterInitialize:"));}return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onAfterInitializeAsync",value:function onAfterInitializeAsync(fCallback){this.onAfterInitialize();return fCallback();}/**
+	 * @return {boolean}
+	 */},{key:"onCompletionOfInitialize",value:function onCompletionOfInitialize(){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onCompletionOfInitialize:"));}return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onCompletionOfInitializeAsync",value:function onCompletionOfInitializeAsync(fCallback){this.onCompletionOfInitialize();return fCallback();}/* -------------------------------------------------------------------------- *//*                     Code Section: Marshal Data From All Views              *//* -------------------------------------------------------------------------- *//**
+	 * @return {boolean}
+	 */},{key:"onBeforeMarshalFromViews",value:function onBeforeMarshalFromViews(){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onBeforeMarshalFromViews:"));}return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onBeforeMarshalFromViewsAsync",value:function onBeforeMarshalFromViewsAsync(fCallback){this.onBeforeMarshalFromViews();return fCallback();}/**
+	 * @return {boolean}
+	 */},{key:"onMarshalFromViews",value:function onMarshalFromViews(){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onMarshalFromViews:"));}return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onMarshalFromViewsAsync",value:function onMarshalFromViewsAsync(fCallback){this.onMarshalFromViews();return fCallback();}/**
+	 * @return {boolean}
+	 */},{key:"marshalFromViews",value:function marshalFromViews(){if(this.pict.LogNoisiness>2){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," executing marshalFromViews() function..."));}this.onBeforeMarshalFromViews();// Now walk through any loaded views and initialize them as well.
+var tmpLoadedViews=Object.keys(this.pict.views);var tmpViewsToMarshalFromViews=[];for(var i=0;i<tmpLoadedViews.length;i++){var tmpView=this.pict.views[tmpLoadedViews[i]];tmpViewsToMarshalFromViews.push(tmpView);}for(var _i19=0;_i19<tmpViewsToMarshalFromViews.length;_i19++){tmpViewsToMarshalFromViews[_i19].marshalFromView();}this.onMarshalFromViews();this.onAfterMarshalFromViews();this.lastMarshalFromViewsTimestamp=this.fable.log.getTimeStamp();return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"marshalFromViewsAsync",value:function marshalFromViewsAsync(fCallback){var _this7=this;var tmpAnticipate=this.fable.instantiateServiceProviderWithoutRegistration('Anticipate');// Allow the callback to be passed in as the last parameter no matter what
+var tmpCallback=typeof fCallback==='function'?fCallback:false;if(!tmpCallback){this.log.warn("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," marshalFromViewsAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));tmpCallback=function tmpCallback(pError){if(pError){_this7.log.error("PictApp [".concat(_this7.UUID,"]::[").concat(_this7.Hash,"] ").concat(_this7.options.Name," marshalFromViewsAsync Auto Callback Error: ").concat(pError),pError);}};}tmpAnticipate.anticipate(this.onBeforeMarshalFromViewsAsync.bind(this));// Walk through any loaded views and marshalFromViews them as well.
+var tmpLoadedViews=Object.keys(this.pict.views);var tmpViewsToMarshalFromViews=[];for(var i=0;i<tmpLoadedViews.length;i++){var tmpView=this.pict.views[tmpLoadedViews[i]];tmpViewsToMarshalFromViews.push(tmpView);}for(var _i20=0;_i20<tmpViewsToMarshalFromViews.length;_i20++){tmpAnticipate.anticipate(tmpViewsToMarshalFromViews[_i20].marshalFromViewAsync.bind(tmpViewsToMarshalFromViews[_i20]));}tmpAnticipate.anticipate(this.onMarshalFromViewsAsync.bind(this));tmpAnticipate.anticipate(this.onAfterMarshalFromViewsAsync.bind(this));tmpAnticipate.wait(function(pError){if(_this7.pict.LogNoisiness>2){_this7.log.trace("PictApp [".concat(_this7.UUID,"]::[").concat(_this7.Hash,"] ").concat(_this7.options.Name," marshalFromViewsAsync() complete."));}_this7.lastMarshalFromViewsTimestamp=_this7.fable.log.getTimeStamp();return tmpCallback(pError);});}/**
+	 * @return {boolean}
+	 */},{key:"onAfterMarshalFromViews",value:function onAfterMarshalFromViews(){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onAfterMarshalFromViews:"));}return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onAfterMarshalFromViewsAsync",value:function onAfterMarshalFromViewsAsync(fCallback){this.onAfterMarshalFromViews();return fCallback();}/* -------------------------------------------------------------------------- *//*                     Code Section: Marshal Data To All Views                *//* -------------------------------------------------------------------------- *//**
+	 * @return {boolean}
+	 */},{key:"onBeforeMarshalToViews",value:function onBeforeMarshalToViews(){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onBeforeMarshalToViews:"));}return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onBeforeMarshalToViewsAsync",value:function onBeforeMarshalToViewsAsync(fCallback){this.onBeforeMarshalToViews();return fCallback();}/**
+	 * @return {boolean}
+	 */},{key:"onMarshalToViews",value:function onMarshalToViews(){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onMarshalToViews:"));}return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onMarshalToViewsAsync",value:function onMarshalToViewsAsync(fCallback){this.onMarshalToViews();return fCallback();}/**
+	 * @return {boolean}
+	 */},{key:"marshalToViews",value:function marshalToViews(){if(this.pict.LogNoisiness>2){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," executing marshalToViews() function..."));}this.onBeforeMarshalToViews();// Now walk through any loaded views and initialize them as well.
+var tmpLoadedViews=Object.keys(this.pict.views);var tmpViewsToMarshalToViews=[];for(var i=0;i<tmpLoadedViews.length;i++){var tmpView=this.pict.views[tmpLoadedViews[i]];tmpViewsToMarshalToViews.push(tmpView);}for(var _i21=0;_i21<tmpViewsToMarshalToViews.length;_i21++){tmpViewsToMarshalToViews[_i21].marshalToView();}this.onMarshalToViews();this.onAfterMarshalToViews();this.lastMarshalToViewsTimestamp=this.fable.log.getTimeStamp();return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"marshalToViewsAsync",value:function marshalToViewsAsync(fCallback){var _this8=this;var tmpAnticipate=this.fable.instantiateServiceProviderWithoutRegistration('Anticipate');// Allow the callback to be passed in as the last parameter no matter what
+var tmpCallback=typeof fCallback==='function'?fCallback:false;if(!tmpCallback){this.log.warn("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," marshalToViewsAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));tmpCallback=function tmpCallback(pError){if(pError){_this8.log.error("PictApp [".concat(_this8.UUID,"]::[").concat(_this8.Hash,"] ").concat(_this8.options.Name," marshalToViewsAsync Auto Callback Error: ").concat(pError),pError);}};}tmpAnticipate.anticipate(this.onBeforeMarshalToViewsAsync.bind(this));// Walk through any loaded views and marshalToViews them as well.
+var tmpLoadedViews=Object.keys(this.pict.views);var tmpViewsToMarshalToViews=[];for(var i=0;i<tmpLoadedViews.length;i++){var tmpView=this.pict.views[tmpLoadedViews[i]];tmpViewsToMarshalToViews.push(tmpView);}for(var _i22=0;_i22<tmpViewsToMarshalToViews.length;_i22++){tmpAnticipate.anticipate(tmpViewsToMarshalToViews[_i22].marshalToViewAsync.bind(tmpViewsToMarshalToViews[_i22]));}tmpAnticipate.anticipate(this.onMarshalToViewsAsync.bind(this));tmpAnticipate.anticipate(this.onAfterMarshalToViewsAsync.bind(this));tmpAnticipate.wait(function(pError){if(_this8.pict.LogNoisiness>2){_this8.log.trace("PictApp [".concat(_this8.UUID,"]::[").concat(_this8.Hash,"] ").concat(_this8.options.Name," marshalToViewsAsync() complete."));}_this8.lastMarshalToViewsTimestamp=_this8.fable.log.getTimeStamp();return tmpCallback(pError);});}/**
+	 * @return {boolean}
+	 */},{key:"onAfterMarshalToViews",value:function onAfterMarshalToViews(){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onAfterMarshalToViews:"));}return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onAfterMarshalToViewsAsync",value:function onAfterMarshalToViewsAsync(fCallback){this.onAfterMarshalToViews();return fCallback();}/* -------------------------------------------------------------------------- *//*                     Code Section: Render View                              *//* -------------------------------------------------------------------------- *//**
+	 * @return {boolean}
+	 */},{key:"onBeforeRender",value:function onBeforeRender(){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onBeforeRender:"));}return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onBeforeRenderAsync",value:function onBeforeRenderAsync(fCallback){this.onBeforeRender();return fCallback();}/**
+	 * @param {string} [pViewIdentifier] - The hash of the view to render. By default, the main viewport view is rendered.
+	 * @param {string} [pRenderableHash] - The hash of the renderable to render.
+	 * @param {string} [pRenderDestinationAddress] - The address where the renderable will be rendered.
+	 * @param {string} [pTemplateDataAddress] - The address where the data for the template is stored.
+	 *
+	 * TODO: Should we support objects for pTemplateDataAddress for parity with pict-view?
+	 */},{key:"render",value:function render(pViewIdentifier,pRenderableHash,pRenderDestinationAddress,pTemplateDataAddress){var tmpViewIdentifier=typeof pViewIdentifier!=='string'?this.options.MainViewportViewIdentifier:pViewIdentifier;var tmpRenderableHash=typeof pRenderableHash!=='string'?this.options.MainViewportRenderableHash:pRenderableHash;var tmpRenderDestinationAddress=typeof pRenderDestinationAddress!=='string'?this.options.MainViewportDestinationAddress:pRenderDestinationAddress;var tmpTemplateDataAddress=typeof pTemplateDataAddress!=='string'?this.options.MainViewportDefaultDataAddress:pTemplateDataAddress;if(this.pict.LogControlFlow){this.log.trace("PICT-ControlFlow APPLICATION [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," VIEW Renderable[").concat(tmpRenderableHash,"] Destination[").concat(tmpRenderDestinationAddress,"] TemplateDataAddress[").concat(tmpTemplateDataAddress,"] render:"));}this.onBeforeRender();// Now get the view (by hash) from the loaded views
+var tmpView=typeof tmpViewIdentifier==='string'?this.servicesMap.PictView[tmpViewIdentifier]:false;if(!tmpView){this.log.error("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," could not render from View ").concat(tmpViewIdentifier," because it is not a valid view."));return false;}this.onRender();tmpView.render(tmpRenderableHash,tmpRenderDestinationAddress,tmpTemplateDataAddress);this.onAfterRender();return true;}/**
+	 * @return {boolean}
+	 */},{key:"onRender",value:function onRender(){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onRender:"));}return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onRenderAsync",value:function onRenderAsync(fCallback){this.onRender();return fCallback();}/**
+	 * @param {string|((error?: Error) => void)} pViewIdentifier - The hash of the view to render. By default, the main viewport view is rendered. (or the callback)
+	 * @param {string|((error?: Error) => void)} [pRenderableHash] - The hash of the renderable to render. (or the callback)
+	 * @param {string|((error?: Error) => void)} [pRenderDestinationAddress] - The address where the renderable will be rendered. (or the callback)
+	 * @param {string|((error?: Error) => void)} [pTemplateDataAddress] - The address where the data for the template is stored. (or the callback)
+	 * @param {(error?: Error) => void} [fCallback] - The callback, if all other parameters are provided.
+	 *
+	 * TODO: Should we support objects for pTemplateDataAddress for parity with pict-view?
+	 */},{key:"renderAsync",value:function renderAsync(pViewIdentifier,pRenderableHash,pRenderDestinationAddress,pTemplateDataAddress,fCallback){var _this9=this;var tmpViewIdentifier=typeof pViewIdentifier!=='string'?this.options.MainViewportViewIdentifier:pViewIdentifier;var tmpRenderableHash=typeof pRenderableHash!=='string'?this.options.MainViewportRenderableHash:pRenderableHash;var tmpRenderDestinationAddress=typeof pRenderDestinationAddress!=='string'?this.options.MainViewportDestinationAddress:pRenderDestinationAddress;var tmpTemplateDataAddress=typeof pTemplateDataAddress!=='string'?this.options.MainViewportDefaultDataAddress:pTemplateDataAddress;// Allow the callback to be passed in as the last parameter no matter what
+var tmpCallback=typeof fCallback==='function'?fCallback:typeof pTemplateDataAddress==='function'?pTemplateDataAddress:typeof pRenderDestinationAddress==='function'?pRenderDestinationAddress:typeof pRenderableHash==='function'?pRenderableHash:typeof pViewIdentifier==='function'?pViewIdentifier:false;if(!tmpCallback){this.log.warn("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," renderAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));tmpCallback=function tmpCallback(pError){if(pError){_this9.log.error("PictApp [".concat(_this9.UUID,"]::[").concat(_this9.Hash,"] ").concat(_this9.options.Name," renderAsync Auto Callback Error: ").concat(pError),pError);}};}if(this.pict.LogControlFlow){this.log.trace("PICT-ControlFlow APPLICATION [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," VIEW Renderable[").concat(tmpRenderableHash,"] Destination[").concat(tmpRenderDestinationAddress,"] TemplateDataAddress[").concat(tmpTemplateDataAddress,"] renderAsync:"));}var tmpRenderAnticipate=this.fable.newAnticipate();tmpRenderAnticipate.anticipate(this.onBeforeRenderAsync.bind(this));var tmpView=typeof tmpViewIdentifier==='string'?this.servicesMap.PictView[tmpViewIdentifier]:false;if(!tmpView){var tmpErrorMessage="PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," could not asynchronously render from View ").concat(tmpViewIdentifier," because it is not a valid view.");if(this.pict.LogNoisiness>3){this.log.error(tmpErrorMessage);}return tmpCallback(new Error(tmpErrorMessage));}tmpRenderAnticipate.anticipate(this.onRenderAsync.bind(this));tmpRenderAnticipate.anticipate(function(fNext){tmpView.renderAsync.call(tmpView,tmpRenderableHash,tmpRenderDestinationAddress,tmpTemplateDataAddress,fNext);});tmpRenderAnticipate.anticipate(this.onAfterRenderAsync.bind(this));return tmpRenderAnticipate.wait(tmpCallback);}/**
+	 * @return {boolean}
+	 */},{key:"onAfterRender",value:function onAfterRender(){if(this.pict.LogNoisiness>3){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," onAfterRender:"));}return true;}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"onAfterRenderAsync",value:function onAfterRenderAsync(fCallback){this.onAfterRender();return fCallback();}/**
+	 * @return {boolean}
+	 */},{key:"renderMainViewport",value:function renderMainViewport(){if(this.pict.LogControlFlow){this.log.trace("PICT-ControlFlow APPLICATION [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," renderMainViewport:"));}return this.render();}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"renderMainViewportAsync",value:function renderMainViewportAsync(fCallback){if(this.pict.LogControlFlow){this.log.trace("PICT-ControlFlow APPLICATION [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," renderMainViewportAsync:"));}return this.renderAsync(fCallback);}/**
+	 * @return {void}
+	 */},{key:"renderAutoViews",value:function renderAutoViews(){var _this0=this;if(this.pict.LogNoisiness>0){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," beginning renderAutoViews..."));}// Now walk through any loaded views and sort them by the AutoRender ordinal
+var tmpLoadedViews=Object.keys(this.pict.views);// Sort the views by their priority
+// If they are all the default priority 0, it will end up being add order due to JSON Object Property Key order stuff
+tmpLoadedViews.sort(function(a,b){return _this0.pict.views[a].options.AutoRenderOrdinal-_this0.pict.views[b].options.AutoRenderOrdinal;});for(var i=0;i<tmpLoadedViews.length;i++){var tmpView=this.pict.views[tmpLoadedViews[i]];if(tmpView.options.AutoRender){tmpView.render();}}if(this.pict.LogNoisiness>0){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," renderAutoViewsAsync complete."));}}/**
+	 * @param {(error?: Error) => void} fCallback
+	 */},{key:"renderAutoViewsAsync",value:function renderAutoViewsAsync(fCallback){var _this1=this;var tmpAnticipate=this.fable.instantiateServiceProviderWithoutRegistration('Anticipate');// Allow the callback to be passed in as the last parameter no matter what
+var tmpCallback=typeof fCallback==='function'?fCallback:false;if(!tmpCallback){this.log.warn("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," renderAutoViewsAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));tmpCallback=function tmpCallback(pError){if(pError){_this1.log.error("PictApp [".concat(_this1.UUID,"]::[").concat(_this1.Hash,"] ").concat(_this1.options.Name," renderAutoViewsAsync Auto Callback Error: ").concat(pError),pError);}};}if(this.pict.LogNoisiness>0){this.log.trace("PictApp [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," beginning renderAutoViewsAsync..."));}// Now walk through any loaded views and sort them by the AutoRender ordinal
+// TODO: Some optimization cleverness could be gained by grouping them into a parallelized async operation, by ordinal.
+var tmpLoadedViews=Object.keys(this.pict.views);// Sort the views by their priority
+// If they are all the default priority 0, it will end up being add order due to JSON Object Property Key order stuff
+tmpLoadedViews.sort(function(a,b){return _this1.pict.views[a].options.AutoRenderOrdinal-_this1.pict.views[b].options.AutoRenderOrdinal;});for(var i=0;i<tmpLoadedViews.length;i++){var tmpView=this.pict.views[tmpLoadedViews[i]];if(tmpView.options.AutoRender){tmpAnticipate.anticipate(tmpView.renderAsync.bind(tmpView));}}tmpAnticipate.wait(function(pError){_this1.lastAutoRenderTimestamp=_this1.fable.log.getTimeStamp();if(_this1.pict.LogNoisiness>0){_this1.log.trace("PictApp [".concat(_this1.UUID,"]::[").concat(_this1.Hash,"] ").concat(_this1.options.Name," renderAutoViewsAsync complete."));}return tmpCallback(pError);});}/**
+	 * @return {boolean}
+	 */},{key:"isPictApplication",get:function get(){return true;}}]);}(libFableServiceBase);module.exports=PictApplication;},{"../package.json":4,"fable-serviceproviderbase":2}],6:[function(require,module,exports){/**
+ * Pict Provider: Theme
+ *
+ * Runtime theme manager for Pict applications.  Registers theme bundles
+ * (token maps + CSS + SVG + image assets) and applies them by injecting
+ * CSS custom properties into a single <style id="pict-theme"> element.
+ *
+ * Themes can be:
+ *   - Single-mode (Modes.Strategy = "single")
+ *   - Paired light/dark (Modes.Strategy = "paired")
+ *   - System-aware (Modes.Strategy = "system" — paired + auto-pick)
+ *
+ * Mode is reflected as `theme-light` / `theme-dark` class on <html>.
+ *
+ * Token resolution path examples:
+ *   provider.token('Tokens.Color.Background.Primary') -> raw current value
+ *   provider.cssVar('Color.Background.Primary')       -> 'var(--theme-color-background-primary)'
+ *   provider.asset('SVG', 'Logo')                     -> SVG string
+ *   provider.image('Hero')                            -> image URL / data URL
+ *
+ * Template expressions registered (when pict has addTemplate):
+ *   {~Theme:Tokens.Color.Background.Primary~}    raw value
+ *   {~ThemeVar:Color.Background.Primary~}        var(--theme-...) reference
+ *   {~ThemeAsset:SVG.Logo~}                      asset content
+ *   {~ThemeImage:Hero~}                          image URL
+ *
+ * Stateless: this provider does not persist anything.  Host applications
+ * decide what to apply at boot (from localStorage, server config, etc.).
+ *
+ * @author Steven Velozo <steven@velozo.com>
+ * @license MIT
+ */var libPictProvider=require('pict-provider');var _ProviderConfiguration={ProviderIdentifier:'Theme',AutoInitialize:true,AutoInitializeOrdinal:0};var STYLE_ELEMENT_ID='pict-theme';var HTML_CLASS_LIGHT='theme-light';var HTML_CLASS_DARK='theme-dark';var CSS_VAR_PREFIX='--theme-';var PictProviderTheme=/*#__PURE__*/function(_libPictProvider){function PictProviderTheme(pFable,pOptions,pServiceHash){var _this10;_classCallCheck(this,PictProviderTheme);_this10=_callSuper(this,PictProviderTheme,[pFable,pOptions,pServiceHash]);_this10.serviceType='PictProviderTheme';_this10._themes={};_this10._themeOrder=[];_this10._activeHash=null;_this10._activeMode=null;_this10._resolvedMode=null;_this10._systemMediaQuery=null;_this10._systemListener=null;_this10._registeredCSSHashes=[];_this10._applyListeners=[];// Auto-register the four theme template expressions if the host pict
+// supports addTemplate.  In bare-fable/test contexts this is skipped.
+if(_this10.pict&&typeof _this10.pict.addTemplate==='function'){try{_this10.pict.addTemplate(require('./templates/Pict-Template-Theme.js'));_this10.pict.addTemplate(require('./templates/Pict-Template-ThemeVar.js'));_this10.pict.addTemplate(require('./templates/Pict-Template-ThemeAsset.js'));_this10.pict.addTemplate(require('./templates/Pict-Template-ThemeImage.js'));}catch(pError){if(_this10.log)_this10.log.warn('PictProviderTheme: template registration skipped: '+pError.message);}}return _this10;}// ================================================================
+// Theme registration
+// ================================================================
+/**
+	 * Register a theme bundle.  Bundle is the compiled JSON shape (see
+	 * the manifest schema documented in the module README and example themes).
+	 *
+	 * @param {object} pBundle - parsed manifest object
+	 * @returns {boolean} true on success
+	 */_inherits(PictProviderTheme,_libPictProvider);return _createClass(PictProviderTheme,[{key:"registerTheme",value:function registerTheme(pBundle){if(!pBundle||_typeof(pBundle)!=='object'){if(this.log)this.log.warn('PictProviderTheme.registerTheme: bundle is not an object');return false;}if(!pBundle.Hash||typeof pBundle.Hash!=='string'){if(this.log)this.log.warn('PictProviderTheme.registerTheme: bundle missing required string Hash');return false;}if(!this._themes[pBundle.Hash]){this._themeOrder.push(pBundle.Hash);}this._themes[pBundle.Hash]=pBundle;return true;}/**
+	 * Get an array of registered theme metadata for building UIs.
+	 * @returns {Array<{Hash, Name, Version, Strategy, DefaultMode, Comprehensive}>}
+	 */},{key:"listThemes",value:function listThemes(){var tmpList=[];for(var i=0;i<this._themeOrder.length;i++){var tmpHash=this._themeOrder[i];var tmpTheme=this._themes[tmpHash];var tmpModes=tmpTheme.Modes||{};tmpList.push({Hash:tmpTheme.Hash,Name:tmpTheme.Name||tmpTheme.Hash,Version:tmpTheme.Version||null,Strategy:tmpModes.Strategy||'single',DefaultMode:tmpModes.Default||'light',Comprehensive:tmpTheme.Comprehensive!==false});}return tmpList;}/**
+	 * Get the raw stored bundle for a hash.
+	 */},{key:"getTheme",value:function getTheme(pHash){return this._themes[pHash]||null;}// ================================================================
+// Apply / unapply
+// ================================================================
+/**
+	 * Apply a theme by hash.  Optionally specify mode ('light', 'dark', 'system').
+	 * If pMode is omitted, the theme's Modes.Default is used.
+	 *
+	 * @param {string} pHash
+	 * @param {string} [pMode]
+	 * @returns {boolean}
+	 */},{key:"applyTheme",value:function applyTheme(pHash,pMode){var tmpTheme=this._themes[pHash];if(!tmpTheme){if(this.log)this.log.warn("PictProviderTheme.applyTheme: unknown theme hash [".concat(pHash,"]"));return false;}// Resolve the effective theme bundle (handle BasedOn inheritance).
+var tmpEffective=this._resolveBundle(tmpTheme);var tmpStrategy=tmpEffective.Modes&&tmpEffective.Modes.Strategy||'single';var tmpDefaultMode=tmpEffective.Modes&&tmpEffective.Modes.Default||'light';var tmpMode=pMode||tmpDefaultMode;// Single-mode themes cannot be put into dark/light/system; clamp.
+if(tmpStrategy==='single'){tmpMode=tmpDefaultMode;}this._activeHash=pHash;this._activeMode=tmpMode;// Build CSS once, regardless of mode (paired themes emit both blocks
+// and rely on the html class to switch between them).
+var tmpCSS=this._buildThemeCSS(tmpEffective);this._injectStyleElement(tmpCSS);// Register any auxiliary CSS files declared in the bundle through the
+// Pict CSS cascade so they participate in injectCSS().
+this._registerAuxiliaryCSS(tmpEffective);// Set the html class to drive paired-theme variable resolution.
+this._applyMode(tmpMode,tmpStrategy);// Notify subscribers (e.g. apps that need to re-color SVG icon palettes
+// from a bundle.IconColors block, swap chart palettes, etc.).
+this._fireApplyListeners(tmpEffective);return true;}/**
+	 * Change mode without reapplying the theme.  No-op if no theme is active
+	 * or active theme is single-mode.
+	 *
+	 * @param {string} pMode - 'light' | 'dark' | 'system'
+	 */},{key:"setMode",value:function setMode(pMode){if(!this._activeHash)return false;var tmpTheme=this._resolveBundle(this._themes[this._activeHash]);var tmpStrategy=tmpTheme.Modes&&tmpTheme.Modes.Strategy||'single';if(tmpStrategy==='single')return false;this._activeMode=pMode;this._applyMode(pMode,tmpStrategy);this._fireApplyListeners(tmpTheme);return true;}// ================================================================
+// Listener subscription
+// ================================================================
+/**
+	 * Subscribe to theme apply / mode-change events.  The callback is
+	 * invoked with the effective (BasedOn-resolved) bundle and a context
+	 * object: { Hash, Mode, ResolvedMode }.
+	 *
+	 * Apps use this to re-color SVG icon palettes, swap chart colors,
+	 * push tokens into non-CSS consumers (canvas, WebGL), etc.
+	 *
+	 * Returns a dispose function for symmetry with offApply().
+	 */},{key:"onApply",value:function onApply(fCallback){if(typeof fCallback!=='function')return function(){};this._applyListeners.push(fCallback);var tmpSelf=this;return function(){tmpSelf.offApply(fCallback);};}},{key:"offApply",value:function offApply(fCallback){var tmpIdx=this._applyListeners.indexOf(fCallback);if(tmpIdx>=0)this._applyListeners.splice(tmpIdx,1);}},{key:"_fireApplyListeners",value:function _fireApplyListeners(pBundle){if(this._applyListeners.length===0)return;var tmpContext={Hash:this._activeHash,Mode:this._activeMode,ResolvedMode:this._resolvedMode};for(var i=0;i<this._applyListeners.length;i++){try{this._applyListeners[i](pBundle,tmpContext);}catch(pError){if(this.log)this.log.warn('PictProviderTheme: onApply listener threw: '+pError.message);}}}/**
+	 * Remove the injected style element, html class, and any auxiliary CSS.
+	 */},{key:"unapplyTheme",value:function unapplyTheme(){this._detachSystemListener();if(typeof document!=='undefined'){var tmpStyleEl=document.getElementById(STYLE_ELEMENT_ID);if(tmpStyleEl&&tmpStyleEl.parentNode){tmpStyleEl.parentNode.removeChild(tmpStyleEl);}if(document.documentElement&&document.documentElement.classList){document.documentElement.classList.remove(HTML_CLASS_LIGHT);document.documentElement.classList.remove(HTML_CLASS_DARK);}}// Unregister any auxiliary CSS we added.
+if(this.pict&&this.pict.CSSMap&&typeof this.pict.CSSMap.removeCSS==='function'){for(var i=0;i<this._registeredCSSHashes.length;i++){this.pict.CSSMap.removeCSS(this._registeredCSSHashes[i]);}}this._registeredCSSHashes=[];this._activeHash=null;this._activeMode=null;this._resolvedMode=null;return true;}},{key:"getActiveTheme",value:function getActiveTheme(){return{Hash:this._activeHash,Mode:this._activeMode,ResolvedMode:this._resolvedMode};}// ================================================================
+// Token / asset accessors
+// ================================================================
+/**
+	 * Resolve a token by dot path against the active theme bundle.  Walks
+	 * the entire bundle root, so paths can address Tokens, Brand, etc.
+	 *
+	 * If the value is paired ({Light, Dark}), returns the value at the
+	 * currently resolved mode.
+	 *
+	 * @param {string} pPath - e.g. 'Tokens.Color.Background.Primary'
+	 * @returns {string|number|null}
+	 */},{key:"token",value:function token(pPath){if(!this._activeHash)return null;var tmpTheme=this._resolveBundle(this._themes[this._activeHash]);var tmpValue=this._walkPath(tmpTheme,pPath);return this._resolveModedValue(tmpValue);}/**
+	 * Returns a CSS `var(--theme-...)` reference for a token under Tokens.
+	 * Path is given without the Tokens prefix:
+	 *   cssVar('Color.Background.Primary') -> 'var(--theme-color-background-primary)'
+	 *
+	 * @param {string} pTokenPath
+	 * @returns {string}
+	 */},{key:"cssVar",value:function cssVar(pTokenPath){return'var('+this._cssVarName(pTokenPath)+')';}/**
+	 * Look up a named asset under SVG, optionally nested (e.g. 'Icons.Foo').
+	 * @param {string} pCategory - 'SVG' | 'Image'
+	 * @param {string} pName
+	 */},{key:"asset",value:function asset(pCategory,pName){if(!this._activeHash)return null;var tmpTheme=this._resolveBundle(this._themes[this._activeHash]);var tmpRoot=tmpTheme[pCategory];if(!tmpRoot)return null;return this._walkPath(tmpRoot,pName);}},{key:"image",value:function image(pName){return this.asset('Image',pName);}},{key:"svg",value:function svg(pName){return this.asset('SVG',pName);}// ================================================================
+// Internals
+// ================================================================
+/**
+	 * Resolve a bundle's BasedOn chain into a single effective bundle by
+	 * deep-merging this bundle onto its base.  Cycle-safe.
+	 */},{key:"_resolveBundle",value:function _resolveBundle(pBundle){var tmpChain=[];var tmpCurrent=pBundle;var tmpSeen={};while(tmpCurrent){if(tmpSeen[tmpCurrent.Hash])break;tmpSeen[tmpCurrent.Hash]=true;tmpChain.unshift(tmpCurrent);var tmpBaseHash=tmpCurrent.BasedOn;tmpCurrent=tmpBaseHash?this._themes[tmpBaseHash]:null;}if(tmpChain.length===1)return tmpChain[0];var tmpResult={};for(var i=0;i<tmpChain.length;i++){tmpResult=this._deepMerge(tmpResult,tmpChain[i]);}return tmpResult;}},{key:"_deepMerge",value:function _deepMerge(pTarget,pSource){var tmpResult=Object.assign({},pTarget);var tmpKeys=Object.keys(pSource);for(var i=0;i<tmpKeys.length;i++){var tmpKey=tmpKeys[i];var tmpVal=pSource[tmpKey];if(tmpVal!==null&&_typeof(tmpVal)==='object'&&!Array.isArray(tmpVal)&&tmpResult[tmpKey]!==null&&_typeof(tmpResult[tmpKey])==='object'&&!Array.isArray(tmpResult[tmpKey])){tmpResult[tmpKey]=this._deepMerge(tmpResult[tmpKey],tmpVal);}else{tmpResult[tmpKey]=tmpVal;}}return tmpResult;}/**
+	 * Walk a dot-path from a starting object.  Returns null if any segment
+	 * is missing.  Path segments are matched case-sensitively as authored.
+	 */},{key:"_walkPath",value:function _walkPath(pRoot,pPath){if(!pRoot||!pPath)return null;var tmpSegments=pPath.split('.');var tmpNode=pRoot;for(var i=0;i<tmpSegments.length;i++){if(tmpNode===null||_typeof(tmpNode)!=='object')return null;tmpNode=tmpNode[tmpSegments[i]];if(typeof tmpNode==='undefined')return null;}return tmpNode;}/**
+	 * If pValue is a paired-mode object {Light, Dark}, pick the value matching
+	 * the current resolved mode.  Otherwise return as-is.
+	 */},{key:"_resolveModedValue",value:function _resolveModedValue(pValue){if(this._isPairedValue(pValue)){var tmpMode=this._resolvedMode||'light';var tmpKey=tmpMode==='dark'?'Dark':'Light';return pValue[tmpKey];}return pValue;}},{key:"_isPairedValue",value:function _isPairedValue(pValue){return pValue!==null&&_typeof(pValue)==='object'&&!Array.isArray(pValue)&&Object.keys(pValue).length>0&&Object.keys(pValue).every(function(k){return k==='Light'||k==='Dark';});}/**
+	 * Build the CSS string for a theme.  For single-mode themes, emits a
+	 * single :root block.  For paired themes, emits :root for the Light
+	 * variant and a .theme-dark { ... } block for the Dark variant.
+	 *
+	 * Only values under bundle.Tokens become CSS custom properties.
+	 */},{key:"_buildThemeCSS",value:function _buildThemeCSS(pTheme){var _this11=this;var tmpTokens=pTheme.Tokens||{};var tmpFlat=this._flattenTokens(tmpTokens,'');var tmpStrategy=pTheme.Modes&&pTheme.Modes.Strategy||'single';var tmpHasPaired=tmpFlat.some(function(tmpEntry){return _this11._isPairedValue(tmpEntry.Value);});var tmpAliasLines=this._buildAliasLines(pTheme.Aliases);if(tmpStrategy==='single'||!tmpHasPaired){var tmpCSS=':root {\n';for(var i=0;i<tmpFlat.length;i++){var tmpEntry=tmpFlat[i];var tmpVal=this._isPairedValue(tmpEntry.Value)?tmpEntry.Value.Light:tmpEntry.Value;tmpCSS+='\t'+this._cssVarName(tmpEntry.Path)+': '+this._formatCSSValue(tmpVal)+';\n';}tmpCSS+=tmpAliasLines;tmpCSS+='}\n';return tmpCSS;}var tmpRootCSS=':root {\n';var tmpDarkCSS='.'+HTML_CLASS_DARK+' {\n';for(var _i23=0;_i23<tmpFlat.length;_i23++){var _tmpEntry=tmpFlat[_i23];var tmpVarName=this._cssVarName(_tmpEntry.Path);if(this._isPairedValue(_tmpEntry.Value)){if(typeof _tmpEntry.Value.Light!=='undefined'){tmpRootCSS+='\t'+tmpVarName+': '+this._formatCSSValue(_tmpEntry.Value.Light)+';\n';}if(typeof _tmpEntry.Value.Dark!=='undefined'){tmpDarkCSS+='\t'+tmpVarName+': '+this._formatCSSValue(_tmpEntry.Value.Dark)+';\n';}}else{tmpRootCSS+='\t'+tmpVarName+': '+this._formatCSSValue(_tmpEntry.Value)+';\n';}}// Aliases live in :root only.  Their var() targets resolve to the
+// active mode's value automatically — no need to duplicate in dark.
+tmpRootCSS+=tmpAliasLines;tmpRootCSS+='}\n';tmpDarkCSS+='}\n';return tmpRootCSS+tmpDarkCSS;}/**
+	 * Emit alias lines for legacy CSS variable names that map to token paths
+	 * under Tokens.  Each alias becomes:
+	 *   --legacy-name: var(--theme-color-...);
+	 * Indirection-via-var means paired-mode swap propagates without
+	 * needing alias entries duplicated in the .theme-dark block.
+	 *
+	 * Authored as: { "--legacy-name": "Color.Background.Primary", ... }
+	 */},{key:"_buildAliasLines",value:function _buildAliasLines(pAliases){if(!pAliases||_typeof(pAliases)!=='object')return'';var tmpKeys=Object.keys(pAliases);var tmpOut='';for(var i=0;i<tmpKeys.length;i++){var tmpAlias=tmpKeys[i];var tmpTarget=pAliases[tmpAlias];if(typeof tmpTarget!=='string'||tmpTarget.length===0)continue;tmpOut+='\t'+tmpAlias+': var('+this._cssVarName(tmpTarget)+');\n';}return tmpOut;}/**
+	 * Walk an arbitrary nested token tree and produce a flat list of
+	 * { Path: 'color.background.primary', Value: <leaf> } entries.
+	 *
+	 * Paired-mode objects ({Light, Dark}) and primitive values are leaves.
+	 */},{key:"_flattenTokens",value:function _flattenTokens(pNode,pPathPrefix){var tmpResults=[];if(pNode===null||_typeof(pNode)!=='object'||Array.isArray(pNode)){if(pPathPrefix){tmpResults.push({Path:pPathPrefix,Value:pNode});}return tmpResults;}if(this._isPairedValue(pNode)){tmpResults.push({Path:pPathPrefix,Value:pNode});return tmpResults;}var tmpKeys=Object.keys(pNode);for(var i=0;i<tmpKeys.length;i++){var tmpKey=tmpKeys[i];var tmpChildPath=pPathPrefix?pPathPrefix+'.'+tmpKey:tmpKey;var tmpChild=pNode[tmpKey];tmpResults=tmpResults.concat(this._flattenTokens(tmpChild,tmpChildPath));}return tmpResults;}/**
+	 * 'Color.Background.Primary' -> '--theme-color-background-primary'
+	 */},{key:"_cssVarName",value:function _cssVarName(pTokenPath){return CSS_VAR_PREFIX+pTokenPath.toLowerCase().replace(/\./g,'-');}},{key:"_formatCSSValue",value:function _formatCSSValue(pValue){if(pValue===null||typeof pValue==='undefined')return'';if(typeof pValue==='number')return String(pValue);return String(pValue);}},{key:"_injectStyleElement",value:function _injectStyleElement(pCSS){if(typeof document==='undefined')return;var tmpStyleEl=document.getElementById(STYLE_ELEMENT_ID);if(!tmpStyleEl){tmpStyleEl=document.createElement('style');tmpStyleEl.id=STYLE_ELEMENT_ID;document.head.appendChild(tmpStyleEl);}tmpStyleEl.textContent=pCSS;}},{key:"_registerAuxiliaryCSS",value:function _registerAuxiliaryCSS(pTheme){// Clear previously registered auxiliary CSS so stale entries don't pile
+// up when switching themes.
+if(this.pict&&this.pict.CSSMap&&typeof this.pict.CSSMap.removeCSS==='function'){for(var i=0;i<this._registeredCSSHashes.length;i++){this.pict.CSSMap.removeCSS(this._registeredCSSHashes[i]);}}this._registeredCSSHashes=[];if(!Array.isArray(pTheme.CSS))return;if(!this.pict||!this.pict.CSSMap||typeof this.pict.CSSMap.addCSS!=='function')return;for(var _i24=0;_i24<pTheme.CSS.length;_i24++){var tmpEntry=pTheme.CSS[_i24];if(!tmpEntry||!tmpEntry.Hash||typeof tmpEntry.Content!=='string')continue;var tmpPriority=typeof tmpEntry.Priority==='number'?tmpEntry.Priority:500;this.pict.CSSMap.addCSS(tmpEntry.Hash,tmpEntry.Content,tmpPriority);this._registeredCSSHashes.push(tmpEntry.Hash);}}/**
+	 * Set or update the `theme-light` / `theme-dark` class on <html>.
+	 * For 'system', subscribes to prefers-color-scheme.
+	 */},{key:"_applyMode",value:function _applyMode(pMode,pStrategy){this._detachSystemListener();var tmpResolved=pMode;if(pMode==='system'){tmpResolved=this._readSystemPreference();this._attachSystemListener(pStrategy);}this._resolvedMode=tmpResolved==='dark'?'dark':'light';this._writeHTMLClass(this._resolvedMode);}},{key:"_writeHTMLClass",value:function _writeHTMLClass(pResolvedMode){if(typeof document==='undefined'||!document.documentElement||!document.documentElement.classList)return;var tmpList=document.documentElement.classList;if(pResolvedMode==='dark'){tmpList.remove(HTML_CLASS_LIGHT);tmpList.add(HTML_CLASS_DARK);}else{tmpList.remove(HTML_CLASS_DARK);tmpList.add(HTML_CLASS_LIGHT);}}},{key:"_readSystemPreference",value:function _readSystemPreference(){if(typeof window==='undefined'||typeof window.matchMedia!=='function')return'light';try{return window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}catch(pError){return'light';}}},{key:"_attachSystemListener",value:function _attachSystemListener(pStrategy){if(typeof window==='undefined'||typeof window.matchMedia!=='function')return;try{var tmpSelf=this;var tmpMQ=window.matchMedia('(prefers-color-scheme: dark)');var tmpHandler=function tmpHandler(){var tmpResolved=tmpMQ.matches?'dark':'light';tmpSelf._resolvedMode=tmpResolved;tmpSelf._writeHTMLClass(tmpResolved);};if(typeof tmpMQ.addEventListener==='function'){tmpMQ.addEventListener('change',tmpHandler);}else if(typeof tmpMQ.addListener==='function'){tmpMQ.addListener(tmpHandler);}this._systemMediaQuery=tmpMQ;this._systemListener=tmpHandler;}catch(pError){// Older browser; leave system listener unattached.
+}}},{key:"_detachSystemListener",value:function _detachSystemListener(){if(!this._systemMediaQuery||!this._systemListener)return;try{if(typeof this._systemMediaQuery.removeEventListener==='function'){this._systemMediaQuery.removeEventListener('change',this._systemListener);}else if(typeof this._systemMediaQuery.removeListener==='function'){this._systemMediaQuery.removeListener(this._systemListener);}}catch(pError){// noop
+}this._systemMediaQuery=null;this._systemListener=null;}}]);}(libPictProvider);PictProviderTheme.default_configuration=_ProviderConfiguration;module.exports=PictProviderTheme;module.exports.STYLE_ELEMENT_ID=STYLE_ELEMENT_ID;module.exports.HTML_CLASS_LIGHT=HTML_CLASS_LIGHT;module.exports.HTML_CLASS_DARK=HTML_CLASS_DARK;module.exports.CSS_VAR_PREFIX=CSS_VAR_PREFIX;},{"./templates/Pict-Template-Theme.js":7,"./templates/Pict-Template-ThemeAsset.js":8,"./templates/Pict-Template-ThemeImage.js":9,"./templates/Pict-Template-ThemeVar.js":10,"pict-provider":12}],7:[function(require,module,exports){/**
+ * Pict template expression: {~Theme:Path~}
+ *
+ * Resolves a token path against the active theme bundle and returns the
+ * raw value at the currently resolved mode.  Walks from the bundle root,
+ * so paths like 'Tokens.Color.Background.Primary' or 'Brand.Name' work.
+ *
+ * Returns an empty string if no theme is active or the path is missing.
+ */var libPictTemplate=require('pict-template');var PictTemplateTheme=/*#__PURE__*/function(_libPictTemplate){function PictTemplateTheme(pFable,pOptions,pServiceHash){var _this12;_classCallCheck(this,PictTemplateTheme);_this12=_callSuper(this,PictTemplateTheme,[pFable,pOptions,pServiceHash]);_this12.addPattern('{~Theme:','~}');return _this12;}_inherits(PictTemplateTheme,_libPictTemplate);return _createClass(PictTemplateTheme,[{key:"render",value:function render(pTemplateHash){var tmpPath=(pTemplateHash||'').trim();if(!tmpPath)return'';var tmpProvider=this._findThemeProvider();if(!tmpProvider)return'';var tmpValue=tmpProvider.token(tmpPath);if(tmpValue===null||typeof tmpValue==='undefined')return'';return String(tmpValue);}},{key:"_findThemeProvider",value:function _findThemeProvider(){if(!this.pict||!this.pict.providers)return null;return this.pict.providers['Theme']||null;}}]);}(libPictTemplate);module.exports=PictTemplateTheme;},{"pict-template":67}],8:[function(require,module,exports){/**
+ * Pict template expression: {~ThemeAsset:Category.Name~}
+ *
+ * Returns the contents of a named SVG (or other) asset from the active
+ * theme bundle.  The first path segment is treated as the category
+ * (e.g. SVG), the rest as the asset's path within that category.
+ *
+ *   {~ThemeAsset:SVG.Logo~}        -> bundle.SVG.Logo
+ *   {~ThemeAsset:SVG.Icons.Foo~}   -> bundle.SVG.Icons.Foo
+ */var libPictTemplate=require('pict-template');var PictTemplateThemeAsset=/*#__PURE__*/function(_libPictTemplate2){function PictTemplateThemeAsset(pFable,pOptions,pServiceHash){var _this13;_classCallCheck(this,PictTemplateThemeAsset);_this13=_callSuper(this,PictTemplateThemeAsset,[pFable,pOptions,pServiceHash]);_this13.addPattern('{~ThemeAsset:','~}');return _this13;}_inherits(PictTemplateThemeAsset,_libPictTemplate2);return _createClass(PictTemplateThemeAsset,[{key:"render",value:function render(pTemplateHash){var tmpPath=(pTemplateHash||'').trim();if(!tmpPath)return'';var tmpDot=tmpPath.indexOf('.');if(tmpDot<0)return'';var tmpCategory=tmpPath.substring(0,tmpDot);var tmpName=tmpPath.substring(tmpDot+1);var tmpProvider=this._findThemeProvider();if(!tmpProvider)return'';var tmpValue=tmpProvider.asset(tmpCategory,tmpName);if(tmpValue===null||typeof tmpValue==='undefined')return'';return String(tmpValue);}},{key:"_findThemeProvider",value:function _findThemeProvider(){if(!this.pict||!this.pict.providers)return null;return this.pict.providers['Theme']||null;}}]);}(libPictTemplate);module.exports=PictTemplateThemeAsset;},{"pict-template":67}],9:[function(require,module,exports){/**
+ * Pict template expression: {~ThemeImage:Name~}
+ *
+ * Returns the URL or data URL stored at bundle.Image[Name] in the active
+ * theme bundle.  Convenience over {~ThemeAsset:Image.Name~}.
+ */var libPictTemplate=require('pict-template');var PictTemplateThemeImage=/*#__PURE__*/function(_libPictTemplate3){function PictTemplateThemeImage(pFable,pOptions,pServiceHash){var _this14;_classCallCheck(this,PictTemplateThemeImage);_this14=_callSuper(this,PictTemplateThemeImage,[pFable,pOptions,pServiceHash]);_this14.addPattern('{~ThemeImage:','~}');return _this14;}_inherits(PictTemplateThemeImage,_libPictTemplate3);return _createClass(PictTemplateThemeImage,[{key:"render",value:function render(pTemplateHash){var tmpName=(pTemplateHash||'').trim();if(!tmpName)return'';var tmpProvider=this._findThemeProvider();if(!tmpProvider)return'';var tmpValue=tmpProvider.image(tmpName);if(tmpValue===null||typeof tmpValue==='undefined')return'';return String(tmpValue);}},{key:"_findThemeProvider",value:function _findThemeProvider(){if(!this.pict||!this.pict.providers)return null;return this.pict.providers['Theme']||null;}}]);}(libPictTemplate);module.exports=PictTemplateThemeImage;},{"pict-template":67}],10:[function(require,module,exports){/**
+ * Pict template expression: {~ThemeVar:Path~}
+ *
+ * Returns a CSS `var(--theme-...)` reference for a token path under
+ * Tokens.  E.g. {~ThemeVar:Color.Background.Primary~} ->
+ * `var(--theme-color-background-primary)`.
+ *
+ * Useful inside style attributes and in CSS-in-JS contexts where you want
+ * the live custom-property reference rather than the resolved value.
+ */var libPictTemplate=require('pict-template');var PictTemplateThemeVar=/*#__PURE__*/function(_libPictTemplate4){function PictTemplateThemeVar(pFable,pOptions,pServiceHash){var _this15;_classCallCheck(this,PictTemplateThemeVar);_this15=_callSuper(this,PictTemplateThemeVar,[pFable,pOptions,pServiceHash]);_this15.addPattern('{~ThemeVar:','~}');return _this15;}_inherits(PictTemplateThemeVar,_libPictTemplate4);return _createClass(PictTemplateThemeVar,[{key:"render",value:function render(pTemplateHash){var tmpPath=(pTemplateHash||'').trim();if(!tmpPath)return'';var tmpProvider=this._findThemeProvider();if(!tmpProvider)return'';return tmpProvider.cssVar(tmpPath);}},{key:"_findThemeProvider",value:function _findThemeProvider(){if(!this.pict||!this.pict.providers)return null;return this.pict.providers['Theme']||null;}}]);}(libPictTemplate);module.exports=PictTemplateThemeVar;},{"pict-template":67}],11:[function(require,module,exports){module.exports={"name":"pict-provider","version":"1.0.13","description":"Pict Provider Base Class","main":"source/Pict-Provider.js","scripts":{"start":"node source/Pict-Provider.js","test":"npx quack test","tests":"npx quack test -g","coverage":"npx quack coverage","build":"npx quack build","docker-dev-build":"docker build ./ -f Dockerfile_LUXURYCode -t pict-provider-image:local","docker-dev-run":"docker run -it -d --name pict-provider-dev -p 24125:8080 -p 30027:8086 -v \"$PWD/.config:/home/coder/.config\"  -v \"$PWD:/home/coder/pict-provider\" -u \"$(id -u):$(id -g)\" -e \"DOCKER_USER=$USER\" pict-provider-image:local","docker-dev-shell":"docker exec -it pict-provider-dev /bin/bash","lint":"eslint source/**","types":"tsc -p ."},"types":"types/source/Pict-Provider.d.ts","repository":{"type":"git","url":"git+https://github.com/stevenvelozo/pict-provider.git"},"author":"steven velozo <steven@velozo.com>","license":"MIT","bugs":{"url":"https://github.com/stevenvelozo/pict-provider/issues"},"homepage":"https://github.com/stevenvelozo/pict-provider#readme","devDependencies":{"@eslint/js":"^9.39.1","eslint":"^9.39.1","pict":"^1.0.351","pict-docuserve":"^0.1.5","quackage":"^1.1.0","typescript":"^5.9.3"},"dependencies":{"fable-serviceproviderbase":"^3.0.19"},"mocha":{"diff":true,"extension":["js"],"package":"./package.json","reporter":"spec","slow":"75","timeout":"5000","ui":"tdd","watch-files":["source/**/*.js","test/**/*.js"],"watch-ignore":["lib/vendor"]}};},{}],12:[function(require,module,exports){var libFableServiceBase=require('fable-serviceproviderbase');var libPackage=require('../package.json');var defaultPictProviderSettings={ProviderIdentifier:false,// If this is set to true, when the App initializes this will.
+// After the App initializes, initialize will be called as soon as it's added.
+AutoInitialize:true,AutoInitializeOrdinal:0,AutoLoadDataWithApp:true,AutoLoadDataOrdinal:0,AutoSolveWithApp:true,AutoSolveOrdinal:0,Manifests:{},Templates:[]};var PictProvider=/*#__PURE__*/function(_libFableServiceBase2){/**
+	 * @param {import('fable')} pFable - The Fable instance.
+	 * @param {Record<string, any>} [pOptions] - The options for the provider.
+	 * @param {string} [pServiceHash] - The service hash for the provider.
+	 */function PictProvider(pFable,pOptions,pServiceHash){var _this16;_classCallCheck(this,PictProvider);// Intersect default options, parent constructor, service information
+var tmpOptions=Object.assign({},JSON.parse(JSON.stringify(defaultPictProviderSettings)),pOptions);_this16=_callSuper(this,PictProvider,[pFable,tmpOptions,pServiceHash]);/** @type {import('fable') & import('pict') & { instantiateServiceProviderWithoutRegistration(pServiceType: string, pOptions?: Record<string, any>, pCustomServiceHash?: string): any }} */_this16.fable;/** @type {import('fable') & import('pict') & { instantiateServiceProviderWithoutRegistration(pServiceType: string, pOptions?: Record<string, any>, pCustomServiceHash?: string): any }} */_this16.pict;/** @type {any} */_this16.log;/** @type {Record<string, any>} */_this16.options;/** @type {string} */_this16.UUID;/** @type {string} */_this16.Hash;if(!_this16.options.ProviderIdentifier){_this16.options.ProviderIdentifier="AutoProviderID-".concat(_this16.fable.getUUID());}_this16.serviceType='PictProvider';/** @type {Record<string, any>} */_this16._Package=libPackage;// Convenience and consistency naming
+_this16.pict=_this16.fable;// Wire in the essential Pict application state
+/** @type {Record<string, any>} */_this16.AppData=_this16.pict.AppData;/** @type {Record<string, any>} */_this16.Bundle=_this16.pict.Bundle;_this16.initializeTimestamp=false;_this16.lastSolvedTimestamp=false;for(var i=0;i<_this16.options.Templates.length;i++){var tmpDefaultTemplate=_this16.options.Templates[i];if(!tmpDefaultTemplate.hasOwnProperty('Postfix')||!tmpDefaultTemplate.hasOwnProperty('Template')){_this16.log.error("PictProvider [".concat(_this16.UUID,"]::[").concat(_this16.Hash,"] ").concat(_this16.options.ProviderIdentifier," could not load Default Template ").concat(i," in the options array."),tmpDefaultTemplate);}else{if(!tmpDefaultTemplate.Source){tmpDefaultTemplate.Source="PictProvider [".concat(_this16.UUID,"]::[").concat(_this16.Hash,"] ").concat(_this16.options.ProviderIdentifier," options object.");}_this16.pict.TemplateProvider.addDefaultTemplate(tmpDefaultTemplate.Prefix,tmpDefaultTemplate.Postfix,tmpDefaultTemplate.Template,tmpDefaultTemplate.Source);}}return _this16;}/* -------------------------------------------------------------------------- *//*                        Code Section: Initialization                        *//* -------------------------------------------------------------------------- */_inherits(PictProvider,_libFableServiceBase2);return _createClass(PictProvider,[{key:"onBeforeInitialize",value:function onBeforeInitialize(){if(this.pict.LogNoisiness>3){this.log.trace("PictProvider [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ProviderIdentifier," onBeforeInitialize:"));}return true;}/**
+	 * @param {(pError?: Error) => void} fCallback - The callback to call after pre-pinitialization.
+	 *
+	 * @return {void}
+	 */},{key:"onBeforeInitializeAsync",value:function onBeforeInitializeAsync(fCallback){this.onBeforeInitialize();return fCallback();}},{key:"onInitialize",value:function onInitialize(){if(this.pict.LogNoisiness>3){this.log.trace("PictProvider [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ProviderIdentifier," onInitialize:"));}return true;}/**
+	 * @param {(pError?: Error) => void} fCallback - The callback to call after initialization.
+	 *
+	 * @return {void}
+	 */},{key:"onInitializeAsync",value:function onInitializeAsync(fCallback){this.onInitialize();return fCallback();}},{key:"initialize",value:function initialize(){if(this.pict.LogControlFlow){this.log.trace("PICT-ControlFlow PROVIDER [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ProviderIdentifier," initialize:"));}if(!this.initializeTimestamp){this.onBeforeInitialize();this.onInitialize();this.onAfterInitialize();this.initializeTimestamp=this.pict.log.getTimeStamp();return true;}else{this.log.warn("PictProvider [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ProviderIdentifier," initialize called but initialization is already completed.  Aborting."));return false;}}/**
+	 * @param {(pError?: Error) => void} fCallback - The callback to call after initialization.
+	 *
+	 * @return {void}
+	 */},{key:"initializeAsync",value:function initializeAsync(fCallback){var _this17=this;if(this.pict.LogControlFlow){this.log.trace("PICT-ControlFlow PROVIDER [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ProviderIdentifier," initializeAsync:"));}if(!this.initializeTimestamp){var tmpAnticipate=this.pict.instantiateServiceProviderWithoutRegistration('Anticipate');if(this.pict.LogNoisiness>0){this.log.info("PictProvider [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ProviderIdentifier," beginning initialization..."));}tmpAnticipate.anticipate(this.onBeforeInitializeAsync.bind(this));tmpAnticipate.anticipate(this.onInitializeAsync.bind(this));tmpAnticipate.anticipate(this.onAfterInitializeAsync.bind(this));tmpAnticipate.wait(function(pError){_this17.initializeTimestamp=_this17.pict.log.getTimeStamp();if(pError){_this17.log.error("PictProvider [".concat(_this17.UUID,"]::[").concat(_this17.Hash,"] ").concat(_this17.options.ProviderIdentifier," initialization failed: ").concat(pError.message||pError),{Stack:pError.stack});}else if(_this17.pict.LogNoisiness>0){_this17.log.info("PictProvider [".concat(_this17.UUID,"]::[").concat(_this17.Hash,"] ").concat(_this17.options.ProviderIdentifier," initialization complete."));}return fCallback();});}else{this.log.warn("PictProvider [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ProviderIdentifier," async initialize called but initialization is already completed.  Aborting."));// TODO: Should this be an error?
+return fCallback();}}},{key:"onAfterInitialize",value:function onAfterInitialize(){if(this.pict.LogNoisiness>3){this.log.trace("PictProvider [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ProviderIdentifier," onAfterInitialize:"));}return true;}/**
+	 * @param {(pError?: Error) => void} fCallback - The callback to call after initialization.
+	 *
+	 * @return {void}
+	 */},{key:"onAfterInitializeAsync",value:function onAfterInitializeAsync(fCallback){this.onAfterInitialize();return fCallback();}},{key:"onPreRender",value:function onPreRender(){if(this.pict.LogNoisiness>3){this.log.trace("PictProvider [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ProviderIdentifier," onPreRender:"));}return true;}/**
+	 * @param {(pError?: Error) => void} fCallback - The callback to call after pre-render.
+	 *
+	 * @return {void}
+	 */},{key:"onPreRenderAsync",value:function onPreRenderAsync(fCallback){this.onPreRender();return fCallback();}},{key:"render",value:function render(){return this.onPreRender();}/**
+	 * @param {(pError?: Error) => void} fCallback - The callback to call after render.
+	 *
+	 * @return {void}
+	 */},{key:"renderAsync",value:function renderAsync(fCallback){this.onPreRender();return fCallback();}},{key:"onPreSolve",value:function onPreSolve(){if(this.pict.LogNoisiness>3){this.log.trace("PictProvider [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ProviderIdentifier," onPreSolve:"));}return true;}/**
+	 * @param {(pError?: Error) => void} fCallback - The callback to call after pre-solve.
+	 *
+	 * @return {void}
+	 */},{key:"onPreSolveAsync",value:function onPreSolveAsync(fCallback){this.onPreSolve();return fCallback();}},{key:"solve",value:function solve(){return this.onPreSolve();}/**
+	 * @param {(pError?: Error) => void} fCallback - The callback to call after solve.
+	 *
+	 * @return {void}
+	 */},{key:"solveAsync",value:function solveAsync(fCallback){this.onPreSolve();return fCallback();}/**
+	 * @param {(pError?: Error) => void} fCallback - The callback to call after the data pre-load.
+	 */},{key:"onBeforeLoadDataAsync",value:function onBeforeLoadDataAsync(fCallback){return fCallback();}/**
+	 * Hook to allow the provider to load data during application data load.
+	 *
+	 * @param {(pError?: Error) => void} fCallback - The callback to call after the data load.
+	 */},{key:"onLoadDataAsync",value:function onLoadDataAsync(fCallback){if(this.pict.LogNoisiness>3){this.log.trace("PictProvider [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ProviderIdentifier," onLoadDataAsync:"));}return fCallback();}/**
+	 * @param {(pError?: Error) => void} fCallback - The callback to call after the data post-load.
+	 */},{key:"onAfterLoadDataAsync",value:function onAfterLoadDataAsync(fCallback){return fCallback();}/**
+	 * @param {(pError?: Error) => void} fCallback - The callback to call after the data pre-load.
+	 *
+	 * @return {void}
+	 */},{key:"onBeforeSaveDataAsync",value:function onBeforeSaveDataAsync(fCallback){return fCallback();}/**
+	 * Hook to allow the provider to load data during application data load.
+	 *
+	 * @param {(pError?: Error) => void} fCallback - The callback to call after the data load.
+	 *
+	 * @return {void}
+	 */},{key:"onSaveDataAsync",value:function onSaveDataAsync(fCallback){if(this.pict.LogNoisiness>3){this.log.trace("PictProvider [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ProviderIdentifier," onSaveDataAsync:"));}return fCallback();}/**
+	 * @param {(pError?: Error) => void} fCallback - The callback to call after the data post-load.
+	 *
+	 * @return {void}
+	 */},{key:"onAfterSaveDataAsync",value:function onAfterSaveDataAsync(fCallback){return fCallback();}}]);}(libFableServiceBase);module.exports=PictProvider;},{"../package.json":11,"fable-serviceproviderbase":2}],13:[function(require,module,exports){var libPictProvider=require('pict-provider');var libNavigo=require('navigo');var _DEFAULT_PROVIDER_CONFIGURATION={ProviderIdentifier:'Pict-Router',AutoInitialize:true,AutoInitializeOrdinal:0};var PictRouter=/*#__PURE__*/function(_libPictProvider2){function PictRouter(pFable,pOptions,pServiceHash){var _this18;_classCallCheck(this,PictRouter);var tmpOptions=Object.assign({},_DEFAULT_PROVIDER_CONFIGURATION,pOptions);_this18=_callSuper(this,PictRouter,[pFable,tmpOptions,pServiceHash]);// Initialize the navigo router and set the base path to '/'
+_this18.router=new libNavigo('/',{strategy:'ONE',hash:true});if(_this18.options.Routes){for(var i=0;i<_this18.options.Routes.length;i++){if(_this18.options.Routes[i].path&&_this18.options.Routes[i].template){_this18.addRoute(_this18.options.Routes[i].path,_this18.options.Routes[i].template);}else if(_this18.options.Routes[i].path&&_this18.options.Routes[i].render){_this18.addRoute(_this18.options.Routes[i].path,_this18.options.Routes[i].render);}else{_this18.pict.log.warn("Route ".concat(i," is missing a render function or template string."));}}}// This is the route to render after load
+_this18.afterPersistView='/Manyfest/Overview';return _this18;}_inherits(PictRouter,_libPictProvider2);return _createClass(PictRouter,[{key:"currentScope",get:function get(){var _this$AppData$Manyfes,_this$AppData;return(_this$AppData$Manyfes=(_this$AppData=this.AppData)===null||_this$AppData===void 0||(_this$AppData=_this$AppData.ManyfestRecord)===null||_this$AppData===void 0?void 0:_this$AppData.Scope)!==null&&_this$AppData$Manyfes!==void 0?_this$AppData$Manyfes:'Default';}},{key:"forwardToScopedRoute",value:function forwardToScopedRoute(pData){this.navigate("".concat(pData.url,"/").concat(this.currentScope));}},{key:"onInitializeAsync",value:function onInitializeAsync(fCallback){return _superPropGet(PictRouter,"onInitializeAsync",this,3)([fCallback]);}/**
+	 * Add a route to the router.
+	 */},{key:"addRoute",value:function addRoute(pRoute,pRenderable){var _this19=this;if(typeof pRenderable==='function'){this.router.on(pRoute,pRenderable);this.resolve();}else if(typeof pRenderable==='string'){// Run this as a template, allowing some whack things with functions in template expressions.
+this.router.on(pRoute,function(pData){_this19.pict.parseTemplate(pRenderable,pData,null,_this19.pict);});this.resolve();}else{// renderable isn't usable!
+this.pict.log.warn("Route ".concat(pRoute," has an invalid renderable."));}}/**
+	 * Navigate to a given route (set the browser URL string, add to history, trigger router)
+	 * 
+	 * @param {string} pRoute - The route to navigate to
+	 */},{key:"navigate",value:function navigate(pRoute){this.router.navigate(pRoute);}/**
+	 * Trigger the router resolving logic; this is expected to be called after all routes are added (to go to the default route).
+	 *
+	 */},{key:"resolve",value:function resolve(){this.router.resolve();}}]);}(libPictProvider);module.exports=PictRouter;module.exports.default_configuration=_DEFAULT_PROVIDER_CONFIGURATION;},{"navigo":3,"pict-provider":12}],14:[function(require,module,exports){/**
+ * Pict-Modal-Confirm
+ *
+ * Builds confirm and double-confirm dialog DOM, returns Promises.
+ */var PictModalConfirm=/*#__PURE__*/function(){function PictModalConfirm(pModal){_classCallCheck(this,PictModalConfirm);this._modal=pModal;}/**
+	 * Show a single-step confirmation dialog.
+	 *
+	 * @param {string} pMessage - The confirmation message
+	 * @param {object} [pOptions] - Options (title, confirmLabel, cancelLabel, dangerous)
+	 * @returns {Promise<boolean>}
+	 */return _createClass(PictModalConfirm,[{key:"confirm",value:function confirm(pMessage,pOptions){var _this20=this;var tmpOptions=Object.assign({},this._modal.options.DefaultConfirmOptions,pOptions);return new Promise(function(fResolve){var tmpDialog=_this20._buildDialog(tmpOptions.title,pMessage,fResolve,tmpOptions);_this20._showDialog(tmpDialog,fResolve);});}/**
+	 * Show a two-step confirmation dialog.
+	 *
+	 * If confirmPhrase is provided, user must type it to enable the confirm button.
+	 * Otherwise, first click changes button text, second click confirms.
+	 *
+	 * @param {string} pMessage - The confirmation message
+	 * @param {object} [pOptions] - Options (title, confirmPhrase, phrasePrompt, confirmLabel, cancelLabel)
+	 * @returns {Promise<boolean>}
+	 */},{key:"doubleConfirm",value:function doubleConfirm(pMessage,pOptions){var _this21=this;var tmpOptions=Object.assign({},this._modal.options.DefaultDoubleConfirmOptions,pOptions);return new Promise(function(fResolve){var tmpDialog=_this21._buildDoubleConfirmDialog(tmpOptions.title,pMessage,fResolve,tmpOptions);_this21._showDialog(tmpDialog,fResolve);});}/**
+	 * Build a standard confirm dialog element.
+	 *
+	 * @param {string} pTitle
+	 * @param {string} pMessage
+	 * @param {function} fResolve - Promise resolver
+	 * @param {object} pOptions
+	 * @returns {HTMLElement}
+	 */},{key:"_buildDialog",value:function _buildDialog(pTitle,pMessage,fResolve,pOptions){var _this22=this;var tmpId=this._modal._nextId();var tmpBtnStyle=pOptions.dangerous?'danger':'primary';var tmpDialog=document.createElement('div');tmpDialog.className='pict-modal-dialog';if(pOptions.unbounded){tmpDialog.className+=' pict-modal-dialog--unbounded';}tmpDialog.id='pict-modal-'+tmpId;tmpDialog.setAttribute('role','dialog');tmpDialog.setAttribute('aria-modal','true');tmpDialog.style.width='420px';tmpDialog.innerHTML='<div class="pict-modal-dialog-header">'+'<span class="pict-modal-dialog-title">'+this._escapeHTML(pTitle)+'</span>'+'<button class="pict-modal-dialog-close" aria-label="Close">&times;</button>'+'</div>'+'<div class="pict-modal-dialog-body">'+'<p>'+this._escapeHTML(pMessage)+'</p>'+'</div>'+'<div class="pict-modal-dialog-footer">'+'<button class="pict-modal-btn" data-action="cancel">'+this._escapeHTML(pOptions.cancelLabel)+'</button>'+'<button class="pict-modal-btn pict-modal-btn--'+tmpBtnStyle+'" data-action="confirm">'+this._escapeHTML(pOptions.confirmLabel)+'</button>'+'</div>';var tmpCloseBtn=tmpDialog.querySelector('.pict-modal-dialog-close');var tmpCancelBtn=tmpDialog.querySelector('[data-action="cancel"]');var tmpConfirmBtn=tmpDialog.querySelector('[data-action="confirm"]');var tmpDismiss=function tmpDismiss(pResult){_this22._dismissDialog(tmpDialog,pResult,fResolve);};tmpCloseBtn.addEventListener('click',function(){tmpDismiss(false);});tmpCancelBtn.addEventListener('click',function(){tmpDismiss(false);});tmpConfirmBtn.addEventListener('click',function(){tmpDismiss(true);});tmpDialog._dismiss=tmpDismiss;tmpDialog._focusTarget=tmpCancelBtn;return tmpDialog;}/**
+	 * Build a double-confirm dialog element.
+	 *
+	 * @param {string} pTitle
+	 * @param {string} pMessage
+	 * @param {function} fResolve - Promise resolver
+	 * @param {object} pOptions
+	 * @returns {HTMLElement}
+	 */},{key:"_buildDoubleConfirmDialog",value:function _buildDoubleConfirmDialog(pTitle,pMessage,fResolve,pOptions){var _this23=this;var tmpId=this._modal._nextId();var tmpHasPhrase=typeof pOptions.confirmPhrase==='string'&&pOptions.confirmPhrase.length>0;var tmpDialog=document.createElement('div');tmpDialog.className='pict-modal-dialog';if(pOptions.unbounded){tmpDialog.className+=' pict-modal-dialog--unbounded';}tmpDialog.id='pict-modal-'+tmpId;tmpDialog.setAttribute('role','dialog');tmpDialog.setAttribute('aria-modal','true');tmpDialog.style.width='420px';var tmpBodyContent='<p>'+this._escapeHTML(pMessage)+'</p>';if(tmpHasPhrase){var tmpPromptText=pOptions.phrasePrompt.replace('{phrase}',pOptions.confirmPhrase);tmpBodyContent+='<div class="pict-modal-confirm-prompt">'+this._escapeHTML(tmpPromptText)+'</div>'+'<input type="text" class="pict-modal-confirm-input" autocomplete="off" spellcheck="false" />';}tmpDialog.innerHTML='<div class="pict-modal-dialog-header">'+'<span class="pict-modal-dialog-title">'+this._escapeHTML(pTitle)+'</span>'+'<button class="pict-modal-dialog-close" aria-label="Close">&times;</button>'+'</div>'+'<div class="pict-modal-dialog-body">'+tmpBodyContent+'</div>'+'<div class="pict-modal-dialog-footer">'+'<button class="pict-modal-btn" data-action="cancel">'+this._escapeHTML(pOptions.cancelLabel)+'</button>'+'<button class="pict-modal-btn pict-modal-btn--danger" data-action="confirm" disabled>'+this._escapeHTML(pOptions.confirmLabel)+'</button>'+'</div>';var tmpCloseBtn=tmpDialog.querySelector('.pict-modal-dialog-close');var tmpCancelBtn=tmpDialog.querySelector('[data-action="cancel"]');var tmpConfirmBtn=tmpDialog.querySelector('[data-action="confirm"]');var tmpDismiss=function tmpDismiss(pResult){_this23._dismissDialog(tmpDialog,pResult,fResolve);};tmpCloseBtn.addEventListener('click',function(){tmpDismiss(false);});tmpCancelBtn.addEventListener('click',function(){tmpDismiss(false);});if(tmpHasPhrase){// Phrase-based: enable confirm button when input matches
+var tmpInput=tmpDialog.querySelector('.pict-modal-confirm-input');tmpInput.addEventListener('input',function(){tmpConfirmBtn.disabled=tmpInput.value!==pOptions.confirmPhrase;});tmpConfirmBtn.addEventListener('click',function(){if(!tmpConfirmBtn.disabled){tmpDismiss(true);}});tmpDialog._focusTarget=tmpInput;}else{// Two-click: first click changes label, second click confirms
+var tmpClickCount=0;var tmpOriginalLabel=pOptions.confirmLabel;tmpConfirmBtn.disabled=false;tmpConfirmBtn.addEventListener('click',function(){tmpClickCount++;if(tmpClickCount===1){tmpConfirmBtn.textContent='Click again to confirm';}else{tmpDismiss(true);}});tmpDialog._focusTarget=tmpCancelBtn;}tmpDialog._dismiss=tmpDismiss;return tmpDialog;}/**
+	 * Show a dialog element: append to body, show overlay, animate in.
+	 *
+	 * @param {HTMLElement} pDialog
+	 * @param {function} fResolve - Promise resolver (for overlay click dismiss)
+	 */},{key:"_showDialog",value:function _showDialog(pDialog,fResolve){var tmpModalEntry={element:pDialog,dismiss:pDialog._dismiss,type:'confirm'};// Show overlay
+var tmpOverlayClickHandler=null;if(this._modal.options.OverlayClickDismisses){tmpOverlayClickHandler=function tmpOverlayClickHandler(){pDialog._dismiss(false);};}this._modal._overlay.show(tmpOverlayClickHandler);// Append to body
+document.body.appendChild(pDialog);// Track active modal
+this._modal._activeModals.push(tmpModalEntry);// Animate in
+void pDialog.offsetHeight;pDialog.classList.add('pict-modal-visible');// Focus
+if(pDialog._focusTarget){pDialog._focusTarget.focus();}// Keyboard handler
+pDialog._keyHandler=function(pEvent){if(pEvent.key==='Escape'){pDialog._dismiss(false);}};document.addEventListener('keydown',pDialog._keyHandler);}/**
+	 * Dismiss a dialog: animate out, remove from DOM, hide overlay.
+	 *
+	 * @param {HTMLElement} pDialog
+	 * @param {*} pResult - Value to resolve the promise with
+	 * @param {function} fResolve - Promise resolver
+	 */},{key:"_dismissDialog",value:function _dismissDialog(pDialog,pResult,fResolve){// Prevent double-dismiss
+if(pDialog._dismissed){return;}pDialog._dismissed=true;// Remove keyboard handler
+if(pDialog._keyHandler){document.removeEventListener('keydown',pDialog._keyHandler);}// Animate out
+pDialog.classList.remove('pict-modal-visible');// Remove from active modals
+this._modal._activeModals=this._modal._activeModals.filter(function(pEntry){return pEntry.element!==pDialog;});// Update overlay click handler to point to new topmost modal
+if(this._modal._activeModals.length>0){var tmpTopModal=this._modal._activeModals[this._modal._activeModals.length-1];this._modal._overlay.updateClickHandler(this._modal.options.OverlayClickDismisses?tmpTopModal.dismiss:null);}// Hide overlay
+this._modal._overlay.hide();// Remove from DOM after transition
+setTimeout(function(){if(pDialog.parentNode){pDialog.parentNode.removeChild(pDialog);}},220);// Resolve promise
+fResolve(pResult);}/**
+	 * Escape HTML special characters.
+	 *
+	 * @param {string} pText
+	 * @returns {string}
+	 */},{key:"_escapeHTML",value:function _escapeHTML(pText){if(typeof pText!=='string'){return'';}return pText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}}]);}();module.exports=PictModalConfirm;},{}],15:[function(require,module,exports){/**
+ * Pict-Modal-Dropdown
+ *
+ * Anchor-positioned menu that behaves like a dropdown / popover. Handy for:
+ *   - nav menus that hang off a header link or button
+ *   - "split button" style addenda (a primary action paired with a chevron
+ *     that opens a list of related/alternate actions)
+ *   - any "more options" affordance where a full modal would be heavy
+ *
+ * Differences from the modal Window helper:
+ *   - No backdrop overlay — the rest of the page stays interactive.
+ *   - Positioned next to the anchor element, not centered.
+ *   - Auto-flips above when there isn't room below; clamps inside the viewport.
+ *   - Click outside or Escape dismisses (matches native menu conventions).
+ *
+ * Usage:
+ *     modal.dropdown(anchorEl, {
+ *         items:
+ *         [
+ *             { Hash: 'edit',   Label: 'Edit'                    },
+ *             { Hash: 'rename', Label: 'Rename...'                },
+ *             { Separator: true                                   },
+ *             { Hash: 'delete', Label: 'Delete', Style: 'danger'  },
+ *             { Hash: 'archive',Label: 'Archive', Disabled: true,
+ *               Tooltip: 'Already archived'                       }
+ *         ],
+ *         align: 'left'        // 'left' | 'right' (relative to anchor)
+ *     }).then((pChoice) => { ... });
+ *
+ * Returns a Promise that resolves with `{ Hash, Item }` on selection or
+ * `null` on dismiss.
+ */var PictModalDropdown=/*#__PURE__*/function(){function PictModalDropdown(pModal){_classCallCheck(this,PictModalDropdown);this._modal=pModal;this._activeMenu=null;}/**
+	 * Open a dropdown menu anchored to an element.
+	 *
+	 * @param {HTMLElement|string|object} pAnchor - Element, CSS selector, or
+	 *   a rect-like { left, top, width, height } anchor (handy for context menus).
+	 * @param {object} pOptions
+	 * @param {Array}    pOptions.items     - [{ Hash, Label, Style?, Disabled?, Tooltip?, Icon?, Separator? }]
+	 * @param {string}   [pOptions.align]   - 'left'|'right' (default 'left')
+	 * @param {string}   [pOptions.position]- 'auto'|'below'|'above' (default 'auto')
+	 * @param {string}   [pOptions.minWidth]- CSS minWidth (default: anchor width if known, else '160px')
+	 * @param {string}   [pOptions.maxHeight]- CSS maxHeight (default '60vh')
+	 * @param {string}   [pOptions.className]- extra class(es) for the menu element
+	 * @param {boolean}  [pOptions.closeOnSelect] - default true
+	 * @param {function} [pOptions.onSelect]- called with (Hash, Item) on selection
+	 * @param {function} [pOptions.onClose] - called after dismiss
+	 * @returns {Promise<{Hash: string, Item: object}|null>}
+	 */return _createClass(PictModalDropdown,[{key:"dropdown",value:function dropdown(pAnchor,pOptions){var _this24=this;var tmpOptions=Object.assign({align:'left',position:'auto',maxHeight:'60vh',closeOnSelect:true},pOptions||{});var tmpAnchorEl=this._resolveAnchor(pAnchor);var tmpAnchorRect=this._anchorRect(pAnchor,tmpAnchorEl);if(!tmpAnchorRect){return Promise.resolve(null);}// Re-opening the same menu is a no-op; closing-then-reopening is a
+// caller decision (just call dismissDropdown() first).
+if(this._activeMenu&&this._activeMenu.anchor===tmpAnchorEl){return this._activeMenu.promise;}// Only one dropdown at a time keeps focus / keyboard handling sane.
+this.dismissAll();var tmpItems=Array.isArray(tmpOptions.items)?tmpOptions.items:[];var tmpResolveOuter;var tmpPromise=new Promise(function(fResolve){tmpResolveOuter=fResolve;});var tmpMenu=this._buildMenu(tmpItems,tmpOptions);document.body.appendChild(tmpMenu);this._positionMenu(tmpMenu,tmpAnchorRect,tmpOptions);// Animate in on the next frame.
+void tmpMenu.offsetHeight;tmpMenu.classList.add('pict-modal-visible');var tmpDismiss=function tmpDismiss(pResult){if(tmpMenu._dismissed){return;}tmpMenu._dismissed=true;document.removeEventListener('mousedown',tmpOutsideHandler,true);document.removeEventListener('keydown',tmpKeyHandler,true);window.removeEventListener('resize',tmpRepositionHandler);window.removeEventListener('scroll',tmpRepositionHandler,true);tmpMenu.classList.remove('pict-modal-visible');setTimeout(function(){if(tmpMenu.parentNode){tmpMenu.parentNode.removeChild(tmpMenu);}},180);if(_this24._activeMenu&&_this24._activeMenu.element===tmpMenu){_this24._activeMenu=null;}if(typeof tmpOptions.onClose==='function'){tmpOptions.onClose(pResult);}tmpResolveOuter(pResult);};// Wire item clicks (each item element carries a data-hash; separators
+// and disabled items are skipped).
+var tmpItemEls=tmpMenu.querySelectorAll('[data-pict-modal-dropdown-item]');var _loop=function _loop(){var tmpEl=tmpItemEls[i];tmpEl.addEventListener('click',function(pEvent){if(tmpEl.hasAttribute('data-disabled')){return;}pEvent.stopPropagation();var tmpIdx=parseInt(tmpEl.getAttribute('data-index'),10);var tmpItem=tmpItems[tmpIdx];var tmpHash=tmpEl.getAttribute('data-hash');if(typeof tmpOptions.onSelect==='function'){tmpOptions.onSelect(tmpHash,tmpItem);}if(tmpOptions.closeOnSelect!==false){tmpDismiss({Hash:tmpHash,Item:tmpItem});}});};for(var i=0;i<tmpItemEls.length;i++){_loop();}// Click anywhere outside the menu (and outside the anchor) → dismiss.
+// Use mousedown/capture so we beat any per-element click handlers.
+var tmpOutsideHandler=function tmpOutsideHandler(pEvent){if(tmpMenu.contains(pEvent.target)){return;}if(tmpAnchorEl&&tmpAnchorEl.contains&&tmpAnchorEl.contains(pEvent.target)){return;}tmpDismiss(null);};document.addEventListener('mousedown',tmpOutsideHandler,true);// Esc dismisses; arrow keys navigate items (skipping disabled/separator).
+var tmpKeyHandler=function tmpKeyHandler(pEvent){if(pEvent.key==='Escape'){pEvent.stopPropagation();tmpDismiss(null);return;}if(pEvent.key==='ArrowDown'||pEvent.key==='ArrowUp'){pEvent.preventDefault();_this24._focusNeighbor(tmpMenu,pEvent.key==='ArrowDown'?1:-1);}else if(pEvent.key==='Enter'||pEvent.key===' '){var tmpFocused=document.activeElement;if(tmpFocused&&tmpMenu.contains(tmpFocused)&&tmpFocused.hasAttribute('data-pict-modal-dropdown-item')){pEvent.preventDefault();tmpFocused.click();}}};document.addEventListener('keydown',tmpKeyHandler,true);// Reposition on viewport resize / scroll so the menu doesn't drift
+// off the anchor.
+var tmpRepositionHandler=function tmpRepositionHandler(){var tmpRect=_this24._anchorRect(pAnchor,tmpAnchorEl);if(tmpRect){_this24._positionMenu(tmpMenu,tmpRect,tmpOptions);}};window.addEventListener('resize',tmpRepositionHandler);window.addEventListener('scroll',tmpRepositionHandler,true);// Move keyboard focus to the first enabled item so arrows / Enter work
+// without an extra click.
+setTimeout(function(){_this24._focusFirstEnabled(tmpMenu);},0);this._activeMenu={element:tmpMenu,anchor:tmpAnchorEl,promise:tmpPromise,dismiss:tmpDismiss};return tmpPromise;}/**
+	 * Dismiss the currently-open dropdown (if any).
+	 */},{key:"dismissAll",value:function dismissAll(){if(this._activeMenu){var tmpDismiss=this._activeMenu.dismiss;this._activeMenu=null;tmpDismiss(null);}}// ─────────────────────────────────────────────
+//  Internals
+// ─────────────────────────────────────────────
+},{key:"_resolveAnchor",value:function _resolveAnchor(pAnchor){if(!pAnchor){return null;}if(typeof pAnchor==='string'){return document.querySelector(pAnchor);}if(pAnchor.nodeType===1){return pAnchor;}// rect-like — no element to attach focus / outside-click ignore to,
+// but that's fine, the caller knows what they're doing.
+return null;}},{key:"_anchorRect",value:function _anchorRect(pAnchor,pAnchorEl){if(pAnchorEl&&typeof pAnchorEl.getBoundingClientRect==='function'){return pAnchorEl.getBoundingClientRect();}if(pAnchor&&_typeof(pAnchor)==='object'&&typeof pAnchor.left==='number'&&typeof pAnchor.top==='number'){return{left:pAnchor.left,top:pAnchor.top,width:pAnchor.width||0,height:pAnchor.height||0,right:pAnchor.left+(pAnchor.width||0),bottom:pAnchor.top+(pAnchor.height||0)};}return null;}},{key:"_buildMenu",value:function _buildMenu(pItems,pOptions){var tmpId=this._modal._nextId();var tmpMenu=document.createElement('div');tmpMenu.className='pict-modal-dropdown';if(pOptions.className){tmpMenu.className+=' '+pOptions.className;}tmpMenu.id='pict-modal-dropdown-'+tmpId;tmpMenu.setAttribute('role','menu');tmpMenu.style.maxHeight=pOptions.maxHeight;var tmpHtml='';for(var i=0;i<pItems.length;i++){var tmpItem=pItems[i];if(tmpItem.Separator){tmpHtml+='<div class="pict-modal-dropdown-separator" role="separator"></div>';continue;}if(tmpItem.Header){tmpHtml+='<div class="pict-modal-dropdown-header">'+this._escapeHTML(tmpItem.Header)+'</div>';continue;}var tmpCls='pict-modal-dropdown-item';if(tmpItem.Style){tmpCls+=' pict-modal-dropdown-item--'+tmpItem.Style;}if(tmpItem.Disabled){tmpCls+=' pict-modal-dropdown-item--disabled';}var tmpAttrs=''+' data-pict-modal-dropdown-item'+' data-index="'+i+'"'+' data-hash="'+this._escapeHTML(tmpItem.Hash||'')+'"'+' role="menuitem"'+' tabindex="-1"';if(tmpItem.Disabled){tmpAttrs+=' aria-disabled="true" data-disabled';}if(tmpItem.Tooltip){tmpAttrs+=' title="'+this._escapeHTML(tmpItem.Tooltip)+'"';}var tmpIcon=tmpItem.Icon?'<span class="pict-modal-dropdown-item-icon">'+tmpItem.Icon+'</span>':'';var tmpHint=tmpItem.Hint?'<span class="pict-modal-dropdown-item-hint">'+this._escapeHTML(tmpItem.Hint)+'</span>':'';tmpHtml+='<div class="'+tmpCls+'"'+tmpAttrs+'>'+tmpIcon+'<span class="pict-modal-dropdown-item-label">'+this._escapeHTML(tmpItem.Label||'')+'</span>'+tmpHint+'</div>';}tmpMenu.innerHTML=tmpHtml;return tmpMenu;}},{key:"_positionMenu",value:function _positionMenu(pMenu,pAnchorRect,pOptions){// Apply min-width before measuring so the menu's natural size accounts
+// for the constraint.
+var tmpMinWidth=pOptions.minWidth||(pAnchorRect.width>=80?Math.ceil(pAnchorRect.width)+'px':'160px');pMenu.style.minWidth=tmpMinWidth;// Measure after attaching.
+var tmpMenuRect=pMenu.getBoundingClientRect();var tmpVw=window.innerWidth||document.documentElement.clientWidth;var tmpVh=window.innerHeight||document.documentElement.clientHeight;var tmpGap=4;// breathing room between anchor and menu
+// Vertical: prefer below; flip above when not enough room and there's
+// more above. 'below'/'above' overrides force the side.
+var tmpRoomBelow=tmpVh-pAnchorRect.bottom-tmpGap;var tmpRoomAbove=pAnchorRect.top-tmpGap;var tmpPlaceAbove;if(pOptions.position==='above'){tmpPlaceAbove=true;}else if(pOptions.position==='below'){tmpPlaceAbove=false;}else{tmpPlaceAbove=tmpMenuRect.height>tmpRoomBelow&&tmpRoomAbove>tmpRoomBelow;}// Cap height to whichever side we landed on so the menu can scroll
+// internally instead of running off the screen.
+var tmpCap=Math.max(80,(tmpPlaceAbove?tmpRoomAbove:tmpRoomBelow)-8);pMenu.style.maxHeight=tmpCap+'px';// Horizontal alignment to the anchor, then clamp inside the viewport.
+var tmpLeft;if(pOptions.align==='right'){tmpLeft=pAnchorRect.right-tmpMenuRect.width;}else if(pOptions.align==='center'){tmpLeft=pAnchorRect.left+(pAnchorRect.width-tmpMenuRect.width)/2;}else{tmpLeft=pAnchorRect.left;}tmpLeft=Math.min(tmpLeft,tmpVw-tmpMenuRect.width-4);tmpLeft=Math.max(4,tmpLeft);var tmpTop;if(tmpPlaceAbove){tmpTop=Math.max(4,pAnchorRect.top-tmpMenuRect.height-tmpGap);pMenu.classList.add('pict-modal-dropdown--above');}else{tmpTop=pAnchorRect.bottom+tmpGap;pMenu.classList.remove('pict-modal-dropdown--above');}pMenu.style.left=Math.round(tmpLeft)+'px';pMenu.style.top=Math.round(tmpTop)+'px';}},{key:"_focusFirstEnabled",value:function _focusFirstEnabled(pMenu){var tmpItems=pMenu.querySelectorAll('[data-pict-modal-dropdown-item]:not([data-disabled])');if(tmpItems.length){tmpItems[0].focus();}}},{key:"_focusNeighbor",value:function _focusNeighbor(pMenu,pDirection){var tmpItems=Array.prototype.slice.call(pMenu.querySelectorAll('[data-pict-modal-dropdown-item]:not([data-disabled])'));if(!tmpItems.length){return;}var tmpActive=document.activeElement;var tmpIdx=tmpItems.indexOf(tmpActive);var tmpNext=tmpIdx===-1?pDirection>0?0:tmpItems.length-1:(tmpIdx+pDirection+tmpItems.length)%tmpItems.length;tmpItems[tmpNext].focus();}},{key:"_escapeHTML",value:function _escapeHTML(pText){if(typeof pText!=='string'){return'';}return pText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}}]);}();module.exports=PictModalDropdown;},{}],16:[function(require,module,exports){/**
+ * Pict-Modal-Overlay
+ *
+ * Manages a shared backdrop overlay element appended to document.body.
+ * Reference-counted — created on first modal open, removed when last closes.
+ */var PictModalOverlay=/*#__PURE__*/function(){function PictModalOverlay(pModal){_classCallCheck(this,PictModalOverlay);this._modal=pModal;this._element=null;this._refCount=0;}/**
+	 * Show the overlay (incrementing reference count).
+	 * Creates the DOM element on first call.
+	 *
+	 * @param {function} [fOnClick] - Optional click handler (e.g. dismiss topmost modal)
+	 */return _createClass(PictModalOverlay,[{key:"show",value:function show(fOnClick){var _this25=this;this._refCount++;if(!this._element){this._element=document.createElement('div');this._element.className='pict-modal-overlay';document.body.appendChild(this._element);// Force reflow so the transition animates
+void this._element.offsetHeight;this._element.classList.add('pict-modal-visible');}if(fOnClick){// Store the latest click handler (for the topmost modal)
+this._currentClickHandler=fOnClick;this._element.onclick=function(pEvent){if(pEvent.target===_this25._element&&_this25._currentClickHandler){_this25._currentClickHandler();}};}}/**
+	 * Update the overlay click handler (e.g. when topmost modal changes).
+	 *
+	 * @param {function} [fOnClick] - New click handler
+	 */},{key:"updateClickHandler",value:function updateClickHandler(fOnClick){this._currentClickHandler=fOnClick||null;}/**
+	 * Hide the overlay (decrementing reference count).
+	 * Removes the DOM element when reference count reaches zero.
+	 */},{key:"hide",value:function hide(){this._refCount--;if(this._refCount<=0){this._refCount=0;if(this._element){this._element.classList.remove('pict-modal-visible');var tmpElement=this._element;// Remove after transition
+setTimeout(function(){if(tmpElement.parentNode){tmpElement.parentNode.removeChild(tmpElement);}},220);this._element=null;this._currentClickHandler=null;}}}/**
+	 * Force-remove the overlay regardless of reference count.
+	 */},{key:"destroy",value:function destroy(){this._refCount=0;if(this._element&&this._element.parentNode){this._element.parentNode.removeChild(this._element);}this._element=null;this._currentClickHandler=null;}}]);}();module.exports=PictModalOverlay;},{}],17:[function(require,module,exports){/**
+ * Pict-Modal-Panel
+ *
+ * Adds resizable and collapsible panel behavior to any DOM element.
+ * Follows the handler composition pattern used by the other modal
+ * handlers (confirm, window, toast, tooltip).
+ *
+ * Usage:
+ *   let handle = modal.panel('#my-panel', { position: 'right', width: 340 });
+ *   handle.toggle();
+ *   handle.destroy();
+ */var PictModalPanel=/*#__PURE__*/function(){function PictModalPanel(pModal){_classCallCheck(this,PictModalPanel);this._modal=pModal;this._panels=[];}/**
+	 * Attach resizable/collapsible panel behavior to an element.
+	 *
+	 * @param {string} pTargetSelector - CSS selector for the panel element
+	 * @param {object} [pOptions] - Panel options
+	 * @returns {{ collapse, expand, toggle, setWidth, destroy }} Panel handle
+	 */return _createClass(PictModalPanel,[{key:"create",value:function create(pTargetSelector,pOptions){var _this26=this;var tmpDefaults=this._modal&&this._modal.options&&this._modal.options.DefaultPanelOptions||{};var tmpOptions=Object.assign({},{position:'right',width:340,minWidth:200,maxWidth:600,collapsible:true,collapsed:false,persist:false,persistKey:'',onResize:null,onToggle:null},tmpDefaults,pOptions);if(typeof document==='undefined')return this._nullHandle();var tmpTarget=document.querySelector(pTargetSelector);if(!tmpTarget)return this._nullHandle();var tmpId=this._modal._nextId();var tmpIsRight=tmpOptions.position==='right';var tmpIsCollapsed=false;var tmpCurrentWidth=tmpOptions.width;var tmpDestroyed=false;// Restore persisted state
+if(tmpOptions.persist&&tmpOptions.persistKey){try{var tmpStored=localStorage.getItem('pict-panel-'+tmpOptions.persistKey);if(tmpStored){var tmpParsed=JSON.parse(tmpStored);if(typeof tmpParsed.width==='number')tmpCurrentWidth=tmpParsed.width;if(typeof tmpParsed.collapsed==='boolean')tmpOptions.collapsed=tmpParsed.collapsed;}}catch(e){/* ignore */}}// Apply classes and initial width
+tmpTarget.classList.add('pict-panel');tmpTarget.classList.add(tmpIsRight?'pict-panel-right':'pict-panel-left');tmpTarget.style.width=tmpCurrentWidth+'px';// Remove display:none if present — panel uses width collapse instead
+if(tmpTarget.style.display==='none'){tmpTarget.style.display='';}// ── Create the edge container ───────────────────────
+var tmpEdge=document.createElement('div');tmpEdge.className='pict-panel-edge '+(tmpIsRight?'pict-panel-edge-right':'pict-panel-edge-left');// Resize handle
+var tmpResize=document.createElement('div');tmpResize.className='pict-panel-resize';tmpEdge.appendChild(tmpResize);// Collapse tab (chevron SVG)
+var tmpTab=null;if(tmpOptions.collapsible){tmpTab=document.createElement('div');tmpTab.className='pict-panel-tab';tmpTab.title='Toggle panel';tmpEdge.appendChild(tmpTab);}// Insert edge as a sibling so it is not clipped by the
+// panel's own overflow (e.g. overflow-y: auto for scrolling).
+// Right panels: edge goes BEFORE the panel (left side).
+// Left panels: edge goes AFTER the panel (right side).
+if(tmpTarget.parentNode){if(tmpIsRight){tmpTarget.parentNode.insertBefore(tmpEdge,tmpTarget);}else{tmpTarget.parentNode.insertBefore(tmpEdge,tmpTarget.nextSibling);}}else{tmpTarget.insertBefore(tmpEdge,tmpTarget.firstChild);}// ── Chevron lookup via pict.providers.Icon ──────────
+// Both directions come from the core registry (`{~I:ChevronLeft~}`
+// / `{~I:ChevronRight~}`).  Resolved per-render so a theme that
+// re-registers the chevron variant picks up automatically.  Empty
+// fallback in the unlikely case pict is missing the Icon provider
+// (very old pict versions; current minimum is 1.0.368).
+var tmpPictHandle=typeof window!=='undefined'&&window.pict?window.pict:null;var tmpIcon=function tmpIcon(pName){return tmpPictHandle&&typeof tmpPictHandle.icon==='function'?tmpPictHandle.icon(pName):'';};var tmpUpdateChevron=function tmpUpdateChevron(){if(!tmpTab)return;var tmpChevronRight=tmpIcon('ChevronRight');var tmpChevronLeft=tmpIcon('ChevronLeft');if(tmpIsRight){tmpTab.innerHTML=tmpIsCollapsed?tmpChevronLeft:tmpChevronRight;}else{tmpTab.innerHTML=tmpIsCollapsed?tmpChevronRight:tmpChevronLeft;}};// ── Persist helper ──────────────────────────────────
+var tmpPersist=function tmpPersist(){if(!tmpOptions.persist||!tmpOptions.persistKey)return;try{localStorage.setItem('pict-panel-'+tmpOptions.persistKey,JSON.stringify({width:tmpCurrentWidth,collapsed:tmpIsCollapsed}));}catch(e){/* ignore */}};// ── Collapse / expand ───────────────────────────────
+var tmpCollapse=function tmpCollapse(){if(tmpIsCollapsed||tmpDestroyed)return;tmpIsCollapsed=true;tmpTarget.classList.add('pict-panel-collapsed');tmpEdge.classList.add('pict-panel-edge-collapsed');tmpUpdateChevron();tmpPersist();if(typeof tmpOptions.onToggle==='function')tmpOptions.onToggle(true);};var tmpExpand=function tmpExpand(){if(!tmpIsCollapsed||tmpDestroyed)return;tmpIsCollapsed=false;tmpEdge.classList.remove('pict-panel-edge-collapsed');tmpTarget.classList.remove('pict-panel-collapsed');tmpTarget.style.width=tmpCurrentWidth+'px';tmpUpdateChevron();tmpPersist();if(typeof tmpOptions.onToggle==='function')tmpOptions.onToggle(false);};var tmpToggle=function tmpToggle(){if(tmpIsCollapsed)tmpExpand();else tmpCollapse();};var tmpSetWidth=function tmpSetWidth(pWidth){if(tmpDestroyed)return;var tmpWidth=Math.max(tmpOptions.minWidth,Math.min(tmpOptions.maxWidth,pWidth));tmpCurrentWidth=tmpWidth;if(!tmpIsCollapsed){tmpTarget.style.width=tmpWidth+'px';}tmpPersist();if(typeof tmpOptions.onResize==='function')tmpOptions.onResize(tmpWidth);};// ── Tab click ───────────────────────────────────────
+if(tmpTab){tmpTab.addEventListener('click',function(pEvent){pEvent.stopPropagation();tmpToggle();});}// ── Resize drag ─────────────────────────────────────
+var tmpOnMouseDown=function tmpOnMouseDown(pEvent){if(tmpIsCollapsed)return;pEvent.preventDefault();var tmpStartX=pEvent.clientX;var tmpStartWidth=tmpTarget.offsetWidth;tmpResize.classList.add('dragging');tmpTarget.style.transition='none';document.body.style.userSelect='none';document.body.style.cursor='col-resize';var tmpOnMouseMove=function tmpOnMouseMove(pMoveEvent){var tmpDelta=tmpIsRight?tmpStartX-pMoveEvent.clientX:pMoveEvent.clientX-tmpStartX;var tmpNewWidth=Math.max(tmpOptions.minWidth,Math.min(tmpOptions.maxWidth,tmpStartWidth+tmpDelta));tmpTarget.style.width=tmpNewWidth+'px';};var _tmpOnMouseUp=function tmpOnMouseUp(pUpEvent){document.removeEventListener('mousemove',tmpOnMouseMove);document.removeEventListener('mouseup',_tmpOnMouseUp);tmpResize.classList.remove('dragging');tmpTarget.style.transition='';document.body.style.userSelect='';document.body.style.cursor='';// Capture the final width
+tmpCurrentWidth=tmpTarget.offsetWidth;tmpPersist();if(typeof tmpOptions.onResize==='function')tmpOptions.onResize(tmpCurrentWidth);};document.addEventListener('mousemove',tmpOnMouseMove);document.addEventListener('mouseup',_tmpOnMouseUp);};tmpResize.addEventListener('mousedown',tmpOnMouseDown);// ── Initial state ───────────────────────────────────
+tmpUpdateChevron();if(tmpOptions.collapsed){tmpIsCollapsed=true;tmpTarget.classList.add('pict-panel-collapsed');tmpEdge.classList.add('pict-panel-edge-collapsed');tmpUpdateChevron();}// ── Destroy ─────────────────────────────────────────
+var tmpDestroy=function tmpDestroy(){if(tmpDestroyed)return;tmpDestroyed=true;tmpResize.removeEventListener('mousedown',tmpOnMouseDown);if(tmpEdge.parentNode)tmpEdge.remove();tmpTarget.classList.remove('pict-panel','pict-panel-right','pict-panel-left','pict-panel-collapsed');tmpTarget.style.width='';tmpTarget.style.transition='';var tmpIdx=_this26._panels.indexOf(tmpHandle);if(tmpIdx>=0)_this26._panels.splice(tmpIdx,1);};// ── Return handle ───────────────────────────────────
+var tmpHandle={id:tmpId,collapse:tmpCollapse,expand:tmpExpand,toggle:tmpToggle,setWidth:tmpSetWidth,destroy:tmpDestroy};this._panels.push(tmpHandle);return tmpHandle;}/**
+	 * Return a no-op handle for server-side or missing-element cases.
+	 */},{key:"_nullHandle",value:function _nullHandle(){return{id:0,collapse:function collapse(){},expand:function expand(){},toggle:function toggle(){},setWidth:function setWidth(){},destroy:function destroy(){}};}/**
+	 * Destroy all active panels.
+	 */},{key:"destroyAll",value:function destroyAll(){var tmpPanels=this._panels.slice();for(var i=0;i<tmpPanels.length;i++){tmpPanels[i].destroy();}}}]);}();module.exports=PictModalPanel;},{}],18:[function(require,module,exports){/**
+ * Pict-Modal-Shell — viewport-managing layout system for top / right /
+ * bottom / left panels around a center.
+ *
+ * # What this is for
+ *
+ * Most apps grow a chrome of stacked bars: a topbar, sometimes a
+ * sub-nav, sometimes a bottom status bar, often a left sidebar, maybe
+ * a right inspector. Each one has its own collapse / resize / persist
+ * concerns, and apps end up reinventing the layout glue + the chrome
+ * controls per-app.
+ *
+ * The Shell solves this once. The host calls `modal.shell(viewport)`,
+ * adds panels in the order they should stack from each edge, and the
+ * Shell manages:
+ *
+ *   - DOM structure (a flex tree wrapping the viewport)
+ *   - Layout placement (multiple panels per side, each in registration order)
+ *   - Collapse / expand chrome (a thin tab strip when collapsed)
+ *   - Resize chrome (drag handle on the inner edge)
+ *   - Pinned (in-flow) vs overlay (absolutely-positioned) panels
+ *   - Persistence (per-panel collapsed + size, scoped by host or custom key)
+ *   - Center destination (the workspace area between all panels)
+ *
+ * # Usage
+ *
+ *   let tmpShell = modal.shell('#App-Container', { PersistenceKey: 'my-app' });
+ *
+ *   tmpShell.addPanel({
+ *       Hash: 'topbar', Side: 'top', Mode: 'fixed', Size: 60,
+ *       ContentDestinationId: 'App-TopBar'
+ *   });
+ *   tmpShell.addPanel({
+ *       Hash: 'statusbar', Side: 'bottom', Mode: 'fixed', Size: 28,
+ *       ContentDestinationId: 'App-StatusBar'
+ *   });
+ *   tmpShell.addPanel({
+ *       Hash: 'sidebar', Side: 'left', Mode: 'resizable', Size: 280,
+ *       MinSize: 180, MaxSize: 480, Title: 'Modules',
+ *       ContentDestinationId: 'App-Sidebar'
+ *   });
+ *
+ *   let tmpCenter = tmpShell.center({ ContentDestinationId: 'App-Workspace' });
+ *
+ *   // Render into the destinations the same way as any other Pict view.
+ *   pict.ContentAssignment.assignContent('#App-Sidebar', tmpHTML);
+ *
+ * # Panel options
+ *
+ *   Hash:                 unique id within the shell (auto-generated if omitted).
+ *                         Used as the localStorage key suffix and for getPanel().
+ *   Side:                 'top' | 'right' | 'bottom' | 'left'.
+ *   Mode:                 'fixed' (no chrome), 'collapsible' (collapse tab),
+ *                         'resizable' (collapse tab + drag handle).
+ *   Position:             'pinned' (default; takes layout space) or 'overlay'
+ *                         (absolutely positioned over the center / siblings).
+ *   Scope:                'shell' (default) | 'center'.
+ *                         When 'shell', the panel mounts in one of the
+ *                         outer rows / side stacks (Side decides which).
+ *                         When 'center', the panel mounts INSIDE the
+ *                         center column instead — useful for bars that
+ *                         should align with the content area only, not
+ *                         span across the sidebars.  Only Side='top' and
+ *                         Side='bottom' are supported with Scope='center'.
+ *                         The center auto-switches to a flex-column
+ *                         layout so the content destination + inner
+ *                         panels stack vertically.
+ *   Size:                 initial px (height for top/bottom, width for left/right).
+ *                         Default: 200 for sides, 60 for top/bottom.
+ *   MinSize, MaxSize:     drag clamp for resizable panels.
+ *   Collapsed:            initial state. Persisted state overrides this.
+ *   CollapsedSize:        px the panel becomes when collapsed (default 24).
+ *   Title:                shown in the collapse tab.
+ *   Icon:                 optional inline SVG / HTML for the collapse tab.
+ *   ContentDestinationId: id given to the inner content div so the host can
+ *                         reach it via #ContentDestinationId selectors.
+ *   ContentView:          ViewIdentifier (string) of a registered Pict view
+ *                         that owns this panel's content. When set, the
+ *                         shell auto-renders the view once at panel creation
+ *                         (so the destination is filled before the user
+ *                         opens the panel) AND again on every expand
+ *                         transition (so freshly-streamed state shows up).
+ *                         Centralises the "I created a panel — now I have
+ *                         to remember to render the view into it" boilerplate.
+ *   Persist:              default true; pass false to skip save/load for this
+ *                         panel even when the shell has persistence enabled.
+ *   Hidden:               default false. When true, the collapsed state has
+ *                         NO visible chrome — no collapse tab, no edge
+ *                         affordance, the panel root is display: none. The
+ *                         only way to reveal it is a programmatic
+ *                         expand()/toggle() from elsewhere (e.g. a topbar
+ *                         gear). Mode still controls the EXPANDED chrome —
+ *                         pass Mode: 'resizable' to keep the drag handle
+ *                         while open, then vanish on collapse.
+ *   OnExpand, OnCollapse: callbacks that fire ONLY on transitions
+ *                         (collapsed→expanded or expanded→collapsed).
+ *                         Cleaner than OnToggle which fires for both
+ *                         directions and forces callers to inspect the
+ *                         bool. OnToggle is kept for back-compat.
+ *
+ * # Persistence
+ *
+ *   Storage key:  'pict-modal-shell:' + <PersistenceKey or hostname or 'default'>
+ *   Value shape:  { Version: 1, Panels: { <hash>: { Collapsed: bool, Size: number } } }
+ */var STORAGE_PREFIX='pict-modal-shell:';var SCHEMA_VERSION=1;var DEFAULT_COLLAPSED_SIZE=24;var DEFAULT_SIZE_SIDE=240;var DEFAULT_SIZE_TOPBOTTOM=60;var PictModalShell=/*#__PURE__*/function(){function PictModalShell(pModalSection,pViewportEl,pOptions){var _this27=this;_classCallCheck(this,PictModalShell);// Pointer events fire at the device's input rate (often 240 Hz+ on
+// modern trackpads / mice) but we only paint at the display's refresh
+// rate (60–120 Hz). Coalesce multiple pointermoves per frame into a
+// single setSize() call via requestAnimationFrame — this drops the
+// per-frame work to one DOM mutation regardless of pointer rate.
+_defineProperty(this,"_onDragMove",function(pEvent){if(!_this27._activeDrag)return;var tmpD=_this27._activeDrag;var tmpCoord=tmpD.Axis==='x'?pEvent.clientX:pEvent.clientY;var tmpDelta=(tmpCoord-tmpD.StartCoord)*tmpD.Direction;tmpD.PendingSize=tmpD.StartSize+tmpDelta;if(!tmpD.RAFId){var tmpSelf=_this27;tmpD.RAFId=typeof window!=='undefined'&&window.requestAnimationFrame?window.requestAnimationFrame(function(){tmpSelf._flushDrag();}):setTimeout(function(){tmpSelf._flushDrag();},16);}});_defineProperty(this,"_onDragEnd",function(){if(!_this27._activeDrag)return;var tmpD=_this27._activeDrag;// Flush any pending pointermove that hadn't painted yet so the
+// final size matches the actual cursor position, not the last
+// rAF-aligned value.
+if(tmpD.PendingSize!==null){_this27._flushDrag();}if(tmpD.RAFId&&typeof window!=='undefined'&&window.cancelAnimationFrame){window.cancelAnimationFrame(tmpD.RAFId);}document.body.classList.remove('pict-modal-shell-dragging-x');document.body.classList.remove('pict-modal-shell-dragging-y');tmpD.Panel.El.classList.remove('pict-modal-shell-panel-resizing');document.removeEventListener('pointermove',_this27._onDragMove);document.removeEventListener('pointerup',_this27._onDragEnd);// Persist final size.
+tmpD.Panel._persist();_this27._activeDrag=null;});this._modal=pModalSection;this._viewport=pViewportEl;this._options=pOptions||{};this._panels=[];this._panelsByHash={};this._centerDestinationEl=null;this._idCounter=0;this._activeDrag=null;this._persistenceEnabled=this._options.Persistence!==false;this._persistenceKey=this._persistenceEnabled?this._resolvePersistenceKey(this._options.PersistenceKey):null;// Build the wrapper DOM inside the viewport.
+this._buildSkeleton();}// ────────────────────────────────────────────────────────────────
+//  Public API
+// ────────────────────────────────────────────────────────────────
+return _createClass(PictModalShell,[{key:"addPanel",value:function addPanel(pConfig){var tmpPanel=new ShellPanel(this,pConfig||{});this._panels.push(tmpPanel);this._panelsByHash[tmpPanel.Hash]=tmpPanel;this._mountPanel(tmpPanel);// Render the bound ContentView once now so the destination has
+// content even before the user opens the panel. This is the
+// "create" half of the unified create-and-popup pattern — hosts
+// no longer need to chase down each panel and call view.render()
+// manually after addPanel().
+tmpPanel._renderContentView();return tmpPanel;}},{key:"getPanel",value:function getPanel(pHash){return this._panelsByHash[pHash]||null;}},{key:"getPanels",value:function getPanels(){return this._panels.slice();}/**
+	 * Convenience for cross-view popup triggers. Equivalent to
+	 * `shell.getPanel(hash).popup()`. Silently no-ops when the hash
+	 * doesn't match a registered panel (so callers don't have to
+	 * null-check during boot races).
+	 */},{key:"openPanel",value:function openPanel(pHash){var tmpPanel=this._panelsByHash[pHash];if(tmpPanel){tmpPanel.popup();}return tmpPanel||null;}/**
+	 * Configure the center area. Optional; if never called, the center
+	 * still exists but has no host-supplied destination id (host can
+	 * still reach it via .pict-modal-shell-center).
+	 */},{key:"center",value:function center(pOptions){pOptions=pOptions||{};if(pOptions.ContentDestinationId){// Remove any previously-created destination so center() is
+// idempotent across reconfigurations.  We don't blow away
+// the whole center via innerHTML='' anymore: Scope:'center'
+// panels mounted by earlier addPanel() calls need to stay
+// in place.  Find the right insertion point so the
+// destination sits between any top-scoped panels and any
+// bottom-scoped panels.
+if(this._centerDestinationEl&&this._centerDestinationEl.parentNode===this._centerEl){this._centerEl.removeChild(this._centerDestinationEl);}var tmpInner=document.createElement('div');tmpInner.id=pOptions.ContentDestinationId;tmpInner.className='pict-modal-shell-center-content';var tmpFirstBottomScoped=null;var tmpChildren=this._centerEl.children;for(var i=0;i<tmpChildren.length;i++){var tmpCandidate=tmpChildren[i];if(tmpCandidate.classList&&tmpCandidate.classList.contains('pict-modal-shell-panel-bottom')){tmpFirstBottomScoped=tmpCandidate;break;}}if(tmpFirstBottomScoped){this._centerEl.insertBefore(tmpInner,tmpFirstBottomScoped);}else{this._centerEl.appendChild(tmpInner);}this._centerDestinationEl=tmpInner;}return this._centerEl;}},{key:"getCenterEl",value:function getCenterEl(){return this._centerEl;}},{key:"destroy",value:function destroy(){for(var i=0;i<this._panels.length;i++){this._panels[i].destroy(true);}this._panels=[];this._panelsByHash={};if(this._wrapperEl&&this._wrapperEl.parentNode){this._wrapperEl.parentNode.removeChild(this._wrapperEl);}this._detachDragHandlers();}// ────────────────────────────────────────────────────────────────
+//  Persistence
+// ────────────────────────────────────────────────────────────────
+},{key:"_resolvePersistenceKey",value:function _resolvePersistenceKey(pUserKey){if(typeof pUserKey==='string'&&pUserKey.length>0)return STORAGE_PREFIX+pUserKey;try{if(typeof window!=='undefined'&&window.location&&window.location.hostname){return STORAGE_PREFIX+window.location.hostname;}}catch(pErr){/* fall through */}return STORAGE_PREFIX+'default';}},{key:"_loadState",value:function _loadState(){if(!this._persistenceKey)return null;try{var tmpStore=typeof window!=='undefined'?window.localStorage:null;if(!tmpStore)return null;var tmpRaw=tmpStore.getItem(this._persistenceKey);if(!tmpRaw)return null;var tmpParsed=JSON.parse(tmpRaw);if(!tmpParsed||tmpParsed.Version!==SCHEMA_VERSION)return null;return tmpParsed.Panels&&_typeof(tmpParsed.Panels)==='object'?tmpParsed.Panels:{};}catch(pErr){return null;}}},{key:"_loadPanelState",value:function _loadPanelState(pHash){var tmpAll=this._loadState();if(!tmpAll)return null;return tmpAll[pHash]||null;}},{key:"_savePanelState",value:function _savePanelState(pHash,pState){if(!this._persistenceKey)return;try{var tmpStore=typeof window!=='undefined'?window.localStorage:null;if(!tmpStore)return;var tmpAll=this._loadState()||{};tmpAll[pHash]=pState;tmpStore.setItem(this._persistenceKey,JSON.stringify({Version:SCHEMA_VERSION,Panels:tmpAll,SavedAt:new Date().toISOString()}));}catch(pErr){/* swallow */}}// ────────────────────────────────────────────────────────────────
+//  DOM scaffolding
+// ────────────────────────────────────────────────────────────────
+},{key:"_buildSkeleton",value:function _buildSkeleton(){// Wipe whatever was inside the viewport — the host opted into
+// the shell taking ownership of layout.
+this._viewport.innerHTML='';this._viewport.classList.add('pict-modal-shell-host');this._wrapperEl=document.createElement('div');this._wrapperEl.className='pict-modal-shell';this._topRow=document.createElement('div');this._topRow.className='pict-modal-shell-row pict-modal-shell-row-top';this._wrapperEl.appendChild(this._topRow);this._middleRow=document.createElement('div');this._middleRow.className='pict-modal-shell-row pict-modal-shell-row-middle';this._wrapperEl.appendChild(this._middleRow);this._leftStack=document.createElement('div');this._leftStack.className='pict-modal-shell-side pict-modal-shell-side-left';this._middleRow.appendChild(this._leftStack);this._centerEl=document.createElement('div');this._centerEl.className='pict-modal-shell-center';this._middleRow.appendChild(this._centerEl);this._rightStack=document.createElement('div');this._rightStack.className='pict-modal-shell-side pict-modal-shell-side-right';this._middleRow.appendChild(this._rightStack);this._bottomRow=document.createElement('div');this._bottomRow.className='pict-modal-shell-row pict-modal-shell-row-bottom';this._wrapperEl.appendChild(this._bottomRow);// Overlay layer for overlay-position panels (absolute over middle row)
+this._overlayLayer=document.createElement('div');this._overlayLayer.className='pict-modal-shell-overlay-layer';this._middleRow.appendChild(this._overlayLayer);this._viewport.appendChild(this._wrapperEl);}},{key:"_mountPanel",value:function _mountPanel(pPanel){if(pPanel.Position==='overlay'){this._overlayLayer.appendChild(pPanel.El);return;}if(pPanel.Scope==='center'){// Center-scoped panels mount inside the center column.
+// The column switches to flex-column so the content
+// destination + the panel(s) stack vertically.
+this._centerEl.classList.add('pict-modal-shell-center-with-inner-panel');if(pPanel.Side==='top'){// Top-scoped panels go above the content destination.
+// If center() hasn't run yet, this still works — we
+// insert before whatever's first (or just append to an
+// empty center, which leaves us above any subsequent
+// content destination).
+this._centerEl.insertBefore(pPanel.El,this._centerEl.firstChild);}else{// Side === 'bottom' (the Scope guard already filtered
+// left/right).  Append to the bottom of the center.
+this._centerEl.appendChild(pPanel.El);}return;}var tmpHost;if(pPanel.Side==='top')tmpHost=this._topRow;else if(pPanel.Side==='bottom')tmpHost=this._bottomRow;else if(pPanel.Side==='left')tmpHost=this._leftStack;else if(pPanel.Side==='right')tmpHost=this._rightStack;else tmpHost=this._wrapperEl;tmpHost.appendChild(pPanel.El);}// ────────────────────────────────────────────────────────────────
+//  Drag (resize) machinery — shared across all resizable panels.
+// ────────────────────────────────────────────────────────────────
+},{key:"_attachDragStart",value:function _attachDragStart(pPanel,pEvent){pEvent.preventDefault();var tmpAxis=pPanel.Side==='top'||pPanel.Side==='bottom'?'y':'x';this._activeDrag={Panel:pPanel,Axis:tmpAxis,StartCoord:tmpAxis==='x'?pEvent.clientX:pEvent.clientY,StartSize:pPanel.Size,Direction:pPanel.Side==='left'||pPanel.Side==='top'?1:-1,PendingSize:null,RAFId:0};document.body.classList.add(tmpAxis==='x'?'pict-modal-shell-dragging-x':'pict-modal-shell-dragging-y');// Suppress the panel's collapse/expand width/height transition for
+// the duration of the drag — without this, every pointermove kicks
+// off a fresh 140ms transition that stacks up and renders the
+// resize as visibly laggy ("choppy"). With the transition off the
+// panel snaps to each new size in the same frame as the pointer.
+pPanel.El.classList.add('pict-modal-shell-panel-resizing');// Capture the pointer so dragging works even when the cursor leaves
+// the resize handle (otherwise the user has to keep the cursor
+// exactly on the 6 px strip — feels twitchy).
+try{pEvent.target.setPointerCapture&&pEvent.target.setPointerCapture(pEvent.pointerId);}catch(pErr){/* not supported in old browsers — fine */}document.addEventListener('pointermove',this._onDragMove);document.addEventListener('pointerup',this._onDragEnd);}},{key:"_flushDrag",value:function _flushDrag(){var tmpD=this._activeDrag;if(!tmpD)return;tmpD.RAFId=0;if(tmpD.PendingSize!==null){tmpD.Panel.setSize(tmpD.PendingSize);tmpD.PendingSize=null;}}},{key:"_detachDragHandlers",value:function _detachDragHandlers(){document.removeEventListener('pointermove',this._onDragMove);document.removeEventListener('pointerup',this._onDragEnd);}}]);}();// ════════════════════════════════════════════════════════════════════
+//  ShellPanel — one panel within a Shell
+// ════════════════════════════════════════════════════════════════════
+var ShellPanel=/*#__PURE__*/function(){function ShellPanel(pShell,pConfig){_classCallCheck(this,ShellPanel);this._shell=pShell;this._config=pConfig;this.Hash=pConfig.Hash||'panel-'+ ++pShell._idCounter;this.Side=pConfig.Side==='right'||pConfig.Side==='bottom'||pConfig.Side==='left'?pConfig.Side:'top';this.Mode=pConfig.Mode==='collapsible'||pConfig.Mode==='resizable'?pConfig.Mode:'fixed';this.Position=pConfig.Position==='overlay'?'overlay':'pinned';// Scope: 'center' opts the panel into the center column instead
+// of the shell's outer rows.  Only valid for Side='top'/'bottom'
+// (left/right inside center would need a separate axis we don't
+// support).  Invalid combinations silently fall back to 'shell'.
+this.Scope=pConfig.Scope==='center'&&(this.Side==='top'||this.Side==='bottom')?'center':'shell';this.Title=pConfig.Title||'';this.Icon=pConfig.Icon||'';this.MinSize=typeof pConfig.MinSize==='number'?pConfig.MinSize:40;this.MaxSize=typeof pConfig.MaxSize==='number'?pConfig.MaxSize:1200;// `Hidden: true` is a panel that has NO visible chrome in its collapsed
+// state — no collapse tab sliver, no resize handle, no edge marker, and
+// (via CSS) display: none on the panel root. The only way to reveal it
+// is a programmatic expand()/toggle() called from elsewhere in the app
+// (e.g. a gear button in the topbar). Useful when the host wants a
+// fully-shaped panel but doesn't want an always-visible affordance for
+// discovering it. The Mode is still honoured for the EXPANDED state —
+// pass Mode: 'resizable' to keep the drag handle while the panel is
+// open, while still vanishing entirely when collapsed.
+this.Hidden=!!pConfig.Hidden;this.CollapsedSize=typeof pConfig.CollapsedSize==='number'?pConfig.CollapsedSize:this.Hidden?0:DEFAULT_COLLAPSED_SIZE;this.PersistEnabled=pShell._persistenceEnabled&&pConfig.Persist!==false;var tmpDefaultSize=this.Side==='left'||this.Side==='right'?DEFAULT_SIZE_SIDE:DEFAULT_SIZE_TOPBOTTOM;this.Size=typeof pConfig.Size==='number'?pConfig.Size:tmpDefaultSize;this.Collapsed=!!pConfig.Collapsed;// Persisted state overrides initial Size/Collapsed.
+if(this.PersistEnabled){var tmpSaved=pShell._loadPanelState(this.Hash);if(tmpSaved){if(typeof tmpSaved.Size==='number')this.Size=tmpSaved.Size;if(typeof tmpSaved.Collapsed==='boolean')this.Collapsed=tmpSaved.Collapsed;}}this._clampSize();// Build the panel DOM.
+this._buildEl(pConfig);this._applySize();this._applyCollapsedClass();// Responsive drawer — at narrow viewports, flip a docked side
+// panel into a "top drawer" by adding a class to the middle row
+// that toggles flex-direction from row to column. The panel
+// stretches to full width and trades its inline `width` for a
+// configurable drawer `height`. The user's collapse/expand
+// keeps working: collapsed in drawer mode just gives the panel
+// height: 0 (so only the collapse tab remains visible at the
+// top of the content), expanded restores the drawer height.
+// Pass `0` or omit to disable. Mirrors retold-remote's
+// `.content-editor-body { flex-direction: column }` pattern.
+this.ResponsiveDrawer=typeof pConfig.ResponsiveDrawer==='number'&&pConfig.ResponsiveDrawer>0?pConfig.ResponsiveDrawer:0;// Drawer height — applied as `height` to the panel in drawer
+// mode. CSS units (px / vh / %) accepted. Default 33vh which
+// gives the panel roughly a third of the viewport height and
+// leaves comfortable room for the workspace below.
+this.DrawerHeight=typeof pConfig.DrawerHeight==='string'&&pConfig.DrawerHeight?pConfig.DrawerHeight:'33vh';this._mediaQuery=null;this._mediaQueryHandler=null;if(this.ResponsiveDrawer>0){this._wireResponsiveDrawer();}}// ───────────── public ─────────────
+return _createClass(ShellPanel,[{key:"getContentEl",value:function getContentEl(){return this._contentEl;}/**
+	 * Returns the currently-bound ContentView Pict view instance, or
+	 * null if no ContentView is configured / the view isn't registered
+	 * yet.
+	 */},{key:"getContentView",value:function getContentView(){if(!this._config.ContentView)return null;var tmpPict=this._shell._modal&&this._shell._modal.pict;if(!tmpPict||!tmpPict.views)return null;return tmpPict.views[this._config.ContentView]||null;}},{key:"collapse",value:function collapse(){this._setCollapsed(true);}},{key:"expand",value:function expand(){this._setCollapsed(false);}},{key:"toggle",value:function toggle(){this._setCollapsed(!this.Collapsed);}/**
+	 * Unified "show this panel" affordance — this is the shared
+	 * codepath every popup trigger should funnel through. Behavior:
+	 *
+	 *   - If collapsed → expand (which fires OnExpand + re-renders the
+	 *     ContentView via the shared transition machinery).
+	 *   - If already open → re-render the ContentView (so any newly-
+	 *     streamed state is visible) AND briefly flash the panel
+	 *     border so the user notices that the existing panel just
+	 *     received attention. Avoids the "I clicked a button but
+	 *     nothing happened" feeling when the panel was already open.
+	 *
+	 * Idempotent — safe to call from any number of triggers without
+	 * stacking effects.
+	 */},{key:"popup",value:function popup(){if(this.Collapsed){this._setCollapsed(false);}else{// Already open — refresh content + flash for attention.
+this._renderContentView();this._flash();}}},{key:"setSize",value:function setSize(pSize){if(typeof pSize!=='number'||!isFinite(pSize))return;this.Size=pSize;this._clampSize();this._applySize();}},{key:"destroy",value:function destroy(pSkipFromShell){this._unwireResponsiveDrawer();if(this.El&&this.El.parentNode)this.El.parentNode.removeChild(this.El);if(!pSkipFromShell){var tmpIdx=this._shell._panels.indexOf(this);if(tmpIdx>=0)this._shell._panels.splice(tmpIdx,1);delete this._shell._panelsByHash[this.Hash];}}// ───────────── internals ─────────────
+},{key:"_clampSize",value:function _clampSize(){if(this.Size<this.MinSize)this.Size=this.MinSize;if(this.Size>this.MaxSize)this.Size=this.MaxSize;}// Responsive drawer — sets up a matchMedia listener for
+// `(max-width: <ResponsiveDrawer>px)`. Each crossing flips the
+// shell's middle row between row layout (wide) and column layout
+// (narrow) by toggling the `pict-modal-shell-drawer-active` class
+// on the middle row. The matching CSS makes side panels expand to
+// full width with a fixed `DrawerHeight`, becoming top/bottom
+// drawers above/below the workspace center. Collapsed in drawer
+// mode collapses to height: 0, leaving only the collapse tab.
+//
+// This pattern is the conventional "responsive sidebar" approach
+// (used by retold-remote's content editor) — the user keeps their
+// sidebar accessible at narrow widths but it gives the workspace
+// room to breathe.
+},{key:"_wireResponsiveDrawer",value:function _wireResponsiveDrawer(){if(typeof window==='undefined'||!window.matchMedia)return;this._mediaQuery=window.matchMedia('(max-width: '+this.ResponsiveDrawer+'px)');// Apply the drawer height as a CSS variable on the panel
+// element so the static CSS rules can read it. Doing this once
+// here avoids per-event JS style writes.
+if(this.El){this.El.style.setProperty('--pict-modal-drawer-height',this.DrawerHeight);}var tmpSelf=this;this._mediaQueryHandler=function(pEvent){var tmpNarrow=pEvent&&typeof pEvent.matches==='boolean'?pEvent.matches:tmpSelf._mediaQuery.matches;tmpSelf._setDrawerMode(tmpNarrow);};// Apply the current state immediately (handles the case where the
+// page loads already-narrow). Newer browsers use addEventListener;
+// older ones use addListener.
+if(this._mediaQuery.addEventListener){this._mediaQuery.addEventListener('change',this._mediaQueryHandler);}else if(this._mediaQuery.addListener){this._mediaQuery.addListener(this._mediaQueryHandler);}this._mediaQueryHandler({matches:this._mediaQuery.matches});// Belt + suspenders: also listen to window resize and re-sync.
+// `matchMedia.change` is supposed to be reliable on every
+// boundary crossing, but in real-world testing (esp. when the
+// user is dragging DevTools to resize the inner viewport, or
+// going through fast successive crossings) we've seen the
+// change event silently miss. A plain resize listener is
+// cheap and the handler is idempotent — if matches state
+// hasn't actually changed the body of `_setDrawerMode` is a
+// no-op (it short-circuits when classes are already correct).
+this._resizeHandler=function(){tmpSelf._setDrawerMode(tmpSelf._mediaQuery.matches);};window.addEventListener('resize',this._resizeHandler);}},{key:"_unwireResponsiveDrawer",value:function _unwireResponsiveDrawer(){if(this._resizeHandler&&typeof window!=='undefined'){window.removeEventListener('resize',this._resizeHandler);this._resizeHandler=null;}if(!this._mediaQuery||!this._mediaQueryHandler)return;if(this._mediaQuery.removeEventListener){this._mediaQuery.removeEventListener('change',this._mediaQueryHandler);}else if(this._mediaQuery.removeListener){this._mediaQuery.removeListener(this._mediaQueryHandler);}this._mediaQuery=null;this._mediaQueryHandler=null;}// Toggle drawer mode by adding / removing a class on the shell's
+// middle row. The CSS rule for `.pict-modal-shell-drawer-active`
+// flips flex-direction column, makes side panels full-width, and
+// applies the panel's `--pict-modal-drawer-height` for sizing.
+// Also tags the panel itself so per-panel CSS can target it.
+// Re-applies the inline size at the end so the wide-mode crossing
+// gets a clean width back (drawer mode forced width: 100% via CSS
+// !important; the inline style was stale).
+},{key:"_setDrawerMode",value:function _setDrawerMode(pDrawer){if(!this._shell||!this._shell._middleRow)return;// Idempotent — short-circuit when the panel's drawer state
+// already matches the target. Keeps the resize-event fallback
+// (which fires constantly during drag-resize) from doing
+// pointless DOM thrash + style re-application every frame.
+var tmpCurrentlyDrawer=!!(this.El&&this.El.classList.contains('pict-modal-shell-panel-drawer'));if(tmpCurrentlyDrawer===!!pDrawer)return;if(pDrawer){this._shell._middleRow.classList.add('pict-modal-shell-drawer-active');if(this.El){this.El.classList.add('pict-modal-shell-panel-drawer');}}else{// Only remove the row-level class if NO other panel still
+// wants drawer mode. Multi-panel hosts can safely each opt
+// in independently this way.
+var tmpStillNarrow=false;var tmpPanels=this._shell._panels||[];for(var i=0;i<tmpPanels.length;i++){var tmpP=tmpPanels[i];if(tmpP!==this&&tmpP._mediaQuery&&tmpP._mediaQuery.matches&&tmpP.ResponsiveDrawer>0){tmpStillNarrow=true;break;}}if(!tmpStillNarrow){this._shell._middleRow.classList.remove('pict-modal-shell-drawer-active');}if(this.El){this.El.classList.remove('pict-modal-shell-panel-drawer');}}// Re-apply inline size. In drawer mode the CSS !important
+// rule overrides this anyway, but on the wide crossing we
+// need the inline width to be correct so the panel shows up
+// at its proper docked / collapsed-docked size rather than
+// inheriting any stale state.
+this._applySize();}},{key:"_buildEl",value:function _buildEl(pConfig){var tmpRoot=document.createElement('div');tmpRoot.className='pict-modal-shell-panel pict-modal-shell-panel-'+this.Side+' pict-modal-shell-panel-mode-'+this.Mode+(this.Position==='overlay'?' pict-modal-shell-panel-overlay':'')+(this.Hidden?' pict-modal-shell-panel-hidden':'');tmpRoot.setAttribute('data-shell-panel-hash',this.Hash);tmpRoot.setAttribute('data-shell-panel-side',this.Side);tmpRoot.setAttribute('data-shell-panel-mode',this.Mode);// Content area — hosts render their stuff into the inner #id div.
+var tmpContentWrap=document.createElement('div');tmpContentWrap.className='pict-modal-shell-panel-content';this._contentEl=document.createElement('div');if(pConfig.ContentDestinationId){this._contentEl.id=pConfig.ContentDestinationId;}this._contentEl.className='pict-modal-shell-panel-content-inner';tmpContentWrap.appendChild(this._contentEl);tmpRoot.appendChild(tmpContentWrap);// Collapse tab — shown when collapsible / resizable. Lives at the
+// inner edge so it's always reachable when the panel is collapsed.
+// Hidden panels skip the tab entirely — the only path back from
+// collapsed → expanded is a programmatic expand() / toggle() call
+// from the host (e.g. a topbar gear button).
+if((this.Mode==='collapsible'||this.Mode==='resizable')&&!this.Hidden){this._collapseTab=document.createElement('button');this._collapseTab.type='button';this._collapseTab.className='pict-modal-shell-panel-collapse-tab';this._collapseTab.setAttribute('aria-label',this.Title?'Toggle '+this.Title:'Toggle panel');this._collapseTab.title=this.Title||'Toggle';this._collapseTab.innerHTML=''+(this.Icon?'<span class="pict-modal-shell-panel-collapse-tab-icon">'+this.Icon+'</span>':'')+(this.Title?'<span class="pict-modal-shell-panel-collapse-tab-title">'+this._escape(this.Title)+'</span>':'');var tmpSelf=this;this._collapseTab.addEventListener('click',function(){tmpSelf.toggle();});tmpRoot.appendChild(this._collapseTab);}// Resize handle — only when resizable. Positioned via CSS based
+// on side.
+if(this.Mode==='resizable'){this._resizeHandle=document.createElement('div');this._resizeHandle.className='pict-modal-shell-panel-resize-handle';this._resizeHandle.setAttribute('aria-hidden','true');var _tmpSelf=this;this._resizeHandle.addEventListener('pointerdown',function(pEvent){if(_tmpSelf.Collapsed)return;_tmpSelf._shell._attachDragStart(_tmpSelf,pEvent);});tmpRoot.appendChild(this._resizeHandle);}this.El=tmpRoot;}},{key:"_applySize",value:function _applySize(){var tmpEffective=this.Collapsed?this.CollapsedSize:this.Size;if(this.Side==='left'||this.Side==='right'){this.El.style.width=tmpEffective+'px';this.El.style.height='';}else{this.El.style.height=tmpEffective+'px';this.El.style.width='';}}},{key:"_applyCollapsedClass",value:function _applyCollapsedClass(){if(this.Collapsed)this.El.classList.add('pict-modal-shell-panel-collapsed');else this.El.classList.remove('pict-modal-shell-panel-collapsed');}},{key:"_setCollapsed",value:function _setCollapsed(pBool){if(this.Collapsed===!!pBool)return;var tmpWasCollapsed=this.Collapsed;this.Collapsed=!!pBool;this._applyCollapsedClass();this._applySize();this._persist();// Transition-specific hooks fire BEFORE OnToggle so OnExpand
+// callers can mutate state (e.g. set focus, re-fetch data) and
+// have it reflected by any OnToggle observer that runs after.
+if(tmpWasCollapsed&&!this.Collapsed){// collapsed → expanded. Render the bound ContentView so
+// freshly-streamed state shows up the moment the panel
+// becomes visible (replaces the manual view.render() dance
+// hosts used to do in their own runAction-style helpers).
+this._renderContentView();this._fireHook('OnExpand');}else if(!tmpWasCollapsed&&this.Collapsed){this._fireHook('OnCollapse');}// Back-compat: OnToggle still fires for both directions.
+this._fireHook('OnToggle',this.Collapsed);}},{key:"_fireHook",value:function _fireHook(pName,pArg){var tmpFn=this._config[pName];if(typeof tmpFn!=='function')return;try{if(typeof pArg!=='undefined'){tmpFn(pArg,this);}else{tmpFn(this);}}catch(pErr){/* host hook failure must not break the panel */}}/**
+	 * Render the bound ContentView (if any) into this panel's
+	 * destination. Called by the shell on panel creation + on every
+	 * collapsed→expanded transition + by popup() when re-flashing an
+	 * already-open panel. Silently no-ops when no ContentView is
+	 * configured or the view isn't registered yet (boot races).
+	 */},{key:"_renderContentView",value:function _renderContentView(){var tmpView=this.getContentView();if(tmpView&&typeof tmpView.render==='function'){try{tmpView.render();}catch(pErr){/* view render failure shouldn't break the panel chrome */}}}/**
+	 * Briefly highlight the panel — used by popup() when called on an
+	 * already-open panel so the user sees that their click landed.
+	 * The class is removed after the CSS animation completes; safe to
+	 * re-trigger (timeouts overlap, last one wins on the trailing edge).
+	 */},{key:"_flash",value:function _flash(){if(!this.El)return;this.El.classList.add('pict-modal-shell-panel-flash');var tmpSelf=this;clearTimeout(this._flashTimer);this._flashTimer=setTimeout(function(){if(tmpSelf.El)tmpSelf.El.classList.remove('pict-modal-shell-panel-flash');},700);}},{key:"_persist",value:function _persist(){if(!this.PersistEnabled)return;this._shell._savePanelState(this.Hash,{Collapsed:this.Collapsed,Size:this.Size});}},{key:"_escape",value:function _escape(pStr){return String(pStr||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}}]);}();// ════════════════════════════════════════════════════════════════════
+//  Module exports — used internally by Pict-Section-Modal.shell()
+// ════════════════════════════════════════════════════════════════════
+var PictModalShellManager=/*#__PURE__*/function(){function PictModalShellManager(pModalSection){_classCallCheck(this,PictModalShellManager);this._modal=pModalSection;this._shellsByViewport=new WeakMap();}/**
+	 * Idempotent — calling shell() twice with the same viewport returns
+	 * the same instance.
+	 */return _createClass(PictModalShellManager,[{key:"shell",value:function shell(pViewportSelectorOrEl,pOptions){var tmpEl=typeof pViewportSelectorOrEl==='string'?document.querySelector(pViewportSelectorOrEl):pViewportSelectorOrEl;if(!tmpEl){throw new Error('Pict-Modal-Shell.shell: viewport not found for '+pViewportSelectorOrEl);}var tmpExisting=this._shellsByViewport.get(tmpEl);if(tmpExisting)return tmpExisting;var tmpShell=new PictModalShell(this._modal,tmpEl,pOptions);this._shellsByViewport.set(tmpEl,tmpShell);return tmpShell;}}]);}();module.exports=PictModalShellManager;module.exports.PictModalShell=PictModalShell;module.exports.ShellPanel=ShellPanel;module.exports.STORAGE_PREFIX=STORAGE_PREFIX;module.exports.SCHEMA_VERSION=SCHEMA_VERSION;},{}],19:[function(require,module,exports){/**
+ * Pict-Modal-Toast
+ *
+ * Manages toast notification elements with auto-dismiss and stacking.
+ */var PictModalToast=/*#__PURE__*/function(){function PictModalToast(pModal){_classCallCheck(this,PictModalToast);this._modal=pModal;this._containers={};}/**
+	 * Show a toast notification.
+	 *
+	 * @param {string} pMessage - Toast message text
+	 * @param {object} [pOptions] - Options (type, duration, position, dismissible)
+	 * @returns {{ dismiss: function }} Handle with dismiss method
+	 */return _createClass(PictModalToast,[{key:"toast",value:function toast(pMessage,pOptions){var _this28=this;var tmpOptions=Object.assign({},this._modal.options.DefaultToastOptions,pOptions);var tmpContainer=this._getContainer(tmpOptions.position);var tmpId=this._modal._nextId();var tmpToast=document.createElement('div');tmpToast.className='pict-modal-toast pict-modal-toast--'+tmpOptions.type;tmpToast.id='pict-modal-toast-'+tmpId;var tmpContent='<span class="pict-modal-toast-message">'+this._escapeHTML(pMessage)+'</span>';if(tmpOptions.dismissible){tmpContent+='<button class="pict-modal-toast-dismiss" aria-label="Dismiss">&times;</button>';}tmpToast.innerHTML=tmpContent;// Create handle
+var tmpDismissed=false;var tmpTimeoutHandle=null;var tmpDismiss=function tmpDismiss(){if(tmpDismissed){return;}tmpDismissed=true;if(tmpTimeoutHandle){clearTimeout(tmpTimeoutHandle);}// Exit animation
+tmpToast.classList.remove('pict-modal-visible');tmpToast.classList.add('pict-modal-toast-exit');// Remove from active list
+_this28._modal._activeToasts=_this28._modal._activeToasts.filter(function(pEntry){return pEntry.element!==tmpToast;});// Remove from DOM after transition
+setTimeout(function(){if(tmpToast.parentNode){tmpToast.parentNode.removeChild(tmpToast);}_this28._cleanupContainer(tmpOptions.position);},220);};var tmpHandle={dismiss:tmpDismiss};// Wire dismiss button
+if(tmpOptions.dismissible){var tmpDismissBtn=tmpToast.querySelector('.pict-modal-toast-dismiss');if(tmpDismissBtn){tmpDismissBtn.addEventListener('click',tmpDismiss);}}// Append to container
+tmpContainer.appendChild(tmpToast);// Track
+var tmpEntry={element:tmpToast,dismiss:tmpDismiss,handle:tmpHandle};this._modal._activeToasts.push(tmpEntry);// Animate in
+void tmpToast.offsetHeight;tmpToast.classList.add('pict-modal-visible');// Auto-dismiss
+if(tmpOptions.duration>0){tmpTimeoutHandle=setTimeout(tmpDismiss,tmpOptions.duration);}return tmpHandle;}/**
+	 * Get or create a toast container for the given position.
+	 *
+	 * @param {string} pPosition - Position key (e.g. 'top-right')
+	 * @returns {HTMLElement}
+	 */},{key:"_getContainer",value:function _getContainer(pPosition){if(this._containers[pPosition]){return this._containers[pPosition];}var tmpContainer=document.createElement('div');tmpContainer.className='pict-modal-toast-container pict-modal-toast-container--'+pPosition;document.body.appendChild(tmpContainer);this._containers[pPosition]=tmpContainer;return tmpContainer;}/**
+	 * Remove a container if it has no more toasts.
+	 *
+	 * @param {string} pPosition
+	 */},{key:"_cleanupContainer",value:function _cleanupContainer(pPosition){var tmpContainer=this._containers[pPosition];if(tmpContainer&&tmpContainer.children.length===0){if(tmpContainer.parentNode){tmpContainer.parentNode.removeChild(tmpContainer);}delete this._containers[pPosition];}}/**
+	 * Dismiss all active toasts.
+	 */},{key:"dismissAll",value:function dismissAll(){var tmpToasts=this._modal._activeToasts.slice();for(var i=0;i<tmpToasts.length;i++){tmpToasts[i].dismiss();}}/**
+	 * Destroy all containers.
+	 */},{key:"destroy",value:function destroy(){this.dismissAll();var tmpPositions=Object.keys(this._containers);for(var i=0;i<tmpPositions.length;i++){var tmpContainer=this._containers[tmpPositions[i]];if(tmpContainer&&tmpContainer.parentNode){tmpContainer.parentNode.removeChild(tmpContainer);}}this._containers={};}/**
+	 * Escape HTML special characters.
+	 *
+	 * @param {string} pText
+	 * @returns {string}
+	 */},{key:"_escapeHTML",value:function _escapeHTML(pText){if(typeof pText!=='string'){return'';}return pText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}}]);}();module.exports=PictModalToast;},{}],20:[function(require,module,exports){/**
+ * Pict-Modal-Tooltip
+ *
+ * Manages simple text and rich HTML tooltips with positioning and auto-flip.
+ */var PictModalTooltip=/*#__PURE__*/function(){function PictModalTooltip(pModal){_classCallCheck(this,PictModalTooltip);this._modal=pModal;}/**
+	 * Attach a simple text tooltip to an element.
+	 *
+	 * @param {HTMLElement} pElement - Target element
+	 * @param {string} pText - Tooltip text
+	 * @param {object} [pOptions] - Options (position, delay, maxWidth)
+	 * @returns {{ destroy: function }} Handle to remove the tooltip
+	 */return _createClass(PictModalTooltip,[{key:"tooltip",value:function tooltip(pElement,pText,pOptions){var tmpOptions=Object.assign({},this._modal.options.DefaultTooltipOptions,pOptions);return this._attachTooltip(pElement,pText,false,tmpOptions);}/**
+	 * Attach a rich HTML tooltip to an element.
+	 *
+	 * @param {HTMLElement} pElement - Target element
+	 * @param {string} pHTMLContent - HTML content for the tooltip
+	 * @param {object} [pOptions] - Options (position, delay, maxWidth, interactive)
+	 * @returns {{ destroy: function }} Handle to remove the tooltip
+	 */},{key:"richTooltip",value:function richTooltip(pElement,pHTMLContent,pOptions){var tmpOptions=Object.assign({},this._modal.options.DefaultTooltipOptions,pOptions);return this._attachTooltip(pElement,pHTMLContent,true,tmpOptions);}/**
+	 * Internal: attach tooltip event listeners to an element.
+	 *
+	 * @param {HTMLElement} pElement
+	 * @param {string} pContent
+	 * @param {boolean} pIsHTML
+	 * @param {object} pOptions
+	 * @returns {{ destroy: function }}
+	 */},{key:"_attachTooltip",value:function _attachTooltip(pElement,pContent,pIsHTML,pOptions){var _this29=this;var tmpTooltipElement=null;var tmpShowTimeout=null;var tmpHideTimeout=null;var tmpDestroyed=false;var tmpId=this._modal._nextId();var tmpShow=function tmpShow(){if(tmpDestroyed||tmpTooltipElement){return;}tmpTooltipElement=document.createElement('div');tmpTooltipElement.className='pict-modal-tooltip pict-modal-tooltip--'+pOptions.position;tmpTooltipElement.id='pict-modal-tooltip-'+tmpId;tmpTooltipElement.setAttribute('role','tooltip');tmpTooltipElement.style.maxWidth=pOptions.maxWidth;if(pOptions.interactive){tmpTooltipElement.classList.add('pict-modal-tooltip-interactive');}// Arrow
+var tmpArrow=document.createElement('div');tmpArrow.className='pict-modal-tooltip-arrow';// Content
+var tmpContentDiv=document.createElement('div');if(pIsHTML){tmpContentDiv.innerHTML=pContent;}else{tmpContentDiv.textContent=pContent;}tmpTooltipElement.appendChild(tmpArrow);tmpTooltipElement.appendChild(tmpContentDiv);document.body.appendChild(tmpTooltipElement);// Set aria-describedby on target
+pElement.setAttribute('aria-describedby',tmpTooltipElement.id);// Position
+_this29._positionTooltip(tmpTooltipElement,pElement,pOptions.position);// Animate in
+void tmpTooltipElement.offsetHeight;tmpTooltipElement.classList.add('pict-modal-visible');// Track
+_this29._modal._activeTooltips.push({element:tmpTooltipElement,targetElement:pElement,destroy:tmpDestroy});// For interactive tooltips, allow hovering over the tooltip itself
+if(pOptions.interactive&&tmpTooltipElement){tmpTooltipElement.addEventListener('mouseenter',function(){if(tmpHideTimeout){clearTimeout(tmpHideTimeout);tmpHideTimeout=null;}});tmpTooltipElement.addEventListener('mouseleave',function(){tmpHide();});}};var tmpHide=function tmpHide(){if(!tmpTooltipElement){return;}tmpTooltipElement.classList.remove('pict-modal-visible');var tmpEl=tmpTooltipElement;tmpTooltipElement=null;// Remove aria
+pElement.removeAttribute('aria-describedby');// Remove from tracking
+_this29._modal._activeTooltips=_this29._modal._activeTooltips.filter(function(pEntry){return pEntry.element!==tmpEl;});setTimeout(function(){if(tmpEl.parentNode){tmpEl.parentNode.removeChild(tmpEl);}},220);};var tmpOnMouseEnter=function tmpOnMouseEnter(){if(tmpHideTimeout){clearTimeout(tmpHideTimeout);tmpHideTimeout=null;}tmpShowTimeout=setTimeout(tmpShow,pOptions.delay);};var tmpOnMouseLeave=function tmpOnMouseLeave(){if(tmpShowTimeout){clearTimeout(tmpShowTimeout);tmpShowTimeout=null;}// Small delay before hiding to allow moving to interactive tooltip
+if(pOptions.interactive){tmpHideTimeout=setTimeout(tmpHide,100);}else{tmpHide();}};var tmpOnFocusIn=function tmpOnFocusIn(){tmpShowTimeout=setTimeout(tmpShow,pOptions.delay);};var tmpOnFocusOut=function tmpOnFocusOut(){if(tmpShowTimeout){clearTimeout(tmpShowTimeout);tmpShowTimeout=null;}tmpHide();};// Attach listeners
+pElement.addEventListener('mouseenter',tmpOnMouseEnter);pElement.addEventListener('mouseleave',tmpOnMouseLeave);pElement.addEventListener('focusin',tmpOnFocusIn);pElement.addEventListener('focusout',tmpOnFocusOut);var tmpDestroy=function tmpDestroy(){if(tmpDestroyed){return;}tmpDestroyed=true;if(tmpShowTimeout){clearTimeout(tmpShowTimeout);}if(tmpHideTimeout){clearTimeout(tmpHideTimeout);}tmpHide();pElement.removeEventListener('mouseenter',tmpOnMouseEnter);pElement.removeEventListener('mouseleave',tmpOnMouseLeave);pElement.removeEventListener('focusin',tmpOnFocusIn);pElement.removeEventListener('focusout',tmpOnFocusOut);};return{destroy:tmpDestroy};}/**
+	 * Position a tooltip element relative to the target element.
+	 * Flips direction if the tooltip would overflow the viewport.
+	 *
+	 * @param {HTMLElement} pTooltip
+	 * @param {HTMLElement} pTarget
+	 * @param {string} pPosition - 'top', 'bottom', 'left', 'right'
+	 */},{key:"_positionTooltip",value:function _positionTooltip(pTooltip,pTarget,pPosition){var tmpTargetRect=pTarget.getBoundingClientRect();var tmpTooltipRect=pTooltip.getBoundingClientRect();var tmpGap=8;var tmpPosition=pPosition;// Flip if needed
+if(tmpPosition==='top'&&tmpTargetRect.top<tmpTooltipRect.height+tmpGap){tmpPosition='bottom';}else if(tmpPosition==='bottom'&&window.innerHeight-tmpTargetRect.bottom<tmpTooltipRect.height+tmpGap){tmpPosition='top';}else if(tmpPosition==='left'&&tmpTargetRect.left<tmpTooltipRect.width+tmpGap){tmpPosition='right';}else if(tmpPosition==='right'&&window.innerWidth-tmpTargetRect.right<tmpTooltipRect.width+tmpGap){tmpPosition='left';}// Update class for arrow direction
+pTooltip.className=pTooltip.className.replace(/pict-modal-tooltip--\w+/,'pict-modal-tooltip--'+tmpPosition);var tmpTop=0;var tmpLeft=0;switch(tmpPosition){case'top':tmpTop=tmpTargetRect.top-tmpTooltipRect.height-tmpGap;tmpLeft=tmpTargetRect.left+tmpTargetRect.width/2-tmpTooltipRect.width/2;break;case'bottom':tmpTop=tmpTargetRect.bottom+tmpGap;tmpLeft=tmpTargetRect.left+tmpTargetRect.width/2-tmpTooltipRect.width/2;break;case'left':tmpTop=tmpTargetRect.top+tmpTargetRect.height/2-tmpTooltipRect.height/2;tmpLeft=tmpTargetRect.left-tmpTooltipRect.width-tmpGap;break;case'right':tmpTop=tmpTargetRect.top+tmpTargetRect.height/2-tmpTooltipRect.height/2;tmpLeft=tmpTargetRect.right+tmpGap;break;}// Clamp to viewport
+tmpLeft=Math.max(4,Math.min(tmpLeft,window.innerWidth-tmpTooltipRect.width-4));tmpTop=Math.max(4,Math.min(tmpTop,window.innerHeight-tmpTooltipRect.height-4));pTooltip.style.top=tmpTop+'px';pTooltip.style.left=tmpLeft+'px';}/**
+	 * Dismiss all active tooltips.
+	 */},{key:"dismissAll",value:function dismissAll(){var tmpTooltips=this._modal._activeTooltips.slice();for(var i=0;i<tmpTooltips.length;i++){tmpTooltips[i].destroy();}}}]);}();module.exports=PictModalTooltip;},{}],21:[function(require,module,exports){/**
+ * Pict-Modal-Window
+ *
+ * Builds custom floating modal windows with arbitrary content and buttons.
+ */var PictModalWindow=/*#__PURE__*/function(){function PictModalWindow(pModal){_classCallCheck(this,PictModalWindow);this._modal=pModal;}/**
+	 * Show a custom modal window.
+	 *
+	 * @param {object} [pOptions] - Options
+	 * @param {string} [pOptions.title] - Dialog title
+	 * @param {string} [pOptions.content] - HTML content for the body
+	 * @param {Array} [pOptions.buttons] - Array of { Hash, Label, Style }
+	 * @param {boolean} [pOptions.closeable] - Whether the close button and overlay dismiss are enabled
+	 * @param {string} [pOptions.width] - CSS width value
+	 * @param {boolean} [pOptions.unbounded] - If true, removes the default 90vh/90vw viewport cap. The dialog will grow with its content and may extend beyond the viewport.
+	 * @param {function} [pOptions.onOpen] - Called after dialog is shown, receives dialog element
+	 * @param {function} [pOptions.onClose] - Called after dialog is dismissed
+	 * @returns {Promise<string|null>} Resolves with clicked button Hash, or null on close
+	 */return _createClass(PictModalWindow,[{key:"show",value:function show(pOptions){var _this30=this;var tmpOptions=Object.assign({},this._modal.options.DefaultModalOptions,pOptions);return new Promise(function(fResolve){var tmpDialog=_this30._buildDialog(tmpOptions,fResolve);_this30._showDialog(tmpDialog,tmpOptions,fResolve);});}/**
+	 * Build the modal dialog element.
+	 *
+	 * @param {object} pOptions
+	 * @param {function} fResolve
+	 * @returns {HTMLElement}
+	 */},{key:"_buildDialog",value:function _buildDialog(pOptions,fResolve){var _this31=this;var tmpId=this._modal._nextId();var tmpDialog=document.createElement('div');tmpDialog.className='pict-modal-dialog';if(pOptions.unbounded){tmpDialog.className+=' pict-modal-dialog--unbounded';}tmpDialog.id='pict-modal-'+tmpId;tmpDialog.setAttribute('role','dialog');tmpDialog.setAttribute('aria-modal','true');tmpDialog.style.width=pOptions.width;// Header
+var tmpHeaderHTML='';if(pOptions.title||pOptions.closeable){tmpHeaderHTML='<div class="pict-modal-dialog-header">';tmpHeaderHTML+='<span class="pict-modal-dialog-title">'+this._escapeHTML(pOptions.title)+'</span>';if(pOptions.closeable){tmpHeaderHTML+='<button class="pict-modal-dialog-close" aria-label="Close">&times;</button>';}tmpHeaderHTML+='</div>';}// Body
+var tmpBodyHTML='<div class="pict-modal-dialog-body">'+(pOptions.content||'')+'</div>';// Footer with buttons
+var tmpFooterHTML='';if(pOptions.buttons&&pOptions.buttons.length>0){tmpFooterHTML='<div class="pict-modal-dialog-footer">';for(var i=0;i<pOptions.buttons.length;i++){var tmpButton=pOptions.buttons[i];var tmpBtnClass='pict-modal-btn';if(tmpButton.Style){tmpBtnClass+=' pict-modal-btn--'+tmpButton.Style;}tmpFooterHTML+='<button class="'+tmpBtnClass+'" data-hash="'+this._escapeHTML(tmpButton.Hash)+'">'+this._escapeHTML(tmpButton.Label)+'</button>';}tmpFooterHTML+='</div>';}tmpDialog.innerHTML=tmpHeaderHTML+tmpBodyHTML+tmpFooterHTML;var tmpDismiss=function tmpDismiss(pResult){_this31._dismissDialog(tmpDialog,pResult,fResolve,pOptions);};// Wire close button
+if(pOptions.closeable){var tmpCloseBtn=tmpDialog.querySelector('.pict-modal-dialog-close');if(tmpCloseBtn){tmpCloseBtn.addEventListener('click',function(){tmpDismiss(null);});}}// Wire action buttons
+var tmpActionButtons=tmpDialog.querySelectorAll('[data-hash]');var _loop2=function _loop2(){var tmpBtn=tmpActionButtons[_i25];tmpBtn.addEventListener('click',function(){tmpDismiss(tmpBtn.getAttribute('data-hash'));});};for(var _i25=0;_i25<tmpActionButtons.length;_i25++){_loop2();}tmpDialog._dismiss=tmpDismiss;return tmpDialog;}/**
+	 * Show the dialog: append to body, show overlay, animate in.
+	 *
+	 * @param {HTMLElement} pDialog
+	 * @param {object} pOptions
+	 * @param {function} fResolve
+	 */},{key:"_showDialog",value:function _showDialog(pDialog,pOptions,fResolve){var tmpModalEntry={element:pDialog,dismiss:pDialog._dismiss,type:'window'};// Show overlay
+var tmpOverlayClickHandler=null;if(this._modal.options.OverlayClickDismisses&&pOptions.closeable){tmpOverlayClickHandler=function tmpOverlayClickHandler(){pDialog._dismiss(null);};}this._modal._overlay.show(tmpOverlayClickHandler);// Append to body
+document.body.appendChild(pDialog);// Track
+this._modal._activeModals.push(tmpModalEntry);// Animate in
+void pDialog.offsetHeight;pDialog.classList.add('pict-modal-visible');// Focus first button or close button
+var tmpFocusTarget=pDialog.querySelector('.pict-modal-btn')||pDialog.querySelector('.pict-modal-dialog-close');if(tmpFocusTarget){tmpFocusTarget.focus();}// Keyboard handler
+pDialog._keyHandler=function(pEvent){if(pEvent.key==='Escape'&&pOptions.closeable){pDialog._dismiss(null);}};document.addEventListener('keydown',pDialog._keyHandler);// onOpen callback
+if(typeof pOptions.onOpen==='function'){pOptions.onOpen(pDialog);}}/**
+	 * Dismiss the dialog: animate out, remove from DOM, hide overlay.
+	 *
+	 * @param {HTMLElement} pDialog
+	 * @param {*} pResult
+	 * @param {function} fResolve
+	 * @param {object} pOptions
+	 */},{key:"_dismissDialog",value:function _dismissDialog(pDialog,pResult,fResolve,pOptions){if(pDialog._dismissed){return;}pDialog._dismissed=true;if(pDialog._keyHandler){document.removeEventListener('keydown',pDialog._keyHandler);}pDialog.classList.remove('pict-modal-visible');this._modal._activeModals=this._modal._activeModals.filter(function(pEntry){return pEntry.element!==pDialog;});if(this._modal._activeModals.length>0){var tmpTopModal=this._modal._activeModals[this._modal._activeModals.length-1];this._modal._overlay.updateClickHandler(this._modal.options.OverlayClickDismisses?tmpTopModal.dismiss:null);}this._modal._overlay.hide();setTimeout(function(){if(pDialog.parentNode){pDialog.parentNode.removeChild(pDialog);}},220);if(typeof pOptions.onClose==='function'){pOptions.onClose(pResult);}fResolve(pResult);}/**
+	 * Escape HTML special characters.
+	 *
+	 * @param {string} pText
+	 * @returns {string}
+	 */},{key:"_escapeHTML",value:function _escapeHTML(pText){if(typeof pText!=='string'){return'';}return pText.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}}]);}();module.exports=PictModalWindow;},{}],22:[function(require,module,exports){module.exports={"AutoInitialize":true,"AutoRender":false,"AutoSolveWithApp":false,"ViewIdentifier":"Pict-Section-Modal","OverlayClickDismisses":true,"DefaultConfirmOptions":{"title":"Confirm","confirmLabel":"OK","cancelLabel":"Cancel","dangerous":false,"unbounded":false},"DefaultDoubleConfirmOptions":{"title":"Are you sure?","confirmLabel":"Confirm","cancelLabel":"Cancel","phrasePrompt":"Type \"{phrase}\" to confirm:","confirmPhrase":"","unbounded":false},"DefaultModalOptions":{"title":"","content":"","buttons":[],"closeable":true,"width":"480px","unbounded":false},"DefaultTooltipOptions":{"position":"top","delay":200,"maxWidth":"300px","interactive":false},"DefaultToastOptions":{"type":"info","duration":3000,"position":"top-right","dismissible":true},"DefaultPanelOptions":{"position":"right","width":340,"minWidth":200,"maxWidth":600,"collapsible":true,"collapsed":false,"persist":false,"persistKey":""},"Templates":[],"Renderables":[],"CSS":/*css*/"\n/* pict-section-modal */\n.pict-modal-root\n{\n\t/* Defaults are routed through pict-provider-theme tokens so apps\n\t   using the theme provider get themed modals automatically.  Each\n\t   var() carries its original hex as the fallback so apps that don't\n\t   install pict-provider-theme look exactly as before.  Apps may\n\t   still override any --pict-modal-* var directly to layer over the\n\t   theme-driven defaults. */\n\n\t/* Overlay */\n\t--pict-modal-overlay-bg: rgba(0, 0, 0, 0.5);\n\n\t/* Dialog */\n\t--pict-modal-bg:                  var(--theme-color-background-panel,  #ffffff);\n\t--pict-modal-fg:                  var(--theme-color-text-primary,      #1a1a1a);\n\t--pict-modal-border:              var(--theme-color-border-default,    #e0e0e0);\n\t--pict-modal-border-radius:       8px;\n\t--pict-modal-shadow:              0 4px 24px rgba(0, 0, 0, 0.15);\n\t--pict-modal-header-bg:           var(--theme-color-background-secondary, #f5f5f5);\n\t--pict-modal-header-fg:           var(--theme-color-text-primary,      #1a1a1a);\n\t--pict-modal-header-border:       var(--theme-color-border-default,    #e0e0e0);\n\n\t/* Buttons */\n\t--pict-modal-btn-bg:              var(--theme-color-background-secondary, #e0e0e0);\n\t--pict-modal-btn-fg:              var(--theme-color-text-primary,      #1a1a1a);\n\t--pict-modal-btn-hover-bg:        var(--theme-color-background-hover,  #d0d0d0);\n\t--pict-modal-btn-primary-bg:      var(--theme-color-brand-primary,     #2563eb);\n\t--pict-modal-btn-primary-fg:      var(--theme-color-text-on-brand,     #ffffff);\n\t--pict-modal-btn-primary-hover-bg:var(--theme-color-brand-primary-hover,#1d4ed8);\n\t--pict-modal-btn-danger-bg:       var(--theme-color-status-error,      #dc2626);\n\t--pict-modal-btn-danger-fg:       var(--theme-color-text-on-brand,     #ffffff);\n\t--pict-modal-btn-danger-hover-bg: var(--theme-color-status-error,      #b91c1c);\n\t--pict-modal-btn-border-radius:   4px;\n\n\t/* Toast */\n\t--pict-modal-toast-bg:            var(--theme-color-background-panel,  #333333);\n\t--pict-modal-toast-fg:            var(--theme-color-text-primary,      #ffffff);\n\t--pict-modal-toast-success-bg:    var(--theme-color-status-success,    #16a34a);\n\t--pict-modal-toast-warning-bg:    var(--theme-color-status-warning,    #d97706);\n\t--pict-modal-toast-error-bg:      var(--theme-color-status-error,      #dc2626);\n\t--pict-modal-toast-info-bg:       var(--theme-color-status-info,       #2563eb);\n\t--pict-modal-toast-border-radius: 6px;\n\t--pict-modal-toast-shadow:        0 2px 12px rgba(0, 0, 0, 0.15);\n\n\t/* Tooltip */\n\t--pict-modal-tooltip-bg:          var(--theme-color-background-tertiary,#1a1a1a);\n\t--pict-modal-tooltip-fg:          var(--theme-color-text-primary,      #ffffff);\n\t--pict-modal-tooltip-border-radius:4px;\n\t--pict-modal-tooltip-shadow:      0 2px 8px rgba(0, 0, 0, 0.15);\n\n\t/* Dropdown */\n\t--pict-modal-dropdown-bg:                 var(--theme-color-background-panel,  #ffffff);\n\t--pict-modal-dropdown-fg:                 var(--theme-color-text-primary,      #1a1a1a);\n\t--pict-modal-dropdown-border:             var(--theme-color-border-default,    #e0e0e0);\n\t--pict-modal-dropdown-border-radius:      6px;\n\t--pict-modal-dropdown-shadow:             0 6px 18px rgba(0, 0, 0, 0.18);\n\t--pict-modal-dropdown-item-hover-bg:      var(--theme-color-background-hover,  rgba(37, 99, 235, 0.10));\n\t--pict-modal-dropdown-item-hover-fg:      var(--theme-color-text-primary,      #1a1a1a);\n\t--pict-modal-dropdown-item-disabled-fg:   var(--theme-color-text-muted,        #9aa0a6);\n\t--pict-modal-dropdown-separator:          var(--theme-color-border-light,      #e8e8e8);\n\t--pict-modal-dropdown-header-fg:          var(--theme-color-text-secondary,    #6b7280);\n\t--pict-modal-dropdown-danger-fg:          var(--theme-color-status-error,      #dc2626);\n\t--pict-modal-dropdown-primary-fg:         var(--theme-color-brand-primary,     #2563eb);\n\n\t/* Typography */\n\t--pict-modal-font-family:         var(--theme-typography-family-sans,  system-ui, -apple-system, sans-serif);\n\t--pict-modal-font-size:           14px;\n\t--pict-modal-title-font-size:     16px;\n\n\t/* Animation */\n\t--pict-modal-transition-duration: 200ms;\n}\n\n/* Overlay */\n.pict-modal-overlay\n{\n\tposition: fixed;\n\ttop: 0;\n\tleft: 0;\n\twidth: 100%;\n\theight: 100%;\n\tz-index: 1000;\n\tbackground: var(--pict-modal-overlay-bg);\n\topacity: 0;\n\ttransition: opacity var(--pict-modal-transition-duration) ease;\n}\n\n.pict-modal-overlay.pict-modal-visible\n{\n\topacity: 1;\n}\n\n/* Dialog */\n.pict-modal-dialog\n{\n\tposition: fixed;\n\tz-index: 1010;\n\ttop: 50%;\n\tleft: 50%;\n\ttransform: translate(-50%, -50%) translateY(-20px);\n\topacity: 0;\n\ttransition: opacity var(--pict-modal-transition-duration) ease,\n\t            transform var(--pict-modal-transition-duration) ease;\n\n\tmax-width: 90vw;\n\tmax-height: 90vh;\n\tdisplay: flex;\n\tflex-direction: column;\n\n\tbackground: var(--pict-modal-bg);\n\tcolor: var(--pict-modal-fg);\n\tborder: 1px solid var(--pict-modal-border);\n\tborder-radius: var(--pict-modal-border-radius);\n\tbox-shadow: var(--pict-modal-shadow);\n\tfont-family: var(--pict-modal-font-family);\n\tfont-size: var(--pict-modal-font-size);\n}\n\n.pict-modal-dialog.pict-modal-visible\n{\n\topacity: 1;\n\ttransform: translate(-50%, -50%) translateY(0);\n}\n\n/* Unbounded modifier \u2014 lets callers opt out of the 90vh/90vw viewport cap.\n   Use with caution: content taller than the viewport will push buttons\n   below the fold. */\n.pict-modal-dialog.pict-modal-dialog--unbounded\n{\n\tmax-height: none;\n\tmax-width: none;\n}\n\n.pict-modal-dialog-header\n{\n\tdisplay: flex;\n\talign-items: center;\n\tjustify-content: space-between;\n\tpadding: 12px 16px;\n\tbackground: var(--pict-modal-header-bg);\n\tcolor: var(--pict-modal-header-fg);\n\tborder-bottom: 1px solid var(--pict-modal-header-border);\n\tborder-radius: var(--pict-modal-border-radius) var(--pict-modal-border-radius) 0 0;\n}\n\n.pict-modal-dialog-title\n{\n\tfont-size: var(--pict-modal-title-font-size);\n\tfont-weight: 600;\n}\n\n.pict-modal-dialog-close\n{\n\tbackground: none;\n\tborder: none;\n\tfont-size: 20px;\n\tcursor: pointer;\n\tcolor: var(--pict-modal-fg);\n\tpadding: 0 4px;\n\tline-height: 1;\n\topacity: 0.6;\n}\n\n.pict-modal-dialog-close:hover\n{\n\topacity: 1;\n}\n\n.pict-modal-dialog-body\n{\n\tpadding: 16px;\n\toverflow-y: auto;\n\tflex: 1;\n}\n\n.pict-modal-dialog-footer\n{\n\tdisplay: flex;\n\tjustify-content: flex-end;\n\tgap: 8px;\n\tpadding: 12px 16px;\n\tborder-top: 1px solid var(--pict-modal-border);\n}\n\n/* Buttons */\n.pict-modal-btn\n{\n\tpadding: 8px 16px;\n\tborder: none;\n\tborder-radius: var(--pict-modal-btn-border-radius);\n\tfont-family: var(--pict-modal-font-family);\n\tfont-size: var(--pict-modal-font-size);\n\tcursor: pointer;\n\tbackground: var(--pict-modal-btn-bg);\n\tcolor: var(--pict-modal-btn-fg);\n\ttransition: background var(--pict-modal-transition-duration) ease;\n}\n\n.pict-modal-btn:hover\n{\n\tbackground: var(--pict-modal-btn-hover-bg);\n}\n\n.pict-modal-btn:disabled\n{\n\topacity: 0.5;\n\tcursor: not-allowed;\n}\n\n.pict-modal-btn--primary\n{\n\tbackground: var(--pict-modal-btn-primary-bg);\n\tcolor: var(--pict-modal-btn-primary-fg);\n}\n\n.pict-modal-btn--primary:hover\n{\n\tbackground: var(--pict-modal-btn-primary-hover-bg);\n}\n\n.pict-modal-btn--danger\n{\n\tbackground: var(--pict-modal-btn-danger-bg);\n\tcolor: var(--pict-modal-btn-danger-fg);\n}\n\n.pict-modal-btn--danger:hover\n{\n\tbackground: var(--pict-modal-btn-danger-hover-bg);\n}\n\n/* Double confirm input */\n.pict-modal-confirm-input\n{\n\twidth: 100%;\n\tpadding: 8px 12px;\n\tmargin-top: 12px;\n\tborder: 1px solid var(--pict-modal-border);\n\tborder-radius: var(--pict-modal-btn-border-radius);\n\tfont-family: var(--pict-modal-font-family);\n\tfont-size: var(--pict-modal-font-size);\n\tbox-sizing: border-box;\n}\n\n.pict-modal-confirm-input:focus\n{\n\toutline: 2px solid var(--pict-modal-btn-primary-bg);\n\toutline-offset: -1px;\n}\n\n.pict-modal-confirm-prompt\n{\n\tmargin-top: 12px;\n\tfont-size: 13px;\n\tcolor: var(--pict-modal-fg);\n\topacity: 0.7;\n}\n\n/* Toast container */\n.pict-modal-toast-container\n{\n\tposition: fixed;\n\tz-index: 1030;\n\tdisplay: flex;\n\tflex-direction: column;\n\tgap: 8px;\n\tpointer-events: none;\n\tmax-width: 400px;\n}\n\n.pict-modal-toast-container--top-right\n{\n\ttop: 16px;\n\tright: 16px;\n}\n\n.pict-modal-toast-container--top-left\n{\n\ttop: 16px;\n\tleft: 16px;\n}\n\n.pict-modal-toast-container--bottom-right\n{\n\tbottom: 16px;\n\tright: 16px;\n}\n\n.pict-modal-toast-container--bottom-left\n{\n\tbottom: 16px;\n\tleft: 16px;\n}\n\n.pict-modal-toast-container--top-center\n{\n\ttop: 16px;\n\tleft: 50%;\n\ttransform: translateX(-50%);\n}\n\n.pict-modal-toast-container--bottom-center\n{\n\tbottom: 16px;\n\tleft: 50%;\n\ttransform: translateX(-50%);\n}\n\n/* Toast */\n.pict-modal-toast\n{\n\tdisplay: flex;\n\talign-items: center;\n\tgap: 10px;\n\tpadding: 12px 16px;\n\tborder-radius: var(--pict-modal-toast-border-radius);\n\tbox-shadow: var(--pict-modal-toast-shadow);\n\tfont-family: var(--pict-modal-font-family);\n\tfont-size: var(--pict-modal-font-size);\n\tbackground: var(--pict-modal-toast-bg);\n\tcolor: var(--pict-modal-toast-fg);\n\tpointer-events: auto;\n\topacity: 0;\n\ttransform: translateX(100%);\n\ttransition: opacity var(--pict-modal-transition-duration) ease,\n\t            transform var(--pict-modal-transition-duration) ease;\n}\n\n.pict-modal-toast.pict-modal-visible\n{\n\topacity: 1;\n\ttransform: translateX(0);\n}\n\n.pict-modal-toast.pict-modal-toast-exit\n{\n\topacity: 0;\n\ttransform: translateX(100%);\n}\n\n.pict-modal-toast--info\n{\n\tbackground: var(--pict-modal-toast-info-bg);\n}\n\n.pict-modal-toast--success\n{\n\tbackground: var(--pict-modal-toast-success-bg);\n}\n\n.pict-modal-toast--warning\n{\n\tbackground: var(--pict-modal-toast-warning-bg);\n}\n\n.pict-modal-toast--error\n{\n\tbackground: var(--pict-modal-toast-error-bg);\n}\n\n.pict-modal-toast-message\n{\n\tflex: 1;\n}\n\n.pict-modal-toast-dismiss\n{\n\tbackground: none;\n\tborder: none;\n\tcolor: inherit;\n\tfont-size: 18px;\n\tcursor: pointer;\n\tpadding: 0 2px;\n\tline-height: 1;\n\topacity: 0.7;\n}\n\n.pict-modal-toast-dismiss:hover\n{\n\topacity: 1;\n}\n\n/* Tooltip */\n.pict-modal-tooltip\n{\n\tposition: fixed;\n\tz-index: 1020;\n\tpadding: 6px 10px;\n\tborder-radius: var(--pict-modal-tooltip-border-radius);\n\tbox-shadow: var(--pict-modal-tooltip-shadow);\n\tbackground: var(--pict-modal-tooltip-bg);\n\tcolor: var(--pict-modal-tooltip-fg);\n\tfont-family: var(--pict-modal-font-family);\n\tfont-size: 13px;\n\tpointer-events: none;\n\topacity: 0;\n\ttransition: opacity var(--pict-modal-transition-duration) ease;\n\twhite-space: normal;\n\tword-wrap: break-word;\n}\n\n.pict-modal-tooltip.pict-modal-tooltip-interactive\n{\n\tpointer-events: auto;\n}\n\n.pict-modal-tooltip.pict-modal-visible\n{\n\topacity: 1;\n}\n\n.pict-modal-tooltip-arrow\n{\n\tposition: absolute;\n\twidth: 8px;\n\theight: 8px;\n\tbackground: var(--pict-modal-tooltip-bg);\n\ttransform: rotate(45deg);\n}\n\n.pict-modal-tooltip--top .pict-modal-tooltip-arrow\n{\n\tbottom: -4px;\n\tleft: 50%;\n\tmargin-left: -4px;\n}\n\n.pict-modal-tooltip--bottom .pict-modal-tooltip-arrow\n{\n\ttop: -4px;\n\tleft: 50%;\n\tmargin-left: -4px;\n}\n\n.pict-modal-tooltip--left .pict-modal-tooltip-arrow\n{\n\tright: -4px;\n\ttop: 50%;\n\tmargin-top: -4px;\n}\n\n.pict-modal-tooltip--right .pict-modal-tooltip-arrow\n{\n\tleft: -4px;\n\ttop: 50%;\n\tmargin-top: -4px;\n}\n\n/* \u2500\u2500 Dropdown \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n   Anchor-positioned menu (no overlay). Used for nav menus and\n   \"split button\" addenda \u2014 see Pict-Modal-Dropdown.js.\n*/\n.pict-modal-dropdown\n{\n\tposition: fixed;\n\tz-index: 1025;\n\tmin-width: 160px;\n\tmax-width: 360px;\n\tmax-height: 60vh;\n\toverflow-y: auto;\n\tbackground: var(--pict-modal-dropdown-bg);\n\tcolor: var(--pict-modal-dropdown-fg);\n\tborder: 1px solid var(--pict-modal-dropdown-border);\n\tborder-radius: var(--pict-modal-dropdown-border-radius);\n\tbox-shadow: var(--pict-modal-dropdown-shadow);\n\tfont-family: var(--pict-modal-font-family);\n\tfont-size: var(--pict-modal-font-size);\n\tpadding: 4px 0;\n\topacity: 0;\n\ttransform: translateY(-4px);\n\ttransition: opacity var(--pict-modal-transition-duration) ease,\n\t            transform var(--pict-modal-transition-duration) ease;\n}\n\n.pict-modal-dropdown.pict-modal-dropdown--above { transform: translateY(4px); }\n\n.pict-modal-dropdown.pict-modal-visible\n{\n\topacity: 1;\n\ttransform: translateY(0);\n}\n\n.pict-modal-dropdown-item\n{\n\tdisplay: flex;\n\talign-items: center;\n\tgap: 8px;\n\tpadding: 7px 14px;\n\tcursor: pointer;\n\tuser-select: none;\n\tcolor: inherit;\n\toutline: none;\n}\n\n.pict-modal-dropdown-item:hover,\n.pict-modal-dropdown-item:focus\n{\n\tbackground: var(--pict-modal-dropdown-item-hover-bg);\n\tcolor: var(--pict-modal-dropdown-item-hover-fg);\n}\n\n.pict-modal-dropdown-item--disabled\n{\n\tcursor: not-allowed;\n\tcolor: var(--pict-modal-dropdown-item-disabled-fg);\n}\n\n.pict-modal-dropdown-item--disabled:hover,\n.pict-modal-dropdown-item--disabled:focus\n{\n\tbackground: transparent;\n\tcolor: var(--pict-modal-dropdown-item-disabled-fg);\n}\n\n.pict-modal-dropdown-item--primary { color: var(--pict-modal-dropdown-primary-fg); }\n.pict-modal-dropdown-item--danger  { color: var(--pict-modal-dropdown-danger-fg); }\n\n.pict-modal-dropdown-item-icon\n{\n\tflex: 0 0 auto;\n\tdisplay: inline-flex;\n\talign-items: center;\n\tjustify-content: center;\n\twidth: 16px;\n\theight: 16px;\n}\n\n.pict-modal-dropdown-item-icon svg { width: 100%; height: 100%; display: block; }\n\n.pict-modal-dropdown-item-label { flex: 1 1 auto; min-width: 0; }\n\n.pict-modal-dropdown-item-hint\n{\n\tflex: 0 0 auto;\n\tfont-size: 11px;\n\topacity: 0.6;\n\tmargin-left: 12px;\n}\n\n.pict-modal-dropdown-separator\n{\n\theight: 1px;\n\tbackground: var(--pict-modal-dropdown-separator);\n\tmargin: 4px 0;\n}\n\n.pict-modal-dropdown-header\n{\n\tpadding: 6px 14px 2px;\n\tfont-size: 11px;\n\tfont-weight: 600;\n\ttext-transform: uppercase;\n\tletter-spacing: 0.04em;\n\tcolor: var(--pict-modal-dropdown-header-fg);\n}\n\n/* \u2500\u2500 Resizable / Collapsible Panels \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 */\n.pict-panel\n{\n\tposition: relative;\n\ttransition: width 0.2s ease;\n\tflex-shrink: 0;\n\toverflow: visible;\n}\n.pict-panel-collapsed\n{\n\twidth: 0 !important;\n\tmin-width: 0 !important;\n\toverflow: visible;\n}\n.pict-panel-collapsed > *:not(.pict-panel-edge)\n{\n\tdisplay: none;\n}\n\n/* Edge container \u2014 zero-width flex sibling of the panel.\n   Sits next to the panel in the flex layout; children\n   use absolute positioning to overlap the panel boundary. */\n.pict-panel-edge\n{\n\tposition: relative;\n\twidth: 0;\n\tflex-shrink: 0;\n\tz-index: 50;\n\toverflow: visible;\n}\n\n/* Resize handle \u2014 thin strip on the panel boundary */\n.pict-panel-resize\n{\n\tposition: absolute;\n\ttop: 0;\n\tbottom: 0;\n\twidth: 4px;\n\tcursor: col-resize;\n\tbackground: transparent;\n\ttransition: background 0.15s, width 0.15s;\n}\n.pict-panel-edge-right .pict-panel-resize\n{\n\tright: 0;\n\tborder-right: 1px solid var(--pict-panel-border, #DDD6CA);\n}\n.pict-panel-edge-left .pict-panel-resize\n{\n\tleft: 0;\n\tborder-left: 1px solid var(--pict-panel-border, #DDD6CA);\n}\n.pict-panel-resize:hover,\n.pict-panel-edge:hover .pict-panel-resize\n{\n\twidth: 5px;\n\tbackground: var(--pict-panel-accent, #2E7D74);\n\topacity: 0.5;\n}\n.pict-panel-resize.dragging\n{\n\twidth: 5px;\n\tbackground: var(--pict-panel-accent, #2E7D74);\n\topacity: 1;\n\ttransition: none;\n}\n.pict-panel-edge-collapsed .pict-panel-resize\n{\n\tdisplay: none;\n}\n\n/* Collapse tab \u2014 tucked sliver at rest, slides out on hover */\n.pict-panel-tab\n{\n\tposition: absolute;\n\ttop: 8px;\n\twidth: 8px;\n\theight: 24px;\n\tdisplay: flex;\n\talign-items: center;\n\tjustify-content: center;\n\toverflow: hidden;\n\tbackground: var(--pict-panel-border, #DDD6CA);\n\tborder: 1px solid var(--pict-panel-border, #DDD6CA);\n\tcursor: pointer;\n\tcolor: var(--pict-panel-fg, #8A7F72);\n\tfont-size: 10px;\n\tline-height: 1;\n\topacity: 0.5;\n\ttransition: opacity 0.25s, width 0.2s ease, height 0.2s ease, left 0.2s ease, right 0.2s ease, background 0.2s;\n\tz-index: 51;\n}\n.pict-panel-edge:hover .pict-panel-tab,\n.pict-panel-tab:hover\n{\n\twidth: 20px;\n\theight: 32px;\n\topacity: 1;\n\toverflow: visible;\n\tbackground: var(--pict-panel-bg, #FAF8F4);\n}\n/* Right panel: tab to the left of the edge */\n.pict-panel-edge-right .pict-panel-tab\n{\n\tright: 0;\n\tborder-right: none;\n\tborder-radius: 4px 0 0 4px;\n}\n.pict-panel-edge-right:hover .pict-panel-tab,\n.pict-panel-edge-right .pict-panel-tab:hover\n{\n\tright: 0;\n}\n/* Left panel: tab to the right of the edge */\n.pict-panel-edge-left .pict-panel-tab\n{\n\tleft: 0;\n\tborder-left: none;\n\tborder-radius: 0 4px 4px 0;\n}\n.pict-panel-edge-left:hover .pict-panel-tab,\n.pict-panel-edge-left .pict-panel-tab:hover\n{\n\tleft: 0;\n}\n/* When collapsed \u2014 more visible */\n.pict-panel-edge-collapsed .pict-panel-tab\n{\n\twidth: 10px;\n\theight: 28px;\n\topacity: 0.6;\n}\n.pict-panel-edge-collapsed .pict-panel-tab:hover,\n.pict-panel-edge-collapsed:hover .pict-panel-tab\n{\n\twidth: 20px;\n\theight: 32px;\n\topacity: 1;\n\toverflow: visible;\n\tbackground: var(--pict-panel-bg, #FAF8F4);\n}\n\n/* \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n *  Pict-Modal-Shell \u2014 viewport-managing layout for top / right /\n *  bottom / left panels around a center.\n * \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 */\n\n.pict-modal-shell-host { display: block; height: 100%; min-height: 0; }\n.pict-modal-shell\n{\n\tdisplay: flex;\n\tflex-direction: column;\n\twidth: 100%;\n\theight: 100%;\n\tmin-height: 0;\n\tposition: relative;\n\tcolor: var(--pict-modal-fg, var(--theme-color-text-primary, #1a1a1a));\n\tbackground: var(--theme-color-background-primary, transparent);\n}\n.pict-modal-shell-row { display: flex; min-width: 0; min-height: 0; }\n/* \"First added = at the edge\" convention is held by reversing the\n   flex-direction on the bottom row + right side. That way, for ALL\n   four sides, calling addPanel() N times stacks panel #1 against\n   the viewport edge, panel #2 just inside it, panel #3 further in,\n   and so on. Without these reverses, top + left worked that way but\n   bottom + right inverted (first-added at content side, last-added\n   at edge), which surprised callers. */\n.pict-modal-shell-row-top    { flex: 0 0 auto; flex-direction: column; }\n.pict-modal-shell-row-bottom { flex: 0 0 auto; flex-direction: column-reverse; }\n.pict-modal-shell-row-middle\n{\n\tflex: 1 1 0;\n\tflex-direction: row;\n\tmin-height: 0;\n\tposition: relative;\n}\n.pict-modal-shell-side\n{\n\tdisplay: flex;\n\tflex: 0 0 auto;\n\tmin-height: 0;\n}\n.pict-modal-shell-side-left  { flex-direction: row; }\n.pict-modal-shell-side-right { flex-direction: row-reverse; }\n.pict-modal-shell-center\n{\n\tflex: 1 1 0;\n\tmin-width: 0;\n\tmin-height: 0;\n\toverflow: auto;\n\tposition: relative;\n}\n.pict-modal-shell-center-content\n{\n\tmin-height: 100%;\n}\n/* Center column gains this class when at least one Scope:'center'\n   panel is added.  The center stops scrolling internally \u2014 that job\n   moves to the content destination \u2014 and switches to a vertical flex\n   so the destination and any inner panels stack cleanly. */\n.pict-modal-shell-center.pict-modal-shell-center-with-inner-panel\n{\n\tdisplay: flex;\n\tflex-direction: column;\n\toverflow: hidden;\n}\n.pict-modal-shell-center.pict-modal-shell-center-with-inner-panel > .pict-modal-shell-center-content\n{\n\tflex: 1 1 0;\n\tmin-height: 0;\n\toverflow: auto;\n}\n.pict-modal-shell-center.pict-modal-shell-center-with-inner-panel > .pict-modal-shell-panel\n{\n\tflex: 0 0 auto;\n\twidth: 100%;\n}\n\n/* Panels \u2014 base */\n.pict-modal-shell-panel\n{\n\t/* How far the collapse-tab's panel-bg \"merge bar\" extends INTO\n\t   the panel past the tab's geometric edge. Painted via box-shadow\n\t   on the tab (no DOM impact), it masks any 1px theme border on an\n\t   inner element, content padding offset, or resize-handle hover\n\t   bleed in the strip between the tab's panel-facing edge and the\n\t   first real pixel of panel content. Consumers can bump this for\n\t   themes with thicker (2+px) inner borders. */\n\t--pict-modal-collapse-tab-merge: 2px;\n\tposition: relative;\n\tdisplay: flex;\n\tflex-direction: column;\n\tbox-sizing: border-box;\n\tbackground: var(--pict-modal-bg, var(--theme-color-background-panel, #ffffff));\n\tcolor: inherit;\n\tmin-width: 0;\n\tmin-height: 0;\n\ttransition: width 140ms ease, height 140ms ease;\n}\n.pict-modal-shell-panel-content\n{\n\tflex: 1 1 auto;\n\tmin-width: 0;\n\tmin-height: 0;\n\toverflow: auto;\n}\n.pict-modal-shell-panel-content-inner\n{\n\tmin-height: 100%;\n}\n/* Panel boundary \u2014 fixed-mode panels get a hairline border for explicit\n   demarcation. Collapsible / resizable panels DROP the boundary border\n   (background contrast separates them from the center anyway) so the\n   collapse tab can pull out cleanly without a hairline cutting across\n   it. The host stylesheet still gets full control via the panel's own\n   background. */\n.pict-modal-shell-panel-mode-fixed.pict-modal-shell-panel-top    { border-bottom: 1px solid var(--pict-modal-border, var(--theme-color-border-default, #e0e0e0)); }\n.pict-modal-shell-panel-mode-fixed.pict-modal-shell-panel-bottom { border-top:    1px solid var(--pict-modal-border, var(--theme-color-border-default, #e0e0e0)); }\n.pict-modal-shell-panel-mode-fixed.pict-modal-shell-panel-left   { border-right:  1px solid var(--pict-modal-border, var(--theme-color-border-default, #e0e0e0)); }\n.pict-modal-shell-panel-mode-fixed.pict-modal-shell-panel-right  { border-left:   1px solid var(--pict-modal-border, var(--theme-color-border-default, #e0e0e0)); }\n\n/* Resize handle \u2014 absolute on the inner edge of each panel. */\n.pict-modal-shell-panel-resize-handle\n{\n\tposition: absolute;\n\tbackground: transparent;\n\tz-index: 5;\n\ttransition: background-color 120ms ease;\n}\n/* Resize handle hover \u2014 use the active brand's mode-aware primary\n   color (set by pict-section-theme's Brand provider as\n   --brand-color-primary-mode) so the resize affordance picks up the\n   app's wordmark color. Falls back to the theme's brand-primary\n   token if no brand is registered. */\n.pict-modal-shell-panel-resize-handle:hover\n{\n\tbackground: var(--brand-color-primary-mode, var(--theme-color-brand-primary, #2563eb));\n\topacity: 0.4;\n}\n.pict-modal-shell-panel-left   .pict-modal-shell-panel-resize-handle { right: -3px; top: 0; bottom: 0; width: 6px; cursor: col-resize; }\n.pict-modal-shell-panel-right  .pict-modal-shell-panel-resize-handle { left:  -3px; top: 0; bottom: 0; width: 6px; cursor: col-resize; }\n.pict-modal-shell-panel-top    .pict-modal-shell-panel-resize-handle { bottom:-3px; left: 0; right: 0; height: 6px; cursor: row-resize; }\n.pict-modal-shell-panel-bottom .pict-modal-shell-panel-resize-handle { top:   -3px; left: 0; right: 0; height: 6px; cursor: row-resize; }\n\n/* Collapse tab \u2014 slim sliver flush on the panel's OUTER boundary\n   (where the resize handle sits), modelled on retold-content-system's\n   sidebar tab. At rest it's a 6\xD728 px sliver; hover expands to\n   18\xD736 px without overlapping the panel's own content. The tab is\n   positioned with its center on the boundary so half pokes into the\n   adjacent area \u2014 the only place we can safely take over without\n   stepping on app UI inside the panel. Title text only renders in the\n   collapsed state where there's room for it. */\n.pict-modal-shell-panel-collapse-tab\n{\n\tposition: absolute;\n\tdisplay: flex;            /* not inline-flex \u2014 avoids baseline alignment quirks */\n\talign-items: center;\n\tjustify-content: center;\n\toverflow: hidden;\n\tborder: 1px solid var(--pict-modal-border, var(--theme-color-border-default, #d0d7de));\n\tbackground: var(--pict-modal-bg, var(--theme-color-background-panel, #ffffff));\n\tcolor: var(--theme-color-text-muted, #6b7280);\n\tfont: inherit;\n\tfont-size: 10px;\n\tletter-spacing: 0.4px;\n\ttext-transform: uppercase;\n\tcursor: pointer;\n\tz-index: 50;\n\topacity: 0.55;\n\tpadding: 0;\n\tbox-sizing: border-box;\n\tline-height: 0;          /* keep child boxes from inflating around the rotated chevron */\n\t/* Geometry (width/height/right/left) is intentionally NOT animated.\n\t   Sliding the tab's outer edge inward on hover-out makes it look like\n\t   the tab is \"sliding into\" the panel content \u2014 weird visual.\n\t   Snapping the size change instead, and animating only the appearance\n\t   (opacity/color/shadow), gives a clean fade-in/out with no boundary\n\t   weirdness. */\n\ttransition: opacity 160ms ease,\n\t            background-color 160ms ease, color 160ms ease,\n\t            border-color 160ms ease, box-shadow 160ms ease;\n}\n/* Hover state pulls accent color from the active brand (mode-aware,\n   so it's legible in both light + dark) with theme brand-primary as\n   fallback. The whole point of brand colors is that they show up\n   across the app's chrome. */\n.pict-modal-shell-panel-collapse-tab:hover,\n.pict-modal-shell-panel:hover > .pict-modal-shell-panel-collapse-tab\n{\n\topacity: 1;\n\tcolor:        var(--brand-color-primary-mode, var(--theme-color-brand-primary, #2563eb));\n\tborder-color: var(--brand-color-primary-mode, var(--theme-color-brand-primary, #2563eb));\n}\n/* Drop shadow casts AWAY from the panel so the tab feels pulled out\n   (extension of the panel) rather than floating across the boundary.\n   The first shadow value is the merge-bar (panel-bg colored, offset\n   INTO the panel) which has to be repeated here so the hover override\n   doesn't drop it. */\n.pict-modal-shell-panel-left:hover    > .pict-modal-shell-panel-collapse-tab,\n.pict-modal-shell-panel-left    > .pict-modal-shell-panel-collapse-tab:hover\n{\n\tbox-shadow:\n\t\tcalc(-1 * var(--pict-modal-collapse-tab-merge)) 0 0 0 var(--pict-modal-bg, var(--theme-color-background-panel, #ffffff)),\n\t\t3px 0 6px -2px rgba(0, 0, 0, 0.18);\n}\n.pict-modal-shell-panel-right:hover   > .pict-modal-shell-panel-collapse-tab,\n.pict-modal-shell-panel-right   > .pict-modal-shell-panel-collapse-tab:hover\n{\n\tbox-shadow:\n\t\tvar(--pict-modal-collapse-tab-merge) 0 0 0 var(--pict-modal-bg, var(--theme-color-background-panel, #ffffff)),\n\t\t-3px 0 6px -2px rgba(0, 0, 0, 0.18);\n}\n.pict-modal-shell-panel-top:hover     > .pict-modal-shell-panel-collapse-tab,\n.pict-modal-shell-panel-top     > .pict-modal-shell-panel-collapse-tab:hover\n{\n\tbox-shadow:\n\t\t0 calc(-1 * var(--pict-modal-collapse-tab-merge)) 0 0 var(--pict-modal-bg, var(--theme-color-background-panel, #ffffff)),\n\t\t0 3px 6px -2px rgba(0, 0, 0, 0.18);\n}\n.pict-modal-shell-panel-bottom:hover  > .pict-modal-shell-panel-collapse-tab,\n.pict-modal-shell-panel-bottom  > .pict-modal-shell-panel-collapse-tab:hover\n{\n\tbox-shadow:\n\t\t0 var(--pict-modal-collapse-tab-merge) 0 0 var(--pict-modal-bg, var(--theme-color-background-panel, #ffffff)),\n\t\t0 -3px 6px -2px rgba(0, 0, 0, 0.18);\n}\n\n/* Side panels: slim VERTICAL sliver pulled OUT of the panel's outer\n   boundary like a drawer tab. The geometric inner edge sits 1px\n   INSIDE the panel boundary, and the merge-bar box-shadow paints\n   another --pict-modal-collapse-tab-merge px of panel-bg color past\n   it INTO the panel \u2014 together they mask any 1px theme border on an\n   inner element, content padding offset, or resize-handle hover bleed\n   that would otherwise leak between the tab and the panel content.\n   The tab grows OUTWARD only on hover; the inner edge stays put so\n   the tab always looks like an extension of the panel rather than a\n   floating button. Border-left is removed for left panels (and\n   border-right for right panels) so the panel-facing edge is open. */\n.pict-modal-shell-panel-left  > .pict-modal-shell-panel-collapse-tab\n{\n\tright: -5px; top: 14px; width: 6px; height: 28px;\n\tborder-radius: 0 4px 4px 0;\n\tborder-left: 0;\n\tbox-shadow: calc(-1 * var(--pict-modal-collapse-tab-merge)) 0 0 0 var(--pict-modal-bg, var(--theme-color-background-panel, #ffffff));\n}\n.pict-modal-shell-panel-right > .pict-modal-shell-panel-collapse-tab\n{\n\tleft:  -5px; top: 14px; width: 6px; height: 28px;\n\tborder-radius: 4px 0 0 4px;\n\tborder-right: 0;\n\tbox-shadow: var(--pict-modal-collapse-tab-merge) 0 0 0 var(--pict-modal-bg, var(--theme-color-background-panel, #ffffff));\n}\n/* Hover: same inner anchor (panelRight - 1), tab grows outward to\n   width 18 \u2192 right: -17px. Top + height grow downward only (top\n   stays, height extends so the tab visually 'drops' the chevron\n   into view). */\n.pict-modal-shell-panel-left:hover  > .pict-modal-shell-panel-collapse-tab,\n.pict-modal-shell-panel-left  > .pict-modal-shell-panel-collapse-tab:hover\n{\n\twidth: 18px; height: 36px; right: -17px;\n}\n.pict-modal-shell-panel-right:hover > .pict-modal-shell-panel-collapse-tab,\n.pict-modal-shell-panel-right > .pict-modal-shell-panel-collapse-tab:hover\n{\n\twidth: 18px; height: 36px; left: -17px;\n}\n\n/* Top / bottom panels: slim HORIZONTAL sliver pulled OUT of the\n   horizontal boundary, anchored 14 px in from the right. Same\n   inner-edge-anchored + merge-bar pattern as the side panels \u2014 the\n   merge-bar offsets vertically instead of horizontally. */\n.pict-modal-shell-panel-top    > .pict-modal-shell-panel-collapse-tab\n{\n\tbottom: -5px; right: 14px; width: 28px; height: 6px;\n\tborder-radius: 0 0 4px 4px;\n\tborder-top: 0;\n\tbox-shadow: 0 calc(-1 * var(--pict-modal-collapse-tab-merge)) 0 0 var(--pict-modal-bg, var(--theme-color-background-panel, #ffffff));\n}\n.pict-modal-shell-panel-bottom > .pict-modal-shell-panel-collapse-tab\n{\n\ttop:    -5px; right: 14px; width: 28px; height: 6px;\n\tborder-radius: 4px 4px 0 0;\n\tborder-bottom: 0;\n\tbox-shadow: 0 var(--pict-modal-collapse-tab-merge) 0 0 var(--pict-modal-bg, var(--theme-color-background-panel, #ffffff));\n}\n.pict-modal-shell-panel-top:hover    > .pict-modal-shell-panel-collapse-tab,\n.pict-modal-shell-panel-top    > .pict-modal-shell-panel-collapse-tab:hover\n{\n\twidth: 36px; height: 18px; bottom: -17px;\n}\n.pict-modal-shell-panel-bottom:hover > .pict-modal-shell-panel-collapse-tab,\n.pict-modal-shell-panel-bottom > .pict-modal-shell-panel-collapse-tab:hover\n{\n\twidth: 36px; height: 18px; top: -17px;\n}\n\n.pict-modal-shell-panel-collapse-tab-title { display: none; white-space: nowrap; }\n\n/* Auto-generated chevron glyph inside the tab \u2014 only visible once the\n   tab is wide / tall enough to show it (i.e. hover state, or when the\n   panel is collapsed). Direction follows side + state.\n   Sized 5\xD75 (down from 6) so even with rotation the visual stays\n   well clear of the tab's overflow:hidden bounds at 18\xD736 hover and\n   the 24px collapsed tab strip width. flex-shrink:0 ensures the\n   pseudo never collapses to zero in tight tab dimensions. */\n.pict-modal-shell-panel-collapse-tab::before\n{\n\tcontent: '';\n\tdisplay: block;\n\twidth: 5px; height: 5px;\n\tflex-shrink: 0;\n\topacity: 0;\n\tborder-right: 1.5px solid currentColor;\n\tborder-bottom: 1.5px solid currentColor;\n\ttransform: rotate(135deg);\n\ttransform-origin: center center;\n\ttransition: opacity 160ms ease, transform 160ms ease;\n}\n.pict-modal-shell-panel:hover > .pict-modal-shell-panel-collapse-tab::before,\n.pict-modal-shell-panel-collapse-tab:hover::before,\n.pict-modal-shell-panel-collapsed > .pict-modal-shell-panel-collapse-tab::before\n{\n\topacity: 1;\n}\n.pict-modal-shell-panel-right                                       > .pict-modal-shell-panel-collapse-tab::before { transform: rotate(-45deg); }\n.pict-modal-shell-panel-top                                         > .pict-modal-shell-panel-collapse-tab::before { transform: rotate(-135deg); }\n.pict-modal-shell-panel-bottom                                      > .pict-modal-shell-panel-collapse-tab::before { transform: rotate(45deg); }\n.pict-modal-shell-panel-left.pict-modal-shell-panel-collapsed       > .pict-modal-shell-panel-collapse-tab::before { transform: rotate(-45deg); }\n.pict-modal-shell-panel-right.pict-modal-shell-panel-collapsed      > .pict-modal-shell-panel-collapse-tab::before { transform: rotate(135deg); }\n.pict-modal-shell-panel-top.pict-modal-shell-panel-collapsed        > .pict-modal-shell-panel-collapse-tab::before { transform: rotate(45deg); }\n.pict-modal-shell-panel-bottom.pict-modal-shell-panel-collapsed     > .pict-modal-shell-panel-collapse-tab::before { transform: rotate(-135deg); }\n\n/* Collapsed state \u2014 content disappears, only the collapse tab remains. */\n.pict-modal-shell-panel-collapsed > .pict-modal-shell-panel-content\n{\n\tdisplay: none;\n}\n.pict-modal-shell-panel-collapsed > .pict-modal-shell-panel-resize-handle\n{\n\tdisplay: none;\n}\n.pict-modal-shell-panel-left.pict-modal-shell-panel-collapsed,\n.pict-modal-shell-panel-right.pict-modal-shell-panel-collapsed\n{\n\t/* When collapsed, side panels rotate the title for vertical reading. */\n\toverflow: hidden;\n}\n/* When collapsed: the entire panel becomes the tab strip \u2014 full width\n   for sides, full height for top/bottom \u2014 with the title visible\n   vertically (sides) or horizontally (top/bottom). The little sliver\n   tab on the boundary disappears (we don't need it anymore \u2014 clicking\n   anywhere on the panel toggles it back open). */\n.pict-modal-shell-panel-left.pict-modal-shell-panel-collapsed,\n.pict-modal-shell-panel-right.pict-modal-shell-panel-collapsed,\n.pict-modal-shell-panel-top.pict-modal-shell-panel-collapsed,\n.pict-modal-shell-panel-bottom.pict-modal-shell-panel-collapsed\n{\n\toverflow: hidden;\n}\n.pict-modal-shell-panel-collapsed > .pict-modal-shell-panel-collapse-tab\n{\n\t/* Promote the tab to FILL the collapsed panel (not just hug its\n\t   content) so the centered chevron + title group sits in the middle\n\t   of the panel. Without explicit width/height: 100%, the position:\n\t   absolute element shrinks to its natural content size and the\n\t   group ends up flush at the top of the panel \u2014 where the chevron\n\t   gets clipped by the topbar. */\n\tposition: absolute !important;\n\ttop: 0 !important; right: 0 !important; bottom: 0 !important; left: 0 !important;\n\twidth: 100% !important;\n\theight: 100% !important;\n\tborder: 0;\n\tborder-radius: 0;\n\tbackground: transparent;\n\topacity: 0.85;\n\tdisplay: flex;\n\talign-items: center;\n\tjustify-content: center;\n\tgap: 8px;\n\tpadding: 12px 4px;        /* keeps chevron + title clear of edges */\n\tbox-shadow: none;\n\tcolor: var(--theme-color-text-muted, #6b7280);\n\tbox-sizing: border-box;\n\toverflow: hidden;\n}\n.pict-modal-shell-panel-collapsed > .pict-modal-shell-panel-collapse-tab:hover\n{\n\tbackground: var(--theme-color-background-hover, var(--pict-modal-bg, #fff));\n\tcolor: var(--brand-color-primary-mode, var(--theme-color-brand-primary, #2563eb));\n\tbox-shadow: none;\n}\n/* Side panels (collapsed): rotate the title for vertical reading. */\n.pict-modal-shell-panel-left.pict-modal-shell-panel-collapsed   > .pict-modal-shell-panel-collapse-tab,\n.pict-modal-shell-panel-right.pict-modal-shell-panel-collapsed  > .pict-modal-shell-panel-collapse-tab\n{\n\twriting-mode: vertical-rl;\n\ttext-orientation: mixed;\n}\n.pict-modal-shell-panel-collapsed .pict-modal-shell-panel-collapse-tab-title\n{\n\tdisplay: inline;\n}\n\n/* Hidden panels \u2014 when Hidden:true is passed to addPanel, the collapsed\n   state has zero footprint: no collapse tab (the tab is never built),\n   the panel root is display:none, and the resize handle vanishes. The\n   only path to the open state is a programmatic expand()/toggle() from\n   somewhere else in the app (e.g. a topbar gear button). When expanded,\n   the panel renders normally \u2014 so resize/drag handles continue to work\n   while the panel is open. */\n.pict-modal-shell-panel-hidden.pict-modal-shell-panel-collapsed\n{\n\tdisplay: none !important;\n}\n\n/* Overlay panels \u2014 float over the middle row instead of taking layout\n   space. The overlay layer is positioned absolutely inside the middle\n   row; individual overlay panels stack with positive z-index. */\n.pict-modal-shell-overlay-layer\n{\n\tposition: absolute;\n\tinset: 0;\n\tpointer-events: none;\n\tz-index: 10;\n}\n.pict-modal-shell-overlay-layer .pict-modal-shell-panel\n{\n\tpointer-events: auto;\n\tposition: absolute;\n\tbox-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);\n}\n.pict-modal-shell-overlay-layer .pict-modal-shell-panel-left   { left:   0; top: 0; bottom: 0; }\n.pict-modal-shell-overlay-layer .pict-modal-shell-panel-right  { right:  0; top: 0; bottom: 0; }\n.pict-modal-shell-overlay-layer .pict-modal-shell-panel-top    { top:    0; left: 0; right: 0; }\n.pict-modal-shell-overlay-layer .pict-modal-shell-panel-bottom { bottom: 0; left: 0; right: 0; }\n\n/* \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n   Responsive drawer mode \u2014 .pict-modal-shell-drawer-active toggles\n   onto the middle row when any panel with ResponsiveDrawer crosses\n   below its breakpoint. Flips the row's flex-direction from row to\n   column, stacking side panels above the center and stretching them\n   to full width. Each opted-in panel itself gets the\n   .pict-modal-shell-panel-drawer class so per-panel rules below\n   target only the drawer-mode panels (right + non-drawer panels in\n   the same row are unaffected). The drawer height is read from a\n   per-panel --pict-modal-drawer-height CSS variable (default\n   33vh, set in JS from the DrawerHeight option).\n   \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 */\n.pict-modal-shell-row-middle.pict-modal-shell-drawer-active\n{\n\tflex-direction: column;\n\t/* The drawer tab lives outside the drawer's bottom edge \u2014 ancestor\n\t   chain MUST allow it to escape clip. */\n\toverflow: visible;\n}\n.pict-modal-shell-row-middle.pict-modal-shell-drawer-active .pict-modal-shell-side\n{\n\t/* Side stacks stretch full-width and lay out their panels as a\n\t   horizontal row of stacked drawers (so two drawers from the same\n\t   side don't end up overlapping). overflow: visible so the\n\t   per-panel tab can extend below the side stack into the workspace. */\n\twidth: 100% !important;\n\tflex-direction: column;\n\toverflow: visible;\n}\n/* The drawer-tagged panel itself: kill the inline width set by\n   _applySize (we override with !important since the inline style has\n   higher specificity than a class selector), then size by height\n   from the CSS variable. Resize handle is hidden in drawer mode\n   because horizontal dragging doesn't translate to vertical sizing\n   and the user already has the collapse tab to dismiss / restore.\n\n   padding-bottom reserves an 18px strip at the bottom of the panel\n   for the tab. The tab sits INSIDE the drawer's footprint \u2014 never\n   below it \u2014 so the workspace header below the drawer is never in\n   the same vertical band as the tab. (Previously the tab hung\n   below the drawer's bottom edge into the workspace's top padding;\n   that made the tab visually compete with the workspace header,\n   even when the tab box-model bounds technically cleared the\n   header.) box-sizing: border-box so the padding eats from the\n   33vh, not adding to it. */\n.pict-modal-shell-panel-drawer\n{\n\twidth: 100% !important;\n\tmax-width: 100% !important;\n\theight: var(--pict-modal-drawer-height, 33vh);\n\ttransition: height 140ms ease;\n\tpadding-bottom: 18px;\n\tbox-sizing: border-box;\n\toverflow: visible !important;\n\t/* Clip the panel bg to its CONTENT area only \u2014 the 18px\n\t   padding-bottom reserve (where the tab lives) becomes\n\t   transparent, so the middle row's primary background shows\n\t   through. Without this the reserve would render with the\n\t   panel's chrome bg, creating a visible \"strip\" between the\n\t   drawer content above and the workspace below \u2014 the tab would\n\t   look like it's sitting on its own miscoloured band rather\n\t   than at the seam between drawer and workspace. */\n\tbackground-clip: content-box;\n}\n.pict-modal-shell-panel-drawer.pict-modal-shell-panel-collapsed\n{\n\t/* Collapsed = \"just the tab strip is visible\". 18px matches the\n\t   panel's tab reserve so the height is consistent across states.\n\t   When this is 0 the tab would have nowhere to render and the\n\t   user couldn't reopen the drawer. */\n\theight: 18px !important;\n\tpadding-bottom: 0 !important;\n\t/* Drop the panel's bg in collapsed state \u2014 without this the 18px\n\t   strip shows the --pict-modal-bg (panel chrome) which doesn't\n\t   match the workspace --theme-color-background-primary below it,\n\t   creating a visible \"drawer band\" around the tab that breaks the\n\t   illusion of the tab belonging to the workspace area. With\n\t   transparent bg the middle row's primary background shows\n\t   through, the strip blends with the workspace, and the tab pill\n\t   reads as a free-floating handle. */\n\tbackground: transparent !important;\n}\n.pict-modal-shell-panel-drawer > .pict-modal-shell-panel-resize-handle\n{\n\tdisplay: none;\n}\n/* The drawer's collapse tab is a horizontal pill protruding from the\n   bottom of the drawer (rather than the inner edge of a side panel).\n   Override the side-panel positioning rules from above so the tab\n   always sits at the drawer's bottom-center seam, in both expanded\n   and collapsed states. The expand-from-zero affordance: when\n   collapsed (height: 0), the tab still hangs below \"where the\n   drawer would be\" \u2014 a small handle the user can click to pull\n   the drawer back down. */\n.pict-modal-shell-panel-drawer > .pict-modal-shell-panel-collapse-tab,\n.pict-modal-shell-panel-drawer.pict-modal-shell-panel-collapsed > .pict-modal-shell-panel-collapse-tab\n{\n\tposition: absolute !important;\n\t/* Anchored to the panel's BOTTOM edge \u2014 the tab lives INSIDE the\n\t   drawer's footprint (in the 18px reserve at the bottom), never\n\t   below it into the workspace. This means the workspace below\n\t   the drawer is never sharing a vertical band with the tab, so\n\t   the workspace header doesn't optically compete with it.\n\t   bottom: 4px aligns the tab's top edge exactly with the panel's\n\t   CONTENT-AREA bottom (panel.height \u2212 padding-bottom 18px). With\n\t   border-top: 0 on the tab, the seam between the drawer content\n\t   above and the tab body is invisible \u2014 they share --pict-modal-bg\n\t   and merge into one shape, the tab reading as a labelled\n\t   extension of the drawer hanging downward. Collapsed state\n\t   keeps the smaller offset (overridden below) because its panel\n\t   has no padding-bottom, so the math doesn't apply. */\n\ttop: auto !important;\n\tbottom: 4px !important;\n\tleft: 50% !important;\n\tright: auto !important;\n\ttransform: translate(-50%, 0) !important;\n\twidth: 64px !important;\n\theight: 14px !important;\n\t/* CRITICAL: border-box + padding: 0 \u2014 the collapsed-state base\n\t   rule inherits \"padding: 12px 4px\" (so the chevron clears the\n\t   edges of a tab that fills a 24px-wide side strip). In drawer\n\t   mode the tab is a 14px tall pill, NOT a strip-fill, so that\n\t   12px vertical padding would balloon the tab's outer height to\n\t   ~38px and crash into the workspace header text. The chevron\n\t   is centered via flex anyway. */\n\tbox-sizing: border-box !important;\n\tpadding: 0 !important;\n\t/* Rounded BOTTOM corners + no top border \u2014 the tab looks like a\n\t   traditional drawer-handle/tab hanging from above. Its rounded\n\t   bottom curves face the workspace (the \"open downward\" affordance\n\t   for a top drawer). border-top: 0 lets the tab visually merge\n\t   with whatever's directly above it inside the panel (sidebar\n\t   content when expanded, the panel background when collapsed). */\n\tborder-radius: 0 0 8px 8px;\n\tborder: 1px solid var(--pict-modal-border, var(--theme-color-border-default, #cfd5dd));\n\tborder-top: 0;\n\tbackground: var(--pict-modal-bg, var(--theme-color-background-panel, #fff));\n\topacity: 0.95;\n\tz-index: 20;\n\t/* The default side-panel hover-grow values would yank the tab off\n\t   to the wrong spot in drawer mode \u2014 neutralise. */\n\tdisplay: flex;\n\talign-items: center;\n\tjustify-content: center;\n}\n.pict-modal-shell-panel-drawer > .pict-modal-shell-panel-collapse-tab:hover,\n.pict-modal-shell-panel-drawer.pict-modal-shell-panel-collapsed > .pict-modal-shell-panel-collapse-tab:hover\n{\n\topacity: 1;\n\twidth: 96px !important;\n\t/* height stays at 14px \u2014 the tab is anchored with bottom, so any\n\t   height growth would push the tab's TOP edge UPWARD past the\n\t   space available above it. In EXPANDED state that crashes into\n\t   the drawer content above; in COLLAPSED state it crashes into\n\t   the topbar's brand stripes. Width-only growth (64 to 96, +50%)\n\t   still gives the \"tab is reaching toward me\" affordance without\n\t   the encroachment. */\n\tcolor: var(--brand-color-primary-mode, var(--theme-color-brand-primary, #2563eb));\n\tborder-color: var(--brand-color-primary-mode, var(--theme-color-brand-primary, #2563eb));\n\tbox-shadow: 0 3px 6px -2px rgba(0, 0, 0, 0.18);\n}\n/* Collapsed-state bottom-offset override. Expanded panels have an\n   18px padding-bottom reserve, and \"bottom: 4px\" anchors the tab's\n   top edge exactly at the content-area boundary (so it merges\n   visually with the drawer above). Collapsed panels have\n   padding-bottom: 0 and a total height of 18px \u2014 \"bottom: 4px\"\n   there would put the tab's top at the panel's actual top edge,\n   crashing the (border-top: 0) tab into the topbar. The smaller\n   \"bottom: 2px\" keeps the 14px tab vertically centered in the 18px\n   strip with 2px margins on either side. */\n.pict-modal-shell-panel-drawer.pict-modal-shell-panel-collapsed > .pict-modal-shell-panel-collapse-tab\n{\n\tbottom: 2px !important;\n}\n/* Chevron inside the tab: point UP when expanded (the drawer\n   collapses UP / out of view, so the arrow indicates \"click me to\n   send the drawer up\"), DOWN when collapsed (the drawer expands DOWN\n   into view). Rotations come from the existing top-panel chevron\n   table: rotate(-135deg) \u2192 UP arrow, rotate(45deg) \u2192 DOWN arrow. */\n.pict-modal-shell-panel-drawer > .pict-modal-shell-panel-collapse-tab::before\n{\n\ttransform: rotate(-135deg) !important;\n}\n.pict-modal-shell-panel-drawer.pict-modal-shell-panel-collapsed > .pict-modal-shell-panel-collapse-tab::before\n{\n\ttransform: rotate(45deg) !important;\n}\n/* The collapse tab's existing title-text span is hidden when reduced\n   to a pill \u2014 there's no horizontal room. The chevron alone reads\n   correctly. */\n.pict-modal-shell-panel-drawer > .pict-modal-shell-panel-collapse-tab .pict-modal-shell-panel-collapse-tab-title,\n.pict-modal-shell-panel-drawer > .pict-modal-shell-panel-collapse-tab .pict-modal-shell-panel-collapse-tab-icon\n{\n\tdisplay: none;\n}\n\n/* Drag-active state \u2014 disable text selection + change cursor globally\n   so resize feels solid even when the cursor briefly leaves the handle. */\n.pict-modal-shell-dragging-x, .pict-modal-shell-dragging-y { user-select: none; }\n.pict-modal-shell-dragging-x * { cursor: col-resize !important; }\n.pict-modal-shell-dragging-y * { cursor: row-resize !important; }\n\n/* Per-panel resize-active state \u2014 kills the panel's collapse/expand\n   width/height transition for the duration of a drag. Without this,\n   every pointermove starts a fresh 140 ms transition and the resize\n   visibly lags behind the cursor (\"choppy\"). With it disabled the\n   panel snaps to the new size on the same frame as the pointer, which\n   feels native. */\n.pict-modal-shell-panel-resizing { transition: none !important; }\n.pict-modal-shell-panel-resizing > .pict-modal-shell-panel-resize-handle\n{\n\tbackground: var(--brand-color-primary-mode, var(--theme-color-brand-primary, #2563eb));\n\topacity: 0.5;\n}\n\n/* Panel popup-attention flash \u2014 fires when popup() is called on an\n   already-open panel. Brief brand-colored inset glow so the user sees\n   that their click landed even though the panel didn't change shape.\n   Class is added by the shell, auto-removed after ~700 ms. */\n@keyframes pict-modal-shell-panel-flash\n{\n\t0%   { box-shadow: inset 0 0 0 0 transparent; }\n\t30%  { box-shadow: inset 0 0 0 3px var(--brand-color-primary-mode, var(--theme-color-brand-primary, #2563eb)); }\n\t100% { box-shadow: inset 0 0 0 0 transparent; }\n}\n.pict-modal-shell-panel-flash\n{\n\tanimation: pict-modal-shell-panel-flash 600ms ease-out;\n}\n"};},{}],23:[function(require,module,exports){var libPictViewClass=require('pict-view');var libPictModalOverlay=require('./Pict-Modal-Overlay.js');var libPictModalConfirm=require('./Pict-Modal-Confirm.js');var libPictModalWindow=require('./Pict-Modal-Window.js');var libPictModalToast=require('./Pict-Modal-Toast.js');var libPictModalTooltip=require('./Pict-Modal-Tooltip.js');var libPictModalPanel=require('./Pict-Modal-Panel.js');var libPictModalDropdown=require('./Pict-Modal-Dropdown.js');var libPictModalShell=require('./Pict-Modal-Shell.js');var _DefaultConfiguration=require('./Pict-Section-Modal-DefaultConfiguration.js');var PictSectionModal=/*#__PURE__*/function(_libPictViewClass){function PictSectionModal(pFable,pOptions,pServiceHash){var _this32;_classCallCheck(this,PictSectionModal);var tmpOptions=Object.assign({},_DefaultConfiguration,pOptions);_this32=_callSuper(this,PictSectionModal,[pFable,tmpOptions,pServiceHash]);_this32._activeModals=[];_this32._activeTooltips=[];_this32._activeToasts=[];_this32._idCounter=0;_this32._overlay=new libPictModalOverlay(_this32);_this32._confirm=new libPictModalConfirm(_this32);_this32._window=new libPictModalWindow(_this32);_this32._toast=new libPictModalToast(_this32);_this32._tooltip=new libPictModalTooltip(_this32);_this32._panel=new libPictModalPanel(_this32);_this32._dropdown=new libPictModalDropdown(_this32);_this32._shell=new libPictModalShell(_this32);return _this32;}_inherits(PictSectionModal,_libPictViewClass);return _createClass(PictSectionModal,[{key:"onBeforeInitialize",value:function onBeforeInitialize(){_superPropGet(PictSectionModal,"onBeforeInitialize",this,3)([]);// Ensure the root class is on the body for CSS variable scoping
+if(typeof document!=='undefined'&&document.body){if(!document.body.classList.contains('pict-modal-root')){document.body.classList.add('pict-modal-root');}}return _superPropGet(PictSectionModal,"onBeforeInitialize",this,3)([]);}/**
+	 * Generate a unique ID for DOM elements.
+	 *
+	 * @returns {number}
+	 */},{key:"_nextId",value:function _nextId(){this._idCounter++;return this._idCounter;}// -- Confirm API --
+/**
+	 * Show a confirmation dialog.
+	 *
+	 * @param {string} pMessage - The confirmation message
+	 * @param {object} [pOptions] - Options { title, confirmLabel, cancelLabel, dangerous }
+	 * @returns {Promise<boolean>}
+	 */},{key:"confirm",value:function confirm(pMessage,pOptions){return this._confirm.confirm(pMessage,pOptions);}/**
+	 * Show a two-step confirmation dialog.
+	 *
+	 * If confirmPhrase is set, the user must type it to enable the confirm button.
+	 * If no confirmPhrase, the first click changes the button text and the second click confirms.
+	 *
+	 * @param {string} pMessage - The confirmation message
+	 * @param {object} [pOptions] - Options { title, confirmPhrase, phrasePrompt, confirmLabel, cancelLabel }
+	 * @returns {Promise<boolean>}
+	 */},{key:"doubleConfirm",value:function doubleConfirm(pMessage,pOptions){return this._confirm.doubleConfirm(pMessage,pOptions);}// -- Modal Window API --
+/**
+	 * Show a custom modal window.
+	 *
+	 * @param {object} [pOptions] - Options { title, content, buttons, closeable, width, onOpen, onClose }
+	 * @returns {Promise<string|null>} Resolves with the clicked button Hash, or null on close
+	 */},{key:"show",value:function show(pOptions){return this._window.show(pOptions);}// -- Tooltip API --
+/**
+	 * Attach a simple text tooltip to an element.
+	 *
+	 * @param {HTMLElement} pElement - Target element
+	 * @param {string} pText - Tooltip text
+	 * @param {object} [pOptions] - Options { position, delay, maxWidth }
+	 * @returns {{ destroy: function }}
+	 */},{key:"tooltip",value:function tooltip(pElement,pText,pOptions){return this._tooltip.tooltip(pElement,pText,pOptions);}/**
+	 * Attach a rich HTML tooltip to an element.
+	 *
+	 * @param {HTMLElement} pElement - Target element
+	 * @param {string} pHTMLContent - HTML content
+	 * @param {object} [pOptions] - Options { position, delay, maxWidth, interactive }
+	 * @returns {{ destroy: function }}
+	 */},{key:"richTooltip",value:function richTooltip(pElement,pHTMLContent,pOptions){return this._tooltip.richTooltip(pElement,pHTMLContent,pOptions);}// -- Toast API --
+/**
+	 * Show a toast notification.
+	 *
+	 * @param {string} pMessage - Toast message
+	 * @param {object} [pOptions] - Options { type, duration, position, dismissible }
+	 * @returns {{ dismiss: function }}
+	 */},{key:"toast",value:function toast(pMessage,pOptions){return this._toast.toast(pMessage,pOptions);}// -- Dropdown API --
+/**
+	 * Open an anchor-positioned dropdown menu (no backdrop, click-outside
+	 * dismisses). Useful for nav menus and split-button addenda.
+	 *
+	 * @param {HTMLElement|string|object} pAnchor - Element, CSS selector, or
+	 *   { left, top, width, height } rect for context-menu style anchoring.
+	 * @param {object} pOptions - { items, align, position, minWidth, maxHeight,
+	 *   className, closeOnSelect, onSelect, onClose }
+	 * @returns {Promise<{Hash, Item}|null>} Selection or null on dismiss.
+	 */},{key:"dropdown",value:function dropdown(pAnchor,pOptions){return this._dropdown.dropdown(pAnchor,pOptions);}/**
+	 * Dismiss any open dropdown.
+	 */},{key:"dismissDropdowns",value:function dismissDropdowns(){this._dropdown.dismissAll();}// -- Panel API --
+/**
+	 * Attach resizable/collapsible panel behavior to a DOM element.
+	 *
+	 * @param {string} pTargetSelector - CSS selector for the panel element
+	 * @param {object} [pOptions] - Options { position, width, minWidth, maxWidth, collapsible, collapsed, persist, persistKey, onResize, onToggle }
+	 * @returns {{ collapse, expand, toggle, setWidth, destroy }} Panel handle
+	 */},{key:"panel",value:function panel(pTargetSelector,pOptions){return this._panel.create(pTargetSelector,pOptions);}// -- Shell API --
+/**
+	 * Get (or create) a layout shell for a viewport. Idempotent.
+	 *
+	 * The shell takes ownership of the viewport's contents and manages
+	 * top / right / bottom / left panel placement plus a center area.
+	 * See Pict-Modal-Shell.js for full panel-config semantics.
+	 *
+	 * @param {string|HTMLElement} pViewport - selector or element of the
+	 *   container the shell should fill (commonly the app's root div).
+	 * @param {object} [pOptions]
+	 * @param {boolean} [pOptions.Persistence=true]   - autosave panel state to localStorage
+	 * @param {string}  [pOptions.PersistenceKey=null]- override scope (default: hostname)
+	 * @returns {PictModalShell}
+	 */},{key:"shell",value:function shell(pViewport,pOptions){return this._shell.shell(pViewport,pOptions);}// -- Cleanup API --
+/**
+	 * Dismiss all open modals.
+	 */},{key:"dismissModals",value:function dismissModals(){var tmpModals=this._activeModals.slice();for(var i=tmpModals.length-1;i>=0;i--){tmpModals[i].dismiss(null);}}/**
+	 * Dismiss all active tooltips.
+	 */},{key:"dismissTooltips",value:function dismissTooltips(){this._tooltip.dismissAll();}/**
+	 * Dismiss all active toasts.
+	 */},{key:"dismissToasts",value:function dismissToasts(){this._toast.dismissAll();}/**
+	 * Dismiss everything: modals, tooltips, and toasts.
+	 */},{key:"dismissAll",value:function dismissAll(){this.dismissModals();this.dismissTooltips();this.dismissToasts();this.dismissDropdowns();}/**
+	 * Clean up all DOM elements when the view is destroyed.
+	 *//**
+	 * Destroy all active panels.
+	 */},{key:"destroyPanels",value:function destroyPanels(){this._panel.destroyAll();}},{key:"destroy",value:function destroy(){this.dismissAll();this.destroyPanels();this._overlay.destroy();this._toast.destroy();if(typeof _superPropGet(PictSectionModal,"destroy",this,1)==='function'){return _superPropGet(PictSectionModal,"destroy",this,3)([]);}}}]);}(libPictViewClass);module.exports=PictSectionModal;module.exports.default_configuration=_DefaultConfiguration;},{"./Pict-Modal-Confirm.js":14,"./Pict-Modal-Dropdown.js":15,"./Pict-Modal-Overlay.js":16,"./Pict-Modal-Panel.js":17,"./Pict-Modal-Shell.js":18,"./Pict-Modal-Toast.js":19,"./Pict-Modal-Tooltip.js":20,"./Pict-Modal-Window.js":21,"./Pict-Section-Modal-DefaultConfiguration.js":22,"pict-view":69}],24:[function(require,module,exports){/**
+ * pict-section-theme — entry point.
+ *
+ * Bundles every Retold-ecosystem theme and exposes five reusable views:
+ *
+ *   - Theme-Picker      : a custom dropdown listing every registered theme,
+ *                         grouped by category, with inline SVG mode-glyphs.
+ *                         Switches the active theme on change.
+ *   - Theme-ModeToggle  : a 3-button toggle for Light / Dark / System mode.
+ *                         Disables itself when the active theme is single-mode.
+ *   - Theme-ScaleSelect : a dropdown of viewport scale presets (75% – 200%).
+ *                         Independent of theme bundles — applied via CSS
+ *                         `zoom` on <html> + a `--theme-scale` custom prop.
+ *   - Theme-Button      : an embeddable SVG topbar button that, when clicked,
+ *                         opens a pict-section-modal containing the picker,
+ *                         the mode toggle, and the scale select. Designed to
+ *                         drop into any application chrome.
+ *   - Theme-BrandStrip  : the per-app brand signature (icon + name + two
+ *                         color stripes). Driven by libThemeBrand which the
+ *                         host configures via the `Brand` option.
+ *
+ * # Recommended consumption (Pict provider)
+ *
+ * Add the section as a Pict provider — it self-bootstraps on construction:
+ *
+ *     const libPictSectionTheme = require('pict-section-theme');
+ *
+ *     pict.addProvider('Theme-Section',
+ *     {
+ *         ApplyDefault: 'retold-default',
+ *         DefaultMode:  'system',
+ *         DefaultScale: 1.0,
+ *         Brand:        libRetoldManagerBrand
+ *     }, libPictSectionTheme);
+ *
+ * That single addProvider call:
+ *   - Ensures `pict.providers.Theme` (the underlying pict-provider-theme
+ *     runtime) exists.
+ *   - Registers every theme in the runtime registry — bundled starter set
+ *     plus anything the host registered via `Catalog.register()`.
+ *   - Adds Theme-Picker / Theme-ModeToggle / Theme-ScaleSelect /
+ *     Theme-Button / Theme-BrandStrip to `pict.views[...]`.
+ *   - Hydrates persisted choices from localStorage; otherwise applies the
+ *     supplied `ApplyDefault` / `DefaultMode` / `DefaultScale`.
+ *   - Wires the `onApply` save handler so subsequent user picks persist.
+ *   - Applies the supplied Brand block if one was provided.
+ *
+ * # Runtime theme registration
+ *
+ * The bundled starter set lives in `themes/_catalog.js`. To add custom
+ * themes (e.g. a host app's own brand palette, or a remote bundle from
+ * a "theme garden") use the registry:
+ *
+ *     const libCatalog = require('pict-section-theme').Catalog;
+ *     libCatalog.register({ Hash: 'my-theme', Bundle: require('./mine.json'), Category: 'App' });
+ *     // Or, async, from a URL:
+ *     await libCatalog.registerFromURL('https://garden.example.com/themes/foo.json');
+ *
+ * Themes registered before `addProvider()` runs are picked up
+ * automatically. Themes registered after must be manually pushed via
+ * `pict.providers.Theme.registerTheme(bundle)`.
+ *
+ * # Persistence
+ *
+ * Persisting active theme + mode + scale to localStorage is on by
+ * default. Storage key is scoped to `window.location.hostname` so apps
+ * on different hosts keep independent state. Override with
+ * `PersistenceKey: 'my-app'`. Pass `Persistence: false` to disable.
+ *
+ * A saved entry takes precedence over `ApplyDefault` — once a user has
+ * picked a theme, reloads honour that pick instead of the host's
+ * default. If the saved theme hash is no longer in the registry (theme
+ * removed, app downgraded), the bootstrap falls back to `ApplyDefault`
+ * cleanly.
+ *
+ * # Legacy API
+ *
+ * `install(pict, options)` and `registerCatalog(pict)` are still
+ * exported as thin shims that delegate to the provider — existing apps
+ * keep working without changes.
+ */'use strict';var libPictProvider=require('pict-provider');var libPictProviderTheme=require('pict-provider-theme');var libPickerView=require('./views/PictView-Theme-Picker.js');var libModeToggleView=require('./views/PictView-Theme-ModeToggle.js');var libScaleSelectView=require('./views/PictView-Theme-ScaleSelect.js');var libButtonView=require('./views/PictView-Theme-Button.js');var libBrandStripView=require('./views/PictView-Theme-BrandStrip.js');var libBrandMarkView=require('./views/PictView-Theme-Brand-Mark.js');var libTopBarView=require('./views/PictView-Theme-TopBar.js');var libBottomBarView=require('./views/PictView-Theme-BottomBar.js');var libThemePersistence=require('./Theme-Persistence.js');var libThemeScale=require('./Theme-Scale.js');var libThemeBrand=require('./Theme-Brand.js');// Theme-Logo (the deterministic name → SVG generator) is intentionally
+// NOT required here. It's a build-time tool used by
+// `pict-section-theme-brand` to precompute brand blocks into a host's
+// package.json — there's no reason for it to ride along in the runtime
+// bundle every host ships. Hosts that want runtime generation can
+// `require('pict-section-theme/source/Theme-Logo.js')` directly; that
+// keeps the import explicit and the cost opt-in.
+var libCatalog=require('./themes/_catalog.js');// View registry: short-name → { lib, hash } where hash is the
+// ViewIdentifier the view registers under in pict.views[...].
+var _Views={Picker:{lib:libPickerView,hash:'Theme-Picker'},ModeToggle:{lib:libModeToggleView,hash:'Theme-ModeToggle'},ScaleSelect:{lib:libScaleSelectView,hash:'Theme-ScaleSelect'},Button:{lib:libButtonView,hash:'Theme-Button'},BrandStrip:{lib:libBrandStripView,hash:'Theme-BrandStrip'},BrandMark:{lib:libBrandMarkView,hash:'Theme-Brand-Mark'},TopBar:{lib:libTopBarView,hash:'Theme-TopBar'},BottomBar:{lib:libBottomBarView,hash:'Theme-BottomBar'}};var _ProviderConfiguration={ProviderIdentifier:'Theme-Section',// Don't auto-fire the standard pict-provider initialize chain — we do
+// our setup work synchronously in the constructor so consumers can
+// use the views immediately after addProvider() returns.
+AutoInitialize:false,// Bootstrap config — same shape as the legacy install() options.
+ApplyDefault:null,// theme hash to apply at boot
+DefaultMode:null,// 'light' | 'dark' | 'system' | null (theme's default)
+DefaultScale:null,// 0.75 .. 2.0 — viewport scale
+Persistence:true,PersistenceKey:null,// null → window.location.hostname
+RegisterCatalog:true,Views:null,// null → all views; or array of short-names
+ViewOptions:null,// { Picker: { ... }, ... } per-view overrides
+Brand:null,// { Name, Icon, Colors: { Primary, ... } }
+ProviderOptions:null// pict-provider-theme overrides if a host wants them
+};// ── Helpers ──────────────────────────────────────────────────────────────
+/**
+ * Iterate the runtime registry and call provider.registerTheme() for each
+ * entry. Safe to call before or after addProvider — the runtime's
+ * registerTheme is idempotent on repeat hashes.
+ *
+ * @param {object} pPict - a Pict instance with the Theme runtime attached
+ * @returns {number} count of themes registered
+ */function registerCatalog(pPict){if(!pPict||!pPict.providers||!pPict.providers.Theme){if(pPict&&pPict.log&&pPict.log.warn){pPict.log.warn('pict-section-theme.registerCatalog: pict.providers.Theme not found — register the runtime first');}return 0;}var tmpProvider=pPict.providers.Theme;var tmpEntries=libCatalog.list();var tmpCount=0;for(var i=0;i<tmpEntries.length;i++){if(tmpProvider.registerTheme(tmpEntries[i].Bundle)){tmpCount++;}}return tmpCount;}/**
+ * Return the registry as picker-friendly metadata (no Bundle payload).
+ *
+ * @returns {Array<{Hash, Name, Category, Strategy, DefaultMode, IsDefault}>}
+ */function listCatalog(){var tmpEntries=libCatalog.list();var tmpList=[];for(var i=0;i<tmpEntries.length;i++){var tmpEntry=tmpEntries[i];var tmpBundle=tmpEntry.Bundle||{};var tmpModes=tmpBundle.Modes||{};tmpList.push({Hash:tmpEntry.Hash,Name:tmpBundle.Name||tmpEntry.Hash,Category:tmpEntry.Category||'Other',Strategy:tmpModes.Strategy||'single',DefaultMode:tmpModes.Default||'light',IsDefault:!!tmpEntry.IsDefault});}return tmpList;}// ── Bootstrap routine ────────────────────────────────────────────────────
+// Shared between the provider class (new path) and the install() function
+// (legacy path). Performs the actual wiring against a Pict instance.
+function _bootstrap(pPict,pOptions){if(!pPict||typeof pPict.addProvider!=='function'){throw new Error('pict-section-theme: requires a Pict instance');}var tmpOptions=pOptions||{};// 1. Theme runtime — only add if not already attached (hosts with
+//    a custom runtime, e.g. retold-remote's V2 bridge, pre-register).
+if(!pPict.providers||!pPict.providers.Theme){var tmpRuntimeOpts=Object.assign({},libPictProviderTheme.default_configuration,tmpOptions.ProviderOptions||{});pPict.addProvider('Theme',tmpRuntimeOpts,libPictProviderTheme);}// 2. Catalog — every entry from the runtime registry, unless the host
+//    asked to skip (RegisterCatalog: false).
+if(tmpOptions.RegisterCatalog!==false){registerCatalog(pPict);}// 3. Views — default all five; pass an array to subset.
+var tmpViewNames=Array.isArray(tmpOptions.Views)?tmpOptions.Views:Object.keys(_Views);for(var i=0;i<tmpViewNames.length;i++){var tmpEntry=_Views[tmpViewNames[i]];if(!tmpEntry){if(pPict.log&&pPict.log.warn){pPict.log.warn('pict-section-theme: unknown view name "'+tmpViewNames[i]+'" — skipped');}continue;}if(pPict.views&&pPict.views[tmpEntry.hash]){// Already registered — skip silently.
+continue;}var tmpViewOpts=Object.assign({},tmpEntry.lib.default_configuration,tmpOptions.ViewOptions&&tmpOptions.ViewOptions[tmpViewNames[i]]||{});pPict.addView(tmpEntry.hash,tmpViewOpts,tmpEntry.lib);}// 4. Persistence + initial apply.
+var tmpProvider=pPict.providers.Theme;var tmpPersistenceEnabled=tmpOptions.Persistence!==false;var tmpPersistenceKey=null;var tmpBootHash=tmpOptions.ApplyDefault||null;var tmpBootMode=tmpOptions.DefaultMode||null;var tmpBootScale=typeof tmpOptions.DefaultScale==='number'?tmpOptions.DefaultScale:null;if(tmpPersistenceEnabled&&tmpProvider){tmpPersistenceKey=libThemePersistence.resolveKey(tmpOptions.PersistenceKey);var tmpSaved=libThemePersistence.load(tmpPersistenceKey);if(tmpSaved&&tmpSaved.ThemeHash&&typeof tmpProvider.getTheme==='function'&&tmpProvider.getTheme(tmpSaved.ThemeHash)){tmpBootHash=tmpSaved.ThemeHash;if(tmpSaved.Mode){tmpBootMode=tmpSaved.Mode;}if(tmpSaved.Scale){tmpBootScale=tmpSaved.Scale;}}else if(tmpSaved&&tmpSaved.Scale){tmpBootScale=tmpSaved.Scale;}// Single save snapshot — both the provider listener and the scale
+// listener call this so any change persists the full set.
+var tmpSaveCurrent=function tmpSaveCurrent(){var tmpActive=typeof tmpProvider.getActiveTheme==='function'?tmpProvider.getActiveTheme():{Hash:null,Mode:null};libThemePersistence.save(tmpPersistenceKey,{ThemeHash:tmpActive.Hash,Mode:tmpActive.Mode,Scale:libThemeScale.getActive()});};tmpProvider.onApply(tmpSaveCurrent);libThemeScale.onChange(tmpSaveCurrent);}if(tmpBootHash&&tmpProvider){tmpProvider.applyTheme(tmpBootHash,tmpBootMode);}if(tmpBootScale!==null){libThemeScale.applyScale(tmpBootScale);}// 5. Brand — host-supplied app identity. Apply LAST so the BrandStrip
+//    view's first paint sees the CSS custom properties.
+if(tmpOptions.Brand){libThemeBrand.applyBrand(tmpOptions.Brand);}// Stash the resolved key on the provider for debugging + so the host
+// can clear it via clearPersistence() for a "reset to defaults"
+// affordance.
+if(tmpProvider&&tmpPersistenceKey){tmpProvider._persistenceKey=tmpPersistenceKey;}return tmpProvider;}// ── PictProvider class ───────────────────────────────────────────────────
+// The recommended entry point. `pict.addProvider('Theme-Section',
+// options, PictSectionThemeProvider)` self-bootstraps the whole module
+// (runtime + catalog + views + persistence + apply + brand) inside the
+// constructor — no follow-up install() call required.
+var PictSectionThemeProvider=/*#__PURE__*/function(_libPictProvider3){function PictSectionThemeProvider(pFable,pOptions,pServiceHash){var _this33;_classCallCheck(this,PictSectionThemeProvider);_this33=_callSuper(this,PictSectionThemeProvider,[pFable,pOptions,pServiceHash]);_this33.serviceType='PictSectionTheme';// pict-provider sets `this.pict` for us via super() above. Run the
+// bootstrap synchronously so the views, theme runtime, and applied
+// theme are all in place before addProvider() returns.
+_bootstrap(_this33.pict,_this33.options);return _this33;}/**
+	 * Embed theme controls into a host-supplied container.
+	 *
+	 * The Theme-Button view ships a popover that hosts the picker + mode
+	 * toggle + scale select — convenient for "drop a theme menu in the
+	 * topbar" but not for apps that already have a settings surface and
+	 * want the controls inline there. `mount()` writes the destination
+	 * divs each theme view expects into the supplied container, then
+	 * calls render() on each requested view.
+	 *
+	 * Important: each theme view has a SINGLE default destination id
+	 * (e.g. `#Theme-Picker`). Mounting overrides where the view paints —
+	 * once mount() is called, the picker / toggle / scale destinations
+	 * live inside the supplied container. Combining a mount() with a
+	 * Theme-Button popover that ALSO hosts these views causes duplicate
+	 * destination ids and undefined behaviour; pick one host per view.
+	 *
+	 * @param {object} pOptions
+	 * @param {string|HTMLElement} pOptions.Container - CSS selector or element
+	 * @param {Array<string>} [pOptions.Views] - short names; default ['Picker','ModeToggle','ScaleSelect']
+	 * @param {string} [pOptions.WrapperClass] - class added to the outer wrapper div
+	 * @returns {object|null} { container, viewsRendered } on success, null if the container can't be resolved
+	 */_inherits(PictSectionThemeProvider,_libPictProvider3);return _createClass(PictSectionThemeProvider,[{key:"mount",value:function mount(pOptions){var tmpOpts=pOptions||{};var tmpContainer=tmpOpts.Container;if(!tmpContainer){return null;}var tmpEl=typeof tmpContainer==='string'?this.pict&&this.pict.ContentAssignment?this.pict.ContentAssignment.getElement(tmpContainer):document.querySelector(tmpContainer):tmpContainer;// ContentAssignment.getElement returns an array-like; normalise to one node.
+if(tmpEl&&tmpEl.length&&!tmpEl.tagName){tmpEl=tmpEl[0];}if(!tmpEl){if(this.pict&&this.pict.log&&this.pict.log.warn){this.pict.log.warn('pict-section-theme.mount: container not found for '+tmpContainer);}return null;}var tmpRequested=Array.isArray(tmpOpts.Views)&&tmpOpts.Views.length?tmpOpts.Views:['Picker','ModeToggle','ScaleSelect'];// Build a wrapper that carries one row per requested view; each row
+// contains the destination div the view's render() will write into.
+var tmpRows=[];var tmpRendered=[];for(var i=0;i<tmpRequested.length;i++){var tmpEntry=_Views[tmpRequested[i]];if(!tmpEntry){continue;}var tmpDestSel=tmpEntry.lib.default_configuration.DefaultDestinationAddress||'';var tmpDestId=tmpDestSel.replace(/^#/,'');if(!tmpDestId){continue;}tmpRows.push('<div class="pict-theme-mount-row pict-theme-mount-row-'+tmpEntry.hash.toLowerCase()+'">'+'<div id="'+tmpDestId+'"></div>'+'</div>');tmpRendered.push(tmpEntry.hash);}var tmpWrapperClass='pict-theme-mount'+(tmpOpts.WrapperClass?' '+tmpOpts.WrapperClass:'');tmpEl.innerHTML='<div class="'+tmpWrapperClass+'">'+tmpRows.join('')+'</div>';// Render each requested view. Each render() targets the destination
+// id we just stamped into the wrapper.
+for(var _i26=0;_i26<tmpRendered.length;_i26++){var tmpView=this.pict.views[tmpRendered[_i26]];if(tmpView&&typeof tmpView.render==='function'){try{tmpView.render();}catch(pErr){/* a view render failure shouldn't break the host */}}}return{container:tmpEl,viewsRendered:tmpRendered};}}]);}(libPictProvider);// ── Legacy install() ─────────────────────────────────────────────────────
+// Thin shim for apps that already call install(); delegates to the same
+// bootstrap routine the provider runs.
+function install(pPict,pOptions){if(!pPict||typeof pPict.addProvider!=='function'){throw new Error('pict-section-theme.install: first arg must be a Pict instance');}return _bootstrap(pPict,pOptions||{});}/**
+ * Drop the saved theme state for this app's storage key. The next
+ * install() (or page reload / addProvider) falls back to ApplyDefault.
+ *
+ * @param {object} pPict - the pict instance
+ * @returns {boolean} true if anything was cleared
+ */function clearPersistence(pPict){var tmpKey=pPict&&pPict.providers&&pPict.providers.Theme&&pPict.providers.Theme._persistenceKey||libThemePersistence.resolveKey(null);return libThemePersistence.clear(tmpKey);}// ── Exports ──────────────────────────────────────────────────────────────
+// Default export = the provider class so apps can do:
+//   pict.addProvider('Theme-Section', { ... }, libPictSectionTheme);
+//
+// Named exports preserved so legacy callers keep working unchanged.
+module.exports=PictSectionThemeProvider;module.exports.default_configuration=_ProviderConfiguration;module.exports.Provider=libPictProviderTheme;// the runtime class
+module.exports.PictSectionThemeProvider=PictSectionThemeProvider;module.exports.PickerView=libPickerView;module.exports.ModeToggleView=libModeToggleView;module.exports.ButtonView=libButtonView;module.exports.ScaleSelectView=libScaleSelectView;module.exports.BrandStripView=libBrandStripView;module.exports.BrandMarkView=libBrandMarkView;module.exports.TopBarView=libTopBarView;module.exports.BottomBarView=libBottomBarView;module.exports.Catalog=libCatalog;// the registry singleton
+module.exports.Brand=libThemeBrand;// the brand helper module
+module.exports.Scale=libThemeScale;// the scale helper module
+module.exports.Persistence=libThemePersistence;// the persistence helper module
+// Theme-Logo is exposed as a sub-module path, not a top-level field —
+// see the comment near the imports above.
+module.exports.registerCatalog=registerCatalog;module.exports.listCatalog=listCatalog;module.exports.install=install;module.exports.clearPersistence=clearPersistence;},{"./Theme-Brand.js":25,"./Theme-Persistence.js":27,"./Theme-Scale.js":28,"./themes/_catalog.js":32,"./views/PictView-Theme-BottomBar.js":58,"./views/PictView-Theme-Brand-Mark.js":59,"./views/PictView-Theme-BrandStrip.js":60,"./views/PictView-Theme-Button.js":61,"./views/PictView-Theme-ModeToggle.js":62,"./views/PictView-Theme-Picker.js":63,"./views/PictView-Theme-ScaleSelect.js":64,"./views/PictView-Theme-TopBar.js":65,"pict-provider":12,"pict-provider-theme":6}],25:[function(require,module,exports){/**
+ * Theme-Brand — app-level brand identity (icon + colors) that overlays
+ * the active theme.
+ *
+ * # What this is for
+ *
+ * The active *theme* describes how UI surfaces look (panel colors,
+ * borders, text, status). The active *brand* describes which APP the
+ * user is in. retold-facto, retold-manager, and ultravisor can share
+ * the same theme but each carries its own visual signature: a small
+ * icon and two brand colors that show up in a stripe under the nav
+ * (and optionally tinge link underlines, header accents, etc. when
+ * the active theme opts to reference them).
+ *
+ * Brand is host-supplied (passed to pict-section-theme.install() as
+ * `Brand: {...}` or applied later via this module's `applyBrand()`)
+ * and NOT user-pickable — it's the app's wordmark. It's also not
+ * persisted; the host config drives it on every boot.
+ *
+ * # Brand shape
+ *
+ * Two equivalent forms — pick whichever reads better in your app.
+ *
+ * ## Recommended: nested form
+ *
+ *   {
+ *     Hash:    'retold-manager',
+ *     Name:    'Retold Manager',
+ *     Icon:    '<svg ...>...</svg>',
+ *     Colors: {
+ *       Primary:   { Light: '#0044cc', Dark: '#6b8eff' },   // both required
+ *       Secondary: { Light: '#c75033', Dark: '#ff8a6b' }    // both required
+ *     },
+ *     Tagline: 'Optional short tagline'
+ *   }
+ *
+ * This mirrors how theme JSONs already structure their Tokens.Color.*
+ * trees, makes the "explicit light + dark variants" contract obvious,
+ * and means your brand and your theme look consistent in source.
+ *
+ * ## Legacy: flat form
+ *
+ *   {
+ *     Hash:    'retold-manager',
+ *     Name:    'Retold Manager',
+ *     Icon:    '<svg ...>...</svg>',
+ *     Colors: {
+ *       Primary:        '#0066ff',                // required
+ *       Secondary:      '#ff6600',                // required
+ *       PrimaryLight:   '#3388ff',                // optional, light-mode tint
+ *       PrimaryDark:    '#0044cc',                // optional, dark-mode tint
+ *       SecondaryLight: '#ff8833',
+ *       SecondaryDark:  '#cc4400'
+ *     }
+ *   }
+ *
+ * The flat form's `Primary` / `Secondary` are mode-agnostic constants
+ * (used for the `--brand-color-primary` / `-secondary` CSS variables);
+ * the *Light / *Dark fields drive the mode-aware variants. When the
+ * Light / Dark fields are omitted, the base Primary / Secondary
+ * doubles for both modes. Both forms land on the same six output CSS
+ * variables — see "CSS variables emitted" below.
+ *
+ * Icon shape: inline SVG markup, OR a data URL, OR a remote / app-served
+ * URL. IconType is optional and auto-detected from the value.
+ *
+ * # CSS variables emitted
+ *
+ *   :root {
+ *     --brand-color-primary:           <Primary>
+ *     --brand-color-secondary:         <Secondary>
+ *     --brand-color-primary-light:     <PrimaryLight or Primary>
+ *     --brand-color-primary-dark:      <PrimaryDark or Primary>
+ *     --brand-color-secondary-light:   <SecondaryLight or Secondary>
+ *     --brand-color-secondary-dark:    <SecondaryDark or Secondary>
+ *     --brand-color-primary-mode:      <Primary OR PrimaryLight in :root>
+ *     --brand-color-secondary-mode:    <Secondary OR SecondaryLight in :root>
+ *     --brand-name:                    "<Name>"
+ *   }
+ *   .theme-dark {
+ *     --brand-color-primary-mode:      <PrimaryDark or Primary>
+ *     --brand-color-secondary-mode:    <SecondaryDark or Secondary>
+ *   }
+ *
+ * The `*-mode` variables are the ones theme/host CSS should reach for
+ * when they want a brand color that automatically swaps for dark mode
+ * (parallel to how --theme-color-* works). The plain Primary/Secondary
+ * are constants that ignore the mode toggle — useful for the brand
+ * stripe itself, where the brand should look the same in both modes.
+ *
+ * # Listener pattern
+ *
+ * Mirrors Theme-Scale: subscribe via `onBrandChange(cb)`, dispose by
+ * calling the returned function. The BrandStrip view uses this to
+ * re-render when the host changes brand at runtime (rare, but used by
+ * test harnesses + multi-tenant hosts).
+ */var STYLE_ELEMENT_ID='pict-brand';var FAVICON_LINK_ID='pict-brand-favicon';var FAVICON_DARK_LINK_ID='pict-brand-favicon-dark';var _activeBrand=null;var _listeners=[];function _isInlineSVG(pIcon){return typeof pIcon==='string'&&/^\s*<svg[\s>]/i.test(pIcon);}function _isImageURL(pIcon){if(typeof pIcon!=='string')return false;return /^(data:|https?:|\/|\.\.?\/)/.test(pIcon);}function _detectIconType(pBrand){if(pBrand&&typeof pBrand.IconType==='string')return pBrand.IconType;if(!pBrand||!pBrand.Icon)return null;if(_isInlineSVG(pBrand.Icon))return'svg';if(_isImageURL(pBrand.Icon))return'image';return null;}// Resolve a "color slot" to { Light, Dark, Base } regardless of input
+// shape. Supported inputs:
+//   - "string"                        → all three equal that string
+//   - { Light, Dark }                 → Base = Light, others as given
+//   - { Light, Dark, Base }           → Base explicit
+//   - missing                         → null (caller decides how to fail)
+function _resolveColorSlot(pSlot){if(typeof pSlot==='string'&&pSlot.length>0){return{Light:pSlot,Dark:pSlot,Base:pSlot};}if(pSlot&&_typeof(pSlot)==='object'){var tmpLight=typeof pSlot.Light==='string'&&pSlot.Light.length>0?pSlot.Light:null;var tmpDark=typeof pSlot.Dark==='string'&&pSlot.Dark.length>0?pSlot.Dark:null;// Need at least one variant present.
+if(!tmpLight&&!tmpDark)return null;// Fill missing variant from the other side. Base defaults to
+// the light variant (matches the legacy flat-form semantics).
+tmpLight=tmpLight||tmpDark;tmpDark=tmpDark||tmpLight;var tmpBase=typeof pSlot.Base==='string'&&pSlot.Base.length>0?pSlot.Base:tmpLight;return{Light:tmpLight,Dark:tmpDark,Base:tmpBase};}return null;}function _normalize(pBrand){if(!pBrand||_typeof(pBrand)!=='object')return null;var tmpColors=pBrand.Colors||{};// Brand colors accept TWO forms — flat or nested:
+//
+//   FLAT (legacy):
+//     Colors: {
+//       Primary:        '#e54b1e',     // required (the mode-agnostic value)
+//       Secondary:      '#1e9aa0',     // required
+//       PrimaryLight:   '#e54b1e',     // optional fallback to Primary
+//       PrimaryDark:    '#ff7a4a',     // optional fallback to Primary
+//       SecondaryLight: '#1e9aa0',     // optional fallback to Secondary
+//       SecondaryDark:  '#5fc5cb'      // optional fallback to Secondary
+//     }
+//
+//   NESTED (recommended):
+//     Colors: {
+//       Primary:   { Light: '#e54b1e', Dark: '#ff7a4a' },  // both required
+//       Secondary: { Light: '#1e9aa0', Dark: '#5fc5cb' }   // both required
+//     }
+//
+// The nested form mirrors how themes already structure their
+// Tokens.Color.* trees and makes the "this brand needs explicit
+// light + dark variants" contract obvious. Either form lands on
+// the same six --brand-color-* CSS variables.
+var tmpPriSlot=_resolveColorSlot(tmpColors.Primary);var tmpSecSlot=_resolveColorSlot(tmpColors.Secondary);if(!tmpPriSlot||!tmpSecSlot)return null;// Legacy flat-form fields override the resolved slot's Light/Dark
+// (so a host passing both forms gets the most explicit one).
+var tmpPriLight=tmpColors.PrimaryLight||tmpPriSlot.Light;var tmpPriDark=tmpColors.PrimaryDark||tmpPriSlot.Dark;var tmpSecLight=tmpColors.SecondaryLight||tmpSecSlot.Light;var tmpSecDark=tmpColors.SecondaryDark||tmpSecSlot.Dark;return{Hash:pBrand.Hash||'brand',Name:pBrand.Name||pBrand.Hash||'Brand',Icon:pBrand.Icon||null,IconType:_detectIconType(pBrand),Tagline:typeof pBrand.Tagline==='string'?pBrand.Tagline:null,// Optional favicon assets. Each can be: inline `<svg>` markup, a
+// data URL, or a regular URL. When both Favicon and FaviconDark
+// are supplied, paired light/dark <link rel="icon"> tags are
+// emitted with prefers-color-scheme media queries; otherwise a
+// single <link> covers both modes.
+Favicon:pBrand.Favicon||null,FaviconDark:pBrand.FaviconDark||null,Colors:{Primary:tmpPriSlot.Base,Secondary:tmpSecSlot.Base,PrimaryLight:tmpPriLight,PrimaryDark:tmpPriDark,SecondaryLight:tmpSecLight,SecondaryDark:tmpSecDark}};}// Encode an inline `<svg>` blob into a data URL safe for an <img src> /
+// <link href> attribute. Falls through if the input already looks like
+// a URL (data:, http:, /, ./, ../).
+function _faviconHref(pIcon){if(!pIcon||typeof pIcon!=='string')return null;if(_isInlineSVG(pIcon)){// percent-encode SVG markup. Don't encode '#' or '&' minimally;
+// the safe path is to encode aggressively then unescape spaces.
+var tmpEncoded=encodeURIComponent(pIcon).replace(/'/g,'%27').replace(/"/g,'%22');return'data:image/svg+xml;charset=utf-8,'+tmpEncoded;}if(_isImageURL(pIcon))return pIcon;return null;}function _removeFaviconLinks(){if(typeof document==='undefined')return;[FAVICON_LINK_ID,FAVICON_DARK_LINK_ID].forEach(function(pID){var tmpEl=document.getElementById(pID);if(tmpEl&&tmpEl.parentNode)tmpEl.parentNode.removeChild(tmpEl);});}function _injectFaviconLinks(pBrand){if(typeof document==='undefined')return;_removeFaviconLinks();var tmpLight=_faviconHref(pBrand.Favicon);var tmpDark=_faviconHref(pBrand.FaviconDark);if(!tmpLight&&!tmpDark)return;var tmpHasPair=!!(tmpLight&&tmpDark);if(tmpLight){var tmpLink=document.createElement('link');tmpLink.id=FAVICON_LINK_ID;tmpLink.rel='icon';tmpLink.href=tmpLight;if(/^data:image\/svg\+xml/.test(tmpLight))tmpLink.type='image/svg+xml';if(tmpHasPair)tmpLink.media='(prefers-color-scheme: light)';document.head.appendChild(tmpLink);}if(tmpDark){var _tmpLink=document.createElement('link');_tmpLink.id=FAVICON_DARK_LINK_ID;_tmpLink.rel='icon';_tmpLink.href=tmpDark;if(/^data:image\/svg\+xml/.test(tmpDark))_tmpLink.type='image/svg+xml';// If we have a light variant, the dark link's media query handles
+// the swap; otherwise it serves both modes.
+if(tmpHasPair)_tmpLink.media='(prefers-color-scheme: dark)';document.head.appendChild(_tmpLink);}}function _injectStyleElement(pCSS){if(typeof document==='undefined')return;var tmpStyleEl=document.getElementById(STYLE_ELEMENT_ID);if(!tmpStyleEl){tmpStyleEl=document.createElement('style');tmpStyleEl.id=STYLE_ELEMENT_ID;document.head.appendChild(tmpStyleEl);}tmpStyleEl.textContent=pCSS;}// Escape so the brand name can ride along inside the CSS `content`-style
+// `--brand-name` value as a quoted string.
+function _cssQuote(pStr){return'"'+String(pStr||'').replace(/\\/g,'\\\\').replace(/"/g,'\\"')+'"';}function _buildCSS(pBrand){var tmpC=pBrand.Colors;var tmpRoot=':root {\n'+'\t--brand-color-primary:         '+tmpC.Primary+';\n'+'\t--brand-color-secondary:       '+tmpC.Secondary+';\n'+'\t--brand-color-primary-light:   '+tmpC.PrimaryLight+';\n'+'\t--brand-color-primary-dark:    '+tmpC.PrimaryDark+';\n'+'\t--brand-color-secondary-light: '+tmpC.SecondaryLight+';\n'+'\t--brand-color-secondary-dark:  '+tmpC.SecondaryDark+';\n'+'\t--brand-color-primary-mode:    '+tmpC.PrimaryLight+';\n'+'\t--brand-color-secondary-mode:  '+tmpC.SecondaryLight+';\n'+'\t--brand-name:                  '+_cssQuote(pBrand.Name)+';\n'+'}\n';// Dark-mode overrides for the *-mode variables only.
+var tmpDark='.theme-dark {\n'+'\t--brand-color-primary-mode:    '+tmpC.PrimaryDark+';\n'+'\t--brand-color-secondary-mode:  '+tmpC.SecondaryDark+';\n'+'}\n';return tmpRoot+tmpDark;}/**
+ * Apply (or replace) the active brand. Pass `null` to clear.
+ *
+ * @param {object|null} pBrand
+ * @returns {object|null} the normalized active brand (or null on clear)
+ */function applyBrand(pBrand){var tmpPrev=_activeBrand;if(pBrand===null){_activeBrand=null;if(typeof document!=='undefined'){var tmpStyleEl=document.getElementById(STYLE_ELEMENT_ID);if(tmpStyleEl&&tmpStyleEl.parentNode)tmpStyleEl.parentNode.removeChild(tmpStyleEl);}_removeFaviconLinks();_fireChange(null,tmpPrev);return null;}var tmpNorm=_normalize(pBrand);if(!tmpNorm){// Bad input — keep current brand, no-op.
+if(typeof console!=='undefined'&&console.warn){console.warn('Theme-Brand.applyBrand: bad brand object — needs Colors.Primary + Colors.Secondary as strings.');}return _activeBrand;}_activeBrand=tmpNorm;_injectStyleElement(_buildCSS(tmpNorm));_injectFaviconLinks(tmpNorm);_fireChange(tmpNorm,tmpPrev);return tmpNorm;}function getActive(){return _activeBrand;}function onChange(fCallback){if(typeof fCallback!=='function')return function(){};_listeners.push(fCallback);return function(){offChange(fCallback);};}function offChange(fCallback){var tmpIdx=_listeners.indexOf(fCallback);if(tmpIdx>=0)_listeners.splice(tmpIdx,1);}function _fireChange(pNew,pOld){for(var i=0;i<_listeners.length;i++){try{_listeners[i](pNew,pOld);}catch(pErr){/* swallow — listener failure must not break callers */}}}/**
+ * Reset to no-brand state and detach the injected style. Tests use this;
+ * runtime hosts rarely need it.
+ */function reset(){applyBrand(null);_listeners=[];}module.exports={applyBrand:applyBrand,getActive:getActive,onChange:onChange,offChange:offChange,reset:reset,STYLE_ELEMENT_ID:STYLE_ELEMENT_ID,FAVICON_LINK_ID:FAVICON_LINK_ID,FAVICON_DARK_LINK_ID:FAVICON_DARK_LINK_ID};},{}],26:[function(require,module,exports){/**
+ * Theme-Icons — single source of truth for the inline SVG glyphs the
+ * theme section uses (sun, moon, system / monitor, plus a chevron for
+ * dropdown triggers).
+ *
+ * Every icon:
+ *   - Is a self-contained SVG string suitable for direct DOM insertion
+ *     (innerHTML, template substitution, or pict-section-modal's
+ *     `Icon: <html>` field on dropdown items).
+ *   - Uses `currentColor` for stroke so it picks up the surrounding
+ *     text colour from the active theme (light + dark both look right
+ *     without per-mode swaps).
+ *   - Has `aria-hidden="true"` so screen readers ignore the decorative
+ *     glyph and rely on the surrounding label / aria-label instead.
+ *
+ * The shapes are intentionally line-art (stroke-based, fill="none") so
+ * they read at very small sizes (12–16 px) without going muddy. The
+ * "system" icon is a stylised display (rectangle + stand) rather than
+ * the unicode 🖥 to keep visual weight consistent with sun + moon.
+ *
+ * Need a different size? Pass `pSizePx` to any of the iconXxx() helpers
+ * and the wrapper SVG's width/height are emitted with that value. The
+ * default is 14 px which matches the mode toggle's existing visual.
+ */var _DEFAULT_SIZE_PX=14;function _wrap(pSizePx,pInner){var tmpSize=typeof pSizePx==='number'&&pSizePx>0?pSizePx:_DEFAULT_SIZE_PX;return'<svg class="pict-theme-icon"'+' width="'+tmpSize+'" height="'+tmpSize+'"'+' viewBox="0 0 24 24" fill="none"'+' stroke="currentColor" stroke-width="2"'+' stroke-linecap="round" stroke-linejoin="round"'+' aria-hidden="true">'+pInner+'</svg>';}/**
+ * Sun glyph — central disc + 8 radial rays. Communicates "light mode"
+ * universally. Slightly chunkier disc than the typical Feather sun so
+ * it still reads at 12 px.
+ */function iconSun(pSizePx){return _wrap(pSizePx,'<circle cx="12" cy="12" r="4"/>'+'<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>');}/**
+ * Moon glyph — clean crescent (one continuous filled-look path drawn
+ * as a stroke). Avoids the brittle thin-crescent unicode characters
+ * that fall back to weird outline glyphs in some system fonts.
+ */function iconMoon(pSizePx){return _wrap(pSizePx,'<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>');}/**
+ * System / display glyph — a small monitor with a stand. Communicates
+ * "follow the OS preference" without ambiguity (a monitor is universal
+ * UI for system settings, more than the gear icon would be).
+ */function iconSystem(pSizePx){return _wrap(pSizePx,'<rect x="2" y="4" width="20" height="14" rx="2"/>'+'<path d="M8 21h8M12 18v3"/>');}/**
+ * Composite: a sun + moon side-by-side, sized so the two icons fit in
+ * the same horizontal footprint as a single icon. Used in the picker
+ * to indicate a paired (Light + Dark) theme without needing two
+ * separate visual columns.
+ */function iconPaired(pSizePx){var tmpSize=typeof pSizePx==='number'&&pSizePx>0?pSizePx:_DEFAULT_SIZE_PX;// Each half uses currentColor; the sun is rendered slightly smaller
+// in the left half and the moon in the right half by abusing the
+// viewBox width.
+return'<svg class="pict-theme-icon pict-theme-icon-paired"'+' width="'+tmpSize*1.6+'" height="'+tmpSize+'"'+' viewBox="0 0 38 24" fill="none"'+' stroke="currentColor" stroke-width="2"'+' stroke-linecap="round" stroke-linejoin="round"'+' aria-hidden="true">'// Sun on the left (centred at 8,12, radius 3)
++'<circle cx="8" cy="12" r="3"/>'+'<path d="M8 4v1.5M8 18.5V20M2.5 12H4M12 12h1.5M4.1 7.1l1 1M11.1 7.1l-1 1M4.1 16.9l1-1M11.1 16.9l-1-1"/>'// Moon on the right (mirrored crescent, centred near x=28)
++'<path d="M33 13.5A6.5 6.5 0 1 1 26 6a5 5 0 0 0 7 7.5z"/>'+'</svg>';}/**
+ * Down-chevron used by dropdown triggers. Sized to sit alongside body
+ * text (10 px default).
+ */function iconChevronDown(pSizePx){var tmpSize=typeof pSizePx==='number'&&pSizePx>0?pSizePx:10;return'<svg class="pict-theme-icon pict-theme-icon-chevron"'+' width="'+tmpSize+'" height="'+tmpSize+'"'+' viewBox="0 0 12 12" fill="none"'+' stroke="currentColor" stroke-width="1.6"'+' stroke-linecap="round" stroke-linejoin="round"'+' aria-hidden="true">'+'<path d="M3 4.5l3 3 3-3"/>'+'</svg>';}/**
+ * Pick the right capability icon for a theme based on its mode strategy.
+ * Returns the composite paired glyph for paired themes, sun for light-only,
+ * moon for dark-only.
+ *
+ * @param {string} pStrategy - 'single' or 'system'/'paired'
+ * @param {string} pDefaultMode - 'light' or 'dark' (only consulted for single)
+ * @param {number} [pSizePx]
+ */function iconForTheme(pStrategy,pDefaultMode,pSizePx){if(pStrategy==='single'){return pDefaultMode==='dark'?iconMoon(pSizePx):iconSun(pSizePx);}return iconPaired(pSizePx);}module.exports={iconSun:iconSun,iconMoon:iconMoon,iconSystem:iconSystem,iconPaired:iconPaired,iconChevronDown:iconChevronDown,iconForTheme:iconForTheme,DEFAULT_SIZE_PX:_DEFAULT_SIZE_PX};},{}],27:[function(require,module,exports){/**
+ * Theme-Persistence — reads and writes the user's selected theme + mode
+ * to the browser's localStorage so a reload restores the same look.
+ *
+ * pict-provider-theme is intentionally stateless — host applications
+ * decide what to apply at boot. This module is the small, opt-out-able
+ * layer that pict-section-theme.install() uses to make "remember my
+ * theme" the default behaviour without forcing every consumer to wire
+ * it themselves.
+ *
+ * # Storage shape
+ *
+ * Every entry is a single JSON object under one key:
+ *
+ *   localStorage["pict-section-theme:<scope>"] =
+ *     {
+ *       Version:   1,
+ *       ThemeHash: "retold-manager",
+ *       Mode:      "dark",
+ *       Scale:     1.25,
+ *       SavedAt:   "2026-05-09T21:00:00.000Z"
+ *     }
+ *
+ * Version-tagged so future schema changes can be migrated cleanly;
+ * mismatched versions are treated as "no saved entry" and the host
+ * application's defaults take over. Older entries that pre-date the
+ * Scale field are still valid — Scale is optional and load() returns
+ * null for it when absent (caller defaults to 1.0).
+ *
+ * # Scope (the <scope> portion of the key)
+ *
+ * Determined in this priority order:
+ *   1. The string the host passed in (`PersistenceKey: 'my-app'`) —
+ *      use this when one host serves multiple logical apps from the
+ *      same origin and they shouldn't share theme state.
+ *   2. window.location.hostname when running in a browser.
+ *   3. The literal 'default' as a last-ditch fallback (Node, sandbox,
+ *      mid-SSR, etc.).
+ *
+ * # Failure modes
+ *
+ * - localStorage missing (SSR, Safari private mode, blocked) →
+ *   load() returns null, save() returns false, no exception.
+ * - Quota exceeded → save() returns false silently; the in-memory
+ *   active theme is unaffected.
+ * - JSON parse error or version mismatch → load() returns null so the
+ *   caller falls back to ApplyDefault.
+ *
+ * Nothing here throws — persistence failures must NEVER crash the host
+ * application's boot path.
+ */var STORAGE_PREFIX='pict-section-theme:';var SCHEMA_VERSION=1;function _getStorage(){try{if(typeof window!=='undefined'&&window.localStorage){return window.localStorage;}}catch(pErr){/* SecurityError in some contexts */}return null;}function _autoScope(){try{if(typeof window!=='undefined'&&window.location&&window.location.hostname){return window.location.hostname;}}catch(pErr){/* fall through */}return'default';}/**
+ * Resolve the full localStorage key for this app's theme state.
+ *
+ * @param {string|null} pUserKey - Host-supplied scope override; falsy
+ *   values trigger the auto-scope fallback (hostname → 'default').
+ * @returns {string} the fully-qualified localStorage key.
+ */function resolveKey(pUserKey){var tmpScope=typeof pUserKey==='string'&&pUserKey.length>0?pUserKey:_autoScope();return STORAGE_PREFIX+tmpScope;}/**
+ * Read the saved theme state for a key.  Returns null if nothing is
+ * stored, the storage is unavailable, or the entry's schema version
+ * doesn't match.
+ *
+ * @param {string} pKey - the resolved storage key
+ * @returns {{ThemeHash: string, Mode: string|null, Scale: number|null}|null}
+ */function load(pKey){var tmpStore=_getStorage();if(!tmpStore)return null;var tmpRaw;try{tmpRaw=tmpStore.getItem(pKey);}catch(pErr){return null;}if(!tmpRaw)return null;var tmpParsed;try{tmpParsed=JSON.parse(tmpRaw);}catch(pErr){return null;}if(!tmpParsed||_typeof(tmpParsed)!=='object')return null;if(tmpParsed.Version!==SCHEMA_VERSION)return null;if(typeof tmpParsed.ThemeHash!=='string'||tmpParsed.ThemeHash.length===0)return null;var tmpScale=null;if(typeof tmpParsed.Scale==='number'&&isFinite(tmpParsed.Scale)&&tmpParsed.Scale>0){tmpScale=tmpParsed.Scale;}return{ThemeHash:tmpParsed.ThemeHash,Mode:typeof tmpParsed.Mode==='string'&&tmpParsed.Mode.length>0?tmpParsed.Mode:null,Scale:tmpScale};}/**
+ * Persist the active theme + mode for this key.  No-ops gracefully
+ * when storage is unavailable or quota is exceeded.
+ *
+ * @param {string} pKey
+ * @param {{ThemeHash: string, Mode?: string, Scale?: number}} pState
+ * @returns {boolean} true on success, false otherwise
+ */function save(pKey,pState){var tmpStore=_getStorage();if(!tmpStore)return false;if(!pState||typeof pState.ThemeHash!=='string'||pState.ThemeHash.length===0)return false;var tmpEntry={Version:SCHEMA_VERSION,ThemeHash:pState.ThemeHash,Mode:typeof pState.Mode==='string'&&pState.Mode.length>0?pState.Mode:null,Scale:typeof pState.Scale==='number'&&isFinite(pState.Scale)&&pState.Scale>0?pState.Scale:null,SavedAt:new Date().toISOString()};try{tmpStore.setItem(pKey,JSON.stringify(tmpEntry));return true;}catch(pErr){return false;}}/**
+ * Remove the saved theme state for a key.  Useful for "reset to
+ * defaults" actions.
+ */function clear(pKey){var tmpStore=_getStorage();if(!tmpStore)return false;try{tmpStore.removeItem(pKey);return true;}catch(pErr){return false;}}module.exports={resolveKey:resolveKey,load:load,save:save,clear:clear,STORAGE_PREFIX:STORAGE_PREFIX,SCHEMA_VERSION:SCHEMA_VERSION};},{}],28:[function(require,module,exports){/**
+ * Theme-Scale — viewport scale (zoom) selector independent of theme bundles.
+ *
+ * Scale is a *user preference*, not a property of any particular theme:
+ * the user might want Cyberpunk-at-1.25x or Retold-Manager-at-0.85x.
+ * Pict-provider-theme is intentionally bundle-shaped (Tokens / SVG /
+ * Image), so scale lives here at the section layer alongside Mode.
+ *
+ * # Apply mechanism
+ *
+ * Two outputs feed cooperating CSS:
+ *
+ *   1. `html { zoom: <scale>; }` — works for legacy stylesheets that
+ *      use `px` everywhere (most Retold apps including retold-manager).
+ *      Browsers (Chromium-based + Firefox 126+ + Safari) all honour
+ *      `zoom` on root.
+ *
+ *   2. `:root { --theme-scale: <scale>; }` — exposed for stylesheets
+ *      that want to opt into explicit `calc(... * var(--theme-scale))`
+ *      sizing. Keeps the value addressable from JS too via
+ *      `getComputedStyle(document.documentElement).getPropertyValue(...)`.
+ *
+ * Both are written into a single `<style id="pict-theme-scale">` element
+ * appended to `<head>` after the theme provider's own style element so
+ * scale wins last. Re-applying just rewrites this one element's text.
+ *
+ * # Listener pattern
+ *
+ * Mirrors pict-provider-theme.onApply(): subscribers receive the new
+ * scale value plus the previous value and a return-able `dispose`
+ * function. The persistence wiring in pict-section-theme.install()
+ * uses this to autosave whenever the scale changes.
+ *
+ * # Stateless across instances
+ *
+ * No singleton state — each browser window has one DOM, so the module
+ * tracks active scale via a module-level variable, but exposes
+ * `getActive()` for callers that want to query it. `applyScale()` is
+ * idempotent: applying the same value re-injects the same CSS (cheap
+ * no-op).
+ */var STYLE_ELEMENT_ID='pict-theme-scale';var CSS_VAR_NAME='--theme-scale';var DEFAULT_SCALE=1.0;var MIN_SCALE=0.5;var MAX_SCALE=3.0;// Curated list of presets. Hosts that want a different range can pass
+// a custom `Presets` array to the ScaleSelect view; this default covers
+// the readability common cases without overwhelming the dropdown.
+var PRESETS=[{Value:0.75,Label:'Tiny (75%)'},{Value:0.85,Label:'Small (85%)'},{Value:1.00,Label:'Default (100%)'},{Value:1.15,Label:'Comfortable (115%)'},{Value:1.25,Label:'Large (125%)'},{Value:1.50,Label:'Huge (150%)'},{Value:1.75,Label:'Extra Huge (175%)'},{Value:2.00,Label:'Massive (200%)'}];var _activeScale=DEFAULT_SCALE;var _listeners=[];function _clamp(pValue){var tmpNum=Number(pValue);if(!isFinite(tmpNum)||tmpNum<=0)return DEFAULT_SCALE;if(tmpNum<MIN_SCALE)return MIN_SCALE;if(tmpNum>MAX_SCALE)return MAX_SCALE;return tmpNum;}function _injectStyleElement(pCSS){if(typeof document==='undefined')return;var tmpStyleEl=document.getElementById(STYLE_ELEMENT_ID);if(!tmpStyleEl){tmpStyleEl=document.createElement('style');tmpStyleEl.id=STYLE_ELEMENT_ID;document.head.appendChild(tmpStyleEl);}tmpStyleEl.textContent=pCSS;}function _buildCSS(pScale){// `zoom` on <html> scales everything (px + rem + layout). The
+// `--theme-scale` custom property exposes the same value to any CSS
+// that wants to react explicitly via calc().
+return':root {\n'+'\t'+CSS_VAR_NAME+': '+pScale+';\n'+'}\n'+'html {\n'+'\tzoom: '+pScale+';\n'+'}\n';}/**
+ * Apply a viewport scale.
+ *
+ * @param {number} pScale - desired multiplier (e.g. 1.0, 1.25). Values
+ *   outside [MIN_SCALE, MAX_SCALE] are clamped; non-finite values
+ *   reset to DEFAULT_SCALE.
+ * @returns {number} the actually-applied scale (after clamping).
+ */function applyScale(pScale){var tmpPrev=_activeScale;var tmpNext=_clamp(pScale);_activeScale=tmpNext;_injectStyleElement(_buildCSS(tmpNext));if(tmpPrev!==tmpNext){_fireChange(tmpNext,tmpPrev);}return tmpNext;}function getActive(){return _activeScale;}function onChange(fCallback){if(typeof fCallback!=='function')return function(){};_listeners.push(fCallback);return function(){offChange(fCallback);};}function offChange(fCallback){var tmpIdx=_listeners.indexOf(fCallback);if(tmpIdx>=0)_listeners.splice(tmpIdx,1);}function _fireChange(pNewScale,pOldScale){for(var i=0;i<_listeners.length;i++){try{_listeners[i](pNewScale,pOldScale);}catch(pErr){/* listener failures must not break callers */}}}/**
+ * Reset to default scale and remove the injected style element. Useful
+ * for tests + "reset to defaults" affordances.
+ */function reset(){_activeScale=DEFAULT_SCALE;if(typeof document!=='undefined'){var tmpStyleEl=document.getElementById(STYLE_ELEMENT_ID);if(tmpStyleEl&&tmpStyleEl.parentNode)tmpStyleEl.parentNode.removeChild(tmpStyleEl);}_listeners=[];}module.exports={applyScale:applyScale,getActive:getActive,onChange:onChange,offChange:offChange,reset:reset,PRESETS:PRESETS,DEFAULT_SCALE:DEFAULT_SCALE,MIN_SCALE:MIN_SCALE,MAX_SCALE:MAX_SCALE,STYLE_ELEMENT_ID:STYLE_ELEMENT_ID,CSS_VAR_NAME:CSS_VAR_NAME};},{}],29:[function(require,module,exports){module.exports={"Hash":"1970s-console","Name":"1970s Console","Category":"Fun","Version":"0.0.1","Description":"Amber phosphor on brown-black Ported from RetoldRemote-ThemeDefinitions.js to the pict-provider-theme manifest format.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"dark"},"Tokens":{"Color":{"Background":{"Primary":"#1A1000","Secondary":"#140C00","Tertiary":"#1E1400","Panel":"#1C1200","Viewer":"#100A00","Hover":"#2A1C00","Selected":"#3A2800","Thumb":"#140C00"},"Text":{"Primary":"#FFAA00","Secondary":"#DD8800","Muted":"#AA6600","Dim":"#884400","Placeholder":"#663300"},"Brand":{"Accent":"#FFCC00","AccentHover":"#FFDD44"},"Border":{"Default":"#2A1800","Light":"#3A2200"},"Status":{"Danger":"#FF4400","DangerMuted":"#AA3300"},"Scrollbar":{"Track":"#2A1800","Hover":"#3A2800"},"Selection":{"Background":"rgba(255, 204, 0, 0.2)"},"Focus":{"Outline":"#FFCC00"},"Syntax":{"Keyword":"#FFB000","String":"#FFD080","Number":"#FFB000","Comment":"#806020","Operator":"#FFB000","Punctuation":"#FFD080","Function":"#FFB000","Variable":"#FFE090","Type":"#FFB000","Builtin":"#FFB000","Property":"#FF6E40","Tag":"#FF6E40","AttrName":"#FFB000","AttrValue":"#FFD080"}},"Typography":{"Family":{"Sans":"'Courier New', 'Lucida Console', monospace","Mono":"'Courier New', 'Lucida Console', monospace"}}},"Aliases":{"--retold-bg-primary":"Color.Background.Primary","--retold-bg-secondary":"Color.Background.Secondary","--retold-bg-tertiary":"Color.Background.Tertiary","--retold-bg-panel":"Color.Background.Panel","--retold-bg-viewer":"Color.Background.Viewer","--retold-bg-hover":"Color.Background.Hover","--retold-bg-selected":"Color.Background.Selected","--retold-bg-thumb":"Color.Background.Thumb","--retold-text-primary":"Color.Text.Primary","--retold-text-secondary":"Color.Text.Secondary","--retold-text-muted":"Color.Text.Muted","--retold-text-dim":"Color.Text.Dim","--retold-text-placeholder":"Color.Text.Placeholder","--retold-accent":"Color.Brand.Accent","--retold-accent-hover":"Color.Brand.AccentHover","--retold-border":"Color.Border.Default","--retold-border-light":"Color.Border.Light","--retold-danger":"Color.Status.Danger","--retold-danger-muted":"Color.Status.DangerMuted","--retold-scrollbar":"Color.Scrollbar.Track","--retold-scrollbar-hover":"Color.Scrollbar.Hover","--retold-selection-bg":"Color.Selection.Background","--retold-focus-outline":"Color.Focus.Outline","--retold-font-family":"Typography.Family.Sans","--retold-font-mono":"Typography.Family.Mono"},"IconColors":{"Primary":"#DD8800","Accent":"#FFCC00","Muted":"#884400","Light":"#1E1400","WarmBeige":"#201800","TealTint":"#1A1000","Lavender":"#1C1200","AmberTint":"#221800","PdfFill":"#201000","PdfText":"#FF4400"},"CSS":[],"SVG":{},"Image":{},"CompiledAt":"2026-05-03T18:12:53.405Z","CompilerVersion":1};},{}],30:[function(require,module,exports){module.exports={"Hash":"1980s-console","Name":"1980s Console","Category":"Fun","Version":"0.0.1","Description":"Green phosphor on black Ported from RetoldRemote-ThemeDefinitions.js to the pict-provider-theme manifest format.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"dark"},"Tokens":{"Color":{"Background":{"Primary":"#001200","Secondary":"#000E00","Tertiary":"#001600","Panel":"#001400","Viewer":"#000A00","Hover":"#002200","Selected":"#003800","Thumb":"#000E00"},"Text":{"Primary":"#00FF00","Secondary":"#00CC00","Muted":"#009900","Dim":"#006600","Placeholder":"#004400"},"Brand":{"Accent":"#00FF66","AccentHover":"#44FF88"},"Border":{"Default":"#002A00","Light":"#003A00"},"Status":{"Danger":"#FF0000","DangerMuted":"#AA0000"},"Scrollbar":{"Track":"#002A00","Hover":"#004400"},"Selection":{"Background":"rgba(0, 255, 102, 0.2)"},"Focus":{"Outline":"#00FF66"},"Syntax":{"Keyword":"#00FF00","String":"#90FF90","Number":"#FFFF00","Comment":"#208020","Operator":"#00FF00","Punctuation":"#90FF90","Function":"#00FF00","Variable":"#C0FFC0","Type":"#FFFF00","Builtin":"#FFFF00","Property":"#FF4040","Tag":"#FF4040","AttrName":"#FFFF00","AttrValue":"#90FF90"}},"Typography":{"Family":{"Sans":"'Courier New', monospace","Mono":"'Courier New', monospace"}}},"Aliases":{"--retold-bg-primary":"Color.Background.Primary","--retold-bg-secondary":"Color.Background.Secondary","--retold-bg-tertiary":"Color.Background.Tertiary","--retold-bg-panel":"Color.Background.Panel","--retold-bg-viewer":"Color.Background.Viewer","--retold-bg-hover":"Color.Background.Hover","--retold-bg-selected":"Color.Background.Selected","--retold-bg-thumb":"Color.Background.Thumb","--retold-text-primary":"Color.Text.Primary","--retold-text-secondary":"Color.Text.Secondary","--retold-text-muted":"Color.Text.Muted","--retold-text-dim":"Color.Text.Dim","--retold-text-placeholder":"Color.Text.Placeholder","--retold-accent":"Color.Brand.Accent","--retold-accent-hover":"Color.Brand.AccentHover","--retold-border":"Color.Border.Default","--retold-border-light":"Color.Border.Light","--retold-danger":"Color.Status.Danger","--retold-danger-muted":"Color.Status.DangerMuted","--retold-scrollbar":"Color.Scrollbar.Track","--retold-scrollbar-hover":"Color.Scrollbar.Hover","--retold-selection-bg":"Color.Selection.Background","--retold-focus-outline":"Color.Focus.Outline","--retold-font-family":"Typography.Family.Sans","--retold-font-mono":"Typography.Family.Mono"},"IconColors":{"Primary":"#00CC00","Accent":"#00FF66","Muted":"#006600","Light":"#001600","WarmBeige":"#001A00","TealTint":"#001200","Lavender":"#001400","AmberTint":"#001800","PdfFill":"#140000","PdfText":"#FF0000"},"CSS":[],"SVG":{},"Image":{},"CompiledAt":"2026-05-03T18:12:53.406Z","CompilerVersion":1};},{}],31:[function(require,module,exports){module.exports={"Hash":"1990s-website","Name":"1990s Web Site","Category":"Fun","Version":"0.0.1","Description":"Blue links on grey, beveled Ported from RetoldRemote-ThemeDefinitions.js to the pict-provider-theme manifest format.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"light"},"Tokens":{"Color":{"Background":{"Primary":"#C0C0C0","Secondary":"#B0B0B0","Tertiary":"#A8A8A8","Panel":"#B8B8B8","Viewer":"#D0D0D0","Hover":"#B8B8D0","Selected":"#000080","Thumb":"#B0B0B0"},"Text":{"Primary":"#000000","Secondary":"#000080","Muted":"#404040","Dim":"#606060","Placeholder":"#808080"},"Brand":{"Accent":"#0000FF","AccentHover":"#0000CC"},"Border":{"Default":"#808080","Light":"#A0A0A0"},"Status":{"Danger":"#FF0000","DangerMuted":"#990000"},"Scrollbar":{"Track":"#808080","Hover":"#606060"},"Selection":{"Background":"rgba(0, 0, 128, 0.3)"},"Focus":{"Outline":"#0000FF"},"Syntax":{"Keyword":"#0000FF","String":"#008000","Number":"#A52A2A","Comment":"#808080","Operator":"#000080","Punctuation":"#000000","Function":"#0000A0","Variable":"#000000","Type":"#A52A2A","Builtin":"#A52A2A","Property":"#800080","Tag":"#800080","AttrName":"#A52A2A","AttrValue":"#008000"}},"Typography":{"Family":{"Sans":"'Times New Roman', Times, serif","Mono":"'Courier New', Courier, monospace"}}},"Aliases":{"--retold-bg-primary":"Color.Background.Primary","--retold-bg-secondary":"Color.Background.Secondary","--retold-bg-tertiary":"Color.Background.Tertiary","--retold-bg-panel":"Color.Background.Panel","--retold-bg-viewer":"Color.Background.Viewer","--retold-bg-hover":"Color.Background.Hover","--retold-bg-selected":"Color.Background.Selected","--retold-bg-thumb":"Color.Background.Thumb","--retold-text-primary":"Color.Text.Primary","--retold-text-secondary":"Color.Text.Secondary","--retold-text-muted":"Color.Text.Muted","--retold-text-dim":"Color.Text.Dim","--retold-text-placeholder":"Color.Text.Placeholder","--retold-accent":"Color.Brand.Accent","--retold-accent-hover":"Color.Brand.AccentHover","--retold-border":"Color.Border.Default","--retold-border-light":"Color.Border.Light","--retold-danger":"Color.Status.Danger","--retold-danger-muted":"Color.Status.DangerMuted","--retold-scrollbar":"Color.Scrollbar.Track","--retold-scrollbar-hover":"Color.Scrollbar.Hover","--retold-selection-bg":"Color.Selection.Background","--retold-focus-outline":"Color.Focus.Outline","--retold-font-family":"Typography.Family.Sans","--retold-font-mono":"Typography.Family.Mono"},"IconColors":{"Primary":"#000080","Accent":"#0000FF","Muted":"#606060","Light":"#A8A8A8","WarmBeige":"#B0B0B0","TealTint":"#A0A0A0","Lavender":"#ABABD0","AmberTint":"#B8B0A0","PdfFill":"#C0A0A0","PdfText":"#FF0000"},"CSS":[],"SVG":{},"Image":{},"CompiledAt":"2026-05-03T18:12:53.406Z","CompilerVersion":1};},{}],32:[function(require,module,exports){/**
+ * Theme Registry — runtime registry of every theme available to
+ * pict-section-theme.
+ *
+ * Bundled "starter set" themes are pre-registered at module load time
+ * via static `require()` so browserify can resolve and inline each JSON
+ * at bundle time. Beyond the starter set, consumers can register
+ * additional theme bundles at runtime — useful for:
+ *
+ *   - Loading themes the host app authored (e.g. an app's own brand
+ *     palette that isn't shipped with this module).
+ *   - Pulling themes from a remote "theme garden" via
+ *     `registerFromURL()` (CDN-hosted curated bundles).
+ *   - Tooling / playgrounds that mutate the registry as the user
+ *     iterates.
+ *
+ * Module exports a singleton instance, so all consumers operate on the
+ * same set. Use `register({Hash, Bundle, Category, IsDefault})` to add
+ * themes, `list()` to enumerate them, `get(hash)` for direct lookup,
+ * `unregister(hash)` to remove.
+ *
+ * Each entry shape:
+ *
+ *   {
+ *     Hash:       <string>      // matches bundle.Hash; used by the picker
+ *     Bundle:     <object>      // theme JSON, ready for provider.registerTheme()
+ *     Category:   <string>      // grouping label for the picker UI
+ *     IsDefault:  <bool?>       // true for the canonical ecosystem default
+ *     Source:     <string?>     // 'starter' | URL | host-supplied tag
+ *   }
+ *
+ * Backwards-compat:
+ *   - The instance is iterable (Symbol.iterator), exposes `.length`,
+ *     and supports numeric indexing `[i]` so legacy code that treated
+ *     the catalog as an array continues to work without changes.
+ */'use strict';var ThemeRegistry=/*#__PURE__*/function(){function ThemeRegistry(){_classCallCheck(this,ThemeRegistry);this._themes=new Map();// Hash → entry, insertion-ordered
+this._loadStarterSet();}// ── Bundled starter set ──────────────────────────────────────────────
+// Each `require()` is a literal string so browserify inlines the JSON
+// at build time. Adding a new bundled theme: drop the JSON in this
+// folder and append a row here. Runtime additions go via register()
+// from anywhere else in the codebase.
+return _createClass(ThemeRegistry,[{key:"_loadStarterSet",value:function _loadStarterSet(){var STARTER=[// Retold ecosystem defaults
+{Hash:'retold-default',Category:'Default',IsDefault:true,Bundle:require('./retold-default.json')},{Hash:'retold-mono',Category:'Default',Bundle:require('./retold-mono.json')},// App-extracted themes (named after their host app)
+{Hash:'retold-manager',Category:'App',Bundle:require('./retold-manager.json')},{Hash:'retold-content-system',Category:'App',Bundle:require('./retold-content-system.json')},{Hash:'ultravisor-desert-dusk',Category:'App',Bundle:require('./ultravisor-desert-dusk.json')},{Hash:'ultravisor-desert-day',Category:'App',Bundle:require('./ultravisor-desert-day.json')},{Hash:'ultravisor-desert-sunset',Category:'App',Bundle:require('./ultravisor-desert-sunset.json')},{Hash:'ultravisor-professional-light',Category:'App',Bundle:require('./ultravisor-professional-light.json')},{Hash:'ultravisor-professional-dark',Category:'App',Bundle:require('./ultravisor-professional-dark.json')},{Hash:'ultravisor-desert-canyon',Category:'App',Bundle:require('./ultravisor-desert-canyon.json')},// Playground / starter paired themes (have light/dark)
+{Hash:'playground-corp',Category:'Paired',Bundle:require('./playground-corp.json')},{Hash:'playground-starter',Category:'Paired',Bundle:require('./playground-starter.json')},// Greys (low-light single-mode themes)
+{Hash:'twilight',Category:'Grey',Bundle:require('./twilight.json')},{Hash:'night',Category:'Grey',Bundle:require('./night.json')},{Hash:'evening',Category:'Grey',Bundle:require('./evening.json')},{Hash:'afternoon',Category:'Grey',Bundle:require('./afternoon.json')},{Hash:'daylight',Category:'Grey',Bundle:require('./daylight.json')},// Fun / period palettes
+{Hash:'cyberpunk',Category:'Fun',Bundle:require('./cyberpunk.json')},{Hash:'synthwave',Category:'Fun',Bundle:require('./synthwave.json')},{Hash:'neo-tokyo',Category:'Fun',Bundle:require('./neo-tokyo.json')},{Hash:'solarized-dark',Category:'Fun',Bundle:require('./solarized-dark.json')},{Hash:'forest',Category:'Fun',Bundle:require('./forest.json')},{Hash:'hotdog',Category:'Fun',Bundle:require('./hotdog.json')},{Hash:'1970s-console',Category:'Fun',Bundle:require('./1970s-console.json')},{Hash:'1980s-console',Category:'Fun',Bundle:require('./1980s-console.json')},{Hash:'1990s-website',Category:'Fun',Bundle:require('./1990s-website.json')},{Hash:'early-2000s',Category:'Fun',Bundle:require('./early-2000s.json')},// Diagnostics / utility
+{Hash:'mobile-debug',Category:'Debug',Bundle:require('./mobile-debug.json')}];for(var i=0;i<STARTER.length;i++){var tmpEntry=Object.assign({},STARTER[i],{Source:STARTER[i].Source||'starter'});this._themes.set(tmpEntry.Hash,tmpEntry);}}// ── Public API ───────────────────────────────────────────────────────
+/**
+	 * Register a theme. Re-registering an existing hash overwrites cleanly.
+	 *
+	 * @param {{Hash, Bundle, Category?, IsDefault?, Source?}} pEntry
+	 * @returns {object} the stored entry
+	 */},{key:"register",value:function register(pEntry){if(!pEntry||_typeof(pEntry)!=='object'){throw new Error('ThemeRegistry.register: entry must be an object');}if(typeof pEntry.Hash!=='string'||pEntry.Hash.length===0){throw new Error('ThemeRegistry.register: entry.Hash is required');}if(!pEntry.Bundle||_typeof(pEntry.Bundle)!=='object'){throw new Error('ThemeRegistry.register: entry.Bundle is required');}var tmpStored=Object.assign({Source:'host'},pEntry);this._themes.set(pEntry.Hash,tmpStored);return tmpStored;}/**
+	 * Remove a theme by hash. Returns true if anything was removed.
+	 * @param {string} pHash
+	 * @returns {boolean}
+	 */},{key:"unregister",value:function unregister(pHash){return this._themes["delete"](pHash);}/**
+	 * Look up a single theme entry by hash.
+	 * @param {string} pHash
+	 * @returns {object|undefined}
+	 */},{key:"get",value:function get(pHash){return this._themes.get(pHash);}},{key:"has",value:function has(pHash){return this._themes.has(pHash);}/**
+	 * Snapshot of every registered entry, in registration order.
+	 * @returns {Array<object>}
+	 */},{key:"list",value:function list(){return Array.from(this._themes.values());}/**
+	 * Drop every registered entry. Mostly useful in tests; production
+	 * consumers should prefer `unregister()` per hash.
+	 */},{key:"clear",value:function clear(){this._themes.clear();}/**
+	 * Re-load the bundled starter set. No-op if the starter set is
+	 * already registered (re-registering replaces, so this is safe to
+	 * call any time).
+	 */},{key:"loadStarterSet",value:function loadStarterSet(){this._loadStarterSet();}/**
+	 * Number of registered themes.
+	 * @returns {number}
+	 */},{key:"count",get:function get(){return this._themes.size;}/**
+	 * Async fetch + register from a URL. Used by the future "online theme
+	 * garden" — the URL must serve a JSON bundle compatible with
+	 * pict-provider-theme's `registerTheme()` shape.
+	 *
+	 * @param {string} pURL
+	 * @param {{Category?, IsDefault?, Hash?}} [pMetadata] - override metadata
+	 * @returns {Promise<object>} the registered entry
+	 */},{key:"registerFromURL",value:(function(){var _registerFromURL=_asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(pURL,pMetadata){var tmpResponse,tmpBundle,tmpMeta;return _regenerator().w(function(_context){while(1)switch(_context.n){case 0:if(!(typeof fetch!=='function')){_context.n=1;break;}throw new Error('ThemeRegistry.registerFromURL: fetch is not available in this environment');case 1:_context.n=2;return fetch(pURL);case 2:tmpResponse=_context.v;if(tmpResponse.ok){_context.n=3;break;}throw new Error('ThemeRegistry.registerFromURL: HTTP '+tmpResponse.status+' for '+pURL);case 3:_context.n=4;return tmpResponse.json();case 4:tmpBundle=_context.v;if(!(!tmpBundle||_typeof(tmpBundle)!=='object'||typeof tmpBundle.Hash!=='string')){_context.n=5;break;}throw new Error('ThemeRegistry.registerFromURL: payload missing Hash');case 5:tmpMeta=pMetadata||{};return _context.a(2,this.register({Hash:tmpMeta.Hash||tmpBundle.Hash,Bundle:tmpBundle,Category:tmpMeta.Category||'Garden',IsDefault:!!tmpMeta.IsDefault,Source:pURL}));}},_callee,this);}));function registerFromURL(_x,_x2){return _registerFromURL.apply(this,arguments);}return registerFromURL;}()// ── Array-like compatibility ─────────────────────────────────────────
+// Older code iterated the catalog as an array (`for (let i = 0; i <
+// CATALOG.length; i++) ... CATALOG[i]`). Preserve those usages without
+// requiring a refactor: the iterator + length + numeric proxy give
+// `Array.isArray(registry)` returns false, but everything that reads
+// keeps working. New code should prefer `list()` / `get()`.
+)},{key:"length",get:function get(){return this._themes.size;}},{key:Symbol.iterator,value:function value(){return this._themes.values();}}]);}();// Singleton — every consumer gets the same registry.
+var _Registry=new ThemeRegistry();// Numeric-index proxy: `registry[0]` returns the first entry, matching
+// the legacy "catalog as array" shape. Wraps the singleton so existing
+// `tmpEntry = _CATALOG[i]` loops keep working.
+var _IndexedRegistry=new Proxy(_Registry,{get:function get(pTarget,pProp,pReceiver){if(typeof pProp==='string'&&/^\d+$/.test(pProp)){var tmpIdx=parseInt(pProp,10);var tmpList=pTarget.list();return tmpList[tmpIdx];}return Reflect.get(pTarget,pProp,pReceiver);},has:function has(pTarget,pProp){if(typeof pProp==='string'&&/^\d+$/.test(pProp)){return parseInt(pProp,10)<pTarget.length;}return Reflect.has(pTarget,pProp);}});module.exports=_IndexedRegistry;module.exports.ThemeRegistry=ThemeRegistry;},{"./1970s-console.json":29,"./1980s-console.json":30,"./1990s-website.json":31,"./afternoon.json":33,"./cyberpunk.json":34,"./daylight.json":35,"./early-2000s.json":36,"./evening.json":37,"./forest.json":38,"./hotdog.json":39,"./mobile-debug.json":40,"./neo-tokyo.json":41,"./night.json":42,"./playground-corp.json":43,"./playground-starter.json":44,"./retold-content-system.json":45,"./retold-default.json":46,"./retold-manager.json":47,"./retold-mono.json":48,"./solarized-dark.json":49,"./synthwave.json":50,"./twilight.json":51,"./ultravisor-desert-canyon.json":52,"./ultravisor-desert-day.json":53,"./ultravisor-desert-dusk.json":54,"./ultravisor-desert-sunset.json":55,"./ultravisor-professional-dark.json":56,"./ultravisor-professional-light.json":57}],33:[function(require,module,exports){module.exports={"Hash":"afternoon","Name":"Afternoon","Category":"Grey","Version":"0.0.1","Description":"Warm light grey, softer contrast Ported from RetoldRemote-ThemeDefinitions.js to the pict-provider-theme manifest format.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"light"},"Tokens":{"Color":{"Background":{"Primary":"#E8E4E0","Secondary":"#DAD6D2","Tertiary":"#D0CCC8","Panel":"#DDD9D5","Viewer":"#F0ECE8","Hover":"#CCC8C4","Selected":"#B8B4B0","Thumb":"#DAD6D2"},"Text":{"Primary":"#2A2A2A","Secondary":"#404040","Muted":"#707070","Dim":"#909090","Placeholder":"#B0B0B0"},"Brand":{"Accent":"#555555","AccentHover":"#333333"},"Border":{"Default":"#C0BCB8","Light":"#D0CCC8"},"Status":{"Danger":"#AA3333","DangerMuted":"#886655"},"Scrollbar":{"Track":"#B8B4B0","Hover":"#A0A09C"},"Selection":{"Background":"rgba(85, 85, 85, 0.2)"},"Focus":{"Outline":"#555555"},"Syntax":{"Keyword":"#7038A0","String":"#2E7A3A","Number":"#A86B00","Comment":"#888888","Operator":"#1F6FB5","Punctuation":"#666666","Function":"#3357C7","Variable":"#222222","Type":"#A86B00","Builtin":"#A86B00","Property":"#B62828","Tag":"#B62828","AttrName":"#A86B00","AttrValue":"#2E7A3A"}},"Typography":{"Family":{"Sans":"Georgia, 'Times New Roman', serif","Mono":"'Courier New', Courier, monospace"}}},"Aliases":{"--retold-bg-primary":"Color.Background.Primary","--retold-bg-secondary":"Color.Background.Secondary","--retold-bg-tertiary":"Color.Background.Tertiary","--retold-bg-panel":"Color.Background.Panel","--retold-bg-viewer":"Color.Background.Viewer","--retold-bg-hover":"Color.Background.Hover","--retold-bg-selected":"Color.Background.Selected","--retold-bg-thumb":"Color.Background.Thumb","--retold-text-primary":"Color.Text.Primary","--retold-text-secondary":"Color.Text.Secondary","--retold-text-muted":"Color.Text.Muted","--retold-text-dim":"Color.Text.Dim","--retold-text-placeholder":"Color.Text.Placeholder","--retold-accent":"Color.Brand.Accent","--retold-accent-hover":"Color.Brand.AccentHover","--retold-border":"Color.Border.Default","--retold-border-light":"Color.Border.Light","--retold-danger":"Color.Status.Danger","--retold-danger-muted":"Color.Status.DangerMuted","--retold-scrollbar":"Color.Scrollbar.Track","--retold-scrollbar-hover":"Color.Scrollbar.Hover","--retold-selection-bg":"Color.Selection.Background","--retold-focus-outline":"Color.Focus.Outline","--retold-font-family":"Typography.Family.Sans","--retold-font-mono":"Typography.Family.Mono"},"IconColors":{"Primary":"#404040","Accent":"#555555","Muted":"#909090","Light":"#D0CCC8","WarmBeige":"#DAD6D2","TealTint":"#CCC8C4","Lavender":"#D2D0CE","AmberTint":"#D8D2C8","PdfFill":"#D8C8C0","PdfText":"#AA3333"},"CSS":[],"SVG":{},"Image":{},"CompiledAt":"2026-05-03T18:12:53.406Z","CompilerVersion":1};},{}],34:[function(require,module,exports){module.exports={"Hash":"cyberpunk","Name":"Cyberpunk","Category":"Fun","Version":"0.0.1","Description":"Electric green on black Ported from RetoldRemote-ThemeDefinitions.js to the pict-provider-theme manifest format.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"dark"},"Tokens":{"Color":{"Background":{"Primary":"#0A0E0A","Secondary":"#060806","Tertiary":"#0E120E","Panel":"#0C100C","Viewer":"#040604","Hover":"#142014","Selected":"#1A3A1A","Thumb":"#060806"},"Text":{"Primary":"#C8FFC8","Secondary":"#A0D8A0","Muted":"#608860","Dim":"#406040","Placeholder":"#305030"},"Brand":{"Accent":"#00FF41","AccentHover":"#44FF77"},"Border":{"Default":"#1A2A1A","Light":"#224022"},"Status":{"Danger":"#FF3333","DangerMuted":"#AA2222"},"Scrollbar":{"Track":"#1A2A1A","Hover":"#2A4A2A"},"Selection":{"Background":"rgba(0, 255, 65, 0.2)"},"Focus":{"Outline":"#00FF41"},"Syntax":{"Keyword":"#FF00FF","String":"#00FF41","Number":"#FFFF00","Comment":"#406040","Operator":"#00FFFF","Punctuation":"#A0D8A0","Function":"#FF00FF","Variable":"#C8FFC8","Type":"#FFFF00","Builtin":"#FFFF00","Property":"#FF3333","Tag":"#FF3333","AttrName":"#FFFF00","AttrValue":"#00FF41"}},"Typography":{"Family":{"Sans":"'Lucida Console', 'Courier New', monospace","Mono":"'Lucida Console', 'Courier New', monospace"}}},"Aliases":{"--retold-bg-primary":"Color.Background.Primary","--retold-bg-secondary":"Color.Background.Secondary","--retold-bg-tertiary":"Color.Background.Tertiary","--retold-bg-panel":"Color.Background.Panel","--retold-bg-viewer":"Color.Background.Viewer","--retold-bg-hover":"Color.Background.Hover","--retold-bg-selected":"Color.Background.Selected","--retold-bg-thumb":"Color.Background.Thumb","--retold-text-primary":"Color.Text.Primary","--retold-text-secondary":"Color.Text.Secondary","--retold-text-muted":"Color.Text.Muted","--retold-text-dim":"Color.Text.Dim","--retold-text-placeholder":"Color.Text.Placeholder","--retold-accent":"Color.Brand.Accent","--retold-accent-hover":"Color.Brand.AccentHover","--retold-border":"Color.Border.Default","--retold-border-light":"Color.Border.Light","--retold-danger":"Color.Status.Danger","--retold-danger-muted":"Color.Status.DangerMuted","--retold-scrollbar":"Color.Scrollbar.Track","--retold-scrollbar-hover":"Color.Scrollbar.Hover","--retold-selection-bg":"Color.Selection.Background","--retold-focus-outline":"Color.Focus.Outline","--retold-font-family":"Typography.Family.Sans","--retold-font-mono":"Typography.Family.Mono"},"IconColors":{"Primary":"#A0D8A0","Accent":"#00FF41","Muted":"#406040","Light":"#0E120E","WarmBeige":"#101610","TealTint":"#0C140C","Lavender":"#0E120E","AmberTint":"#141810","PdfFill":"#181010","PdfText":"#FF3333"},"CSS":[],"SVG":{},"Image":{},"CompiledAt":"2026-05-03T18:12:53.406Z","CompilerVersion":1};},{}],35:[function(require,module,exports){module.exports={"Hash":"daylight","Name":"Daylight","Category":"Grey","Version":"0.0.1","Description":"Bright white, dark text Ported from RetoldRemote-ThemeDefinitions.js to the pict-provider-theme manifest format.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"light"},"Tokens":{"Color":{"Background":{"Primary":"#FFFFFF","Secondary":"#F0F0F0","Tertiary":"#E8E8E8","Panel":"#F5F5F5","Viewer":"#FAFAFA","Hover":"#E0E0E0","Selected":"#C8C8C8","Thumb":"#F0F0F0"},"Text":{"Primary":"#1A1A1A","Secondary":"#333333","Muted":"#666666","Dim":"#888888","Placeholder":"#AAAAAA"},"Brand":{"Accent":"#444444","AccentHover":"#222222"},"Border":{"Default":"#D0D0D0","Light":"#E0E0E0"},"Status":{"Danger":"#CC0000","DangerMuted":"#884444"},"Scrollbar":{"Track":"#C0C0C0","Hover":"#A0A0A0"},"Selection":{"Background":"rgba(68, 68, 68, 0.2)"},"Focus":{"Outline":"#444444"},"Syntax":{"Keyword":"#7038A0","String":"#2E7A3A","Number":"#A86B00","Comment":"#888888","Operator":"#1F6FB5","Punctuation":"#444444","Function":"#3357C7","Variable":"#222222","Type":"#A86B00","Builtin":"#A86B00","Property":"#B62828","Tag":"#B62828","AttrName":"#A86B00","AttrValue":"#2E7A3A"}},"Typography":{"Family":{"Sans":"'Segoe UI', system-ui, -apple-system, sans-serif","Mono":"'SF Mono', 'Fira Code', 'Consolas', monospace"}}},"Aliases":{"--retold-bg-primary":"Color.Background.Primary","--retold-bg-secondary":"Color.Background.Secondary","--retold-bg-tertiary":"Color.Background.Tertiary","--retold-bg-panel":"Color.Background.Panel","--retold-bg-viewer":"Color.Background.Viewer","--retold-bg-hover":"Color.Background.Hover","--retold-bg-selected":"Color.Background.Selected","--retold-bg-thumb":"Color.Background.Thumb","--retold-text-primary":"Color.Text.Primary","--retold-text-secondary":"Color.Text.Secondary","--retold-text-muted":"Color.Text.Muted","--retold-text-dim":"Color.Text.Dim","--retold-text-placeholder":"Color.Text.Placeholder","--retold-accent":"Color.Brand.Accent","--retold-accent-hover":"Color.Brand.AccentHover","--retold-border":"Color.Border.Default","--retold-border-light":"Color.Border.Light","--retold-danger":"Color.Status.Danger","--retold-danger-muted":"Color.Status.DangerMuted","--retold-scrollbar":"Color.Scrollbar.Track","--retold-scrollbar-hover":"Color.Scrollbar.Hover","--retold-selection-bg":"Color.Selection.Background","--retold-focus-outline":"Color.Focus.Outline","--retold-font-family":"Typography.Family.Sans","--retold-font-mono":"Typography.Family.Mono"},"IconColors":{"Primary":"#333333","Accent":"#444444","Muted":"#888888","Light":"#E8E8E8","WarmBeige":"#F0F0F0","TealTint":"#E0E0E0","Lavender":"#EBEBEB","AmberTint":"#F0EDE8","PdfFill":"#F0E0E0","PdfText":"#CC0000"},"CSS":[],"SVG":{},"Image":{},"CompiledAt":"2026-05-03T18:12:53.407Z","CompilerVersion":1};},{}],36:[function(require,module,exports){module.exports={"Hash":"early-2000s","Name":"Early 2000s Web","Category":"Fun","Version":"0.0.1","Description":"Teal and silver, Web 2.0 Ported from RetoldRemote-ThemeDefinitions.js to the pict-provider-theme manifest format.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"light"},"Tokens":{"Color":{"Background":{"Primary":"#E8F4F8","Secondary":"#D0E8EE","Tertiary":"#C0DDE6","Panel":"#D8EEF2","Viewer":"#F0F8FA","Hover":"#B0D4E0","Selected":"#88C4D8","Thumb":"#D0E8EE"},"Text":{"Primary":"#1A3A4A","Secondary":"#2A4A5A","Muted":"#5A7A8A","Dim":"#7A9AAA","Placeholder":"#9ABACA"},"Brand":{"Accent":"#0099CC","AccentHover":"#00AADD"},"Border":{"Default":"#A0C8D8","Light":"#B8D8E4"},"Status":{"Danger":"#CC3300","DangerMuted":"#994422"},"Scrollbar":{"Track":"#A0C8D8","Hover":"#88B8CC"},"Selection":{"Background":"rgba(0, 153, 204, 0.2)"},"Focus":{"Outline":"#0099CC"},"Syntax":{"Keyword":"#1A4080","String":"#2E7A3A","Number":"#A86B00","Comment":"#888888","Operator":"#1F6FB5","Punctuation":"#333333","Function":"#3357C7","Variable":"#222222","Type":"#A86B00","Builtin":"#A86B00","Property":"#B62828","Tag":"#B62828","AttrName":"#A86B00","AttrValue":"#2E7A3A"}},"Typography":{"Family":{"Sans":"Verdana, Geneva, Tahoma, sans-serif","Mono":"'Lucida Console', Monaco, monospace"}}},"Aliases":{"--retold-bg-primary":"Color.Background.Primary","--retold-bg-secondary":"Color.Background.Secondary","--retold-bg-tertiary":"Color.Background.Tertiary","--retold-bg-panel":"Color.Background.Panel","--retold-bg-viewer":"Color.Background.Viewer","--retold-bg-hover":"Color.Background.Hover","--retold-bg-selected":"Color.Background.Selected","--retold-bg-thumb":"Color.Background.Thumb","--retold-text-primary":"Color.Text.Primary","--retold-text-secondary":"Color.Text.Secondary","--retold-text-muted":"Color.Text.Muted","--retold-text-dim":"Color.Text.Dim","--retold-text-placeholder":"Color.Text.Placeholder","--retold-accent":"Color.Brand.Accent","--retold-accent-hover":"Color.Brand.AccentHover","--retold-border":"Color.Border.Default","--retold-border-light":"Color.Border.Light","--retold-danger":"Color.Status.Danger","--retold-danger-muted":"Color.Status.DangerMuted","--retold-scrollbar":"Color.Scrollbar.Track","--retold-scrollbar-hover":"Color.Scrollbar.Hover","--retold-selection-bg":"Color.Selection.Background","--retold-focus-outline":"Color.Focus.Outline","--retold-font-family":"Typography.Family.Sans","--retold-font-mono":"Typography.Family.Mono"},"IconColors":{"Primary":"#2A4A5A","Accent":"#0099CC","Muted":"#7A9AAA","Light":"#C0DDE6","WarmBeige":"#D0E8EE","TealTint":"#B0D8E4","Lavender":"#C8DCE6","AmberTint":"#D8E0D0","PdfFill":"#E0C8C0","PdfText":"#CC3300"},"CSS":[],"SVG":{},"Image":{},"CompiledAt":"2026-05-03T18:12:53.407Z","CompilerVersion":1};},{}],37:[function(require,module,exports){module.exports={"Hash":"evening","Name":"Evening","Category":"Grey","Version":"0.0.1","Description":"Medium grey, transitional Ported from RetoldRemote-ThemeDefinitions.js to the pict-provider-theme manifest format.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"dark"},"Tokens":{"Color":{"Background":{"Primary":"#484848","Secondary":"#3C3C3C","Tertiary":"#424242","Panel":"#454545","Viewer":"#363636","Hover":"#525252","Selected":"#606060","Thumb":"#3C3C3C"},"Text":{"Primary":"#E0E0E0","Secondary":"#D0D0D0","Muted":"#A0A0A0","Dim":"#888888","Placeholder":"#707070"},"Brand":{"Accent":"#C0C0C0","AccentHover":"#E0E0E0"},"Border":{"Default":"#585858","Light":"#606060"},"Status":{"Danger":"#FF6666","DangerMuted":"#AA6666"},"Scrollbar":{"Track":"#585858","Hover":"#686868"},"Selection":{"Background":"rgba(192, 192, 192, 0.25)"},"Focus":{"Outline":"#C0C0C0"},"Syntax":{"Keyword":"#B894FF","String":"#A8D8B0","Number":"#FFB880","Comment":"#8A8A8A","Operator":"#7EC0FF","Punctuation":"#BBBBBB","Function":"#FFCC80","Variable":"#DDDDDD","Type":"#FFB880","Builtin":"#FFB880","Property":"#FF9494","Tag":"#FF9494","AttrName":"#FFB880","AttrValue":"#A8D8B0"}},"Typography":{"Family":{"Sans":"system-ui, -apple-system, sans-serif","Mono":"'SF Mono', 'Fira Code', 'Consolas', monospace"}}},"Aliases":{"--retold-bg-primary":"Color.Background.Primary","--retold-bg-secondary":"Color.Background.Secondary","--retold-bg-tertiary":"Color.Background.Tertiary","--retold-bg-panel":"Color.Background.Panel","--retold-bg-viewer":"Color.Background.Viewer","--retold-bg-hover":"Color.Background.Hover","--retold-bg-selected":"Color.Background.Selected","--retold-bg-thumb":"Color.Background.Thumb","--retold-text-primary":"Color.Text.Primary","--retold-text-secondary":"Color.Text.Secondary","--retold-text-muted":"Color.Text.Muted","--retold-text-dim":"Color.Text.Dim","--retold-text-placeholder":"Color.Text.Placeholder","--retold-accent":"Color.Brand.Accent","--retold-accent-hover":"Color.Brand.AccentHover","--retold-border":"Color.Border.Default","--retold-border-light":"Color.Border.Light","--retold-danger":"Color.Status.Danger","--retold-danger-muted":"Color.Status.DangerMuted","--retold-scrollbar":"Color.Scrollbar.Track","--retold-scrollbar-hover":"Color.Scrollbar.Hover","--retold-selection-bg":"Color.Selection.Background","--retold-focus-outline":"Color.Focus.Outline","--retold-font-family":"Typography.Family.Sans","--retold-font-mono":"Typography.Family.Mono"},"IconColors":{"Primary":"#D0D0D0","Accent":"#C0C0C0","Muted":"#888888","Light":"#424242","WarmBeige":"#484848","TealTint":"#3E3E3E","Lavender":"#444444","AmberTint":"#4A4640","PdfFill":"#4A3C3C","PdfText":"#FF6666"},"CSS":[],"SVG":{},"Image":{},"CompiledAt":"2026-05-03T18:12:53.407Z","CompilerVersion":1};},{}],38:[function(require,module,exports){module.exports={"Hash":"forest","Name":"Forest","Category":"Fun","Version":"0.0.1","Description":"Deep greens and earth browns Ported from RetoldRemote-ThemeDefinitions.js to the pict-provider-theme manifest format.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"dark"},"Tokens":{"Color":{"Background":{"Primary":"#1A2018","Secondary":"#141A12","Tertiary":"#1E2620","Panel":"#1C221A","Viewer":"#101410","Hover":"#283828","Selected":"#344834","Thumb":"#141A12"},"Text":{"Primary":"#D0DCC8","Secondary":"#B0C4A8","Muted":"#809878","Dim":"#607858","Placeholder":"#486040"},"Brand":{"Accent":"#6AAF5C","AccentHover":"#88CC78"},"Border":{"Default":"#2A3A28","Light":"#3A4A38"},"Status":{"Danger":"#CC4422","DangerMuted":"#884422"},"Scrollbar":{"Track":"#2A3A28","Hover":"#3A4A38"},"Selection":{"Background":"rgba(106, 175, 92, 0.25)"},"Focus":{"Outline":"#6AAF5C"},"Syntax":{"Keyword":"#D4E157","String":"#A5D6A7","Number":"#FFB74D","Comment":"#5D6F58","Operator":"#80CBC4","Punctuation":"#A8C8A0","Function":"#FFCC80","Variable":"#C8E6C9","Type":"#FFB74D","Builtin":"#FFB74D","Property":"#FF8A65","Tag":"#FF8A65","AttrName":"#FFB74D","AttrValue":"#A5D6A7"}},"Typography":{"Family":{"Sans":"'Palatino Linotype', 'Book Antiqua', Palatino, serif","Mono":"'Courier New', monospace"}}},"Aliases":{"--retold-bg-primary":"Color.Background.Primary","--retold-bg-secondary":"Color.Background.Secondary","--retold-bg-tertiary":"Color.Background.Tertiary","--retold-bg-panel":"Color.Background.Panel","--retold-bg-viewer":"Color.Background.Viewer","--retold-bg-hover":"Color.Background.Hover","--retold-bg-selected":"Color.Background.Selected","--retold-bg-thumb":"Color.Background.Thumb","--retold-text-primary":"Color.Text.Primary","--retold-text-secondary":"Color.Text.Secondary","--retold-text-muted":"Color.Text.Muted","--retold-text-dim":"Color.Text.Dim","--retold-text-placeholder":"Color.Text.Placeholder","--retold-accent":"Color.Brand.Accent","--retold-accent-hover":"Color.Brand.AccentHover","--retold-border":"Color.Border.Default","--retold-border-light":"Color.Border.Light","--retold-danger":"Color.Status.Danger","--retold-danger-muted":"Color.Status.DangerMuted","--retold-scrollbar":"Color.Scrollbar.Track","--retold-scrollbar-hover":"Color.Scrollbar.Hover","--retold-selection-bg":"Color.Selection.Background","--retold-focus-outline":"Color.Focus.Outline","--retold-font-family":"Typography.Family.Sans","--retold-font-mono":"Typography.Family.Mono"},"IconColors":{"Primary":"#B0C4A8","Accent":"#6AAF5C","Muted":"#607858","Light":"#1E2620","WarmBeige":"#22281E","TealTint":"#1A221A","Lavender":"#1E2420","AmberTint":"#262218","PdfFill":"#261A18","PdfText":"#CC4422"},"CSS":[],"SVG":{},"Image":{},"CompiledAt":"2026-05-03T18:12:53.407Z","CompilerVersion":1};},{}],39:[function(require,module,exports){module.exports={"Hash":"hotdog","Name":"Hotdog","Category":"Fun","Version":"0.0.1","Description":"Red and mustard yellow, garish Ported from RetoldRemote-ThemeDefinitions.js to the pict-provider-theme manifest format.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"dark"},"Tokens":{"Color":{"Background":{"Primary":"#8B0000","Secondary":"#6B0000","Tertiary":"#7B0000","Panel":"#750000","Viewer":"#550000","Hover":"#AA1111","Selected":"#BB3300","Thumb":"#6B0000"},"Text":{"Primary":"#FFD700","Secondary":"#FFC000","Muted":"#CC9900","Dim":"#AA7700","Placeholder":"#886600"},"Brand":{"Accent":"#FFD700","AccentHover":"#FFEE44"},"Border":{"Default":"#AA2222","Light":"#BB3333"},"Status":{"Danger":"#FFFF00","DangerMuted":"#CCCC00"},"Scrollbar":{"Track":"#AA2222","Hover":"#CC3333"},"Selection":{"Background":"rgba(255, 215, 0, 0.3)"},"Focus":{"Outline":"#FFD700"},"Syntax":{"Keyword":"#FFD800","String":"#FFFFFF","Number":"#FFD800","Comment":"#9C2828","Operator":"#FFD800","Punctuation":"#FFFFFF","Function":"#FFD800","Variable":"#FFFFFF","Type":"#FFD800","Builtin":"#FFD800","Property":"#FFD800","Tag":"#FFD800","AttrName":"#FFD800","AttrValue":"#FFFFFF"}},"Typography":{"Family":{"Sans":"Impact, 'Arial Black', sans-serif","Mono":"'Courier New', monospace"}}},"Aliases":{"--retold-bg-primary":"Color.Background.Primary","--retold-bg-secondary":"Color.Background.Secondary","--retold-bg-tertiary":"Color.Background.Tertiary","--retold-bg-panel":"Color.Background.Panel","--retold-bg-viewer":"Color.Background.Viewer","--retold-bg-hover":"Color.Background.Hover","--retold-bg-selected":"Color.Background.Selected","--retold-bg-thumb":"Color.Background.Thumb","--retold-text-primary":"Color.Text.Primary","--retold-text-secondary":"Color.Text.Secondary","--retold-text-muted":"Color.Text.Muted","--retold-text-dim":"Color.Text.Dim","--retold-text-placeholder":"Color.Text.Placeholder","--retold-accent":"Color.Brand.Accent","--retold-accent-hover":"Color.Brand.AccentHover","--retold-border":"Color.Border.Default","--retold-border-light":"Color.Border.Light","--retold-danger":"Color.Status.Danger","--retold-danger-muted":"Color.Status.DangerMuted","--retold-scrollbar":"Color.Scrollbar.Track","--retold-scrollbar-hover":"Color.Scrollbar.Hover","--retold-selection-bg":"Color.Selection.Background","--retold-focus-outline":"Color.Focus.Outline","--retold-font-family":"Typography.Family.Sans","--retold-font-mono":"Typography.Family.Mono"},"IconColors":{"Primary":"#FFC000","Accent":"#FFD700","Muted":"#AA7700","Light":"#7B0000","WarmBeige":"#800000","TealTint":"#6B0000","Lavender":"#780000","AmberTint":"#7A1000","PdfFill":"#6B0000","PdfText":"#FFFF00"},"CSS":[],"SVG":{},"Image":{},"CompiledAt":"2026-05-03T18:12:53.407Z","CompilerVersion":1};},{}],40:[function(require,module,exports){module.exports={"Hash":"mobile-debug","Name":"Mobile Container Debug","Category":"Debug","Version":"0.0.1","Description":"Unique color per container for layout debugging Ported from RetoldRemote-ThemeDefinitions.js to the pict-provider-theme manifest format.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"light"},"Tokens":{"Color":{"Background":{"Primary":"#FF0000","Secondary":"#00CCCC","Tertiary":"#00AA00","Panel":"#FFAA00","Viewer":"#333333","Hover":"rgba(255, 255, 255, 0.2)","Selected":"rgba(255, 255, 255, 0.3)","Thumb":"#AA00AA"},"Text":{"Primary":"#FFFFFF","Secondary":"#EEEEEE","Muted":"#CCCCCC","Dim":"#AAAAAA","Placeholder":"#888888"},"Brand":{"Accent":"#FFFF00","AccentHover":"#FFFF88"},"Border":{"Default":"#FFFFFF","Light":"#CCCCCC"},"Status":{"Danger":"#FF0000","DangerMuted":"#CC4444"},"Scrollbar":{"Track":"#888888","Hover":"#AAAAAA"},"Selection":{"Background":"rgba(255, 255, 0, 0.3)"},"Focus":{"Outline":"#FFFF00"},"Syntax":{"Keyword":"#A626A4","String":"#50A14F","Number":"#986801","Comment":"#A0A1A7","Operator":"#0184BC","Punctuation":"#383A42","Function":"#4078F2","Variable":"#383A42","Type":"#C18401","Builtin":"#986801","Property":"#E45649","Tag":"#E45649","AttrName":"#986801","AttrValue":"#50A14F"}},"Typography":{"Family":{"Sans":"system-ui, -apple-system, sans-serif","Mono":"'SF Mono', 'Consolas', monospace"}}},"Aliases":{"--retold-bg-primary":"Color.Background.Primary","--retold-bg-secondary":"Color.Background.Secondary","--retold-bg-tertiary":"Color.Background.Tertiary","--retold-bg-panel":"Color.Background.Panel","--retold-bg-viewer":"Color.Background.Viewer","--retold-bg-hover":"Color.Background.Hover","--retold-bg-selected":"Color.Background.Selected","--retold-bg-thumb":"Color.Background.Thumb","--retold-text-primary":"Color.Text.Primary","--retold-text-secondary":"Color.Text.Secondary","--retold-text-muted":"Color.Text.Muted","--retold-text-dim":"Color.Text.Dim","--retold-text-placeholder":"Color.Text.Placeholder","--retold-accent":"Color.Brand.Accent","--retold-accent-hover":"Color.Brand.AccentHover","--retold-border":"Color.Border.Default","--retold-border-light":"Color.Border.Light","--retold-danger":"Color.Status.Danger","--retold-danger-muted":"Color.Status.DangerMuted","--retold-scrollbar":"Color.Scrollbar.Track","--retold-scrollbar-hover":"Color.Scrollbar.Hover","--retold-selection-bg":"Color.Selection.Background","--retold-focus-outline":"Color.Focus.Outline","--retold-font-family":"Typography.Family.Sans","--retold-font-mono":"Typography.Family.Mono"},"IconColors":{"Primary":"#FFFFFF","Accent":"#FFFF00","Muted":"#CCCCCC","Light":"#333333","WarmBeige":"#FFAA00","TealTint":"#00CCCC","Lavender":"#AA00AA","AmberTint":"#FFAA00","PdfFill":"#FF4444","PdfText":"#FFFFFF"},"CSS":[],"SVG":{},"Image":{},"CompiledAt":"2026-05-03T18:12:53.408Z","CompilerVersion":1};},{}],41:[function(require,module,exports){module.exports={"Hash":"neo-tokyo","Name":"Neo-Tokyo","Category":"Fun","Version":"0.0.1","Description":"Neon pink on dark navy Ported from RetoldRemote-ThemeDefinitions.js to the pict-provider-theme manifest format.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"dark"},"Tokens":{"Color":{"Background":{"Primary":"#0D0D2B","Secondary":"#080820","Tertiary":"#121235","Panel":"#0F0F28","Viewer":"#060615","Hover":"#1A1A42","Selected":"#2A1845","Thumb":"#080820"},"Text":{"Primary":"#E8E0F0","Secondary":"#D0C8E0","Muted":"#9088A8","Dim":"#6860A0","Placeholder":"#504888"},"Brand":{"Accent":"#FF2D8A","AccentHover":"#FF5AA0"},"Border":{"Default":"#2A2050","Light":"#382868"},"Status":{"Danger":"#FF4466","DangerMuted":"#AA3355"},"Scrollbar":{"Track":"#2A2050","Hover":"#3A3068"},"Selection":{"Background":"rgba(255, 45, 138, 0.25)"},"Focus":{"Outline":"#FF2D8A"},"Syntax":{"Keyword":"#FF4E9F","String":"#A1FFCE","Number":"#FFD93D","Comment":"#807A9E","Operator":"#7DF9FF","Punctuation":"#C0BCEB","Function":"#FFCC80","Variable":"#E0D8FF","Type":"#FFD93D","Builtin":"#FFD93D","Property":"#FF6E6E","Tag":"#FF6E6E","AttrName":"#FFD93D","AttrValue":"#A1FFCE"}},"Typography":{"Family":{"Sans":"'Courier New', monospace","Mono":"'Courier New', monospace"}}},"Aliases":{"--retold-bg-primary":"Color.Background.Primary","--retold-bg-secondary":"Color.Background.Secondary","--retold-bg-tertiary":"Color.Background.Tertiary","--retold-bg-panel":"Color.Background.Panel","--retold-bg-viewer":"Color.Background.Viewer","--retold-bg-hover":"Color.Background.Hover","--retold-bg-selected":"Color.Background.Selected","--retold-bg-thumb":"Color.Background.Thumb","--retold-text-primary":"Color.Text.Primary","--retold-text-secondary":"Color.Text.Secondary","--retold-text-muted":"Color.Text.Muted","--retold-text-dim":"Color.Text.Dim","--retold-text-placeholder":"Color.Text.Placeholder","--retold-accent":"Color.Brand.Accent","--retold-accent-hover":"Color.Brand.AccentHover","--retold-border":"Color.Border.Default","--retold-border-light":"Color.Border.Light","--retold-danger":"Color.Status.Danger","--retold-danger-muted":"Color.Status.DangerMuted","--retold-scrollbar":"Color.Scrollbar.Track","--retold-scrollbar-hover":"Color.Scrollbar.Hover","--retold-selection-bg":"Color.Selection.Background","--retold-focus-outline":"Color.Focus.Outline","--retold-font-family":"Typography.Family.Sans","--retold-font-mono":"Typography.Family.Mono"},"IconColors":{"Primary":"#D0C8E0","Accent":"#FF2D8A","Muted":"#6860A0","Light":"#121235","WarmBeige":"#141438","TealTint":"#100E30","Lavender":"#141232","AmberTint":"#1A1228","PdfFill":"#1A1028","PdfText":"#FF4466"},"CSS":[],"SVG":{},"Image":{},"CompiledAt":"2026-05-03T18:12:53.408Z","CompilerVersion":1};},{}],42:[function(require,module,exports){module.exports={"Hash":"night","Name":"Night","Category":"Grey","Version":"0.0.1","Description":"Near-black, minimal contrast Ported from RetoldRemote-ThemeDefinitions.js to the pict-provider-theme manifest format.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"dark"},"Tokens":{"Color":{"Background":{"Primary":"#0A0A0A","Secondary":"#060606","Tertiary":"#0E0E0E","Panel":"#0C0C0C","Viewer":"#040404","Hover":"#161616","Selected":"#252525","Thumb":"#060606"},"Text":{"Primary":"#888888","Secondary":"#707070","Muted":"#555555","Dim":"#444444","Placeholder":"#333333"},"Brand":{"Accent":"#666666","AccentHover":"#808080"},"Border":{"Default":"#1A1A1A","Light":"#222222"},"Status":{"Danger":"#AA4444","DangerMuted":"#663333"},"Scrollbar":{"Track":"#1A1A1A","Hover":"#2A2A2A"},"Selection":{"Background":"rgba(102, 102, 102, 0.2)"},"Focus":{"Outline":"#666666"},"Syntax":{"Keyword":"#C28FFF","String":"#B0E0B0","Number":"#FFA070","Comment":"#888888","Operator":"#80C8FF","Punctuation":"#BBBBBB","Function":"#FFD080","Variable":"#DDDDDD","Type":"#FFB870","Builtin":"#FFB870","Property":"#FF9090","Tag":"#FF9090","AttrName":"#FFB870","AttrValue":"#B0E0B0"}},"Typography":{"Family":{"Sans":"system-ui, -apple-system, sans-serif","Mono":"'SF Mono', 'Fira Code', 'Consolas', monospace"}}},"Aliases":{"--retold-bg-primary":"Color.Background.Primary","--retold-bg-secondary":"Color.Background.Secondary","--retold-bg-tertiary":"Color.Background.Tertiary","--retold-bg-panel":"Color.Background.Panel","--retold-bg-viewer":"Color.Background.Viewer","--retold-bg-hover":"Color.Background.Hover","--retold-bg-selected":"Color.Background.Selected","--retold-bg-thumb":"Color.Background.Thumb","--retold-text-primary":"Color.Text.Primary","--retold-text-secondary":"Color.Text.Secondary","--retold-text-muted":"Color.Text.Muted","--retold-text-dim":"Color.Text.Dim","--retold-text-placeholder":"Color.Text.Placeholder","--retold-accent":"Color.Brand.Accent","--retold-accent-hover":"Color.Brand.AccentHover","--retold-border":"Color.Border.Default","--retold-border-light":"Color.Border.Light","--retold-danger":"Color.Status.Danger","--retold-danger-muted":"Color.Status.DangerMuted","--retold-scrollbar":"Color.Scrollbar.Track","--retold-scrollbar-hover":"Color.Scrollbar.Hover","--retold-selection-bg":"Color.Selection.Background","--retold-focus-outline":"Color.Focus.Outline","--retold-font-family":"Typography.Family.Sans","--retold-font-mono":"Typography.Family.Mono"},"IconColors":{"Primary":"#707070","Accent":"#666666","Muted":"#444444","Light":"#0E0E0E","WarmBeige":"#121212","TealTint":"#0C0C0C","Lavender":"#101010","AmberTint":"#141210","PdfFill":"#141010","PdfText":"#AA4444"},"CSS":[],"SVG":{},"Image":{},"CompiledAt":"2026-05-03T18:12:53.408Z","CompilerVersion":1};},{}],43:[function(require,module,exports){module.exports={"Hash":"playground-corp","Name":"Playground Corp","Version":"0.0.1","Description":"A different paired starter — corporate teal palette, rounder corners.","Comprehensive":true,"Modes":{"Strategy":"system","Default":"light"},"Tokens":{"Color":{"Background":{"Primary":{"Light":"#fbfbfd","Dark":"#0e1416"},"Secondary":{"Light":"#eef3f6","Dark":"#152024"},"Tertiary":{"Light":"#dde7ec","Dark":"#1e2c30"},"Panel":{"Light":"#ffffff","Dark":"#162126"},"Hover":{"Light":"#e5edf1","Dark":"#1d292e"}},"Text":{"Primary":{"Light":"#0a1d22","Dark":"#e3edf0"},"Secondary":{"Light":"#3a5b65","Dark":"#a8c0c8"},"Muted":{"Light":"#647e87","Dark":"#7a929a"},"OnBrand":{"Light":"#ffffff","Dark":"#ffffff"}},"Brand":{"Primary":{"Light":"#117a8b","Dark":"#3ec0d4"},"PrimaryHover":{"Light":"#0e6271","Dark":"#5fd0e0"},"Accent":{"Light":"#d97706","Dark":"#fb923c"}},"Border":{"Default":{"Light":"#cfdce1","Dark":"#2c3a3f"},"Strong":{"Light":"#86a3ac","Dark":"#4d5e64"}},"Status":{"Success":{"Light":"#0f7a52","Dark":"#34d399"},"Warning":{"Light":"#b45309","Dark":"#fbbf24"},"Error":{"Light":"#9f1239","Dark":"#fb7185"},"Info":{"Light":"#1e6fbe","Dark":"#60a5fa"}},"Syntax":{"Keyword":{"Light":"#a626a4","Dark":"#c678dd"},"String":{"Light":"#50a14f","Dark":"#98c379"},"Number":{"Light":"#986801","Dark":"#d19a66"},"Comment":{"Light":"#a0a1a7","Dark":"#7f848e"},"Operator":{"Light":"#0184bc","Dark":"#56b6c2"},"Punctuation":{"Light":"#383a42","Dark":"#abb2bf"},"Function":{"Light":"#4078f2","Dark":"#61afef"},"Variable":{"Light":"#383a42","Dark":"#e06c75"},"Type":{"Light":"#c18401","Dark":"#e5c07b"},"Builtin":{"Light":"#986801","Dark":"#d19a66"},"Property":{"Light":"#e45649","Dark":"#e06c75"},"Tag":{"Light":"#e45649","Dark":"#e06c75"},"AttrName":{"Light":"#986801","Dark":"#d19a66"},"AttrValue":{"Light":"#50a14f","Dark":"#98c379"}}},"Typography":{"Family":{"Sans":"Inter, system-ui, sans-serif","Mono":"ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"},"Size":{"SM":"0.875rem","MD":"1rem","LG":"1.25rem"},"Weight":{"Regular":"400","Bold":"700"}},"Spacing":{"XS":"4px","SM":"8px","MD":"14px","LG":"20px","XL":"28px"},"Radius":{"SM":"4px","MD":"10px","LG":"16px"}},"Brand":{"Name":"Corp"},"Aliases":{"--pict-modal-overlay-bg":"Color.Background.Tertiary","--pict-modal-bg":"Color.Background.Panel","--pict-modal-fg":"Color.Text.Primary","--pict-modal-border":"Color.Border.Default","--pict-modal-shadow":"Color.Border.Strong","--pict-modal-header-bg":"Color.Background.Secondary","--pict-modal-header-fg":"Color.Text.Primary","--pict-modal-header-border":"Color.Border.Default","--pict-modal-btn-bg":"Color.Background.Secondary","--pict-modal-btn-fg":"Color.Text.Primary","--pict-modal-btn-hover-bg":"Color.Background.Hover","--pict-modal-btn-primary-bg":"Color.Brand.Primary","--pict-modal-btn-primary-fg":"Color.Text.OnBrand","--pict-modal-btn-primary-hover-bg":"Color.Brand.PrimaryHover","--pict-modal-btn-danger-bg":"Color.Status.Error","--pict-modal-btn-danger-fg":"Color.Text.OnBrand","--pict-modal-btn-danger-hover-bg":"Color.Status.Error","--pict-modal-toast-bg":"Color.Background.Panel","--pict-modal-toast-fg":"Color.Text.Primary","--pict-modal-toast-shadow":"Color.Border.Strong","--pict-modal-toast-success-bg":"Color.Status.Success","--pict-modal-toast-error-bg":"Color.Status.Error","--pict-modal-toast-warning-bg":"Color.Status.Warning","--pict-modal-toast-info-bg":"Color.Status.Info","--pict-modal-tooltip-bg":"Color.Background.Tertiary","--pict-modal-tooltip-fg":"Color.Text.Primary","--pict-modal-font-family":"Typography.Family.Sans","--pict-um-bg":"Color.Background.Panel","--pict-um-fg":"Color.Text.Primary","--pict-um-muted":"Color.Text.Muted","--pict-um-accent":"Color.Brand.Primary","--pict-um-border":"Color.Border.Default","--pict-um-border-soft":"Color.Border.Light","--pict-um-input-bg":"Color.Background.Primary","--pict-um-pill-bg":"Color.Background.Tertiary","--pict-um-font":"Typography.Family.Sans"}};},{}],44:[function(require,module,exports){module.exports={"Hash":"playground-starter","Name":"Playground Starter","Version":"0.0.1","Description":"A complete paired light/dark starter theme. Edit any token and watch the gallery reflow.","Comprehensive":true,"Modes":{"Strategy":"system","Default":"light"},"Tokens":{"Color":{"Background":{"Primary":{"Light":"#ffffff","Dark":"#1a1a1a"},"Secondary":{"Light":"#f5f5f5","Dark":"#242424"},"Tertiary":{"Light":"#ebebeb","Dark":"#2e2e2e"},"Panel":{"Light":"#ffffff","Dark":"#222222"},"Hover":{"Light":"#f0f0f0","Dark":"#2a2a2a"}},"Text":{"Primary":{"Light":"#1a1a1a","Dark":"#ededed"},"Secondary":{"Light":"#454545","Dark":"#bdbdbd"},"Muted":{"Light":"#6b6b6b","Dark":"#888888"},"OnBrand":{"Light":"#ffffff","Dark":"#ffffff"}},"Brand":{"Primary":{"Light":"#3357c7","Dark":"#6b8eff"},"PrimaryHover":{"Light":"#2848b3","Dark":"#88a4ff"},"Accent":{"Light":"#c75033","Dark":"#ff8a6b"}},"Border":{"Default":{"Light":"#d6d6d6","Dark":"#3a3a3a"},"Strong":{"Light":"#a0a0a0","Dark":"#5a5a5a"}},"Status":{"Success":{"Light":"#2e7a3a","Dark":"#5fc377"},"Warning":{"Light":"#a86b00","Dark":"#f0b84a"},"Error":{"Light":"#b62828","Dark":"#ff7373"},"Info":{"Light":"#1f6fb5","Dark":"#5fb4ff"}},"Syntax":{"Keyword":{"Light":"#a626a4","Dark":"#c678dd"},"String":{"Light":"#50a14f","Dark":"#98c379"},"Number":{"Light":"#986801","Dark":"#d19a66"},"Comment":{"Light":"#a0a1a7","Dark":"#7f848e"},"Operator":{"Light":"#0184bc","Dark":"#56b6c2"},"Punctuation":{"Light":"#383a42","Dark":"#abb2bf"},"Function":{"Light":"#4078f2","Dark":"#61afef"},"Variable":{"Light":"#383a42","Dark":"#e06c75"},"Type":{"Light":"#c18401","Dark":"#e5c07b"},"Builtin":{"Light":"#986801","Dark":"#d19a66"},"Property":{"Light":"#e45649","Dark":"#e06c75"},"Tag":{"Light":"#e45649","Dark":"#e06c75"},"AttrName":{"Light":"#986801","Dark":"#d19a66"},"AttrValue":{"Light":"#50a14f","Dark":"#98c379"}}},"Typography":{"Family":{"Sans":"system-ui, -apple-system, Segoe UI, Roboto, sans-serif","Mono":"ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"},"Size":{"SM":"0.875rem","MD":"1rem","LG":"1.25rem"},"Weight":{"Regular":"400","Bold":"700"}},"Spacing":{"XS":"4px","SM":"8px","MD":"12px","LG":"16px","XL":"24px"},"Radius":{"SM":"2px","MD":"6px","LG":"10px"}},"Brand":{"Name":"Playground"},"Aliases":{"--pict-modal-overlay-bg":"Color.Background.Tertiary","--pict-modal-bg":"Color.Background.Panel","--pict-modal-fg":"Color.Text.Primary","--pict-modal-border":"Color.Border.Default","--pict-modal-shadow":"Color.Border.Strong","--pict-modal-header-bg":"Color.Background.Secondary","--pict-modal-header-fg":"Color.Text.Primary","--pict-modal-header-border":"Color.Border.Default","--pict-modal-btn-bg":"Color.Background.Secondary","--pict-modal-btn-fg":"Color.Text.Primary","--pict-modal-btn-hover-bg":"Color.Background.Hover","--pict-modal-btn-primary-bg":"Color.Brand.Primary","--pict-modal-btn-primary-fg":"Color.Text.OnBrand","--pict-modal-btn-primary-hover-bg":"Color.Brand.PrimaryHover","--pict-modal-btn-danger-bg":"Color.Status.Error","--pict-modal-btn-danger-fg":"Color.Text.OnBrand","--pict-modal-btn-danger-hover-bg":"Color.Status.Error","--pict-modal-toast-bg":"Color.Background.Panel","--pict-modal-toast-fg":"Color.Text.Primary","--pict-modal-toast-shadow":"Color.Border.Strong","--pict-modal-toast-success-bg":"Color.Status.Success","--pict-modal-toast-error-bg":"Color.Status.Error","--pict-modal-toast-warning-bg":"Color.Status.Warning","--pict-modal-toast-info-bg":"Color.Status.Info","--pict-modal-tooltip-bg":"Color.Background.Tertiary","--pict-modal-tooltip-fg":"Color.Text.Primary","--pict-modal-font-family":"Typography.Family.Sans","--pict-um-bg":"Color.Background.Panel","--pict-um-fg":"Color.Text.Primary","--pict-um-muted":"Color.Text.Muted","--pict-um-accent":"Color.Brand.Primary","--pict-um-border":"Color.Border.Default","--pict-um-border-soft":"Color.Border.Light","--pict-um-input-bg":"Color.Background.Primary","--pict-um-pill-bg":"Color.Background.Tertiary","--pict-um-font":"Typography.Family.Sans"}};},{}],45:[function(require,module,exports){module.exports={"Hash":"retold-content-system","Name":"Retold Content System","Version":"0.0.1","Description":"Default palette for the Retold Content System editor — warm beige with teal accents. Light side preserves the original retold-content-system.css palette verbatim; dark side keeps the teal accent and warms the backgrounds into a deep walnut/charcoal range so dark mode reads as the same family of values rather than a generic dark theme.","Comprehensive":true,"Modes":{"Strategy":"system","Default":"system"},"Tokens":{"Color":{"Background":{"Primary":{"Light":"#F5F3EE","Dark":"#1F1B17"},"Secondary":{"Light":"#FAF8F4","Dark":"#2A251F"},"Tertiary":{"Light":"#F0EDE8","Dark":"#332D26"},"Panel":{"Light":"#FFFFFF","Dark":"#26221C"},"Hover":{"Light":"#EDE9E3","Dark":"#383028"},"Selected":{"Light":"#DCE9E7","Dark":"#1E3833"}},"Text":{"Primary":{"Light":"#3D3229","Dark":"#E8DCC8"},"Secondary":{"Light":"#5E5549","Dark":"#C0B5A4"},"Muted":{"Light":"#8A7F72","Dark":"#8E8478"},"Placeholder":{"Light":"#A89E91","Dark":"#6E6457"},"OnBrand":{"Light":"#FFFFFF","Dark":"#1F1B17"}},"Brand":{"Primary":{"Light":"#2E7D74","Dark":"#4FB3A6"},"PrimaryHover":{"Light":"#3A9E92","Dark":"#65CBBE"},"Accent":{"Light":"#2E7D74","Dark":"#4FB3A6"},"AccentHover":{"Light":"#3A9E92","Dark":"#65CBBE"}},"Border":{"Default":{"Light":"#DDD6CA","Dark":"#3F362C"},"Light":{"Light":"#E8E2D7","Dark":"#33291F"},"Strong":{"Light":"#C4BDB0","Dark":"#5A4F40"}},"Status":{"Success":{"Light":"#7BC47F","Dark":"#8FD493"},"Warning":{"Light":"#E8A94D","Dark":"#F0BE6E"},"Error":{"Light":"#D9534F","Dark":"#E87B78"},"Info":{"Light":"#5DA6C7","Dark":"#7FBDD8"}},"Scrollbar":{"Track":{"Light":"#F5F0E8","Dark":"#26221C"},"Thumb":{"Light":"#C4BDB0","Dark":"#4A4036"},"Hover":{"Light":"#8A7F72","Dark":"#6A5F50"}},"Selection":{"Background":{"Light":"#CDE3E0","Dark":"#2E5B55"},"Text":{"Light":"#3D3229","Dark":"#E8DCC8"}},"Focus":{"Outline":{"Light":"#2E7D74","Dark":"#4FB3A6"}},"Shadow":{"Color":{"Light":"rgba(61, 50, 41, 0.12)","Dark":"rgba(0, 0, 0, 0.55)"}},"Syntax":{"Keyword":{"Light":"#A0532E","Dark":"#E89A6E"},"String":{"Light":"#3F8A52","Dark":"#8FD493"},"Number":{"Light":"#A86B00","Dark":"#E8A94D"},"Comment":{"Light":"#8A7F72","Dark":"#8E8478"},"Operator":{"Light":"#2E7D74","Dark":"#4FB3A6"},"Punctuation":{"Light":"#5E5549","Dark":"#C0B5A4"},"Function":{"Light":"#2E5E96","Dark":"#7FBDD8"},"Variable":{"Light":"#3D3229","Dark":"#E8DCC8"},"Type":{"Light":"#A86B00","Dark":"#E8A94D"},"Builtin":{"Light":"#A86B00","Dark":"#E8A94D"},"Property":{"Light":"#A0532E","Dark":"#E89A6E"},"Tag":{"Light":"#A0532E","Dark":"#E89A6E"},"AttrName":{"Light":"#A86B00","Dark":"#E8A94D"},"AttrValue":{"Light":"#3F8A52","Dark":"#8FD493"}}},"Typography":{"Family":{"Sans":"-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif","Serif":"Georgia, Cambria, 'Times New Roman', Times, serif","Mono":"'SFMono-Regular', 'SF Mono', 'Menlo', 'Consolas', 'Liberation Mono', 'Courier New', monospace"},"Size":{"XS":"0.75rem","SM":"0.875rem","MD":"1rem","LG":"1.125rem","XL":"1.375rem","XXL":"1.75rem"},"Weight":{"Regular":"400","Medium":"500","Bold":"700"},"LineHeight":{"Tight":"1.2","Normal":"1.5","Loose":"1.7"}},"Spacing":{"XS":"4px","SM":"8px","MD":"12px","LG":"16px","XL":"24px","XXL":"32px"},"Radius":{"None":"0","SM":"2px","MD":"4px","LG":"8px","XL":"12px","Pill":"999px"},"Layout":{"SidebarWidth":"250px","TopbarHeight":"48px","StatusbarHeight":"28px"}},"Brand":{"Name":"Retold Content","Tagline":"Author content for the Retold ecosystem."}};},{}],46:[function(require,module,exports){module.exports={"Hash":"retold-default","Name":"Retold Default","Version":"0.0.1","Description":"The reference paired light/dark theme for the Retold ecosystem. Neutral palette suitable for any app; dark mode is mid-grey rather than pure black to reduce eye strain.","Comprehensive":true,"Modes":{"Strategy":"system","Default":"light"},"Tokens":{"Color":{"Background":{"Primary":{"Light":"#ffffff","Dark":"#1a1a1a"},"Secondary":{"Light":"#f5f5f5","Dark":"#242424"},"Tertiary":{"Light":"#ebebeb","Dark":"#2e2e2e"},"Panel":{"Light":"#ffffff","Dark":"#222222"},"Hover":{"Light":"#f0f0f0","Dark":"#2a2a2a"},"Selected":{"Light":"#e0eaff","Dark":"#2a3550"}},"Text":{"Primary":{"Light":"#1a1a1a","Dark":"#ededed"},"Secondary":{"Light":"#454545","Dark":"#bdbdbd"},"Muted":{"Light":"#6b6b6b","Dark":"#888888"},"Placeholder":{"Light":"#9a9a9a","Dark":"#6a6a6a"}},"Brand":{"Primary":{"Light":"#3357c7","Dark":"#6b8eff"},"PrimaryHover":{"Light":"#2848b3","Dark":"#88a4ff"},"Accent":{"Light":"#c75033","Dark":"#ff8a6b"}},"Border":{"Default":{"Light":"#d6d6d6","Dark":"#3a3a3a"},"Light":{"Light":"#e9e9e9","Dark":"#2c2c2c"},"Strong":{"Light":"#a0a0a0","Dark":"#5a5a5a"}},"Status":{"Success":{"Light":"#2e7a3a","Dark":"#5fc377"},"Warning":{"Light":"#a86b00","Dark":"#f0b84a"},"Error":{"Light":"#b62828","Dark":"#ff7373"},"Info":{"Light":"#1f6fb5","Dark":"#5fb4ff"}},"Scrollbar":{"Track":{"Light":"#ebebeb","Dark":"#1f1f1f"},"Thumb":{"Light":"#c2c2c2","Dark":"#3f3f3f"},"Hover":{"Light":"#a0a0a0","Dark":"#5a5a5a"}},"Selection":{"Background":{"Light":"#bcd2ff","Dark":"#3a4f7a"},"Text":{"Light":"#1a1a1a","Dark":"#ededed"}},"Focus":{"Outline":{"Light":"#3357c7","Dark":"#6b8eff"}},"Shadow":{"Color":{"Light":"rgba(0, 0, 0, 0.12)","Dark":"rgba(0, 0, 0, 0.55)"}},"Syntax":{"Keyword":{"Light":"#a626a4","Dark":"#c678dd"},"String":{"Light":"#50a14f","Dark":"#98c379"},"Number":{"Light":"#986801","Dark":"#d19a66"},"Comment":{"Light":"#a0a1a7","Dark":"#7f848e"},"Operator":{"Light":"#0184bc","Dark":"#56b6c2"},"Punctuation":{"Light":"#383a42","Dark":"#abb2bf"},"Function":{"Light":"#4078f2","Dark":"#61afef"},"Variable":{"Light":"#383a42","Dark":"#e06c75"},"Type":{"Light":"#c18401","Dark":"#e5c07b"},"Builtin":{"Light":"#986801","Dark":"#d19a66"},"Property":{"Light":"#e45649","Dark":"#e06c75"},"Tag":{"Light":"#e45649","Dark":"#e06c75"},"AttrName":{"Light":"#986801","Dark":"#d19a66"},"AttrValue":{"Light":"#50a14f","Dark":"#98c379"}},"Editor":{"LineNumberBackground":{"Light":"#f5f5f5","Dark":"#1f1f1f"},"LineNumberText":{"Light":"#9a9a9a","Dark":"#6a6a6a"},"CurrentLineHighlight":{"Light":"#f0f0f0","Dark":"#2a2a2a"},"SelectionBackground":{"Light":"#bcd2ff","Dark":"#3a4f7a"},"GutterBorder":{"Light":"#e9e9e9","Dark":"#2c2c2c"}}},"Typography":{"Family":{"Sans":"system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif","Serif":"Georgia, Cambria, Times New Roman, Times, serif","Mono":"ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"},"Size":{"XS":"0.75rem","SM":"0.875rem","MD":"1rem","LG":"1.125rem","XL":"1.375rem","XXL":"1.75rem"},"Weight":{"Regular":"400","Medium":"500","Bold":"700"},"LineHeight":{"Tight":"1.2","Normal":"1.45","Loose":"1.7"}},"Spacing":{"XS":"4px","SM":"8px","MD":"12px","LG":"16px","XL":"24px","XXL":"32px"},"Radius":{"None":"0","SM":"2px","MD":"4px","LG":"8px","XL":"12px","Pill":"999px"},"Shadow":{"SM":"0 1px 2px var(--theme-color-shadow-color)","MD":"0 2px 6px var(--theme-color-shadow-color)","LG":"0 6px 18px var(--theme-color-shadow-color)"},"ZIndex":{"Base":"0","Dropdown":"100","Sticky":"200","Overlay":"900","Modal":"1000","Toast":"2000","Tooltip":"3000"},"Duration":{"Fast":"100ms","Normal":"200ms","Slow":"400ms"}},"Brand":{"Name":"Retold","Tagline":"A suite of JavaScript modules for building web applications and APIs."},"CSS":[{"Hash":"retold-default-brand-accents","Priority":600,"Content":"/* retold-default — subtle brand-aware accents.\n   Falls back gracefully to theme-color tokens when no brand is registered,\n   so non-branded apps still look right. */\na { text-decoration-color: var(--brand-color-primary-mode, var(--theme-color-brand-primary, currentColor)); text-decoration-thickness: 2px; text-underline-offset: 3px; }\nh1 { border-bottom: 2px solid var(--brand-color-primary-mode, var(--theme-color-border-default, transparent)); padding-bottom: 6px; }\nh2 { border-bottom: 1px solid var(--brand-color-secondary-mode, var(--theme-color-border-light, transparent)); padding-bottom: 4px; }"}]};},{}],47:[function(require,module,exports){module.exports={"Hash":"retold-manager","Name":"Retold Manager","Description":"Default palette for the Retold Manager application — GitHub-style dark on slate with a parallel light variant. Dark side mirrors retold-manager.css's original colors verbatim; light side is a sympathetic translation tuned for daytime use. The retold-manager.css :root block proxies its --color-* names through these --theme-color-* tokens (with the original hexes as fallbacks), so this theme drives the whole app cleanly and other catalog themes still skin most of it.","Comprehensive":true,"Modes":{"Strategy":"system","Default":"system"},"Tokens":{"Color":{"Background":{"Primary":{"Light":"#f6f8fa","Dark":"#0e1116"},"Secondary":{"Light":"#eef1f4","Dark":"#161b22"},"Tertiary":{"Light":"#e4e8ec","Dark":"#1c2128"},"Panel":{"Light":"#ffffff","Dark":"#161b22"},"PanelAlt":{"Light":"#f0f3f6","Dark":"#1c2128"},"Hover":{"Light":"#eaeef2","Dark":"#1c2128"},"Selected":{"Light":"#dbe7ff","Dark":"#243454"}},"Border":{"Default":{"Light":"#d0d7de","Dark":"#30363d"},"Light":{"Light":"#e1e4e8","Dark":"#21262d"},"Strong":{"Light":"#a8b1bb","Dark":"#484f58"}},"Brand":{"Primary":{"Light":"#0969da","Dark":"#2f81f7"},"PrimaryHover":{"Light":"#0550ae","Dark":"#1f6feb"},"Accent":{"Light":"#0969da","Dark":"#2f81f7"},"AccentHover":{"Light":"#0550ae","Dark":"#1f6feb"}},"Text":{"Primary":{"Light":"#1f2328","Dark":"#e6edf3"},"Secondary":{"Light":"#3b424a","Dark":"#c9d1d9"},"Muted":{"Light":"#656d76","Dark":"#8b949e"},"Placeholder":{"Light":"#8c959f","Dark":"#6e7681"},"OnBrand":{"Light":"#ffffff","Dark":"#ffffff"}},"Status":{"Success":{"Light":"#1a7f37","Dark":"#3fb950"},"Danger":{"Light":"#cf222e","Dark":"#f85149"},"Warning":{"Light":"#9a6700","Dark":"#d29922"},"Error":{"Light":"#cf222e","Dark":"#f85149"},"Info":{"Light":"#0969da","Dark":"#2f81f7"}},"Scrollbar":{"Track":{"Light":"#eef1f4","Dark":"#161b22"},"Thumb":{"Light":"#c1c8cf","Dark":"#30363d"},"Hover":{"Light":"#a8b1bb","Dark":"#484f58"}},"Selection":{"Background":{"Light":"#cfe6ff","Dark":"#243454"},"Text":{"Light":"#1f2328","Dark":"#e6edf3"}},"Focus":{"Outline":{"Light":"#0969da","Dark":"#2f81f7"}},"Syntax":{"Keyword":{"Light":"#cf222e","Dark":"#ff7b72"},"String":{"Light":"#0a3069","Dark":"#a5d6ff"},"Number":{"Light":"#0550ae","Dark":"#79c0ff"},"Comment":{"Light":"#6e7781","Dark":"#8b949e"},"Operator":{"Light":"#cf222e","Dark":"#ff7b72"},"Punctuation":{"Light":"#24292f","Dark":"#c9d1d9"},"Function":{"Light":"#8250df","Dark":"#d2a8ff"},"Variable":{"Light":"#24292f","Dark":"#c9d1d9"},"Type":{"Light":"#953800","Dark":"#ffa657"},"Builtin":{"Light":"#0550ae","Dark":"#79c0ff"},"Property":{"Light":"#0550ae","Dark":"#79c0ff"},"Tag":{"Light":"#116329","Dark":"#7ee787"},"AttrName":{"Light":"#8250df","Dark":"#d2a8ff"},"AttrValue":{"Light":"#0a3069","Dark":"#a5d6ff"}}},"Typography":{"Family":{"Sans":"-apple-system, BlinkMacSystemFont, \"SF Pro\", \"Segoe UI\", sans-serif","Mono":"ui-monospace, \"SF Mono\", Menlo, Monaco, \"Courier New\", monospace"}},"Layout":{"SidebarWidth":"280px","TopbarHeight":"44px","StatusbarHeight":"28px"}}};},{}],48:[function(require,module,exports){module.exports={"Hash":"retold-mono","Name":"Retold Mono","Version":"0.0.2","Description":"High-contrast monochrome theme — black on white in light mode, white on black in dark mode. Useful for print, simple admin tooling, and as a paired-mode reference theme that proves the toggle works on something visually unmistakable.","Comprehensive":true,"Modes":{"Strategy":"system","Default":"system"},"Tokens":{"Color":{"Background":{"Primary":{"Light":"#ffffff","Dark":"#000000"},"Secondary":{"Light":"#f0f0f0","Dark":"#101010"},"Tertiary":{"Light":"#e2e2e2","Dark":"#1c1c1c"},"Panel":{"Light":"#ffffff","Dark":"#000000"},"Hover":{"Light":"#ebebeb","Dark":"#1a1a1a"},"Selected":{"Light":"#d6d6d6","Dark":"#2a2a2a"}},"Text":{"Primary":{"Light":"#000000","Dark":"#ffffff"},"Secondary":{"Light":"#222222","Dark":"#dddddd"},"Muted":{"Light":"#555555","Dark":"#aaaaaa"},"Placeholder":{"Light":"#888888","Dark":"#777777"}},"Brand":{"Primary":{"Light":"#000000","Dark":"#ffffff"},"PrimaryHover":{"Light":"#222222","Dark":"#dddddd"},"Accent":{"Light":"#444444","Dark":"#bbbbbb"}},"Border":{"Default":{"Light":"#888888","Dark":"#666666"},"Light":{"Light":"#cccccc","Dark":"#333333"},"Strong":{"Light":"#000000","Dark":"#ffffff"}},"Status":{"Success":{"Light":"#000000","Dark":"#ffffff"},"Warning":{"Light":"#000000","Dark":"#ffffff"},"Error":{"Light":"#000000","Dark":"#ffffff"},"Info":{"Light":"#000000","Dark":"#ffffff"}},"Scrollbar":{"Track":{"Light":"#e0e0e0","Dark":"#101010"},"Thumb":{"Light":"#888888","Dark":"#666666"},"Hover":{"Light":"#444444","Dark":"#bbbbbb"}},"Selection":{"Background":{"Light":"#000000","Dark":"#ffffff"},"Text":{"Light":"#ffffff","Dark":"#000000"}},"Focus":{"Outline":{"Light":"#000000","Dark":"#ffffff"}},"Shadow":{"Color":{"Light":"rgba(0, 0, 0, 0.18)","Dark":"rgba(255, 255, 255, 0.18)"}},"Syntax":{"Keyword":{"Light":"#000000","Dark":"#ffffff"},"String":{"Light":"#555555","Dark":"#cccccc"},"Number":{"Light":"#000000","Dark":"#ffffff"},"Comment":{"Light":"#888888","Dark":"#888888"},"Operator":{"Light":"#000000","Dark":"#ffffff"},"Punctuation":{"Light":"#444444","Dark":"#bbbbbb"},"Function":{"Light":"#000000","Dark":"#ffffff"},"Variable":{"Light":"#000000","Dark":"#ffffff"},"Type":{"Light":"#222222","Dark":"#dddddd"},"Builtin":{"Light":"#222222","Dark":"#dddddd"},"Property":{"Light":"#444444","Dark":"#bbbbbb"},"Tag":{"Light":"#000000","Dark":"#ffffff"},"AttrName":{"Light":"#444444","Dark":"#bbbbbb"},"AttrValue":{"Light":"#555555","Dark":"#cccccc"}}},"Typography":{"Family":{"Sans":"Helvetica, Arial, sans-serif","Serif":"Georgia, Times New Roman, serif","Mono":"ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"},"Size":{"XS":"0.75rem","SM":"0.875rem","MD":"1rem","LG":"1.125rem","XL":"1.375rem","XXL":"1.75rem"},"Weight":{"Regular":"400","Medium":"600","Bold":"700"},"LineHeight":{"Tight":"1.15","Normal":"1.4","Loose":"1.65"}},"Spacing":{"XS":"4px","SM":"8px","MD":"12px","LG":"16px","XL":"24px","XXL":"32px"},"Radius":{"None":"0","SM":"0","MD":"0","LG":"0","XL":"0","Pill":"999px"},"Shadow":{"SM":"0 1px 0 var(--theme-color-shadow-color)","MD":"0 2px 0 var(--theme-color-shadow-color)","LG":"0 4px 0 var(--theme-color-shadow-color)"},"ZIndex":{"Base":"0","Dropdown":"100","Sticky":"200","Overlay":"900","Modal":"1000","Toast":"2000","Tooltip":"3000"},"Duration":{"Fast":"0ms","Normal":"0ms","Slow":"0ms"}},"Brand":{"Name":"Retold Mono","Tagline":"Black on white. White on black. Nothing else."},"CSS":[{"Hash":"retold-mono-brand-accents","Priority":600,"Content":"/* retold-mono — keeps the all-monochrome aesthetic but lets brand colors\n   in for narrow accent moments. The thick rule under H1 is brand primary;\n   the hair rule under H2 is brand secondary. Without a brand registered\n   they fall back to mono black/grey. */\na { text-decoration-color: var(--brand-color-primary-mode, currentColor); text-decoration-thickness: 2px; text-underline-offset: 3px; }\nh1 { border-bottom: 3px solid var(--brand-color-primary-mode, var(--theme-color-text-primary, #000)); padding-bottom: 6px; }\nh2 { border-bottom: 1px solid var(--brand-color-secondary-mode, var(--theme-color-border-default, #888)); padding-bottom: 4px; }"}]};},{}],49:[function(require,module,exports){module.exports={"Hash":"solarized-dark","Name":"Solarized Dark","Category":"Fun","Version":"0.0.1","Description":"Schoonover's classic palette Ported from RetoldRemote-ThemeDefinitions.js to the pict-provider-theme manifest format.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"dark"},"Tokens":{"Color":{"Background":{"Primary":"#002B36","Secondary":"#073642","Tertiary":"#003B4A","Panel":"#00303C","Viewer":"#001E28","Hover":"#0A4858","Selected":"#155868","Thumb":"#073642"},"Text":{"Primary":"#FDF6E3","Secondary":"#EEE8D5","Muted":"#93A1A1","Dim":"#839496","Placeholder":"#657B83"},"Brand":{"Accent":"#268BD2","AccentHover":"#45A0E0"},"Border":{"Default":"#0A4050","Light":"#125868"},"Status":{"Danger":"#DC322F","DangerMuted":"#AA2A28"},"Scrollbar":{"Track":"#0A4050","Hover":"#125868"},"Selection":{"Background":"rgba(38, 139, 210, 0.25)"},"Focus":{"Outline":"#268BD2"},"Syntax":{"Keyword":"#859900","String":"#2AA198","Number":"#D33682","Comment":"#586E75","Operator":"#268BD2","Punctuation":"#93A1A1","Function":"#B58900","Variable":"#FDF6E3","Type":"#B58900","Builtin":"#CB4B16","Property":"#268BD2","Tag":"#268BD2","AttrName":"#B58900","AttrValue":"#2AA198"}},"Typography":{"Family":{"Sans":"'Source Code Pro', 'Fira Code', monospace","Mono":"'Source Code Pro', 'Fira Code', monospace"}}},"Aliases":{"--retold-bg-primary":"Color.Background.Primary","--retold-bg-secondary":"Color.Background.Secondary","--retold-bg-tertiary":"Color.Background.Tertiary","--retold-bg-panel":"Color.Background.Panel","--retold-bg-viewer":"Color.Background.Viewer","--retold-bg-hover":"Color.Background.Hover","--retold-bg-selected":"Color.Background.Selected","--retold-bg-thumb":"Color.Background.Thumb","--retold-text-primary":"Color.Text.Primary","--retold-text-secondary":"Color.Text.Secondary","--retold-text-muted":"Color.Text.Muted","--retold-text-dim":"Color.Text.Dim","--retold-text-placeholder":"Color.Text.Placeholder","--retold-accent":"Color.Brand.Accent","--retold-accent-hover":"Color.Brand.AccentHover","--retold-border":"Color.Border.Default","--retold-border-light":"Color.Border.Light","--retold-danger":"Color.Status.Danger","--retold-danger-muted":"Color.Status.DangerMuted","--retold-scrollbar":"Color.Scrollbar.Track","--retold-scrollbar-hover":"Color.Scrollbar.Hover","--retold-selection-bg":"Color.Selection.Background","--retold-focus-outline":"Color.Focus.Outline","--retold-font-family":"Typography.Family.Sans","--retold-font-mono":"Typography.Family.Mono"},"IconColors":{"Primary":"#EEE8D5","Accent":"#268BD2","Muted":"#839496","Light":"#003B4A","WarmBeige":"#073642","TealTint":"#004050","Lavender":"#003848","AmberTint":"#0A3A30","PdfFill":"#0A3028","PdfText":"#DC322F"},"CSS":[],"SVG":{},"Image":{},"CompiledAt":"2026-05-03T18:12:53.408Z","CompilerVersion":1};},{}],50:[function(require,module,exports){module.exports={"Hash":"synthwave","Name":"Synthwave","Category":"Fun","Version":"0.0.1","Description":"Purple and pink neon Ported from RetoldRemote-ThemeDefinitions.js to the pict-provider-theme manifest format.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"dark"},"Tokens":{"Color":{"Background":{"Primary":"#1A0A2E","Secondary":"#140824","Tertiary":"#200E38","Panel":"#1C0C32","Viewer":"#100620","Hover":"#2A1848","Selected":"#3A2060","Thumb":"#140824"},"Text":{"Primary":"#E8C0F8","Secondary":"#D0A8E8","Muted":"#9878B8","Dim":"#7858A8","Placeholder":"#584088"},"Brand":{"Accent":"#FF71CE","AccentHover":"#FF99DD"},"Border":{"Default":"#302050","Light":"#402868"},"Status":{"Danger":"#FF4488","DangerMuted":"#AA3366"},"Scrollbar":{"Track":"#302050","Hover":"#402868"},"Selection":{"Background":"rgba(255, 113, 206, 0.25)"},"Focus":{"Outline":"#FF71CE"},"Syntax":{"Keyword":"#FF6AD5","String":"#FFE066","Number":"#FF6AD5","Comment":"#9C8AC1","Operator":"#26F0F1","Punctuation":"#C8B6E2","Function":"#26F0F1","Variable":"#FFE0FF","Type":"#FFD93D","Builtin":"#FFD93D","Property":"#FF477E","Tag":"#FF477E","AttrName":"#FFD93D","AttrValue":"#FFE066"}},"Typography":{"Family":{"Sans":"'Trebuchet MS', sans-serif","Mono":"'Courier New', monospace"}}},"Aliases":{"--retold-bg-primary":"Color.Background.Primary","--retold-bg-secondary":"Color.Background.Secondary","--retold-bg-tertiary":"Color.Background.Tertiary","--retold-bg-panel":"Color.Background.Panel","--retold-bg-viewer":"Color.Background.Viewer","--retold-bg-hover":"Color.Background.Hover","--retold-bg-selected":"Color.Background.Selected","--retold-bg-thumb":"Color.Background.Thumb","--retold-text-primary":"Color.Text.Primary","--retold-text-secondary":"Color.Text.Secondary","--retold-text-muted":"Color.Text.Muted","--retold-text-dim":"Color.Text.Dim","--retold-text-placeholder":"Color.Text.Placeholder","--retold-accent":"Color.Brand.Accent","--retold-accent-hover":"Color.Brand.AccentHover","--retold-border":"Color.Border.Default","--retold-border-light":"Color.Border.Light","--retold-danger":"Color.Status.Danger","--retold-danger-muted":"Color.Status.DangerMuted","--retold-scrollbar":"Color.Scrollbar.Track","--retold-scrollbar-hover":"Color.Scrollbar.Hover","--retold-selection-bg":"Color.Selection.Background","--retold-focus-outline":"Color.Focus.Outline","--retold-font-family":"Typography.Family.Sans","--retold-font-mono":"Typography.Family.Mono"},"IconColors":{"Primary":"#D0A8E8","Accent":"#FF71CE","Muted":"#7858A8","Light":"#200E38","WarmBeige":"#221040","TealTint":"#1A0C30","Lavender":"#1E0E36","AmberTint":"#241028","PdfFill":"#241020","PdfText":"#FF4488"},"CSS":[],"SVG":{},"Image":{},"CompiledAt":"2026-05-03T18:12:53.408Z","CompilerVersion":1};},{}],51:[function(require,module,exports){module.exports={"Hash":"twilight","Name":"Twilight","Category":"Grey","Version":"0.0.1","Description":"Dark grey, low light. Ported from RetoldRemote-ThemeDefinitions.js to the pict-provider-theme manifest format. Single-mode (no light/dark bifurcation). Aliases preserve the legacy `--retold-*` variable names so existing CSS keeps working through the migration.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"dark"},"Tokens":{"Color":{"Background":{"Primary":"#1E1E1E","Secondary":"#181818","Tertiary":"#252525","Panel":"#202020","Viewer":"#141414","Hover":"#2E2E2E","Selected":"#404040","Thumb":"#181818"},"Text":{"Primary":"#E0E0E0","Secondary":"#C8C8C8","Muted":"#909090","Dim":"#707070","Placeholder":"#585858"},"Brand":{"Accent":"#A0A0A0","AccentHover":"#C0C0C0"},"Border":{"Default":"#333333","Light":"#404040"},"Status":{"Danger":"#FF6666","DangerMuted":"#AA6666"},"Scrollbar":{"Track":"#404040","Hover":"#505050"},"Selection":{"Background":"rgba(160, 160, 160, 0.25)"},"Focus":{"Outline":"#A0A0A0"},"Syntax":{"Keyword":"#B58FFF","String":"#9CDFB0","Number":"#FFB870","Comment":"#6E6E6E","Operator":"#7CC5FF","Punctuation":"#C0C0C0","Function":"#FFD080","Variable":"#E0E0E0","Type":"#FFB870","Builtin":"#FFB870","Property":"#FF8B8B","Tag":"#FF8B8B","AttrName":"#FFB870","AttrValue":"#9CDFB0"}},"Typography":{"Family":{"Sans":"system-ui, -apple-system, sans-serif","Mono":"'SF Mono', 'Fira Code', 'Consolas', monospace"}}},"Aliases":{"--retold-bg-primary":"Color.Background.Primary","--retold-bg-secondary":"Color.Background.Secondary","--retold-bg-tertiary":"Color.Background.Tertiary","--retold-bg-panel":"Color.Background.Panel","--retold-bg-viewer":"Color.Background.Viewer","--retold-bg-hover":"Color.Background.Hover","--retold-bg-selected":"Color.Background.Selected","--retold-bg-thumb":"Color.Background.Thumb","--retold-text-primary":"Color.Text.Primary","--retold-text-secondary":"Color.Text.Secondary","--retold-text-muted":"Color.Text.Muted","--retold-text-dim":"Color.Text.Dim","--retold-text-placeholder":"Color.Text.Placeholder","--retold-accent":"Color.Brand.Accent","--retold-accent-hover":"Color.Brand.AccentHover","--retold-border":"Color.Border.Default","--retold-border-light":"Color.Border.Light","--retold-danger":"Color.Status.Danger","--retold-danger-muted":"Color.Status.DangerMuted","--retold-scrollbar":"Color.Scrollbar.Track","--retold-scrollbar-hover":"Color.Scrollbar.Hover","--retold-selection-bg":"Color.Selection.Background","--retold-focus-outline":"Color.Focus.Outline","--retold-font-family":"Typography.Family.Sans","--retold-font-mono":"Typography.Family.Mono"},"IconColors":{"Primary":"#C8C8C8","Accent":"#A0A0A0","Muted":"#707070","Light":"#252525","WarmBeige":"#2A2A2A","TealTint":"#222222","Lavender":"#282828","AmberTint":"#2E2A24","PdfFill":"#2E2224","PdfText":"#E06060"},"CSS":[],"SVG":{},"Image":{},"CompiledAt":"2026-05-03T18:12:53.408Z","CompilerVersion":1};},{}],52:[function(require,module,exports){module.exports={"Hash":"ultravisor-desert-canyon","Name":"Ultravisor — Desert Canyon","Version":"0.0.1","Description":"Vibrant desert palette — orange brand and teal accents on deep canyon-brown backgrounds. Single-mode dark.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"dark"},"Tokens":{"Color":{"Background":{"Primary":"#18120e","Secondary":"#221a14","Tertiary":"#2e2018","Panel":"#221a14","Hover":"#3a2a1e","Selected":"#3a2a1e"},"Text":{"Primary":"#d8c8b0","Secondary":"#e8d8c0","Muted":"#a09080","Placeholder":"#685040","OnBrand":"#18120e"},"Brand":{"Primary":"#e8943a","PrimaryHover":"#f0a44a","Accent":"#18a0a0","AccentHover":"#30b0b0"},"Border":{"Default":"#3a2a1e","Light":"#2e2018","Strong":"#4a3a2e"},"Status":{"Success":"#18a0a0","Warning":"#e0c870","Error":"#e05830","Info":"#18a0a0"},"Scrollbar":{"Track":"#221a14","Thumb":"#3a2a1e","Hover":"#4a3a2e"},"Selection":{"Background":"#3a2a1e","Text":"#e8d8c0"},"Focus":{"Outline":"#e8943a"},"Shadow":{"Color":"rgba(0, 0, 0, 0.30)"},"Syntax":{"Keyword":"#E89A6E","String":"#8FD493","Number":"#E8A94D","Comment":"#8E8478","Operator":"#4FB3A6","Punctuation":"#C0B5A4","Function":"#7FBDD8","Variable":"#E8DCC8","Type":"#E8A94D","Builtin":"#E8A94D","Property":"#E89A6E","Tag":"#E89A6E","AttrName":"#E8A94D","AttrValue":"#8FD493"},"Editor":{"LineNumberBackground":"#221a14","LineNumberText":"#685040","CurrentLineHighlight":"#2e2018","SelectionBackground":"#3a2a1e","GutterBorder":"#2e2018"}},"Typography":{"Family":{"Sans":"-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif","Serif":"Georgia, Cambria, 'Times New Roman', Times, serif","Mono":"'SFMono-Regular', 'SF Mono', 'Menlo', 'Consolas', 'Liberation Mono', 'Courier New', monospace"}},"Layout":{"SidebarWidth":"260px","TopbarHeight":"56px","StatusbarHeight":"28px"}},"Brand":{"Name":"Ultravisor","Tagline":"Process supervision and workflow automation"}};},{}],53:[function(require,module,exports){module.exports={"Hash":"ultravisor-desert-day","Name":"Ultravisor — Desert Day","Version":"0.0.1","Description":"Ultravisor's warm light palette — cream backgrounds, deep walnut text, teal accents. Single-mode light.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"light"},"Tokens":{"Color":{"Background":{"Primary":"#faf6f0","Secondary":"#f0e6d6","Tertiary":"#e8ddd0","Panel":"#ffffff","Hover":"#f0e6d6","Selected":"#e8ddd0"},"Text":{"Primary":"#3d2b1f","Secondary":"#2e1e14","Muted":"#8a7560","Placeholder":"#a09080","OnBrand":"#ffffff"},"Brand":{"Primary":"#5c3d2e","PrimaryHover":"#7a5040","Accent":"#3a8a8c","AccentHover":"#2a7070"},"Border":{"Default":"#e0d0b8","Light":"#e8ddd0","Strong":"#c8b8a0"},"Status":{"Success":"#5a7a30","Warning":"#b08020","Error":"#a03040","Info":"#3a8a8c"},"Scrollbar":{"Track":"#f0e6d6","Thumb":"#d0c0a8","Hover":"#c0b098"},"Selection":{"Background":"#e8ddd0","Text":"#2e1e14"},"Focus":{"Outline":"#c2703e"},"Shadow":{"Color":"rgba(92, 61, 46, 0.10)"},"Syntax":{"Keyword":"#A0532E","String":"#3F8A52","Number":"#A86B00","Comment":"#8A7F72","Operator":"#2E7D74","Punctuation":"#5E5549","Function":"#2E5E96","Variable":"#3D3229","Type":"#A86B00","Builtin":"#A86B00","Property":"#A0532E","Tag":"#A0532E","AttrName":"#A86B00","AttrValue":"#3F8A52"},"Editor":{"LineNumberBackground":"#f0e6d6","LineNumberText":"#a09080","CurrentLineHighlight":"#f5ede0","SelectionBackground":"#e8ddd0","GutterBorder":"#e0d0b8"}},"Typography":{"Family":{"Sans":"-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif","Serif":"Georgia, Cambria, 'Times New Roman', Times, serif","Mono":"'SFMono-Regular', 'SF Mono', 'Menlo', 'Consolas', 'Liberation Mono', 'Courier New', monospace"}},"Layout":{"SidebarWidth":"260px","TopbarHeight":"56px","StatusbarHeight":"28px"}},"Brand":{"Name":"Ultravisor","Tagline":"Process supervision and workflow automation"}};},{}],54:[function(require,module,exports){module.exports={"Hash":"ultravisor-desert-dusk","Name":"Ultravisor — Desert Dusk","Version":"0.0.1","Description":"Ultravisor's original default — warm tan brand on muted dark desert backgrounds. Single-mode dark.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"dark"},"Tokens":{"Color":{"Background":{"Primary":"#1a1714","Secondary":"#252018","Tertiary":"#302818","Panel":"#252018","Hover":"#3a3028","Selected":"#3a3028"},"Text":{"Primary":"#c8b8a0","Secondary":"#d8c8a8","Muted":"#907860","Placeholder":"#706050","OnBrand":"#FFFFFF"},"Brand":{"Primary":"#c4956a","PrimaryHover":"#d4a57a","Accent":"#4a9090","AccentHover":"#5aacac"},"Border":{"Default":"#3a3028","Light":"#302818","Strong":"#4a4038"},"Status":{"Success":"#8a9a5a","Warning":"#c0a050","Error":"#b04050","Info":"#4a9090"},"Scrollbar":{"Track":"#252018","Thumb":"#3a3028","Hover":"#4a4038"},"Selection":{"Background":"#3a3028","Text":"#d8c8a8"},"Focus":{"Outline":"#c4956a"},"Shadow":{"Color":"rgba(0, 0, 0, 0.30)"},"Syntax":{"Keyword":"#E89A6E","String":"#8FD493","Number":"#E8A94D","Comment":"#8E8478","Operator":"#4FB3A6","Punctuation":"#C0B5A4","Function":"#7FBDD8","Variable":"#E8DCC8","Type":"#E8A94D","Builtin":"#E8A94D","Property":"#E89A6E","Tag":"#E89A6E","AttrName":"#E8A94D","AttrValue":"#8FD493"},"Editor":{"LineNumberBackground":"#252018","LineNumberText":"#706050","CurrentLineHighlight":"#302818","SelectionBackground":"#3a3028","GutterBorder":"#302818"}},"Typography":{"Family":{"Sans":"-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif","Serif":"Georgia, Cambria, 'Times New Roman', Times, serif","Mono":"'SFMono-Regular', 'SF Mono', 'Menlo', 'Consolas', 'Liberation Mono', 'Courier New', monospace"}},"Layout":{"SidebarWidth":"260px","TopbarHeight":"56px","StatusbarHeight":"28px"}},"Brand":{"Name":"Ultravisor","Tagline":"Process supervision and workflow automation"}};},{}],55:[function(require,module,exports){module.exports={"Hash":"ultravisor-desert-sunset","Name":"Ultravisor — Desert Sunset","Version":"0.0.1","Description":"Ultravisor's golden-hour palette — orange brand on rust-warmed dark backgrounds. Single-mode dark.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"dark"},"Tokens":{"Color":{"Background":{"Primary":"#1e1610","Secondary":"#2a2018","Tertiary":"#342818","Panel":"#2a2018","Hover":"#3a2e22","Selected":"#3a2e22"},"Text":{"Primary":"#d4c4aa","Secondary":"#e0d0b8","Muted":"#8a7560","Placeholder":"#6a5840","OnBrand":"#1e1610"},"Brand":{"Primary":"#e8943a","PrimaryHover":"#f0a44a","Accent":"#2a8a8a","AccentHover":"#3a9a9a"},"Border":{"Default":"#3a2e22","Light":"#342818","Strong":"#4a3e32"},"Status":{"Success":"#6a9a3a","Warning":"#d4a46a","Error":"#c44e2a","Info":"#2a8a8a"},"Scrollbar":{"Track":"#2a2018","Thumb":"#3a2e22","Hover":"#4a3e32"},"Selection":{"Background":"#3a2e22","Text":"#e0d0b8"},"Focus":{"Outline":"#e8943a"},"Shadow":{"Color":"rgba(0, 0, 0, 0.30)"},"Syntax":{"Keyword":"#E89A6E","String":"#8FD493","Number":"#E8A94D","Comment":"#8E8478","Operator":"#4FB3A6","Punctuation":"#C0B5A4","Function":"#7FBDD8","Variable":"#E8DCC8","Type":"#E8A94D","Builtin":"#E8A94D","Property":"#E89A6E","Tag":"#E89A6E","AttrName":"#E8A94D","AttrValue":"#8FD493"},"Editor":{"LineNumberBackground":"#2a2018","LineNumberText":"#6a5840","CurrentLineHighlight":"#342818","SelectionBackground":"#3a2e22","GutterBorder":"#342818"}},"Typography":{"Family":{"Sans":"-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif","Serif":"Georgia, Cambria, 'Times New Roman', Times, serif","Mono":"'SFMono-Regular', 'SF Mono', 'Menlo', 'Consolas', 'Liberation Mono', 'Courier New', monospace"}},"Layout":{"SidebarWidth":"260px","TopbarHeight":"56px","StatusbarHeight":"28px"}},"Brand":{"Name":"Ultravisor","Tagline":"Process supervision and workflow automation"}};},{}],56:[function(require,module,exports){module.exports={"Hash":"ultravisor-professional-dark","Name":"Ultravisor — Professional Dark","Version":"0.0.1","Description":"Dark modern palette — slate-blue text on inky surfaces, sky-blue brand. Single-mode dark.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"dark"},"Tokens":{"Color":{"Background":{"Primary":"#111318","Secondary":"#1a1d24","Tertiary":"#22252e","Panel":"#1a1d24","Hover":"#282c34","Selected":"#282c34"},"Text":{"Primary":"#c8cdd5","Secondary":"#e0e4ea","Muted":"#8b92a0","Placeholder":"#5a6070","OnBrand":"#ffffff"},"Brand":{"Primary":"#60a5fa","PrimaryHover":"#93c5fd","Accent":"#60a5fa","AccentHover":"#93c5fd"},"Border":{"Default":"#282c34","Light":"#22252e","Strong":"#3a3f4a"},"Status":{"Success":"#34d399","Warning":"#fbbf24","Error":"#f87171","Info":"#60a5fa"},"Scrollbar":{"Track":"#1a1d24","Thumb":"#282c34","Hover":"#3a3f4a"},"Selection":{"Background":"#1e2230","Text":"#e0e4ea"},"Focus":{"Outline":"#60a5fa"},"Shadow":{"Color":"rgba(0, 0, 0, 0.30)"},"Syntax":{"Keyword":"#E89A6E","String":"#8FD493","Number":"#E8A94D","Comment":"#8E8478","Operator":"#4FB3A6","Punctuation":"#C0B5A4","Function":"#7FBDD8","Variable":"#E8DCC8","Type":"#E8A94D","Builtin":"#E8A94D","Property":"#E89A6E","Tag":"#E89A6E","AttrName":"#E8A94D","AttrValue":"#8FD493"},"Editor":{"LineNumberBackground":"#1a1d24","LineNumberText":"#5a6070","CurrentLineHighlight":"#22252e","SelectionBackground":"#1e2230","GutterBorder":"#22252e"}},"Typography":{"Family":{"Sans":"-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif","Serif":"Georgia, Cambria, 'Times New Roman', Times, serif","Mono":"'SFMono-Regular', 'SF Mono', 'Menlo', 'Consolas', 'Liberation Mono', 'Courier New', monospace"}},"Layout":{"SidebarWidth":"260px","TopbarHeight":"56px","StatusbarHeight":"28px"}},"Brand":{"Name":"Ultravisor","Tagline":"Process supervision and workflow automation"}};},{}],57:[function(require,module,exports){module.exports={"Hash":"ultravisor-professional-light","Name":"Ultravisor — Professional Light","Version":"0.0.1","Description":"Bright modern palette — slate text on near-white backgrounds, royal-blue brand. Single-mode light.","Comprehensive":true,"Modes":{"Strategy":"single","Default":"light"},"Tokens":{"Color":{"Background":{"Primary":"#f5f6f8","Secondary":"#ffffff","Tertiary":"#e4e7ec","Panel":"#ffffff","Hover":"#f0f1f4","Selected":"#e4e7ec"},"Text":{"Primary":"#2d3748","Secondary":"#1a202c","Muted":"#6b7280","Placeholder":"#9ca3af","OnBrand":"#ffffff"},"Brand":{"Primary":"#3b82f6","PrimaryHover":"#2563eb","Accent":"#3b82f6","AccentHover":"#2563eb"},"Border":{"Default":"#e2e5ea","Light":"#eceef2","Strong":"#c8cdd5"},"Status":{"Success":"#10b981","Warning":"#f59e0b","Error":"#ef4444","Info":"#3b82f6"},"Scrollbar":{"Track":"#f0f1f4","Thumb":"#d1d5db","Hover":"#b0b5bd"},"Selection":{"Background":"#dbeafe","Text":"#1a202c"},"Focus":{"Outline":"#3b82f6"},"Shadow":{"Color":"rgba(0, 0, 0, 0.06)"},"Syntax":{"Keyword":"#A0532E","String":"#3F8A52","Number":"#A86B00","Comment":"#8A7F72","Operator":"#2E7D74","Punctuation":"#5E5549","Function":"#2E5E96","Variable":"#3D3229","Type":"#A86B00","Builtin":"#A86B00","Property":"#A0532E","Tag":"#A0532E","AttrName":"#A86B00","AttrValue":"#3F8A52"},"Editor":{"LineNumberBackground":"#f5f6f8","LineNumberText":"#9ca3af","CurrentLineHighlight":"#f0f1f4","SelectionBackground":"#dbeafe","GutterBorder":"#e2e5ea"}},"Typography":{"Family":{"Sans":"-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif","Serif":"Georgia, Cambria, 'Times New Roman', Times, serif","Mono":"'SFMono-Regular', 'SF Mono', 'Menlo', 'Consolas', 'Liberation Mono', 'Courier New', monospace"}},"Layout":{"SidebarWidth":"260px","TopbarHeight":"56px","StatusbarHeight":"28px"}},"Brand":{"Name":"Ultravisor","Tagline":"Process supervision and workflow automation"}};},{}],58:[function(require,module,exports){/**
+ * Theme-BottomBar — standard application footer row.
+ *
+ * The bottom-row counterpart to Theme-TopBar: a thin status / chrome bar
+ * that sits at the absolute bottom of the application shell. Three
+ * zones — status text on the left, info indicators in the middle, and
+ * action buttons / toggles on the right.
+ *
+ *   ┌────────────────────────────────────────────────────────────────┐
+ *   │ Status text          [── Info slot (flex) ──]      [actions]   │
+ *   └────────────────────────────────────────────────────────────────┘
+ *
+ * Renders into `#Theme-BottomBar` by default.
+ *
+ * Three slots host views drop content into:
+ *   - `#Theme-BottomBar-Status`  — short status / state line (left)
+ *   - `#Theme-BottomBar-Info`    — center info: connection, version,
+ *                                  ambient indicators
+ *   - `#Theme-BottomBar-Actions` — log toggle, debug controls, etc.
+ *
+ * Top border uses `--brand-color-secondary-mode` so the bottombar gets
+ * a brand-tinted edge that's visually distinct from the topbar's
+ * primary-color stripe.
+ */var libPictView=require('pict-view');var _ViewConfiguration={ViewIdentifier:'Theme-BottomBar',AutoInitialize:true,AutoRender:false,DefaultDestinationAddress:'#Theme-BottomBar',DefaultRenderable:'Theme-BottomBar-Renderable',// ViewIdentifier of a host view that fills #Theme-BottomBar-Status.
+StatusView:null,// ViewIdentifier of a host view that fills #Theme-BottomBar-Info.
+InfoView:null,// ViewIdentifier of a host view that fills #Theme-BottomBar-Actions.
+ActionsView:null,// Height of the bar in pixels. Drives the min-height on the chrome
+// row so it fills the panel cleanly even when the parent chain
+// (pict-section-modal shell uses min-height: 100% on its panel
+// content destination, which doesn't resolve through plain
+// height: 100% chains) doesn't establish a determinate height.
+// Hosts should match this to whatever Size they use on the panel
+// addPanel() call so the chrome and panel agree on the row size.
+Height:32,Templates:[{Hash:'Theme-BottomBar-Template',Template:/*html*/"\n<div class=\"pict-theme-bottombar\">\n\t<div class=\"pict-theme-bottombar-status\" id=\"Theme-BottomBar-Status\"></div>\n\t<div class=\"pict-theme-bottombar-info\" id=\"Theme-BottomBar-Info\"></div>\n\t<div class=\"pict-theme-bottombar-actions\" id=\"Theme-BottomBar-Actions\"></div>\n</div>"}],Renderables:[{RenderableHash:'Theme-BottomBar-Renderable',TemplateHash:'Theme-BottomBar-Template',ContentDestinationAddress:'#Theme-BottomBar',RenderMethod:'replace'}],CSS:/*css*/"\n.pict-theme-bottombar {\n\tdisplay: flex;\n\talign-items: center;\n\tgap: 14px;\n\t/* The min-height is rewritten per-instance in onAfterRender from the\n\t   Height option (default 32). A fixed px value avoids the\n\t   percent-height resolution trap the pict-section-modal shell sets\n\t   up \u2014 see the comment on Theme-TopBar's CSS for the full story. */\n\tmin-height: 32px;\n\tpadding: 0 14px;\n\tbox-sizing: border-box;\n\tbackground: var(--theme-color-background-secondary, transparent);\n\tfont-size: var(--theme-typography-size-xs, 12px);\n\tcolor: var(--theme-color-text-secondary, #4a5568);\n\t/* Single medium brand-primary stripe at the top of the bottombar.\n\t   The topbar carries the full two-stripe identifier; on the\n\t   bottombar (which is only 32px tall) a single 2px primary line is\n\t   enough to seat the brand colour at the bottom of the page\n\t   without competing for visual weight against the content row. */\n\tborder-top: 2px solid var(--brand-color-primary-mode, var(--theme-color-brand-primary, #2563eb));\n}\n.pict-theme-bottombar-status {\n\tflex: 0 0 auto;\n\tdisplay: flex;\n\talign-items: center;\n\tgap: 6px;\n\twhite-space: nowrap;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n\tmax-width: 50%;\n}\n.pict-theme-bottombar-info {\n\tflex: 1 1 auto;\n\tdisplay: flex;\n\talign-items: center;\n\tjustify-content: center;\n\tgap: 12px;\n\tmin-width: 0;\n\toverflow: hidden;\n}\n.pict-theme-bottombar-actions {\n\tflex: 0 0 auto;\n\tdisplay: flex;\n\talign-items: center;\n\tgap: 6px;\n}",CSSPriority:500};var PictViewThemeBottomBar=/*#__PURE__*/function(_libPictView){function PictViewThemeBottomBar(pFable,pOptions,pServiceHash){_classCallCheck(this,PictViewThemeBottomBar);return _callSuper(this,PictViewThemeBottomBar,[pFable,pOptions,pServiceHash]);}_inherits(PictViewThemeBottomBar,_libPictView);return _createClass(PictViewThemeBottomBar,[{key:"onAfterRender",value:function onAfterRender(pRenderable,pAddress,pRecord,pContent){var _this34=this;this.pict.CSSMap.injectCSS();// Apply the configured Height to the rendered .pict-theme-bottombar
+// — see the matching block in Theme-TopBar's onAfterRender for why.
+if(typeof document!=='undefined'&&this.options.Height){var tmpRoot=document.querySelector('.pict-theme-bottombar');if(tmpRoot){tmpRoot.style.minHeight=this.options.Height+'px';}}var tmpRenderSlot=function tmpRenderSlot(pIdentifier){if(!pIdentifier)return;var tmpView=_this34.pict.views[pIdentifier];if(tmpView){tmpView.render();}else if(_this34.log&&_this34.log.warn){_this34.log.warn('Theme-BottomBar: slot view "'+pIdentifier+'" not registered');}};tmpRenderSlot(this.options.StatusView);tmpRenderSlot(this.options.InfoView);tmpRenderSlot(this.options.ActionsView);return _superPropGet(PictViewThemeBottomBar,"onAfterRender",this,1)?_superPropGet(PictViewThemeBottomBar,"onAfterRender",this,3)([pRenderable,pAddress,pRecord,pContent]):undefined;}// ─── Per-route slot swapping ──────────────────────────────────────────
+// Mirrors Theme-TopBar's setNavView / setUserView — call from a
+// router callback to swap the bottom bar's slot content as the
+// route changes (different status formats per page, etc.).
+},{key:"setStatusView",value:function setStatusView(pViewIdentifier){this._setSlotView('StatusView','#Theme-BottomBar-Status',pViewIdentifier);}},{key:"setInfoView",value:function setInfoView(pViewIdentifier){this._setSlotView('InfoView','#Theme-BottomBar-Info',pViewIdentifier);}},{key:"setActionsView",value:function setActionsView(pViewIdentifier){this._setSlotView('ActionsView','#Theme-BottomBar-Actions',pViewIdentifier);}},{key:"_setSlotView",value:function _setSlotView(pOptionKey,pDestSelector,pViewIdentifier){this.options[pOptionKey]=pViewIdentifier||null;if(typeof document!=='undefined'){var tmpDest=document.querySelector(pDestSelector);if(tmpDest){tmpDest.innerHTML='';}}if(!pViewIdentifier){return;}var tmpView=this.pict.views[pViewIdentifier];if(tmpView){tmpView.render();}else if(this.log&&this.log.warn){this.log.warn('Theme-BottomBar: view "'+pViewIdentifier+'" not registered');}}}]);}(libPictView);module.exports=PictViewThemeBottomBar;module.exports.default_configuration=_ViewConfiguration;},{"pict-view":69}],59:[function(require,module,exports){/**
+ * Theme-Brand-Mark — single-row inline brand mark (icon + name).
+ *
+ * The drop-in counterpart to Theme-BrandStrip for apps that put the
+ * brand wordmark *inside* their topbar (next to action buttons) rather
+ * than as a multi-row chrome below the nav.
+ *
+ * Layout:
+ *
+ *   ┌─────────────────────────┐
+ *   │ [icon]  App Name        │
+ *   └─────────────────────────┘
+ *
+ * Colors come from the brand's primary/secondary; the icon (when SVG
+ * with `stroke="currentColor"`) inherits `--brand-color-primary-mode`,
+ * which auto-swaps between PrimaryLight (default mode) and PrimaryDark
+ * (`.theme-dark`).
+ *
+ * Reads from libThemeBrand and re-renders on `onChange`. Renders an
+ * empty span when no brand is registered.
+ *
+ * Drop-in destination: `<div id="Theme-Brand-Mark"></div>`.
+ */var libPictView=require('pict-view');var libThemeBrand=require('../Theme-Brand.js');var _ViewConfiguration={ViewIdentifier:'Theme-Brand-Mark',AutoInitialize:true,AutoRender:false,DefaultDestinationAddress:'#Theme-Brand-Mark',DefaultRenderable:'Theme-Brand-Mark-Renderable',// Optional: when false the icon is omitted (text-only wordmark).
+ShowIcon:true,// Optional: when false the name is omitted (icon-only mark).
+ShowName:true,Templates:[{Hash:'Theme-Brand-Mark-Template',Template:/*html*/"{~TS:Theme-Brand-Mark-Body-Template:AppData.PictSectionTheme.BrandMark.BodySlot~}"},{Hash:'Theme-Brand-Mark-Body-Template',Template:/*html*/"\n<span class=\"pict-theme-brand-mark\" title=\"{~D:Record.Tooltip~}\">\n\t{~TS:Theme-Brand-Mark-IconSVG-Template:Record.IconSVGSlot~}\n\t{~TS:Theme-Brand-Mark-IconImg-Template:Record.IconImgSlot~}\n\t{~TS:Theme-Brand-Mark-Name-Template:Record.NameSlot~}\n</span>"},{// Inline SVG: trusted markup; let it ride. SVG icons that
+// reference `currentColor` inherit `--brand-color-primary-mode`.
+Hash:'Theme-Brand-Mark-IconSVG-Template',Template:/*html*/"<span class=\"pict-theme-brand-mark-icon\">{~D:Record.IconHTML~}</span>"},{Hash:'Theme-Brand-Mark-IconImg-Template',Template:/*html*/"<span class=\"pict-theme-brand-mark-icon\"><img src=\"{~D:Record.IconURL~}\" alt=\"\"></span>"},{Hash:'Theme-Brand-Mark-Name-Template',Template:/*html*/"<span class=\"pict-theme-brand-mark-name\">{~D:Record.Name~}</span>"}],Renderables:[{RenderableHash:'Theme-Brand-Mark-Renderable',TemplateHash:'Theme-Brand-Mark-Template',ContentDestinationAddress:'#Theme-Brand-Mark',RenderMethod:'replace'}],CSS:/*css*/"\n.pict-theme-brand-mark {\n\tdisplay: inline-flex;\n\talign-items: center;\n\tgap: 8px;\n\t/* line-height: 1 collapses the inherited ~1.2 line-box around the\n\t   name glyphs. Without this the inline-flex container is taller\n\t   than its visible content, the line-box adds asymmetric space\n\t   above the caps, and the whole mark looks pushed up vs.\n\t   neighbouring buttons that sit on standard 12px-text baselines. */\n\tline-height: 1;\n\tcolor: var(--brand-color-primary-mode, var(--theme-color-text-primary, #1a1a1a));\n\tuser-select: none;\n}\n.pict-theme-brand-mark-icon {\n\tdisplay: inline-flex;\n\talign-items: center;\n\tjustify-content: center;\n\twidth: 22px;\n\theight: 22px;\n\tcolor: currentColor;\n}\n.pict-theme-brand-mark-icon img,\n.pict-theme-brand-mark-icon svg {\n\twidth: 100%;\n\theight: 100%;\n\tdisplay: block;\n}\n.pict-theme-brand-mark-name {\n\t/* Font size dropped from 15 \u2192 14 so the brand name reads closer\n\t   to the typical 12px action-button text height; bigger glyphs\n\t   reaching higher into the row are why the mark looked optically\n\t   high. The 2px brand-secondary underline keeps the mark feeling\n\t   distinctly branded; padding-bottom: 1px was an asymmetric nudge\n\t   that shifted the visual center up \u2014 removed. */\n\tfont-size: 14px;\n\tfont-weight: 600;\n\tletter-spacing: 0.4px;\n\tborder-bottom: 2px solid var(--brand-color-secondary-mode, transparent);\n\twhite-space: nowrap;\n}\n/* Compact form \u2014 at narrow viewports the brand mark collapses to\n   icon-only. The icon alone still reads as the brand (the deterministic\n   logo is designed to be recognisable without the wordmark) and freeing\n   up the wordmark's width keeps the nav buttons reachable on tablet /\n   small-laptop widths. The threshold matches the topbar's compact\n   breakpoint in Theme-TopBar. */\n@media (max-width: 720px) {\n\t.pict-theme-brand-mark-name {\n\t\tdisplay: none;\n\t}\n}",CSSPriority:500};var PictViewThemeBrandMark=/*#__PURE__*/function(_libPictView2){function PictViewThemeBrandMark(pFable,pOptions,pServiceHash){var _this35;_classCallCheck(this,PictViewThemeBrandMark);_this35=_callSuper(this,PictViewThemeBrandMark,[pFable,pOptions,pServiceHash]);_this35._unsubscribeFromBrand=null;return _this35;}_inherits(PictViewThemeBrandMark,_libPictView2);return _createClass(PictViewThemeBrandMark,[{key:"onAfterInitialize",value:function onAfterInitialize(){this._subscribeToBrand();return _superPropGet(PictViewThemeBrandMark,"onAfterInitialize",this,1)?_superPropGet(PictViewThemeBrandMark,"onAfterInitialize",this,3)([]):undefined;}},{key:"onBeforeRender",value:function onBeforeRender(pRenderable){this._refreshAppData();return _superPropGet(PictViewThemeBrandMark,"onBeforeRender",this,1)?_superPropGet(PictViewThemeBrandMark,"onBeforeRender",this,3)([pRenderable]):undefined;}},{key:"onAfterRender",value:function onAfterRender(pRenderable,pAddress,pRecord,pContent){this.pict.CSSMap.injectCSS();return _superPropGet(PictViewThemeBrandMark,"onAfterRender",this,1)?_superPropGet(PictViewThemeBrandMark,"onAfterRender",this,3)([pRenderable,pAddress,pRecord,pContent]):undefined;}},{key:"_subscribeToBrand",value:function _subscribeToBrand(){if(this._unsubscribeFromBrand)return;var tmpSelf=this;this._unsubscribeFromBrand=libThemeBrand.onChange(function(){tmpSelf.render();});}},{key:"_refreshAppData",value:function _refreshAppData(){var tmpBrand=libThemeBrand.getActive();this.pict.AppData.PictSectionTheme=this.pict.AppData.PictSectionTheme||{};if(!tmpBrand){this.pict.AppData.PictSectionTheme.BrandMark={BodySlot:[]};return;}// Single-element array slot drives the {~TS:~} render. Empty
+// slots for icon-img/icon-svg/name suppress those sub-templates.
+var tmpShowIcon=this.options.ShowIcon!==false;var tmpShowName=this.options.ShowName!==false;var tmpIconSVGSlot=tmpShowIcon&&tmpBrand.IconType==='svg'&&tmpBrand.Icon?[{IconHTML:tmpBrand.Icon}]:[];var tmpIconImgSlot=tmpShowIcon&&tmpBrand.IconType==='image'&&tmpBrand.Icon?[{IconURL:tmpBrand.Icon}]:[];var tmpNameSlot=tmpShowName&&tmpBrand.Name?[{Name:tmpBrand.Name}]:[];this.pict.AppData.PictSectionTheme.BrandMark={BodySlot:[{Tooltip:tmpBrand.Tagline||tmpBrand.Name||'',IconSVGSlot:tmpIconSVGSlot,IconImgSlot:tmpIconImgSlot,NameSlot:tmpNameSlot}]};}}]);}(libPictView);module.exports=PictViewThemeBrandMark;module.exports.default_configuration=_ViewConfiguration;},{"../Theme-Brand.js":25,"pict-view":69}],60:[function(require,module,exports){/**
+ * Theme-BrandStrip — the subtle two-line brand signature that sits
+ * under the application's navigation.
+ *
+ * Layout:
+ *
+ *   ┌─────────────────────────────────────────────────────────────┐
+ *   │ [icon]  App Name                                            │
+ *   │ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ │  ← primary stripe (3× tall)
+ *   │ ─────────────────────────────────────────────────────────── │  ← secondary stripe (1× tall)
+ *   └─────────────────────────────────────────────────────────────┘
+ *
+ * The icon + name row is colored using the brand's primary color (and
+ * the secondary as an underline accent on the name). Clicking the row
+ * does nothing by default — hosts that want it to navigate or open a
+ * dropdown can pass an `OnClickName` hook in the view options.
+ *
+ * Reads the active brand from libThemeBrand. Subscribes to
+ * libThemeBrand.onChange so swapping the brand at runtime updates the
+ * strip immediately. Renders nothing (an empty span) when no brand is
+ * registered.
+ *
+ * Drop-in destination: `<div id="Theme-BrandStrip"></div>`.
+ */var libPictView=require('pict-view');var libThemeBrand=require('../Theme-Brand.js');var _ViewConfiguration={ViewIdentifier:'Theme-BrandStrip',AutoInitialize:true,AutoRender:false,DefaultDestinationAddress:'#Theme-BrandStrip',DefaultRenderable:'Theme-BrandStrip-Renderable',// Stripe heights in pixels. Primary is conventionally 3× secondary,
+// per the design brief, but exposed here so hosts can tune.
+PrimaryStripeHeight:3,SecondaryStripeHeight:1,// When false, the icon + name row is omitted and only the two
+// stripes render. Useful for very tight chrome where the brand
+// name is already in the topbar.
+ShowName:true,Templates:[{Hash:'Theme-BrandStrip-Template',Template:/*html*/"\n{~TS:Theme-BrandStrip-Body-Template:AppData.PictSectionTheme.BrandStrip.BodySlot~}"},{Hash:'Theme-BrandStrip-Body-Template',Template:/*html*/"\n<div class=\"pict-theme-brandstrip\" title=\"{~D:Record.Tooltip~}\">\n\t{~TS:Theme-BrandStrip-NameRow-Template:Record.NameRowSlot~}\n\t<div class=\"pict-theme-brandstrip-stripes\">\n\t\t<div class=\"pict-theme-brandstrip-stripe pict-theme-brandstrip-stripe-primary\"\n\t\t     style=\"height: {~D:Record.PrimaryHeight~}px;\"></div>\n\t\t<div class=\"pict-theme-brandstrip-stripe pict-theme-brandstrip-stripe-secondary\"\n\t\t     style=\"height: {~D:Record.SecondaryHeight~}px;\"></div>\n\t</div>\n</div>"},{Hash:'Theme-BrandStrip-NameRow-Template',Template:/*html*/"\n<div class=\"pict-theme-brandstrip-row\">\n\t{~TS:Theme-BrandStrip-IconSVG-Template:Record.IconSVGSlot~}\n\t{~TS:Theme-BrandStrip-IconImg-Template:Record.IconImgSlot~}\n\t<span class=\"pict-theme-brandstrip-name\">{~D:Record.Name~}</span>\n</div>"},{// SVG icon: leading <svg> markup is trusted (host-supplied,
+// not user-supplied) so we let it through verbatim. Theme-Icons
+// SVGs use stroke="currentColor" so they pick up the brand
+// primary color from the row's `color: var(--brand-color-primary)`.
+Hash:'Theme-BrandStrip-IconSVG-Template',Template:/*html*/"<span class=\"pict-theme-brandstrip-icon\">{~D:Record.IconHTML~}</span>"},{// <img> icon: src can be a data URL or a regular URL.
+Hash:'Theme-BrandStrip-IconImg-Template',Template:/*html*/"<span class=\"pict-theme-brandstrip-icon\"><img src=\"{~D:Record.IconURL~}\" alt=\"\"></span>"}],Renderables:[{RenderableHash:'Theme-BrandStrip-Renderable',TemplateHash:'Theme-BrandStrip-Template',ContentDestinationAddress:'#Theme-BrandStrip',RenderMethod:'replace'}],CSS:/*css*/"\n.pict-theme-brandstrip {\n\tdisplay: flex;\n\tflex-direction: column;\n\tgap: 4px;\n\tuser-select: none;\n}\n.pict-theme-brandstrip-row {\n\tdisplay: inline-flex;\n\talign-items: center;\n\tgap: 8px;\n\tpadding: 6px 12px 4px;\n\tfont-size: 12px;\n\tfont-weight: 600;\n\tletter-spacing: 0.4px;\n\ttext-transform: uppercase;\n\tcolor: var(--brand-color-primary, var(--theme-color-text-muted, #6b6b6b));\n}\n.pict-theme-brandstrip-name {\n\tborder-bottom: 2px solid var(--brand-color-secondary, transparent);\n\tpadding-bottom: 1px;\n}\n.pict-theme-brandstrip-icon {\n\tdisplay: inline-flex;\n\talign-items: center;\n\tjustify-content: center;\n\twidth: 16px; height: 16px;\n\tcolor: var(--brand-color-primary, currentColor);\n}\n.pict-theme-brandstrip-icon img,\n.pict-theme-brandstrip-icon svg {\n\twidth: 100%; height: 100%;\n\tdisplay: block;\n}\n.pict-theme-brandstrip-stripes {\n\tdisplay: flex;\n\tflex-direction: column;\n\twidth: 100%;\n}\n.pict-theme-brandstrip-stripe {\n\twidth: 100%;\n}\n.pict-theme-brandstrip-stripe-primary {\n\tbackground: var(--brand-color-primary, transparent);\n}\n.pict-theme-brandstrip-stripe-secondary {\n\tbackground: var(--brand-color-secondary, transparent);\n}",CSSPriority:500};var PictViewThemeBrandStrip=/*#__PURE__*/function(_libPictView3){function PictViewThemeBrandStrip(pFable,pOptions,pServiceHash){var _this36;_classCallCheck(this,PictViewThemeBrandStrip);_this36=_callSuper(this,PictViewThemeBrandStrip,[pFable,pOptions,pServiceHash]);_this36._unsubscribeFromBrand=null;return _this36;}_inherits(PictViewThemeBrandStrip,_libPictView3);return _createClass(PictViewThemeBrandStrip,[{key:"onAfterInitialize",value:function onAfterInitialize(){this._subscribeToBrand();return _superPropGet(PictViewThemeBrandStrip,"onAfterInitialize",this,1)?_superPropGet(PictViewThemeBrandStrip,"onAfterInitialize",this,3)([]):undefined;}},{key:"onBeforeRender",value:function onBeforeRender(pRenderable){this._refreshAppData();return _superPropGet(PictViewThemeBrandStrip,"onBeforeRender",this,1)?_superPropGet(PictViewThemeBrandStrip,"onBeforeRender",this,3)([pRenderable]):undefined;}},{key:"onAfterRender",value:function onAfterRender(pRenderable,pAddress,pRecord,pContent){this.pict.CSSMap.injectCSS();return _superPropGet(PictViewThemeBrandStrip,"onAfterRender",this,1)?_superPropGet(PictViewThemeBrandStrip,"onAfterRender",this,3)([pRenderable,pAddress,pRecord,pContent]):undefined;}},{key:"_subscribeToBrand",value:function _subscribeToBrand(){if(this._unsubscribeFromBrand)return;var tmpSelf=this;this._unsubscribeFromBrand=libThemeBrand.onChange(function(){tmpSelf.render();});}},{key:"_refreshAppData",value:function _refreshAppData(){var tmpBrand=libThemeBrand.getActive();this.pict.AppData.PictSectionTheme=this.pict.AppData.PictSectionTheme||{};// No brand → empty BodySlot → renderable emits nothing.
+if(!tmpBrand){this.pict.AppData.PictSectionTheme.BrandStrip={BodySlot:[]};return;}var tmpShowName=this.options.ShowName!==false;// Pick the right per-icon-type slot. Only one of these will be
+// non-empty so the template renders the right element.
+var tmpIconSVGSlot=[];var tmpIconImgSlot=[];if(tmpBrand.IconType==='svg'&&tmpBrand.Icon){tmpIconSVGSlot=[{IconHTML:tmpBrand.Icon}];}else if(tmpBrand.IconType==='image'&&tmpBrand.Icon){tmpIconImgSlot=[{IconURL:tmpBrand.Icon}];}var tmpNameRowSlot=tmpShowName?[{Name:tmpBrand.Name,IconSVGSlot:tmpIconSVGSlot,IconImgSlot:tmpIconImgSlot}]:[];var tmpTooltip=tmpBrand.Name+(tmpBrand.Tagline?' — '+tmpBrand.Tagline:'');this.pict.AppData.PictSectionTheme.BrandStrip={BodySlot:[{Tooltip:tmpTooltip,NameRowSlot:tmpNameRowSlot,PrimaryHeight:this.options.PrimaryStripeHeight||3,SecondaryHeight:this.options.SecondaryStripeHeight||1}]};}}]);}(libPictView);PictViewThemeBrandStrip.default_configuration=_ViewConfiguration;module.exports=PictViewThemeBrandStrip;},{"../Theme-Brand.js":25,"pict-view":69}],61:[function(require,module,exports){/**
+ * Theme-Button — an embeddable SVG button (sun/moon glyph) suitable for
+ * application top bars. Clicking it opens a pict-section-modal popup
+ * containing the Theme-Picker dropdown and the Theme-ModeToggle.
+ *
+ * Drop-in destination: `<div id="Theme-Button"></div>`. The button itself
+ * is a tiny self-contained SVG that picks its color from the theme via
+ * `currentColor` so it inherits the surrounding text color.
+ *
+ * Requires `pict-section-modal` to be registered (under the view hash
+ * `Pict-Section-Modal` by default). If it isn't, clicking the button
+ * falls back to a `console.warn` and a no-op.
+ */var libPictView=require('pict-view');var libThemeIcons=require('../Theme-Icons.js');var _ViewConfiguration={ViewIdentifier:'Theme-Button',AutoInitialize:true,AutoRender:false,DefaultDestinationAddress:'#Theme-Button',DefaultRenderable:'Theme-Button-Renderable',ProviderHash:'Theme',ModalViewHash:'Pict-Section-Modal',// Identifiers of the picker / toggle / scale views that the popup
+// will mount. Each one is optional — if a view isn't registered the
+// matching row is silently skipped (no broken DOM placeholders).
+PickerViewHash:'Theme-Picker',ModeToggleViewHash:'Theme-ModeToggle',ScaleSelectViewHash:'Theme-ScaleSelect',// Visible button label / title (tooltip).
+Title:'Theme',AriaLabel:'Open theme menu',// Modal title.
+ModalTitle:'Theme',// Modal width (CSS).
+ModalWidth:'320px',Templates:[{Hash:'Theme-Button-Template',// SVG sourced from the shared Theme-Icons module so the
+// topbar glyph matches the picker + mode toggle exactly.
+Template:/*html*/"\n<button type=\"button\"\n        class=\"pict-theme-button\"\n        aria-label=\"{~D:AppData.PictSectionTheme.Button.AriaLabel~}\"\n        title=\"{~D:AppData.PictSectionTheme.Button.Title~}\"\n        onclick=\"_Pict.views['Theme-Button'].openMenu();\">\n\t".concat(libThemeIcons.iconSun(16),"\n</button>")},{Hash:'Theme-Button-Modal-Template',Template:/*html*/"\n<div class=\"pict-theme-button-menu\">\n\t<div class=\"pict-theme-button-menu-row\">\n\t\t<label class=\"pict-theme-button-menu-label\">Theme</label>\n\t\t<div id=\"Theme-Picker\"></div>\n\t</div>\n\t<div class=\"pict-theme-button-menu-row\">\n\t\t<label class=\"pict-theme-button-menu-label\">Mode</label>\n\t\t<div id=\"Theme-ModeToggle\"></div>\n\t</div>\n\t<div class=\"pict-theme-button-menu-row\">\n\t\t<label class=\"pict-theme-button-menu-label\">Scale</label>\n\t\t<div id=\"Theme-ScaleSelect\"></div>\n\t</div>\n</div>"}],Renderables:[{RenderableHash:'Theme-Button-Renderable',TemplateHash:'Theme-Button-Template',ContentDestinationAddress:'#Theme-Button',RenderMethod:'replace'}],CSS:/*css*/"\n.pict-theme-button {\n\tdisplay: inline-flex;\n\talign-items: center;\n\tjustify-content: center;\n\t/* Sized to match a typical 12px-font / 6px-12px-padding text button\n\t   (~28px tall) so this drops cleanly into a topbar row alongside\n\t   action buttons without standing taller and crashing the row's\n\t   visual rhythm. Squareish \u2014 width matches height for the icon. */\n\twidth: 28px;\n\theight: 28px;\n\tpadding: 0;\n\tborder-radius: 6px;\n\tborder: 1px solid var(--theme-color-border-default, #cfd5dd);\n\tbackground: var(--theme-color-background-secondary, #fbfbfc);\n\tcolor: var(--theme-color-text-secondary, #4a5568);\n\tcursor: pointer;\n\ttransition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;\n}\n.pict-theme-button:hover {\n\tbackground: var(--theme-color-background-hover, #f0f0f0);\n\tcolor: var(--theme-color-brand-primary, #2563eb);\n\tborder-color: var(--theme-color-brand-primary, #2563eb);\n}\n.pict-theme-button-icon { width: 16px; height: 16px; }\n.pict-theme-button-menu { display: flex; flex-direction: column; gap: 14px; }\n.pict-theme-button-menu-row { display: flex; flex-direction: column; gap: 6px; }\n.pict-theme-button-menu-label {\n\tfont-size: 11px;\n\tfont-weight: 600;\n\tletter-spacing: 0.4px;\n\ttext-transform: uppercase;\n\tcolor: var(--theme-color-text-muted, #6b6b6b);\n}",CSSPriority:500};var PictViewThemeButton=/*#__PURE__*/function(_libPictView4){function PictViewThemeButton(){_classCallCheck(this,PictViewThemeButton);return _callSuper(this,PictViewThemeButton,arguments);}_inherits(PictViewThemeButton,_libPictView4);return _createClass(PictViewThemeButton,[{key:"onBeforeRender",value:function onBeforeRender(pRenderable){this._refreshAppData();return _superPropGet(PictViewThemeButton,"onBeforeRender",this,1)?_superPropGet(PictViewThemeButton,"onBeforeRender",this,3)([pRenderable]):undefined;}},{key:"onAfterRender",value:function onAfterRender(pRenderable,pAddress,pRecord,pContent){this.pict.CSSMap.injectCSS();return _superPropGet(PictViewThemeButton,"onAfterRender",this,1)?_superPropGet(PictViewThemeButton,"onAfterRender",this,3)([pRenderable,pAddress,pRecord,pContent]):undefined;}/**
+	 * onclick handler — open the theme menu in a modal.
+	 */},{key:"openMenu",value:function openMenu(){var tmpModal=this._modal();if(!tmpModal){if(typeof console!=='undefined'){console.warn('Theme-Button: pict-section-modal view not found at "'+(this.options.ModalViewHash||'Pict-Section-Modal')+'" — cannot open theme menu.');}return null;}var tmpHTML=this.pict.parseTemplateByHash('Theme-Button-Modal-Template',{});var tmpSelf=this;return tmpModal.show({title:this.options.ModalTitle||'Theme',content:tmpHTML,width:this.options.ModalWidth||'320px',closeable:true,buttons:[],onOpen:function onOpen(){// Mount the picker + toggle into the freshly-created
+// modal DOM. The views look up their own destinations
+// so a simple render() is enough.
+tmpSelf._mountSubViews();}});}// ================================================================
+// Internals
+// ================================================================
+},{key:"_modal",value:function _modal(){var tmpHash=this.options.ModalViewHash||'Pict-Section-Modal';return this.pict&&this.pict.views&&this.pict.views[tmpHash];}},{key:"_mountSubViews",value:function _mountSubViews(){var tmpPicker=this.pict.views[this.options.PickerViewHash||'Theme-Picker'];if(tmpPicker){tmpPicker.render();}var tmpToggle=this.pict.views[this.options.ModeToggleViewHash||'Theme-ModeToggle'];if(tmpToggle){tmpToggle.render();}var tmpScale=this.pict.views[this.options.ScaleSelectViewHash||'Theme-ScaleSelect'];if(tmpScale){tmpScale.render();}}},{key:"_refreshAppData",value:function _refreshAppData(){this.pict.AppData.PictSectionTheme=this.pict.AppData.PictSectionTheme||{};this.pict.AppData.PictSectionTheme.Button={Title:this.options.Title||'Theme',AriaLabel:this.options.AriaLabel||'Open theme menu'};}}]);}(libPictView);PictViewThemeButton.default_configuration=_ViewConfiguration;module.exports=PictViewThemeButton;},{"../Theme-Icons.js":26,"pict-view":69}],62:[function(require,module,exports){/**
+ * Theme-ModeToggle — three-segment toggle for Light / Dark / System mode.
+ *
+ * Calls `provider.setMode(...)` on click. Greys itself out (and the
+ * Dark / System buttons) when the active theme is single-mode (since
+ * single-mode themes ignore mode requests internally).
+ *
+ * Like the Picker, subscribes to `provider.onApply` so the active button
+ * highlight stays in sync with theme changes from elsewhere.
+ *
+ * Drop-in destination: `<div id="Theme-ModeToggle"></div>`.
+ */var libPictView=require('pict-view');var libThemeIcons=require('../Theme-Icons.js');var _ViewConfiguration={ViewIdentifier:'Theme-ModeToggle',AutoInitialize:true,AutoRender:false,DefaultDestinationAddress:'#Theme-ModeToggle',DefaultRenderable:'Theme-ModeToggle-Renderable',ProviderHash:'Theme',// Allow hosts to relabel buttons (i18n). Order is fixed.
+Labels:{Light:'Light',Dark:'Dark',System:'System'},// Show the inline sun / moon / monitor SVG icons next to the labels.
+ShowIcons:true,Templates:[{Hash:'Theme-ModeToggle-Template',Template:/*html*/"\n<div class=\"pict-theme-modetoggle-wrap\">\n\t<div class=\"pict-theme-modetoggle{~NE:AppData.PictSectionTheme.ModeToggle.Disabled^ pict-theme-modetoggle-disabled~}\"\n\t     role=\"group\" aria-label=\"Color mode\"\n\t     title=\"{~D:AppData.PictSectionTheme.ModeToggle.WrapTitle~}\">\n\t\t{~TS:Theme-ModeToggle-Button-Template:AppData.PictSectionTheme.ModeToggle.Buttons~}\n\t</div>\n\t{~TS:Theme-ModeToggle-LockedNote-Template:AppData.PictSectionTheme.ModeToggle.LockedNoteSlot~}\n</div>"},{Hash:'Theme-ModeToggle-Button-Template',Template:/*html*/"\n<button type=\"button\"\n        class=\"pict-theme-modetoggle-btn{~NE:Record.Active^ pict-theme-modetoggle-btn-active~}{~NE:Record.LockedOut^ pict-theme-modetoggle-btn-lockedout~}\"\n        title=\"{~D:Record.Title~}\"\n        aria-pressed=\"{~D:Record.Active~}\"\n        aria-disabled=\"{~D:Record.LockedOut~}\"\n        onclick=\"_Pict.views['Theme-ModeToggle'].pickMode('{~D:Record.Mode~}');\">\n\t{~TS:Theme-ModeToggle-Icon-Light:Record.IconLight~}{~TS:Theme-ModeToggle-Icon-Dark:Record.IconDark~}{~TS:Theme-ModeToggle-Icon-System:Record.IconSystem~}<span class=\"pict-theme-modetoggle-label\">{~D:Record.Label~}</span>\n</button>"},{Hash:'Theme-ModeToggle-LockedNote-Template',Template:/*html*/"\n<div class=\"pict-theme-modetoggle-locked-note\" role=\"note\">\n\t<svg class=\"pict-theme-modetoggle-locked-icon\" viewBox=\"0 0 24 24\" fill=\"none\"\n\t     stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"\n\t     stroke-linejoin=\"round\" aria-hidden=\"true\">\n\t\t<rect x=\"4\" y=\"11\" width=\"16\" height=\"9\" rx=\"2\"/>\n\t\t<path d=\"M8 11V7a4 4 0 0 1 8 0v4\"/>\n\t</svg>\n\t<span>{~D:Record.Message~}</span>\n</div>"},// Icon templates pull SVG markup from the shared Theme-Icons
+// module so the picker, toggle, and topbar button stay visually
+// consistent — change the glyph in one place, every consumer
+// updates.
+{Hash:'Theme-ModeToggle-Icon-Light',Template:libThemeIcons.iconSun()},{Hash:'Theme-ModeToggle-Icon-Dark',Template:libThemeIcons.iconMoon()},{Hash:'Theme-ModeToggle-Icon-System',Template:libThemeIcons.iconSystem()}],Renderables:[{RenderableHash:'Theme-ModeToggle-Renderable',TemplateHash:'Theme-ModeToggle-Template',ContentDestinationAddress:'#Theme-ModeToggle',RenderMethod:'replace'}],CSS:/*css*/"\n.pict-theme-modetoggle-wrap { display: inline-flex; flex-direction: column; gap: 6px; }\n.pict-theme-modetoggle {\n\tdisplay: inline-flex;\n\tborder: 1px solid var(--theme-color-border-default, #cfd5dd);\n\tborder-radius: 6px;\n\toverflow: hidden;\n\tbackground: var(--theme-color-background-secondary, #fbfbfc);\n\tfont-size: 12px;\n}\n.pict-theme-modetoggle-btn {\n\tdisplay: inline-flex;\n\talign-items: center;\n\tgap: 4px;\n\tpadding: 4px 10px;\n\tborder: 0;\n\tbackground: transparent;\n\tcolor: var(--theme-color-text-secondary, #4a5568);\n\tcursor: pointer;\n\tborder-right: 1px solid var(--theme-color-border-default, #cfd5dd);\n\ttransition: background-color 120ms ease, color 120ms ease;\n}\n.pict-theme-modetoggle-btn:last-child { border-right: 0; }\n.pict-theme-modetoggle-btn:hover {\n\tbackground: var(--theme-color-background-hover, #f0f0f0);\n\tcolor: var(--theme-color-text-primary, #1f2933);\n}\n.pict-theme-modetoggle-btn-active {\n\tbackground: var(--theme-color-brand-primary, #2563eb);\n\tcolor: var(--theme-color-text-on-brand, #ffffff);\n}\n.pict-theme-modetoggle-btn-active:hover {\n\tbackground: var(--theme-color-brand-primary-hover, #1e54cc);\n\tcolor: var(--theme-color-text-on-brand, #ffffff);\n}\n/* When the active theme is single-mode the entire group becomes\n   non-interactive. The locked-out buttons (the ones the theme cannot\n   switch to) get a strikethrough so the cause is unmistakable; the\n   active button stays styled normally so users can still see which\n   mode the theme IS using. */\n.pict-theme-modetoggle-disabled .pict-theme-modetoggle-btn {\n\tpointer-events: none;\n\tcursor: not-allowed;\n}\n.pict-theme-modetoggle-disabled .pict-theme-modetoggle-btn-lockedout {\n\topacity: 0.45;\n\ttext-decoration: line-through;\n\ttext-decoration-thickness: 1.5px;\n}\n/* Icons come from Theme-Icons.js with explicit width/height baked into\n   the <svg>. We only need to nudge their vertical alignment with the\n   button label. */\n.pict-theme-modetoggle .pict-theme-icon {\n\tdisplay: inline-block; vertical-align: -2px;\n}\n.pict-theme-modetoggle-label { line-height: 1; }\n.pict-theme-modetoggle-locked-note {\n\tdisplay: inline-flex;\n\talign-items: center;\n\tgap: 6px;\n\tfont-size: 11px;\n\tline-height: 1.3;\n\tcolor: var(--theme-color-text-muted, #6b6b6b);\n\tpadding: 0 2px;\n}\n.pict-theme-modetoggle-locked-icon {\n\twidth: 12px; height: 12px;\n\tflex: 0 0 12px;\n\tcolor: var(--theme-color-text-muted, #6b6b6b);\n}",CSSPriority:500};// The icon SVGs themselves live as templates above (Theme-ModeToggle-Icon-*).
+// Per CLAUDE.md "AppData stores data, not HTML" — we drive icon selection
+// with one-or-zero element arrays (`Record.IconLight = [{}]` to render the
+// Light icon, `[]` to skip it). Each template is keyed off `Record.Mode`.
+var PictViewThemeModeToggle=/*#__PURE__*/function(_libPictView5){function PictViewThemeModeToggle(pFable,pOptions,pServiceHash){var _this37;_classCallCheck(this,PictViewThemeModeToggle);_this37=_callSuper(this,PictViewThemeModeToggle,[pFable,pOptions,pServiceHash]);_this37._unsubscribeFromProvider=null;return _this37;}_inherits(PictViewThemeModeToggle,_libPictView5);return _createClass(PictViewThemeModeToggle,[{key:"onAfterInitialize",value:function onAfterInitialize(){this._subscribeToProvider();return _superPropGet(PictViewThemeModeToggle,"onAfterInitialize",this,1)?_superPropGet(PictViewThemeModeToggle,"onAfterInitialize",this,3)([]):undefined;}},{key:"onBeforeRender",value:function onBeforeRender(pRenderable){this._refreshAppData();return _superPropGet(PictViewThemeModeToggle,"onBeforeRender",this,1)?_superPropGet(PictViewThemeModeToggle,"onBeforeRender",this,3)([pRenderable]):undefined;}},{key:"onAfterRender",value:function onAfterRender(pRenderable,pAddress,pRecord,pContent){this.pict.CSSMap.injectCSS();return _superPropGet(PictViewThemeModeToggle,"onAfterRender",this,1)?_superPropGet(PictViewThemeModeToggle,"onAfterRender",this,3)([pRenderable,pAddress,pRecord,pContent]):undefined;}/**
+	 * onclick handler — flip mode on the active theme. Single-mode themes
+	 * silently ignore (the toggle is shown disabled in that case anyway).
+	 */},{key:"pickMode",value:function pickMode(pMode){var tmpProvider=this._provider();if(!tmpProvider)return false;var tmpOk=tmpProvider.setMode(pMode);if(tmpOk&&typeof this.options.OnModeChange==='function'){try{this.options.OnModeChange(pMode);}catch(pErr){/* host hook failure */}}// setMode fires onApply listeners which trigger our own re-render.
+// If single-mode rejected the change, force a re-render so the UI
+// state is still consistent.
+if(!tmpOk){this.render();}return tmpOk;}// ================================================================
+// Internals
+// ================================================================
+},{key:"_subscribeToProvider",value:function _subscribeToProvider(){if(this._unsubscribeFromProvider)return;var tmpProvider=this._provider();if(!tmpProvider||typeof tmpProvider.onApply!=='function')return;var tmpSelf=this;this._unsubscribeFromProvider=tmpProvider.onApply(function(){tmpSelf.render();});}},{key:"_provider",value:function _provider(){var tmpHash=this.options.ProviderHash||'Theme';return this.pict&&this.pict.providers&&this.pict.providers[tmpHash];}},{key:"_refreshAppData",value:function _refreshAppData(){var tmpProvider=this._provider();var tmpActive=tmpProvider?tmpProvider.getActiveTheme():null;var tmpActiveMode=tmpActive&&tmpActive.Mode||'light';// Detect single-mode (Strategy === 'single') so we can lock the
+// toggle and surface the reason the buttons aren't responding.
+var tmpDisabled=false;var tmpLockedToMode=null;var tmpThemeName=null;if(tmpActive&&tmpActive.Hash&&tmpProvider&&typeof tmpProvider.getTheme==='function'){var tmpBundle=tmpProvider.getTheme(tmpActive.Hash);var tmpStrategy=tmpBundle&&tmpBundle.Modes&&tmpBundle.Modes.Strategy||'single';tmpDisabled=tmpStrategy==='single';if(tmpDisabled){tmpLockedToMode=tmpBundle.Modes&&tmpBundle.Modes.Default||tmpActiveMode||'light';tmpThemeName=tmpBundle.Name||tmpBundle.Hash||'this theme';}}var tmpLabels=this.options.Labels||_ViewConfiguration.Labels;var tmpShowIcons=this.options.ShowIcons!==false;// Use one-or-zero element arrays to drive each icon template so
+// the icon SVG never gets stuffed into AppData as a raw string.
+var tmpModeRows=[{Mode:'light',Label:tmpLabels.Light||'Light'},{Mode:'dark',Label:tmpLabels.Dark||'Dark'},{Mode:'system',Label:tmpLabels.System||'System'}];var tmpButtons=[];for(var i=0;i<tmpModeRows.length;i++){var tmpRow=tmpModeRows[i];var tmpIsActive=tmpActiveMode===tmpRow.Mode;// "Locked out" = single-mode theme AND this button is not the
+// mode the theme is fixed to. The active button keeps normal
+// styling so users can still see which mode is in use.
+var tmpLockedOut=tmpDisabled&&tmpRow.Mode!==tmpLockedToMode;var tmpTitle=void 0;if(tmpLockedOut){var tmpLockedLabel=tmpLockedToMode.charAt(0).toUpperCase()+tmpLockedToMode.slice(1);tmpTitle=tmpThemeName+' is fixed to '+tmpLockedLabel+' mode — pick a different theme to switch.';}else{tmpTitle=tmpRow.Label+' mode';}tmpButtons.push({Mode:tmpRow.Mode,Label:tmpRow.Label,Title:tmpTitle,Active:tmpIsActive,LockedOut:tmpLockedOut,IconLight:tmpShowIcons&&tmpRow.Mode==='light'?[{}]:[],IconDark:tmpShowIcons&&tmpRow.Mode==='dark'?[{}]:[],IconSystem:tmpShowIcons&&tmpRow.Mode==='system'?[{}]:[]});}// One-or-zero element array drives the locked-note template
+// (per CLAUDE.md "single-element-array trick"). Empty array →
+// note skipped entirely.
+var tmpLockedNoteSlot=[];var tmpWrapTitle='';if(tmpDisabled){var _tmpLockedLabel=tmpLockedToMode.charAt(0).toUpperCase()+tmpLockedToMode.slice(1);var tmpMessage=tmpThemeName+' is fixed to '+_tmpLockedLabel+' mode';tmpLockedNoteSlot=[{Message:tmpMessage}];tmpWrapTitle=tmpMessage+' — pick a different theme to switch modes.';}this.pict.AppData.PictSectionTheme=this.pict.AppData.PictSectionTheme||{};this.pict.AppData.PictSectionTheme.ModeToggle={ActiveMode:tmpActiveMode,Disabled:tmpDisabled,LockedToMode:tmpLockedToMode,ThemeName:tmpThemeName,Buttons:tmpButtons,LockedNoteSlot:tmpLockedNoteSlot,WrapTitle:tmpWrapTitle};}}]);}(libPictView);PictViewThemeModeToggle.default_configuration=_ViewConfiguration;module.exports=PictViewThemeModeToggle;},{"../Theme-Icons.js":26,"pict-view":69}],63:[function(require,module,exports){/**
+ * Theme-Picker — a custom dropdown that lists every theme registered
+ * with the Theme provider, grouped by category.
+ *
+ * Renders as a trigger button showing the active theme name + a chevron.
+ * Click → opens a `pict-section-modal` dropdown menu where each row is
+ * the theme name plus an inline SVG glyph indicating the modes the
+ * theme supports (sun for light-only, moon for dark-only, sun+moon for
+ * paired). This is why we ditched the native <select>: option elements
+ * can't render SVG, only plain text, and the unicode crescent
+ * substitutes that earlier looked like dental glyphs.
+ *
+ * Subscribes to `provider.onApply` so a theme switch from elsewhere
+ * (the modal-tucked picker, a hotkey, persistence restore) keeps the
+ * trigger button in sync.
+ *
+ * Drop-in destination: `<div id="Theme-Picker"></div>`.
+ *
+ * # Modal section dependency
+ *
+ * Requires pict-section-modal to be registered (the dropdown popover
+ * is a modal-section feature, not a hand-rolled DOM widget). When
+ * pict-section-theme.install() is used, the host always has the modal
+ * section available because Theme-Button needs it too. If you add this
+ * view manually without the modal section, the trigger button will
+ * still render but clicking it logs a warning and no-ops.
+ */var libPictView=require('pict-view');var libThemeIcons=require('../Theme-Icons.js');// AppData address used to surface picker state to templates.
+var APPDATA_ADDRESS='PictSectionTheme.Picker';var _ViewConfiguration={ViewIdentifier:'Theme-Picker',AutoInitialize:true,AutoRender:false,DefaultDestinationAddress:'#Theme-Picker',DefaultRenderable:'Theme-Picker-Renderable',ProviderHash:'Theme',ModalViewHash:'Pict-Section-Modal',// Optional categories block — array describing the optgroup order.
+// If omitted we discover categories from the provider's themes in
+// first-seen order.
+Categories:null,// Show the per-row mode-capability glyph (sun / moon / sun+moon) as
+// the leading icon on each dropdown item. Default on. Pass false if
+// you want a plainer menu.
+ShowModeIcons:true,Templates:[{Hash:'Theme-Picker-Template',// Trigger button that mirrors a native <select>'s look but
+// can carry SVG content. Clicking opens the modal dropdown.
+Template:/*html*/"\n<button type=\"button\" class=\"pict-theme-picker\"\n        title=\"{~D:AppData.PictSectionTheme.Picker.TriggerTooltip~}\"\n        onclick=\"_Pict.views['Theme-Picker'].openMenu(this);\">\n\t{~TS:Theme-Picker-Trigger-Glyph:AppData.PictSectionTheme.Picker.TriggerGlyphSlot~}\n\t<span class=\"pict-theme-picker-name\">{~D:AppData.PictSectionTheme.Picker.ActiveLabel~}</span>\n\t<span class=\"pict-theme-picker-chevron\">{~D:AppData.PictSectionTheme.Picker.ChevronHTML~}</span>\n</button>"},{// Wrapped in a 1-or-0 element array so the trigger glyph is
+// optional (ShowModeIcons: false → empty slot, no leading
+// icon). Per CLAUDE.md "AppData stores data, not HTML".
+Hash:'Theme-Picker-Trigger-Glyph',Template:/*html*/"<span class=\"pict-theme-picker-trigger-glyph\">{~D:Record.IconHTML~}</span>"}],Renderables:[{RenderableHash:'Theme-Picker-Renderable',TemplateHash:'Theme-Picker-Template',ContentDestinationAddress:'#Theme-Picker',RenderMethod:'replace'}],CSS:/*css*/"\n.pict-theme-picker {\n\tdisplay: inline-flex;\n\talign-items: center;\n\tgap: 8px;\n\tmin-width: 200px;\n\tmax-width: 100%;\n\tpadding: 6px 10px;\n\tborder-radius: 6px;\n\tfont: inherit;\n\tfont-size: 13px;\n\tbackground: var(--theme-color-background-secondary, #fbfbfc);\n\tcolor: var(--theme-color-text-primary, #1f2933);\n\tborder: 1px solid var(--theme-color-border-default, #cfd5dd);\n\tcursor: pointer;\n\ttext-align: left;\n\ttransition: border-color 120ms ease, box-shadow 120ms ease;\n}\n.pict-theme-picker:hover { border-color: var(--theme-color-text-muted, #6b6b6b); }\n.pict-theme-picker:focus, .pict-theme-picker:focus-visible {\n\toutline: none;\n\tborder-color: var(--theme-color-brand-primary, #2563eb);\n\tbox-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);\n}\n.pict-theme-picker .pict-theme-picker-name {\n\tflex: 1;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n\twhite-space: nowrap;\n}\n.pict-theme-picker .pict-theme-picker-chevron {\n\tcolor: var(--theme-color-text-muted, #6b6b6b);\n\tdisplay: inline-flex;\n\talign-items: center;\n}\n.pict-theme-picker-trigger-glyph {\n\tdisplay: inline-flex; align-items: center;\n\tcolor: var(--theme-color-text-muted, #6b6b6b);\n}\n\n/* Skin the modal-dropdown items with cleaner spacing for our glyphs. */\n.pict-theme-picker-menu .pict-modal-dropdown-item-icon {\n\twidth: 28px;\n\tdisplay: inline-flex;\n\talign-items: center;\n\tjustify-content: flex-start;\n\tcolor: var(--theme-color-text-muted, #6b6b6b);\n}\n.pict-theme-picker-menu .pict-modal-dropdown-item--active {\n\tbackground: var(--theme-color-background-selected, #e0eaff);\n\tcolor: var(--theme-color-brand-primary, #2563eb);\n}\n.pict-theme-picker-menu .pict-modal-dropdown-item--active .pict-modal-dropdown-item-icon {\n\tcolor: var(--theme-color-brand-primary, #2563eb);\n}",CSSPriority:500};var PictViewThemePicker=/*#__PURE__*/function(_libPictView6){function PictViewThemePicker(pFable,pOptions,pServiceHash){var _this38;_classCallCheck(this,PictViewThemePicker);_this38=_callSuper(this,PictViewThemePicker,[pFable,pOptions,pServiceHash]);_this38._unsubscribeFromProvider=null;return _this38;}_inherits(PictViewThemePicker,_libPictView6);return _createClass(PictViewThemePicker,[{key:"onAfterInitialize",value:function onAfterInitialize(){this._subscribeToProvider();return _superPropGet(PictViewThemePicker,"onAfterInitialize",this,1)?_superPropGet(PictViewThemePicker,"onAfterInitialize",this,3)([]):undefined;}},{key:"onBeforeRender",value:function onBeforeRender(pRenderable){this._refreshAppData();return _superPropGet(PictViewThemePicker,"onBeforeRender",this,1)?_superPropGet(PictViewThemePicker,"onBeforeRender",this,3)([pRenderable]):undefined;}},{key:"onAfterRender",value:function onAfterRender(pRenderable,pAddress,pRecord,pContent){this.pict.CSSMap.injectCSS();return _superPropGet(PictViewThemePicker,"onAfterRender",this,1)?_superPropGet(PictViewThemePicker,"onAfterRender",this,3)([pRenderable,pAddress,pRecord,pContent]):undefined;}/**
+	 * onclick handler — open the rich dropdown menu via pict-section-modal.
+	 * @param {HTMLElement} pAnchor - the trigger button (click target)
+	 */},{key:"openMenu",value:function openMenu(pAnchor){var tmpModal=this._modal();if(!tmpModal){if(typeof console!=='undefined'&&console.warn){console.warn('Theme-Picker: pict-section-modal not registered — cannot open menu.');}return null;}var tmpItems=this._buildMenuItems();var tmpSelf=this;return tmpModal.dropdown(pAnchor,{items:tmpItems,align:'left',minWidth:'260px',maxHeight:'60vh',className:'pict-theme-picker-menu',closeOnSelect:true,onSelect:function onSelect(pHash){tmpSelf.pick(pHash);}});}/**
+	 * Apply the picked theme. Public so external callers can drive the
+	 * picker programmatically too (hotkeys, tests, etc.).
+	 */},{key:"pick",value:function pick(pHash){var tmpProvider=this._provider();if(!tmpProvider)return false;// Preserve the current user-facing mode if the new theme
+// supports modes. Single-mode themes will clamp internally.
+var tmpActive=tmpProvider.getActiveTheme();var tmpMode=tmpActive?tmpActive.Mode:null;var tmpOk=tmpProvider.applyTheme(pHash,tmpMode);if(tmpOk&&typeof this.options.OnPick==='function'){try{this.options.OnPick(pHash);}catch(pErr){/* host hook failure */}}return tmpOk;}// ================================================================
+// Internals
+// ================================================================
+},{key:"_subscribeToProvider",value:function _subscribeToProvider(){if(this._unsubscribeFromProvider)return;var tmpProvider=this._provider();if(!tmpProvider||typeof tmpProvider.onApply!=='function')return;var tmpSelf=this;this._unsubscribeFromProvider=tmpProvider.onApply(function(){tmpSelf.render();});}},{key:"_provider",value:function _provider(){var tmpHash=this.options.ProviderHash||'Theme';return this.pict&&this.pict.providers&&this.pict.providers[tmpHash];}},{key:"_modal",value:function _modal(){var tmpHash=this.options.ModalViewHash||'Pict-Section-Modal';return this.pict&&this.pict.views&&this.pict.views[tmpHash];}/**
+	 * Build the modal-dropdown `items` array from the registered themes
+	 * + the catalog's category metadata. One Header row per category,
+	 * one item per theme with a leading SVG capability glyph.
+	 */},{key:"_buildMenuItems",value:function _buildMenuItems(){var tmpProvider=this._provider();var tmpThemes=tmpProvider?tmpProvider.listThemes():[];var tmpActive=tmpProvider?tmpProvider.getActiveTheme():{Hash:null};var tmpActiveHash=tmpActive&&tmpActive.Hash||null;var tmpCatalog=this._loadCatalog();var tmpCategoryByHash={};var tmpCategoryOrder=[];if(Array.isArray(this.options.Categories)){tmpCategoryOrder=this.options.Categories.slice();}for(var i=0;i<tmpCatalog.length;i++){var tmpEntry=tmpCatalog[i];var tmpCat=tmpEntry.Category||'Other';tmpCategoryByHash[tmpEntry.Hash]=tmpCat;if(tmpCategoryOrder.indexOf(tmpCat)<0)tmpCategoryOrder.push(tmpCat);}var tmpBuckets={};for(var _i27=0;_i27<tmpThemes.length;_i27++){var tmpTheme=tmpThemes[_i27];var _tmpCat=tmpCategoryByHash[tmpTheme.Hash]||'Other';if(!tmpBuckets[_tmpCat]){tmpBuckets[_tmpCat]=[];if(tmpCategoryOrder.indexOf(_tmpCat)<0)tmpCategoryOrder.push(_tmpCat);}tmpBuckets[_tmpCat].push(tmpTheme);}var tmpShowIcons=this.options.ShowModeIcons!==false;var tmpItems=[];for(var _i28=0;_i28<tmpCategoryOrder.length;_i28++){var _tmpCat2=tmpCategoryOrder[_i28];if(!tmpBuckets[_tmpCat2]||tmpBuckets[_tmpCat2].length===0)continue;tmpItems.push({Header:_tmpCat2});for(var j=0;j<tmpBuckets[_tmpCat2].length;j++){var _tmpTheme=tmpBuckets[_tmpCat2][j];var tmpIcon=tmpShowIcons?libThemeIcons.iconForTheme(_tmpTheme.Strategy,_tmpTheme.DefaultMode,14):'';tmpItems.push({Hash:_tmpTheme.Hash,Label:_tmpTheme.Name||_tmpTheme.Hash,Icon:tmpIcon,Style:_tmpTheme.Hash===tmpActiveHash?'active':null,Tooltip:this._capabilityLabel(_tmpTheme)});}}return tmpItems;}},{key:"_capabilityLabel",value:function _capabilityLabel(pTheme){var tmpStrategy=pTheme.Strategy||'single';if(tmpStrategy==='single'){var tmpMode=pTheme.DefaultMode||'light';return(pTheme.Name||pTheme.Hash)+' — '+(tmpMode==='dark'?'dark only':'light only');}return(pTheme.Name||pTheme.Hash)+' — light + dark';}},{key:"_refreshAppData",value:function _refreshAppData(){var tmpProvider=this._provider();var tmpThemes=tmpProvider?tmpProvider.listThemes():[];var tmpActive=tmpProvider?tmpProvider.getActiveTheme():{Hash:null};var tmpActiveHash=tmpActive&&tmpActive.Hash||null;// Find the active theme's metadata for the trigger glyph.
+var tmpActiveTheme=null;for(var i=0;i<tmpThemes.length;i++){if(tmpThemes[i].Hash===tmpActiveHash){tmpActiveTheme=tmpThemes[i];break;}}var tmpShowIcons=this.options.ShowModeIcons!==false;var tmpTriggerGlyphSlot=[];if(tmpShowIcons&&tmpActiveTheme){tmpTriggerGlyphSlot=[{IconHTML:libThemeIcons.iconForTheme(tmpActiveTheme.Strategy,tmpActiveTheme.DefaultMode,14)}];}this.pict.AppData.PictSectionTheme=this.pict.AppData.PictSectionTheme||{};this.pict.AppData.PictSectionTheme.Picker={ActiveHash:tmpActiveHash,ActiveLabel:tmpActiveTheme?tmpActiveTheme.Name||tmpActiveTheme.Hash:'Choose a theme',TriggerTooltip:tmpActiveTheme?this._capabilityLabel(tmpActiveTheme)+' — click to change':'Choose a theme',TriggerGlyphSlot:tmpTriggerGlyphSlot,ChevronHTML:libThemeIcons.iconChevronDown(10)};this.pict.AppData.PictSectionTheme.AllThemes=tmpThemes;}},{key:"_loadCatalog",value:function _loadCatalog(){try{return require('../themes/_catalog.js');}catch(pError){return[];}}}]);}(libPictView);PictViewThemePicker.default_configuration=_ViewConfiguration;PictViewThemePicker.APPDATA_ADDRESS=APPDATA_ADDRESS;module.exports=PictViewThemePicker;},{"../Theme-Icons.js":26,"../themes/_catalog.js":32,"pict-view":69}],64:[function(require,module,exports){/**
+ * Theme-ScaleSelect — dropdown that picks a viewport scale (zoom).
+ *
+ * Independent of the active theme bundle: scale is a per-user
+ * preference stored alongside ThemeHash + Mode in localStorage. Reads
+ * presets from the Theme-Scale helper (or a host-supplied `Presets`
+ * array). Subscribes to Theme-Scale.onChange so external scale changes
+ * (the persisted boot apply, hotkeys, other code) keep the dropdown's
+ * selected option in sync.
+ *
+ * Drop-in destination: `<div id="Theme-ScaleSelect"></div>`.
+ */var libPictView=require('pict-view');var libThemeScale=require('../Theme-Scale.js');var _ViewConfiguration={ViewIdentifier:'Theme-ScaleSelect',AutoInitialize:true,AutoRender:false,DefaultDestinationAddress:'#Theme-ScaleSelect',DefaultRenderable:'Theme-ScaleSelect-Renderable',// Optional override of the preset list. Each entry: { Value: <number>, Label: <string> }.
+// When omitted we use libThemeScale.PRESETS.
+Presets:null,Templates:[{Hash:'Theme-ScaleSelect-Template',Template:/*html*/"\n<select class=\"pict-theme-scaleselect\"\n        title=\"{~D:AppData.PictSectionTheme.ScaleSelect.Tooltip~}\"\n        onchange=\"_Pict.views['Theme-ScaleSelect'].pickScale(parseFloat(this.value));\">\n\t{~TS:Theme-ScaleSelect-Option-Template:AppData.PictSectionTheme.ScaleSelect.Options~}\n</select>"},{Hash:'Theme-ScaleSelect-Option-Template',Template:/*html*/"\n<option value=\"{~D:Record.Value~}\"{~NE:Record.Selected^ selected~}>{~D:Record.Label~}</option>"}],Renderables:[{RenderableHash:'Theme-ScaleSelect-Renderable',TemplateHash:'Theme-ScaleSelect-Template',ContentDestinationAddress:'#Theme-ScaleSelect',RenderMethod:'replace'}],CSS:/*css*/"\n.pict-theme-scaleselect {\n\tmin-width: 180px;\n\tpadding: 6px 10px;\n\tborder-radius: 6px;\n\tfont: inherit;\n\tfont-size: 13px;\n\tbackground: var(--theme-color-background-secondary, #fbfbfc);\n\tcolor: var(--theme-color-text-primary, #1f2933);\n\tborder: 1px solid var(--theme-color-border-default, #cfd5dd);\n\tcursor: pointer;\n}\n.pict-theme-scaleselect:focus {\n\toutline: none;\n\tborder-color: var(--theme-color-brand-primary, #2563eb);\n\tbox-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);\n}",CSSPriority:500};var PictViewThemeScaleSelect=/*#__PURE__*/function(_libPictView7){function PictViewThemeScaleSelect(pFable,pOptions,pServiceHash){var _this39;_classCallCheck(this,PictViewThemeScaleSelect);_this39=_callSuper(this,PictViewThemeScaleSelect,[pFable,pOptions,pServiceHash]);_this39._unsubscribeFromScale=null;return _this39;}_inherits(PictViewThemeScaleSelect,_libPictView7);return _createClass(PictViewThemeScaleSelect,[{key:"onAfterInitialize",value:function onAfterInitialize(){this._subscribeToScale();return _superPropGet(PictViewThemeScaleSelect,"onAfterInitialize",this,1)?_superPropGet(PictViewThemeScaleSelect,"onAfterInitialize",this,3)([]):undefined;}},{key:"onBeforeRender",value:function onBeforeRender(pRenderable){this._refreshAppData();return _superPropGet(PictViewThemeScaleSelect,"onBeforeRender",this,1)?_superPropGet(PictViewThemeScaleSelect,"onBeforeRender",this,3)([pRenderable]):undefined;}},{key:"onAfterRender",value:function onAfterRender(pRenderable,pAddress,pRecord,pContent){this.pict.CSSMap.injectCSS();return _superPropGet(PictViewThemeScaleSelect,"onAfterRender",this,1)?_superPropGet(PictViewThemeScaleSelect,"onAfterRender",this,3)([pRenderable,pAddress,pRecord,pContent]):undefined;}/**
+	 * onchange handler — apply a new scale and let the listener re-render.
+	 * @param {number} pScale
+	 */},{key:"pickScale",value:function pickScale(pScale){var tmpApplied=libThemeScale.applyScale(pScale);if(typeof this.options.OnScaleChange==='function'){try{this.options.OnScaleChange(tmpApplied);}catch(pErr){/* host hook failure */}}return tmpApplied;}// ================================================================
+// Internals
+// ================================================================
+},{key:"_subscribeToScale",value:function _subscribeToScale(){if(this._unsubscribeFromScale)return;var tmpSelf=this;this._unsubscribeFromScale=libThemeScale.onChange(function(){tmpSelf.render();});}},{key:"_refreshAppData",value:function _refreshAppData(){var tmpPresets=Array.isArray(this.options.Presets)?this.options.Presets:libThemeScale.PRESETS;var tmpActive=libThemeScale.getActive();// "Closest" match — the saved scale may be a custom value (e.g.
+// 1.10 from a hotkey nudge) that doesn't exactly equal any preset.
+// We highlight the nearest option so the dropdown still reflects
+// roughly where the user is.
+var tmpClosestIdx=0;var tmpClosestDelta=Infinity;for(var i=0;i<tmpPresets.length;i++){var tmpDelta=Math.abs(tmpPresets[i].Value-tmpActive);if(tmpDelta<tmpClosestDelta){tmpClosestDelta=tmpDelta;tmpClosestIdx=i;}}var tmpOptions=[];for(var _i29=0;_i29<tmpPresets.length;_i29++){var tmpEntry=tmpPresets[_i29];tmpOptions.push({Value:tmpEntry.Value,Label:tmpEntry.Label,Selected:_i29===tmpClosestIdx});}var tmpTooltip='Viewport scale — currently '+Math.round(tmpActive*100)+'%';this.pict.AppData.PictSectionTheme=this.pict.AppData.PictSectionTheme||{};this.pict.AppData.PictSectionTheme.ScaleSelect={ActiveScale:tmpActive,Tooltip:tmpTooltip,Options:tmpOptions};}}]);}(libPictView);PictViewThemeScaleSelect.default_configuration=_ViewConfiguration;module.exports=PictViewThemeScaleSelect;},{"../Theme-Scale.js":28,"pict-view":69}],65:[function(require,module,exports){/**
+ * Theme-TopBar — standard application chrome row.
+ *
+ * Provides the boilerplate every Pict / retold app remakes: a flex row
+ * with three zones — brand mark on the left, navigation in the middle,
+ * configuration / user widgets on the right (with the theme button
+ * pinned at the far edge).
+ *
+ *   ┌────────────────────────────────────────────────────────────────┐
+ *   │ [Brand-Mark]   [── Nav slot (flex-grow) ──]   [User-slot] [⚙]  │
+ *   └────────────────────────────────────────────────────────────────┘
+ *
+ * Auto-mounts:
+ *   - Theme-Brand-Mark in the brand slot (skip via MountBrandMark: false)
+ *   - Theme-Button at the far right of the user area (skip via
+ *     MountThemeButton: false)
+ *
+ * Host fills two empty slots via standard Pict view destinations:
+ *   - `#Theme-TopBar-Nav`  — primary navigation / action buttons
+ *   - `#Theme-TopBar-User` — app-specific user-area widgets (account,
+ *                            log toggle, custom indicators)
+ *
+ * Renders into `#Theme-TopBar` by default. The host's layout shell
+ * provides that destination — typically the top panel of a
+ * pict-section-modal Shell.
+ *
+ * The bottom border uses `--brand-color-primary-mode` so the topbar
+ * carries a thin brand stripe that auto-swaps with light/dark mode.
+ *
+ * Each app's nav / user-area views can stay app-specific; this view
+ * eliminates the chrome boilerplate around them.
+ */var libPictView=require('pict-view');var _ViewConfiguration={ViewIdentifier:'Theme-TopBar',AutoInitialize:true,AutoRender:false,DefaultDestinationAddress:'#Theme-TopBar',DefaultRenderable:'Theme-TopBar-Renderable',// When false, the host is responsible for mounting Theme-Brand-Mark
+// itself (or skipping the brand entirely).
+MountBrandMark:true,// When false, Theme-Button is not auto-mounted into the user slot.
+// Useful when the host wants to position the button somewhere else
+// or when no theme picker is desired.
+MountThemeButton:true,// ViewIdentifier of a host-supplied view that fills the nav slot
+// (#Theme-TopBar-Nav). Typical convention: a small per-app view
+// rendering primary action buttons / nav links / breadcrumbs.
+NavView:null,// ViewIdentifier of a host-supplied view that fills the user-area
+// slot (#Theme-TopBar-User). Theme-Button still auto-mounts at the
+// far edge — this view fills the slot before it.
+UserView:null,// Height of the bar in pixels. Drives the min-height on the
+// chrome row so it fills the panel cleanly even when the parent
+// chain (pict-section-modal shell uses min-height: 100% on its
+// panel content destination, which doesn't resolve through plain
+// height: 100% chains) doesn't establish a determinate height.
+// Hosts should match this to whatever Size they use on the panel
+// addPanel() call so the chrome and panel agree on the row size.
+Height:56,// Horizontal alignment of items inside the nav slot. The slot
+// itself stretches (flex: 1) between brand mark and user area;
+// this option controls where the nav content sits within that
+// stretched space. Default 'right' so action buttons hug the
+// user-area / theme button cluster (the convention every
+// retold-* app converged on). Override to 'left' to put the nav
+// flush against the brand, or 'center' to centre it across the
+// row. Maps to justify-content: flex-end / flex-start / center.
+NavAlign:'right',// Viewport width (px) below which the topbar collapses to compact
+// mode: nav + user-area widgets hide, a burger button shows in
+// their place. Clicking the burger opens a pict-section-modal
+// popup with a clone of the nav + user DOM, so every action stays
+// reachable.
+//
+// Default 900px — the conventional "narrow desktop / small laptop"
+// cut-off where a topbar with ~4 nav buttons + a brand mark + a
+// user-area cluster genuinely starts crowding. Most users will
+// resize a window to this range (drag a split-pane, dock a window
+// next to another app, etc.); 600px would only trigger at true
+// mobile widths most desktop users never hit.
+//
+// Conventional ladder for picking a value:
+//   ~1024px  large breakpoint — nav-heavy apps with 6+ buttons
+//    ~900px  default — "narrow desktop window" (recommended)
+//    ~768px  tablet portrait — minimal-nav apps
+//    ~600px  mobile-only — single-button toolbars
+//        0   disable compact mode entirely
+CompactBreakpoint:900,Templates:[{Hash:'Theme-TopBar-Template',// The burger button is hidden by default and the regular nav /
+// user-slot are visible — flipped by the media query in CSS
+// at the CompactBreakpoint (default 600px). On click the
+// burger opens a pict-section-modal popup containing a clone
+// of the existing #Theme-TopBar-Nav + #Theme-TopBar-User DOM
+// — host apps don't need to provide a separate burger view.
+Template:/*html*/"\n<div class=\"pict-theme-topbar\">\n\t<div class=\"pict-theme-topbar-mark\"><div id=\"Theme-Brand-Mark\"></div></div>\n\t<div class=\"pict-theme-topbar-nav\" id=\"Theme-TopBar-Nav\"></div>\n\t<div class=\"pict-theme-topbar-user\">\n\t\t<div class=\"pict-theme-topbar-user-slot\" id=\"Theme-TopBar-User\"></div>\n\t\t<div class=\"pict-theme-topbar-user-button\"><div id=\"Theme-Button\"></div></div>\n\t\t<button type=\"button\" class=\"pict-theme-topbar-burger\"\n\t\t\taria-label=\"More navigation\"\n\t\t\ttitle=\"Menu\"\n\t\t\tonclick=\"_Pict.views['Theme-TopBar'].openBurgerMenu();\">\n\t\t\t<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\"\n\t\t\t\tstroke=\"currentColor\" stroke-width=\"2\"\n\t\t\t\tstroke-linecap=\"round\" stroke-linejoin=\"round\"\n\t\t\t\taria-hidden=\"true\">\n\t\t\t\t<path d=\"M3 6h18M3 12h18M3 18h18\"/>\n\t\t\t</svg>\n\t\t</button>\n\t</div>\n</div>"}],Renderables:[{RenderableHash:'Theme-TopBar-Renderable',TemplateHash:'Theme-TopBar-Template',ContentDestinationAddress:'#Theme-TopBar',RenderMethod:'replace'}],CSS:/*css*/"\n.pict-theme-topbar {\n\tdisplay: flex;\n\talign-items: center;\n\tgap: 14px;\n\t/* The min-height is rewritten per-instance in onAfterRender from the\n\t   Height option (default 56). Avoids the percent-height resolution\n\t   trap: pict-section-modal's panel destination uses min-height: 100%\n\t   on its inner div, which means a child's height: 100% / min-height:\n\t   100% resolves against the parent's *property* (auto), not its\n\t   resolved size \u2014 and collapses the row to its content. A fixed px\n\t   value gives align-items: center real space to centre into. */\n\tmin-height: 56px;\n\tpadding: 0 14px;\n\tbox-sizing: border-box;\n\tbackground: var(--theme-color-background-panel, transparent);\n\t/* Brand stripes are drawn by .pict-theme-topbar::after as an absolute\n\t   element overlaying the bottom 5px of the row. Using ::after rather\n\t   than border-bottom + box-shadow lets us put a transparent gap\n\t   between the two stripes (border / box-shadow can't draw gaps).\n\t   Position relative so the ::after positions to this row. */\n\tposition: relative;\n}\n/* Two-stripe brand identifier at the bottom of the topbar:\n     4px brand-primary (thicker \u2014 the dominant identifier)\n     2px transparent gap (clearly readable separation)\n     3px brand-secondary (thinner than primary but still substantial)\n   Earlier iterations used 1\u20132px stripes; both read clearly at light\n   mode but dark-mode secondary colors are often desaturated (lifted)\n   so the eye can miss a thin band against a dark background. The\n   current sizes push the secondary above the perception threshold\n   regardless of palette. Stripes overlay the bottom 9px of the row;\n   content (which centres in the full row via align-items: center)\n   keeps its visual position. */\n.pict-theme-topbar::after {\n\tcontent: '';\n\tposition: absolute;\n\tleft: 0;\n\tright: 0;\n\tbottom: 0;\n\theight: 9px;\n\tpointer-events: none;\n\tbackground: linear-gradient(\n\t\tto bottom,\n\t\tvar(--brand-color-primary-mode, var(--theme-color-brand-primary, #2563eb)) 0,\n\t\tvar(--brand-color-primary-mode, var(--theme-color-brand-primary, #2563eb)) 4px,\n\t\ttransparent 4px,\n\t\ttransparent 6px,\n\t\tvar(--brand-color-secondary-mode, var(--theme-color-brand-secondary, transparent)) 6px,\n\t\tvar(--brand-color-secondary-mode, var(--theme-color-brand-secondary, transparent)) 9px\n\t);\n}\n.pict-theme-topbar-mark {\n\tflex: 0 0 auto;\n\tdisplay: flex;\n\talign-items: center;\n}\n.pict-theme-topbar-nav {\n\tflex: 1 1 auto;\n\tdisplay: flex;\n\talign-items: center;\n\t/* Default to right-aligning nav items inside the stretched slot \u2014\n\t   the convention retold-* apps converged on. Overridden per-instance\n\t   from the NavAlign option in onAfterRender. */\n\tjustify-content: flex-end;\n\tgap: 8px;\n\tmin-width: 0;\n\t/* Horizontally scrollable when the nav overflows (narrow viewports\n\t   with many buttons) \u2014 better than overflow:hidden which would\n\t   silently clip buttons offscreen. The vertical axis stays clipped\n\t   so a tall accidental child doesn't blow up the row height. A\n\t   proper overflow menu is a future enhancement; this gets us safe\n\t   degradation today. */\n\toverflow-x: auto;\n\toverflow-y: hidden;\n\t/* Hide the scrollbar by default; modern browsers pick up the\n\t   trackpad scroll without it. Apps wanting a visible scrollbar\n\t   can override at higher specificity. */\n\tscrollbar-width: none;\n}\n.pict-theme-topbar-nav::-webkit-scrollbar { display: none; }\n/* Active-route indicator. The convention every host app should follow:\n   put aria-current=\"page\" on the button (or anchor) representing the\n   current route. The W3C-standard attribute reads correctly to screen\n   readers and gets a brand-tinted highlight here. Apps that already\n   ship their own active styling can override these rules \u2014 they're\n   keyed off attribute selectors so no class collision is possible. */\n.pict-theme-topbar-nav [aria-current=\"page\"],\n.pict-theme-topbar-user [aria-current=\"page\"] {\n\tcolor: var(--brand-color-primary-mode, var(--theme-color-brand-primary, #2563eb));\n\tborder-color: var(--brand-color-primary-mode, var(--theme-color-brand-primary, #2563eb));\n\tbackground: var(--theme-color-background-hover, rgba(37, 99, 235, 0.08));\n}\n.pict-theme-topbar-user {\n\tflex: 0 0 auto;\n\tdisplay: flex;\n\talign-items: center;\n\tgap: 8px;\n}\n.pict-theme-topbar-user-slot {\n\tdisplay: flex;\n\talign-items: center;\n\tgap: 8px;\n}\n.pict-theme-topbar-user-button {\n\tdisplay: flex;\n\talign-items: center;\n}\n/* Burger button \u2014 hidden by default; the media query (or the inline\n   per-instance JS that swaps it via CompactBreakpoint) shows it once\n   the viewport drops below the host's compact threshold. Sized to\n   match Theme-Button (28\xD728) so the row's rhythm is preserved. */\n.pict-theme-topbar-burger {\n\tdisplay: none;\n\talign-items: center;\n\tjustify-content: center;\n\twidth: 28px;\n\theight: 28px;\n\tpadding: 0;\n\tborder-radius: 6px;\n\tborder: 1px solid var(--theme-color-border-default, #cfd5dd);\n\tbackground: var(--theme-color-background-secondary, #fbfbfc);\n\tcolor: var(--theme-color-text-secondary, #4a5568);\n\tcursor: pointer;\n\ttransition: background-color 120ms ease, color 120ms ease, border-color 120ms ease;\n}\n.pict-theme-topbar-burger:hover {\n\tbackground: var(--theme-color-background-hover, #f0f0f0);\n\tcolor: var(--brand-color-primary-mode, var(--theme-color-brand-primary, #2563eb));\n\tborder-color: var(--brand-color-primary-mode, var(--theme-color-brand-primary, #2563eb));\n}\n/* Burger menu popup \u2014 applied to the cloned nav + user DOM inside\n   pict-section-modal. The cloned children inherit their original\n   styling (action buttons, badges, etc.) so the popup looks visually\n   consistent with what was on the topbar. */\n.pict-theme-burger-menu {\n\tdisplay: flex;\n\tflex-direction: column;\n\tgap: 6px;\n}\n.pict-theme-burger-menu-section {\n\tdisplay: flex;\n\tflex-direction: column;\n\tgap: 6px;\n}\n/* Cloned children render as a vertical stack inside the popup \u2014 flip\n   the horizontal flex layouts to column so each button takes a full\n   row instead of cramming side-by-side at narrow width. */\n.pict-theme-burger-menu .rm-topbar-nav,\n.pict-theme-burger-menu .rm-topbar-user,\n.pict-theme-burger-menu [class*=\"-topbar-nav\"],\n.pict-theme-burger-menu [class*=\"-topbar-user\"] {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: stretch;\n\tgap: 6px;\n}\n.pict-theme-burger-menu button { width: 100%; text-align: left; }\n.pict-theme-burger-menu .rm-topbar-nav-divider,\n.pict-theme-burger-menu [class*=\"divider\"] { display: none; }\n/* Compact mode \u2014 defaults to a 900px breakpoint. The onAfterRender\n   handler injects a per-instance <style> rule when the host passes a\n   different CompactBreakpoint, so this @media block is the fallback\n   for hosts that accept the default. */\n@media (max-width: 900px) {\n\t.pict-theme-topbar-nav            { display: none !important; }\n\t.pict-theme-topbar-user-slot      { display: none !important; }\n\t.pict-theme-topbar-burger         { display: inline-flex; }\n\t/* In wide mode the flex-1 nav slot pushes the user-area to the\n\t   right edge. With the nav hidden the user-area would collapse\n\t   left of the now-empty middle; the auto-margin re-creates the\n\t   \"push right\" effect so the theme button + burger stay flush\n\t   against the right edge of the topbar. */\n\t.pict-theme-topbar-user           { margin-left: auto; }\n}",CSSPriority:500};var PictViewThemeTopBar=/*#__PURE__*/function(_libPictView8){function PictViewThemeTopBar(pFable,pOptions,pServiceHash){_classCallCheck(this,PictViewThemeTopBar);return _callSuper(this,PictViewThemeTopBar,[pFable,pOptions,pServiceHash]);}_inherits(PictViewThemeTopBar,_libPictView8);return _createClass(PictViewThemeTopBar,[{key:"onAfterRender",value:function onAfterRender(pRenderable,pAddress,pRecord,pContent){this.pict.CSSMap.injectCSS();// Apply the configured Height to the rendered .pict-theme-topbar.
+// Using inline style so each instance can carry its own size
+// (different apps will pick different heights) without us having
+// to inject per-instance <style> blocks.
+if(typeof document!=='undefined'&&this.options.Height){var tmpRoot=document.querySelector('.pict-theme-topbar');if(tmpRoot){tmpRoot.style.minHeight=this.options.Height+'px';}}// Per-instance CompactBreakpoint. CSS @media rules can't reference
+// JS option values, so when the host overrides the default 600px
+// we inject a single-rule <style> with the chosen breakpoint and
+// !important to win over the static media query. Set to 0 to
+// disable compact mode entirely (the burger stays hidden).
+this._applyCompactBreakpoint();// Translate NavAlign ('left' | 'right' | 'center') to the matching
+// justify-content. Right is the default (and already in the static
+// CSS), but the inline style wins so an explicit option always
+// takes precedence over the cached stylesheet.
+if(typeof document!=='undefined'&&this.options.NavAlign){var tmpJustify={left:'flex-start',right:'flex-end',center:'center'}[this.options.NavAlign];if(tmpJustify){var tmpNav=document.querySelector('.pict-theme-topbar-nav');if(tmpNav){tmpNav.style.justifyContent=tmpJustify;}}}// Auto-mount the standard pieces. Host can opt out via the view
+// options (MountBrandMark / MountThemeButton).
+if(this.options.MountBrandMark!==false){var tmpBrandMark=this.pict.views['Theme-Brand-Mark'];if(tmpBrandMark){tmpBrandMark.render();}}if(this.options.NavView){var tmpNavView=this.pict.views[this.options.NavView];if(tmpNavView){tmpNavView.render();}else if(this.log&&this.log.warn){this.log.warn('Theme-TopBar: NavView "'+this.options.NavView+'" not registered');}}if(this.options.UserView){var tmpUserView=this.pict.views[this.options.UserView];if(tmpUserView){tmpUserView.render();}else if(this.log&&this.log.warn){this.log.warn('Theme-TopBar: UserView "'+this.options.UserView+'" not registered');}}if(this.options.MountThemeButton!==false){var tmpThemeButton=this.pict.views['Theme-Button'];if(tmpThemeButton){tmpThemeButton.render();}}return _superPropGet(PictViewThemeTopBar,"onAfterRender",this,1)?_superPropGet(PictViewThemeTopBar,"onAfterRender",this,3)([pRenderable,pAddress,pRecord,pContent]):undefined;}// ─── Per-route slot swapping ──────────────────────────────────────────
+// Apps with chrome that morphs between routes (e.g. breadcrumb-style
+// navigation that differs by section) call setNavView / setUserView
+// from their router callback. The new view is rendered into the
+// matching slot and the option is persisted so subsequent re-renders
+// of the topbar (theme switches, etc.) keep the new view mounted.
+/**
+	 * Swap the NavView (slot at `#Theme-TopBar-Nav`) at runtime.
+	 * @param {string|null} pViewIdentifier
+	 *   View hash to mount, or null to clear the slot.
+	 */},{key:"setNavView",value:function setNavView(pViewIdentifier){this.options.NavView=pViewIdentifier||null;this._mountSlot('#Theme-TopBar-Nav',this.options.NavView);}/**
+	 * Swap the UserView (slot at `#Theme-TopBar-User`) at runtime.
+	 * @param {string|null} pViewIdentifier
+	 */},{key:"setUserView",value:function setUserView(pViewIdentifier){this.options.UserView=pViewIdentifier||null;this._mountSlot('#Theme-TopBar-User',this.options.UserView);}},{key:"_mountSlot",value:function _mountSlot(pDestSelector,pViewIdentifier){// Clear the slot first — handles both the clear-only case
+// (pViewIdentifier is null) and the swap case (gives the
+// new view a clean slate when its renderable doesn't use
+// `replace` mode).
+if(typeof document!=='undefined'){var tmpDest=document.querySelector(pDestSelector);if(tmpDest){tmpDest.innerHTML='';}}if(!pViewIdentifier){return;}var tmpView=this.pict.views[pViewIdentifier];if(tmpView){tmpView.render();}else if(this.log&&this.log.warn){this.log.warn('Theme-TopBar: view "'+pViewIdentifier+'" not registered');}}// ─── Compact mode + burger menu ──────────────────────────────────────
+// At narrow widths the nav + user-area slots collapse into a single
+// burger button that opens a pict-section-modal popup with the
+// cloned nav + user DOM. The default breakpoint is 600px; hosts that
+// want a different value pass CompactBreakpoint in ViewOptions.
+},{key:"_applyCompactBreakpoint",value:function _applyCompactBreakpoint(){if(typeof document==='undefined')return;// Default value of 900 lives in the static CSS @media block; we
+// only need to inject when the host explicitly overrode it.
+var tmpBreakpoint=this.options.CompactBreakpoint;if(tmpBreakpoint===undefined||tmpBreakpoint===null)return;if(tmpBreakpoint===900)return;// matches default — no override needed
+var tmpStyleId='pict-theme-topbar-compact-'+this.UUID;var tmpStyleEl=document.getElementById(tmpStyleId);if(!tmpStyleEl){tmpStyleEl=document.createElement('style');tmpStyleEl.id=tmpStyleId;document.head.appendChild(tmpStyleEl);}// 0 (or any non-positive value) disables compact mode by emitting
+// a never-matching media rule. The static CSS still has the 600px
+// rule, so we override it with a more-specific selector + the
+// chosen breakpoint. Specificity-wise the inline rule wins
+// because it's emitted after the static CSS and has !important
+// matching the static rule's importance.
+if(typeof tmpBreakpoint!=='number'||tmpBreakpoint<=0){// Disable: force compact selectors to never apply by giving
+// the burger display: none unconditionally at all widths.
+tmpStyleEl.textContent='.pict-theme-topbar-nav            { display: flex !important; }\n'+'.pict-theme-topbar-user-slot      { display: flex !important; }\n'+'.pict-theme-topbar-burger         { display: none !important; }\n'+'.pict-theme-topbar-user           { margin-left: 0 !important; }\n';}else{tmpStyleEl.textContent='@media (max-width: '+tmpBreakpoint+'px) {\n'+'\t.pict-theme-topbar-nav            { display: none !important; }\n'+'\t.pict-theme-topbar-user-slot      { display: none !important; }\n'+'\t.pict-theme-topbar-burger         { display: inline-flex !important; }\n'+'\t.pict-theme-topbar-user           { margin-left: auto !important; }\n'+'}\n'+'@media (min-width: '+(tmpBreakpoint+1)+'px) {\n'+'\t.pict-theme-topbar-nav            { display: flex !important; }\n'+'\t.pict-theme-topbar-user-slot      { display: flex !important; }\n'+'\t.pict-theme-topbar-burger         { display: none !important; }\n'+'\t.pict-theme-topbar-user           { margin-left: 0 !important; }\n'+'}\n';}}/**
+	 * Open the burger / overflow menu. Clones the current contents of
+	 * `#Theme-TopBar-Nav` and `#Theme-TopBar-User` into a
+	 * pict-section-modal popup so every action stays reachable at narrow
+	 * widths. The cloned buttons keep their inline `onclick` handlers
+	 * (those reference globals like `_Pict.PictApplication.*`, which
+	 * resolve at click-time regardless of where the DOM lives).
+	 *
+	 * Override on the instance (`view.openBurgerMenu = function() {...}`)
+	 * to customise the popup contents — e.g. emit a per-app menu view
+	 * instead of cloning the topbar DOM.
+	 */},{key:"openBurgerMenu",value:function openBurgerMenu(){if(typeof document==='undefined')return null;var tmpModal=this.pict.views['Pict-Section-Modal'];if(!tmpModal||typeof tmpModal.show!=='function'){if(typeof console!=='undefined'&&console.warn){console.warn('Theme-TopBar: pict-section-modal not registered — burger menu unavailable.');}return null;}var tmpSections=[];var tmpNav=document.querySelector('#Theme-TopBar-Nav');var tmpUser=document.querySelector('#Theme-TopBar-User');if(tmpNav&&tmpNav.innerHTML.trim()){tmpSections.push('<div class="pict-theme-burger-menu-section">'+tmpNav.innerHTML+'</div>');}if(tmpUser&&tmpUser.innerHTML.trim()){tmpSections.push('<div class="pict-theme-burger-menu-section">'+tmpUser.innerHTML+'</div>');}if(tmpSections.length===0){tmpSections.push('<div class="pict-theme-burger-menu-empty">No menu items configured.</div>');}var tmpHTML='<div class="pict-theme-burger-menu">'+tmpSections.join('')+'</div>';return tmpModal.show({title:'Menu',content:tmpHTML,width:'280px',closeable:true,buttons:[]});}}]);}(libPictView);module.exports=PictViewThemeTopBar;module.exports.default_configuration=_ViewConfiguration;},{"pict-view":69}],66:[function(require,module,exports){module.exports={"name":"pict-template","version":"1.0.15","description":"Pict Template Base Class","main":"source/Pict-Template.js","scripts":{"start":"node source/Pict-Template.js","test":"npx quack test","tests":"npx quack test -g","coverage":"npx quack coverage","build":"npx quack build","types":"tsc -p ."},"types":"types/source/Pict-Template.d.ts","repository":{"type":"git","url":"git+https://github.com/stevenvelozo/pict-view.git"},"author":"steven velozo <steven@velozo.com>","license":"MIT","bugs":{"url":"https://github.com/stevenvelozo/pict-view/issues"},"homepage":"https://github.com/stevenvelozo/pict-view#readme","devDependencies":{"pict":"^1.0.348","quackage":"^1.0.58","typescript":"^5.9.3"},"mocha":{"diff":true,"extension":["js"],"package":"./package.json","reporter":"spec","slow":"75","timeout":"5000","ui":"tdd","watch-files":["source/**/*.js","test/**/*.js"],"watch-ignore":["lib/vendor"]},"dependencies":{"fable-serviceproviderbase":"^3.0.19"}};},{}],67:[function(require,module,exports){var libFableServiceBase=require('fable-serviceproviderbase');var libPackage=require('../package.json');/** @typedef {import('pict') & {
+ *     [key: string]: any, // represent services for now as a workaround
+ * }} Pict *//**
+ * @class PictTemplateExpression
+ * @classdesc The PictTemplateExpression class is a service provider for the pict anti-framework that provides template rendering services.
+ */var PictTemplateExpression=/*#__PURE__*/function(_libFableServiceBase3){/**
+	 * @param {Pict} pFable - The Fable Framework instance
+	 * @param {Record<string, any>} [pOptions] - The options for the service
+	 * @param {string} [pServiceHash] - The hash of the service
+	 */function PictTemplateExpression(pFable,pOptions,pServiceHash){var _this40;_classCallCheck(this,PictTemplateExpression);_this40=_callSuper(this,PictTemplateExpression,[pFable,pOptions,pServiceHash]);/** @type {Pict} */_this40.fable;/** @type {Pict} */_this40.pict=_this40.fable;_this40.serviceType='PictTemplate';/** @type {Record<string, any>} */_this40._Package=libPackage;return _this40;}/**
+	 * Render a template expression, returning a string with the resulting content.
+	 *
+	 * @param {string} pTemplateHash - The hash contents of the template (what's between the template start and stop tags)
+	 * @param {any} pRecord - The json object to be used as the Record for the template render
+	 * @param {Array<any>} pContextArray - An array of context objects accessible from the template; safe to leave empty
+	 * @param {any} [pScope] - A sticky scope that can be used to carry state and simplify template
+	 * @param {any} [pState] - A catchall state object for plumbing data through template processing.
+	 *
+	 * @return {string} The rendered template
+	 */_inherits(PictTemplateExpression,_libFableServiceBase3);return _createClass(PictTemplateExpression,[{key:"render",value:function render(pTemplateHash,pRecord,pContextArray,pScope,pState){return'';}/**
+	 * Render a template expression, deliver a string with the resulting content to a callback function.
+	 *
+	 * @param {string} pTemplateHash - The hash contents of the template (what's between the template start and stop tags)
+	 * @param {any} pRecord - The json object to be used as the Record for the template render
+	 * @param {(error?: Error, content?: String) => void} fCallback - callback function invoked with the rendered template, or an error
+	 * @param {Array<any>} pContextArray - An array of context objects accessible from the template; safe to leave empty
+	 * @param {any} [pScope] - A sticky scope that can be used to carry state and simplify template
+	 * @param {any} [pState] - A catchall state object for plumbing data through template processing.
+	 *
+	 * @return {void}
+	 */},{key:"renderAsync",value:function renderAsync(pTemplateHash,pRecord,fCallback,pContextArray,pScope,pState){return fCallback(null,this.render(pTemplateHash,pRecord,pContextArray,pScope,pState));}/**
+	 * Provide a match criteria for a template expression.  Anything between these two values is returned as the template hash.
+	 *
+	 * @param {string} pMatchStart - The string pattern to start a match in the template trie
+	 * @param {string} pMatchEnd  - The string pattern to stop a match in the trie acyclic graph
+	 *
+	 * @return {void}
+	 */},{key:"addPattern",value:function addPattern(pMatchStart,pMatchEnd){return this.pict.MetaTemplate.addPatternBoth(pMatchStart,pMatchEnd,this.render,this.renderAsync,this);}/**
+	 * Read a value from a nested object using a dot notation string.
+	 *
+	 * @param {string} pAddress - The address to resolve
+	 * @param {Record<string, any>} pRecord - The record to resolve
+	 * @param {Array<any>} [pContextArray] - The context array to resolve (optional)
+	 * @param {Record<string, any>} [pRootDataObject] - The root data object to resolve (optional)
+	 * @param {any} [pScope] - A sticky scope that can be used to carry state and simplify template
+	 * @param {any} [pState] - A catchall state object for plumbing data through template processing.
+	 *
+	 * @return {any} The value at the given address, or undefined
+	 */},{key:"resolveStateFromAddress",value:function resolveStateFromAddress(pAddress,pRecord,pContextArray,pRootDataObject,pScope,pState){return this.pict.resolveStateFromAddress(pAddress,pRecord,pContextArray,pRootDataObject,pScope,pState);}}]);}(libFableServiceBase);module.exports=PictTemplateExpression;module.exports.template_hash='Default';},{"../package.json":66,"fable-serviceproviderbase":2}],68:[function(require,module,exports){module.exports={"name":"pict-view","version":"1.0.68","description":"Pict View Base Class","main":"source/Pict-View.js","scripts":{"test":"npx quack test","tests":"npx quack test -g","start":"node source/Pict-View.js","coverage":"npx quack coverage","build":"npx quack build","docker-dev-build":"docker build ./ -f Dockerfile_LUXURYCode -t pict-view-image:local","docker-dev-run":"docker run -it -d --name pict-view-dev -p 30001:8080 -p 38086:8086 -v \"$PWD/.config:/home/coder/.config\"  -v \"$PWD:/home/coder/pict-view\" -u \"$(id -u):$(id -g)\" -e \"DOCKER_USER=$USER\" pict-view-image:local","docker-dev-shell":"docker exec -it pict-view-dev /bin/bash","types":"tsc -p .","lint":"eslint source/**"},"types":"types/source/Pict-View.d.ts","repository":{"type":"git","url":"git+https://github.com/stevenvelozo/pict-view.git"},"author":"steven velozo <steven@velozo.com>","license":"MIT","bugs":{"url":"https://github.com/stevenvelozo/pict-view/issues"},"homepage":"https://github.com/stevenvelozo/pict-view#readme","devDependencies":{"@eslint/js":"^9.39.1","browser-env":"^3.3.0","eslint":"^9.39.1","pict":"^1.0.363","quackage":"^1.0.65","typescript":"^5.9.3"},"mocha":{"diff":true,"extension":["js"],"package":"./package.json","reporter":"spec","slow":"75","timeout":"5000","ui":"tdd","watch-files":["source/**/*.js","test/**/*.js"],"watch-ignore":["lib/vendor"]},"dependencies":{"fable":"^3.1.67","fable-serviceproviderbase":"^3.0.19"}};},{}],69:[function(require,module,exports){var libFableServiceBase=require('fable-serviceproviderbase');var libPackage=require('../package.json');var defaultPictViewSettings={DefaultRenderable:false,DefaultDestinationAddress:false,DefaultTemplateRecordAddress:false,ViewIdentifier:false,// If this is set to true, when the App initializes this will.
+// After the App initializes, initialize will be called as soon as it's added.
+AutoInitialize:true,AutoInitializeOrdinal:0,// If this is set to true, when the App autorenders (on load) this will.
+// After the App initializes, render will be called as soon as it's added.
+AutoRender:true,AutoRenderOrdinal:0,AutoSolveWithApp:true,AutoSolveOrdinal:0,CSSHash:false,CSS:false,CSSProvider:false,CSSPriority:500,Templates:[],DefaultTemplates:[],Renderables:[],Manifests:{}};/** @typedef {(error?: Error) => void} ErrorCallback *//** @typedef {number | boolean} PictTimestamp *//**
+ * @typedef {'replace' | 'append' | 'prepend' | 'append_once' | 'virtual-assignment'} RenderMethod
+ *//**
+ * @typedef {Object} Renderable
+ *
+ * @property {string} RenderableHash - A unique hash for the renderable.
+ * @property {string} TemplateHash - The hash of the template to use for rendering this renderable.
+ * @property {string} [DefaultTemplateRecordAddress] - The default address for resolving the data record for this renderable.
+ * @property {string} [ContentDestinationAddress] - The default address (DOM CSS selector) for rendering the content of this renderable.
+ * @property {RenderMethod} [RenderMethod=replace] - The method to use when projecting the renderable to the DOM ('replace', 'append', 'prepend', 'append_once', 'virtual-assignment').
+ * @property {string} [TestAddress] - The address to use for testing the renderable.
+ * @property {string} [TransactionHash] - The transaction hash for the root renderable.
+ * @property {string} [RootRenderableViewHash] - The hash of the root renderable.
+ * @property {string} [Content] - The rendered content for this renderable, if applicable.
+ *//**
+ * Represents a view in the Pict ecosystem.
+ */var PictView=/*#__PURE__*/function(_libFableServiceBase4){/**
+	 * @param {any} pFable - The Fable object that this service is attached to.
+	 * @param {any} [pOptions] - (optional) The options for this service.
+	 * @param {string} [pServiceHash] - (optional) The hash of the service.
+	 */function PictView(pFable,pOptions,pServiceHash){var _this41;_classCallCheck(this,PictView);// Intersect default options, parent constructor, service information
+var tmpOptions=Object.assign({},JSON.parse(JSON.stringify(defaultPictViewSettings)),pOptions);_this41=_callSuper(this,PictView,[pFable,tmpOptions,pServiceHash]);//FIXME: add types to fable and ancillaries
+/** @type {any} */_this41.fable;/** @type {any} */_this41.options;/** @type {String} */_this41.UUID;/** @type {String} */_this41.Hash;/** @type {any} */_this41.log;var tmpHashIsUUID=_this41.Hash===_this41.UUID;//NOTE: since many places are using the view UUID as the HTML element ID, we prefix it to avoid starting with a number
+_this41.UUID="V-".concat(_this41.UUID);if(tmpHashIsUUID){_this41.Hash=_this41.UUID;}if(!_this41.options.ViewIdentifier){_this41.options.ViewIdentifier="AutoViewID-".concat(_this41.fable.getUUID());}_this41.serviceType='PictView';/** @type {Record<string, any>} */_this41._Package=libPackage;// Convenience and consistency naming
+/** @type {import('pict') & { log: any, instantiateServiceProviderWithoutRegistration: (hash: String) => any, instantiateServiceProviderIfNotExists: (hash: string) => any, TransactionTracking: import('pict/types/source/services/Fable-Service-TransactionTracking') }} */_this41.pict=_this41.fable;// Wire in the essential Pict application state
+_this41.AppData=_this41.pict.AppData;_this41.Bundle=_this41.pict.Bundle;/** @type {PictTimestamp} */_this41.initializeTimestamp=false;/** @type {PictTimestamp} */_this41.lastSolvedTimestamp=false;/** @type {PictTimestamp} */_this41.lastRenderedTimestamp=false;/** @type {PictTimestamp} */_this41.lastMarshalFromViewTimestamp=false;/** @type {PictTimestamp} */_this41.lastMarshalToViewTimestamp=false;_this41.pict.instantiateServiceProviderIfNotExists('TransactionTracking');// Load all templates from the array in the options
+// Templates are in the form of {Hash:'Some-Template-Hash',Template:'Template content',Source:'TemplateSource'}
+for(var i=0;i<_this41.options.Templates.length;i++){var tmpTemplate=_this41.options.Templates[i];if(!('Hash'in tmpTemplate)||!('Template'in tmpTemplate)){_this41.log.error("PictView [".concat(_this41.UUID,"]::[").concat(_this41.Hash,"] ").concat(_this41.options.ViewIdentifier," could not load Template ").concat(i," in the options array."),tmpTemplate);}else{if(!tmpTemplate.Source){tmpTemplate.Source="PictView [".concat(_this41.UUID,"]::[").concat(_this41.Hash,"] ").concat(_this41.options.ViewIdentifier," options object.");}_this41.pict.TemplateProvider.addTemplate(tmpTemplate.Hash,tmpTemplate.Template,tmpTemplate.Source);}}// Load all default templates from the array in the options
+// Templates are in the form of {Prefix:'',Postfix:'-List-Row',Template:'Template content',Source:'TemplateSourceString'}
+for(var _i30=0;_i30<_this41.options.DefaultTemplates.length;_i30++){var tmpDefaultTemplate=_this41.options.DefaultTemplates[_i30];if(!('Postfix'in tmpDefaultTemplate)||!('Template'in tmpDefaultTemplate)){_this41.log.error("PictView [".concat(_this41.UUID,"]::[").concat(_this41.Hash,"] ").concat(_this41.options.ViewIdentifier," could not load Default Template ").concat(_i30," in the options array."),tmpDefaultTemplate);}else{if(!tmpDefaultTemplate.Source){tmpDefaultTemplate.Source="PictView [".concat(_this41.UUID,"]::[").concat(_this41.Hash,"] ").concat(_this41.options.ViewIdentifier," options object.");}_this41.pict.TemplateProvider.addDefaultTemplate(tmpDefaultTemplate.Prefix,tmpDefaultTemplate.Postfix,tmpDefaultTemplate.Template,tmpDefaultTemplate.Source);}}// Load the CSS if it's available
+if(_this41.options.CSS){var tmpCSSHash=_this41.options.CSSHash?_this41.options.CSSHash:"View-".concat(_this41.options.ViewIdentifier);var tmpCSSProvider=_this41.options.CSSProvider?_this41.options.CSSProvider:tmpCSSHash;_this41.pict.CSSMap.addCSS(tmpCSSHash,_this41.options.CSS,tmpCSSProvider,_this41.options.CSSPriority);}// Load all renderables
+// Renderables are launchable renderable instructions with templates
+// They look as such: {Identifier:'ContentEntry', TemplateHash:'Content-Entry-Section-Main', ContentDestinationAddress:'#ContentSection', RecordAddress:'AppData.Content.DefaultText', ManifestTransformation:'ManyfestHash', ManifestDestinationAddress:'AppData.Content.DataToTransformContent'}
+// The only parts that are necessary are Identifier and Template
+// A developer can then do render('ContentEntry') and it just kinda works.  Or they can override the ContentDestinationAddress
+/** @type {Record<String, Renderable>} */_this41.renderables={};for(var _i31=0;_i31<_this41.options.Renderables.length;_i31++){/** @type {Renderable} */var tmpRenderable=_this41.options.Renderables[_i31];_this41.addRenderable(tmpRenderable);}return _this41;}/**
+	 * Adds a renderable to the view.
+	 *
+	 * @param {string | Renderable} pRenderableHash - The hash of the renderable, or a renderable object.
+	 * @param {string} [pTemplateHash] - (optional) The hash of the template for the renderable.
+	 * @param {string} [pDefaultTemplateRecordAddress] - (optional) The default data address for the template.
+	 * @param {string} [pDefaultDestinationAddress] - (optional) The default destination address for the renderable.
+	 * @param {RenderMethod} [pRenderMethod=replace] - (optional) The method to use when rendering the renderable (ex. 'replace').
+	 */_inherits(PictView,_libFableServiceBase4);return _createClass(PictView,[{key:"addRenderable",value:function addRenderable(pRenderableHash,pTemplateHash,pDefaultTemplateRecordAddress,pDefaultDestinationAddress,pRenderMethod){/** @type {Renderable} */var tmpRenderable;if(_typeof(pRenderableHash)=='object'){// The developer passed in the renderable as an object.
+// Use theirs instead!
+tmpRenderable=pRenderableHash;}else{/** @type {RenderMethod} */var tmpRenderMethod=typeof pRenderMethod!=='string'?pRenderMethod:'replace';tmpRenderable={RenderableHash:pRenderableHash,TemplateHash:pTemplateHash,DefaultTemplateRecordAddress:pDefaultTemplateRecordAddress,ContentDestinationAddress:pDefaultDestinationAddress,RenderMethod:tmpRenderMethod};}if(typeof tmpRenderable.RenderableHash!='string'||typeof tmpRenderable.TemplateHash!='string'){this.log.error("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," could not load Renderable; RenderableHash or TemplateHash are invalid."),tmpRenderable);}else{if(this.pict.LogNoisiness>0){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," adding renderable [").concat(tmpRenderable.RenderableHash,"] pointed to template ").concat(tmpRenderable.TemplateHash,"."));}this.renderables[tmpRenderable.RenderableHash]=tmpRenderable;}}/* -------------------------------------------------------------------------- *//*                        Code Section: Initialization                        *//* -------------------------------------------------------------------------- *//**
+	 * Lifecycle hook that triggers before the view is initialized.
+	 */},{key:"onBeforeInitialize",value:function onBeforeInitialize(){if(this.pict.LogNoisiness>3){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," onBeforeInitialize:"));}return true;}/**
+	 * Lifecycle hook that triggers before the view is initialized (async flow).
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 */},{key:"onBeforeInitializeAsync",value:function onBeforeInitializeAsync(fCallback){this.onBeforeInitialize();return fCallback();}/**
+	 * Lifecycle hook that triggers when the view is initialized.
+	 */},{key:"onInitialize",value:function onInitialize(){if(this.pict.LogNoisiness>3){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," onInitialize:"));}return true;}/**
+	 * Lifecycle hook that triggers when the view is initialized (async flow).
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 */},{key:"onInitializeAsync",value:function onInitializeAsync(fCallback){this.onInitialize();return fCallback();}/**
+	 * Performs view initialization.
+	 */},{key:"initialize",value:function initialize(){if(this.pict.LogControlFlow){this.log.trace("PICT-ControlFlow VIEW [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," initialize:"));}if(!this.initializeTimestamp){this.onBeforeInitialize();this.onInitialize();this.onAfterInitialize();this.initializeTimestamp=this.pict.log.getTimeStamp();return true;}else{this.log.warn("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," initialize called but initialization is already completed.  Aborting."));return false;}}/**
+	 * Performs view initialization (async flow).
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 */},{key:"initializeAsync",value:function initializeAsync(fCallback){var _this42=this;if(this.pict.LogControlFlow){this.log.trace("PICT-ControlFlow VIEW [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," initializeAsync:"));}if(!this.initializeTimestamp){var tmpAnticipate=this.pict.instantiateServiceProviderWithoutRegistration('Anticipate');if(this.pict.LogNoisiness>0){this.log.info("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," beginning initialization..."));}tmpAnticipate.anticipate(this.onBeforeInitializeAsync.bind(this));tmpAnticipate.anticipate(this.onInitializeAsync.bind(this));tmpAnticipate.anticipate(this.onAfterInitializeAsync.bind(this));tmpAnticipate.wait(/** @param {Error} pError */function(pError){if(pError){_this42.log.error("PictView [".concat(_this42.UUID,"]::[").concat(_this42.Hash,"] ").concat(_this42.options.ViewIdentifier," initialization failed: ").concat(pError.message||pError),{stack:pError.stack});}_this42.initializeTimestamp=_this42.pict.log.getTimeStamp();if(_this42.pict.LogNoisiness>0){_this42.log.info("PictView [".concat(_this42.UUID,"]::[").concat(_this42.Hash,"] ").concat(_this42.options.ViewIdentifier," initialization complete."));}return fCallback();});}else{this.log.warn("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," async initialize called but initialization is already completed.  Aborting."));// TODO: Should this be an error?
+return fCallback();}}},{key:"onAfterInitialize",value:function onAfterInitialize(){if(this.pict.LogNoisiness>3){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," onAfterInitialize:"));}return true;}/**
+	 * Lifecycle hook that triggers after the view is initialized (async flow).
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 */},{key:"onAfterInitializeAsync",value:function onAfterInitializeAsync(fCallback){this.onAfterInitialize();return fCallback();}/* -------------------------------------------------------------------------- *//*                            Code Section: Render                            *//* -------------------------------------------------------------------------- *//**
+	 * Lifecycle hook that triggers before the view is rendered.
+	 *
+	 * @param {Renderable} pRenderable - The renderable that will be rendered.
+	 */},{key:"onBeforeRender",value:function onBeforeRender(pRenderable){// Overload this to mess with stuff before the content gets generated from the template
+if(this.pict.LogNoisiness>3){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," onBeforeRender:"));}return true;}/**
+	 * Lifecycle hook that triggers before the view is rendered (async flow).
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 * @param {Renderable} pRenderable - The renderable that will be rendered.
+	 */},{key:"onBeforeRenderAsync",value:function onBeforeRenderAsync(fCallback,pRenderable){this.onBeforeRender(pRenderable);return fCallback();}/**
+	 * Lifecycle hook that triggers before the view is projected into the DOM.
+	 *
+	 * @param {Renderable} pRenderable - The renderable that will be projected.
+	 */},{key:"onBeforeProject",value:function onBeforeProject(pRenderable){// Overload this to mess with stuff before the content gets generated from the template
+if(this.pict.LogNoisiness>3){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," onBeforeProject:"));}return true;}/**
+	 * Lifecycle hook that triggers before the view is projected into the DOM (async flow).
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 * @param {Renderable} pRenderable - The renderable that will be projected.
+	 */},{key:"onBeforeProjectAsync",value:function onBeforeProjectAsync(fCallback,pRenderable){this.onBeforeProject(pRenderable);return fCallback();}/**
+	 * Builds the render options for a renderable.
+	 *
+	 * For DRY purposes on the three flavors of render.
+	 *
+	 * @param {string|ErrorCallback} [pRenderableHash] - The hash of the renderable to render.
+	 * @param {string|ErrorCallback} [pRenderDestinationAddress] - The address where the renderable will be rendered.
+	 * @param {string|object|ErrorCallback} [pTemplateRecordAddress] - The address of (or actual obejct) where the data for the template is stored.
+	 */},{key:"buildRenderOptions",value:function buildRenderOptions(pRenderableHash,pRenderDestinationAddress,pTemplateRecordAddress){var tmpRenderOptions={Valid:true};tmpRenderOptions.RenderableHash=typeof pRenderableHash==='string'?pRenderableHash:typeof this.options.DefaultRenderable=='string'?this.options.DefaultRenderable:false;if(!tmpRenderOptions.RenderableHash){this.log.error("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," could not find a suitable RenderableHash ").concat(tmpRenderOptions.RenderableHash," (param ").concat(pRenderableHash,"because it is not a valid renderable."));tmpRenderOptions.Valid=false;}tmpRenderOptions.Renderable=this.renderables[tmpRenderOptions.RenderableHash];if(!tmpRenderOptions.Renderable){this.log.error("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," could not render ").concat(tmpRenderOptions.RenderableHash," (param ").concat(pRenderableHash,") because it does not exist."));tmpRenderOptions.Valid=false;}tmpRenderOptions.DestinationAddress=typeof pRenderDestinationAddress==='string'?pRenderDestinationAddress:typeof tmpRenderOptions.Renderable.ContentDestinationAddress==='string'?tmpRenderOptions.Renderable.ContentDestinationAddress:typeof this.options.DefaultDestinationAddress==='string'?this.options.DefaultDestinationAddress:false;if(!tmpRenderOptions.DestinationAddress){this.log.error("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," could not render ").concat(tmpRenderOptions.RenderableHash," (param ").concat(pRenderableHash,") because it does not have a valid destination address (param ").concat(pRenderDestinationAddress,")."));tmpRenderOptions.Valid=false;}if(_typeof(pTemplateRecordAddress)==='object'){tmpRenderOptions.RecordAddress='Passed in as object';tmpRenderOptions.Record=pTemplateRecordAddress;}else{tmpRenderOptions.RecordAddress=typeof pTemplateRecordAddress==='string'?pTemplateRecordAddress:typeof tmpRenderOptions.Renderable.DefaultTemplateRecordAddress==='string'?tmpRenderOptions.Renderable.DefaultTemplateRecordAddress:typeof this.options.DefaultTemplateRecordAddress==='string'?this.options.DefaultTemplateRecordAddress:false;tmpRenderOptions.Record=typeof tmpRenderOptions.RecordAddress==='string'?this.pict.DataProvider.getDataByAddress(tmpRenderOptions.RecordAddress):undefined;}return tmpRenderOptions;}/**
+	 * Assigns the content to the destination address.
+	 *
+	 * For DRY purposes on the three flavors of render.
+	 *
+	 * @param {Renderable} pRenderable - The renderable to render.
+	 * @param {string} pRenderDestinationAddress - The address where the renderable will be rendered.
+	 * @param {string} pContent - The content to render.
+	 * @returns {boolean} - Returns true if the content was assigned successfully.
+	 * @memberof PictView
+	 */},{key:"assignRenderContent",value:function assignRenderContent(pRenderable,pRenderDestinationAddress,pContent){return this.pict.ContentAssignment.projectContent(pRenderable.RenderMethod,pRenderDestinationAddress,pContent,pRenderable.TestAddress);}/**
+	 * Render a renderable from this view.
+	 *
+	 * @param {string} [pRenderableHash] - The hash of the renderable to render.
+	 * @param {string} [pRenderDestinationAddress] - The address where the renderable will be rendered.
+	 * @param {string|object} [pTemplateRecordAddress] - The address where the data for the template is stored.
+	 * @param {Renderable} [pRootRenderable] - The root renderable for the render operation, if applicable.
+	 * @return {boolean}
+	 */},{key:"render",value:function render(pRenderableHash,pRenderDestinationAddress,pTemplateRecordAddress,pRootRenderable){return this.renderWithScope(this,pRenderableHash,pRenderDestinationAddress,pTemplateRecordAddress,pRootRenderable);}/**
+	 * Render a renderable from this view, providing a specifici scope for the template.
+	 *
+	 * @param {any} pScope - The scope to use for the template rendering.
+	 * @param {string} [pRenderableHash] - The hash of the renderable to render.
+	 * @param {string} [pRenderDestinationAddress] - The address where the renderable will be rendered.
+	 * @param {string|object} [pTemplateRecordAddress] - The address where the data for the template is stored.
+	 * @param {Renderable} [pRootRenderable] - The root renderable for the render operation, if applicable.
+	 * @return {boolean}
+	 */},{key:"renderWithScope",value:function renderWithScope(pScope,pRenderableHash,pRenderDestinationAddress,pTemplateRecordAddress,pRootRenderable){var tmpRenderableHash=typeof pRenderableHash==='string'?pRenderableHash:typeof this.options.DefaultRenderable=='string'?this.options.DefaultRenderable:false;if(!tmpRenderableHash){this.log.error("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," could not render ").concat(tmpRenderableHash," (param ").concat(pRenderableHash,") because it is not a valid renderable."));return false;}/** @type {Renderable} */var tmpRenderable;if(tmpRenderableHash=='__Virtual'){tmpRenderable={RenderableHash:'__Virtual',TemplateHash:this.renderables[this.options.DefaultRenderable].TemplateHash,ContentDestinationAddress:typeof pRenderDestinationAddress==='string'?pRenderDestinationAddress:typeof tmpRenderable.ContentDestinationAddress==='string'?tmpRenderable.ContentDestinationAddress:typeof this.options.DefaultDestinationAddress==='string'?this.options.DefaultDestinationAddress:null,RenderMethod:'virtual-assignment',TransactionHash:pRootRenderable&&pRootRenderable.TransactionHash,RootRenderableViewHash:pRootRenderable&&pRootRenderable.RootRenderableViewHash};}else{tmpRenderable=Object.assign({},this.renderables[tmpRenderableHash]);tmpRenderable.ContentDestinationAddress=typeof pRenderDestinationAddress==='string'?pRenderDestinationAddress:typeof tmpRenderable.ContentDestinationAddress==='string'?tmpRenderable.ContentDestinationAddress:typeof this.options.DefaultDestinationAddress==='string'?this.options.DefaultDestinationAddress:null;}if(!tmpRenderable.TransactionHash){tmpRenderable.TransactionHash="ViewRender-V-".concat(this.options.ViewIdentifier,"-R-").concat(tmpRenderableHash,"-U-").concat(this.pict.getUUID());tmpRenderable.RootRenderableViewHash=this.Hash;this.pict.TransactionTracking.registerTransaction(tmpRenderable.TransactionHash);}if(!tmpRenderable){this.log.error("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," could not render ").concat(tmpRenderableHash," (param ").concat(pRenderableHash,") because it does not exist."));return false;}if(!tmpRenderable.ContentDestinationAddress){this.log.error("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," could not render ").concat(tmpRenderableHash," (param ").concat(pRenderableHash,") because it does not have a valid destination address."));return false;}var tmpRecordAddress;var tmpRecord;if(_typeof(pTemplateRecordAddress)==='object'){tmpRecord=pTemplateRecordAddress;tmpRecordAddress='Passed in as object';}else{tmpRecordAddress=typeof pTemplateRecordAddress==='string'?pTemplateRecordAddress:typeof tmpRenderable.DefaultTemplateRecordAddress==='string'?tmpRenderable.DefaultTemplateRecordAddress:typeof this.options.DefaultTemplateRecordAddress==='string'?this.options.DefaultTemplateRecordAddress:false;tmpRecord=typeof tmpRecordAddress==='string'?this.pict.DataProvider.getDataByAddress(tmpRecordAddress):undefined;}// Execute the developer-overridable pre-render behavior
+this.onBeforeRender(tmpRenderable);if(this.pict.LogControlFlow){this.log.trace("PICT-ControlFlow VIEW [".concat(this.UUID,"]::[").concat(this.Hash,"] Renderable[").concat(tmpRenderableHash,"] Destination[").concat(tmpRenderable.ContentDestinationAddress,"] TemplateRecordAddress[").concat(tmpRecordAddress,"] render:"));}if(this.pict.LogNoisiness>0){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," Beginning Render of Renderable[").concat(tmpRenderableHash,"] to Destination [").concat(tmpRenderable.ContentDestinationAddress,"]..."));}// Generate the content output from the template and data
+tmpRenderable.Content=this.pict.parseTemplateByHash(tmpRenderable.TemplateHash,tmpRecord,null,[this],pScope,{RootRenderable:_typeof(pRootRenderable)==='object'?pRootRenderable:tmpRenderable});if(this.pict.LogNoisiness>0){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," Assigning Renderable[").concat(tmpRenderableHash,"] content length ").concat(tmpRenderable.Content.length," to Destination [").concat(tmpRenderable.ContentDestinationAddress,"] using render method [").concat(tmpRenderable.RenderMethod,"]."));}this.onBeforeProject(tmpRenderable);this.onProject(tmpRenderable);if(tmpRenderable.RenderMethod!=='virtual-assignment'){this.onAfterProject(tmpRenderable);// Execute the developer-overridable post-render behavior
+this.onAfterRender(tmpRenderable);}return true;}/**
+	 * Render a renderable from this view.
+	 *
+	 * @param {string|ErrorCallback} [pRenderableHash] - The hash of the renderable to render.
+	 * @param {string|ErrorCallback} [pRenderDestinationAddress] - The address where the renderable will be rendered.
+	 * @param {string|object|ErrorCallback} [pTemplateRecordAddress] - The address where the data for the template is stored.
+	 * @param {Renderable|ErrorCallback} [pRootRenderable] - The root renderable for the render operation, if applicable.
+	 * @param {ErrorCallback} [fCallback] - The callback to call when the async operation is complete.
+	 *
+	 * @return {void}
+	 */},{key:"renderAsync",value:function renderAsync(pRenderableHash,pRenderDestinationAddress,pTemplateRecordAddress,pRootRenderable,fCallback){return this.renderWithScopeAsync(this,pRenderableHash,pRenderDestinationAddress,pTemplateRecordAddress,pRootRenderable,fCallback);}/**
+	 * Render a renderable from this view.
+	 *
+	 * @param {any} pScope - The scope to use for the template rendering.
+	 * @param {string|ErrorCallback} [pRenderableHash] - The hash of the renderable to render.
+	 * @param {string|ErrorCallback} [pRenderDestinationAddress] - The address where the renderable will be rendered.
+	 * @param {string|object|ErrorCallback} [pTemplateRecordAddress] - The address where the data for the template is stored.
+	 * @param {Renderable|ErrorCallback} [pRootRenderable] - The root renderable for the render operation, if applicable.
+	 * @param {ErrorCallback} [fCallback] - The callback to call when the async operation is complete.
+	 *
+	 * @return {void}
+	 */},{key:"renderWithScopeAsync",value:function renderWithScopeAsync(pScope,pRenderableHash,pRenderDestinationAddress,pTemplateRecordAddress,pRootRenderable,fCallback){var _this43=this;var tmpRenderableHash=typeof pRenderableHash==='string'?pRenderableHash:typeof this.options.DefaultRenderable=='string'?this.options.DefaultRenderable:false;// Allow the callback to be passed in as the last parameter no matter what
+/** @type {ErrorCallback} */var tmpCallback=typeof fCallback==='function'?fCallback:typeof pTemplateRecordAddress==='function'?pTemplateRecordAddress:typeof pRenderDestinationAddress==='function'?pRenderDestinationAddress:typeof pRenderableHash==='function'?pRenderableHash:typeof pRootRenderable==='function'?pRootRenderable:null;if(!tmpCallback){this.log.warn("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," renderAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));tmpCallback=function tmpCallback(pError){if(pError){_this43.log.error("PictView [".concat(_this43.UUID,"]::[").concat(_this43.Hash,"] ").concat(_this43.options.Name," renderAsync Auto Callback Error: ").concat(pError),pError);}};}if(!tmpRenderableHash){this.log.error("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," could not asynchronously render ").concat(tmpRenderableHash," (param ").concat(pRenderableHash,"because it is not a valid renderable."));return tmpCallback(new Error("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," could not asynchronously render ").concat(tmpRenderableHash," (param ").concat(pRenderableHash,"because it is not a valid renderable.")));}/** @type {Renderable} */var tmpRenderable;if(tmpRenderableHash=='__Virtual'){tmpRenderable={RenderableHash:'__Virtual',TemplateHash:this.renderables[this.options.DefaultRenderable].TemplateHash,ContentDestinationAddress:typeof pRenderDestinationAddress==='string'?pRenderDestinationAddress:typeof this.options.DefaultDestinationAddress==='string'?this.options.DefaultDestinationAddress:null,RenderMethod:'virtual-assignment',TransactionHash:pRootRenderable&&typeof pRootRenderable!=='function'&&pRootRenderable.TransactionHash,RootRenderableViewHash:pRootRenderable&&typeof pRootRenderable!=='function'&&pRootRenderable.RootRenderableViewHash};}else{tmpRenderable=Object.assign({},this.renderables[tmpRenderableHash]);tmpRenderable.ContentDestinationAddress=typeof pRenderDestinationAddress==='string'?pRenderDestinationAddress:typeof tmpRenderable.ContentDestinationAddress==='string'?tmpRenderable.ContentDestinationAddress:typeof this.options.DefaultDestinationAddress==='string'?this.options.DefaultDestinationAddress:null;}if(!tmpRenderable.TransactionHash){tmpRenderable.TransactionHash="ViewRender-V-".concat(this.options.ViewIdentifier,"-R-").concat(tmpRenderableHash,"-U-").concat(this.pict.getUUID());tmpRenderable.RootRenderableViewHash=this.Hash;this.pict.TransactionTracking.registerTransaction(tmpRenderable.TransactionHash);}if(!tmpRenderable){this.log.error("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," could not render ").concat(tmpRenderableHash," (param ").concat(pRenderableHash,") because it does not exist."));return tmpCallback(new Error("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," could not render ").concat(tmpRenderableHash," (param ").concat(pRenderableHash,") because it does not exist.")));}if(!tmpRenderable.ContentDestinationAddress){this.log.error("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," could not render ").concat(tmpRenderableHash," (param ").concat(pRenderableHash,") because it does not have a valid destination address."));return tmpCallback(new Error("Could not render ".concat(tmpRenderableHash)));}var tmpRecordAddress;var tmpRecord;if(_typeof(pTemplateRecordAddress)==='object'){tmpRecord=pTemplateRecordAddress;tmpRecordAddress='Passed in as object';}else{tmpRecordAddress=typeof pTemplateRecordAddress==='string'?pTemplateRecordAddress:typeof tmpRenderable.DefaultTemplateRecordAddress==='string'?tmpRenderable.DefaultTemplateRecordAddress:typeof this.options.DefaultTemplateRecordAddress==='string'?this.options.DefaultTemplateRecordAddress:false;tmpRecord=typeof tmpRecordAddress==='string'?this.pict.DataProvider.getDataByAddress(tmpRecordAddress):undefined;}if(this.pict.LogControlFlow){this.log.trace("PICT-ControlFlow VIEW [".concat(this.UUID,"]::[").concat(this.Hash,"] Renderable[").concat(tmpRenderableHash,"] Destination[").concat(tmpRenderable.ContentDestinationAddress,"] TemplateRecordAddress[").concat(tmpRecordAddress,"] renderAsync:"));}if(this.pict.LogNoisiness>2){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," Beginning Asynchronous Render (callback-style)..."));}var tmpAnticipate=this.fable.newAnticipate();tmpAnticipate.anticipate(function(fOnBeforeRenderCallback){_this43.onBeforeRenderAsync(fOnBeforeRenderCallback,tmpRenderable);});tmpAnticipate.anticipate(function(fAsyncTemplateCallback){// Render the template (asynchronously)
+_this43.pict.parseTemplateByHash(tmpRenderable.TemplateHash,tmpRecord,function(pError,pContent){if(pError){_this43.log.error("PictView [".concat(_this43.UUID,"]::[").concat(_this43.Hash,"] ").concat(_this43.options.ViewIdentifier," could not render (asynchronously) ").concat(tmpRenderableHash," (param ").concat(pRenderableHash,") because it did not parse the template."),pError);return fAsyncTemplateCallback(pError);}tmpRenderable.Content=pContent;return fAsyncTemplateCallback();},[_this43],pScope,{RootRenderable:_typeof(pRootRenderable)==='object'?pRootRenderable:tmpRenderable});});tmpAnticipate.anticipate(function(fNext){_this43.onBeforeProjectAsync(fNext,tmpRenderable);});tmpAnticipate.anticipate(function(fNext){_this43.onProjectAsync(fNext,tmpRenderable);});if(tmpRenderable.RenderMethod!=='virtual-assignment'){tmpAnticipate.anticipate(function(fNext){_this43.onAfterProjectAsync(fNext,tmpRenderable);});// Execute the developer-overridable post-render behavior
+tmpAnticipate.anticipate(function(fNext){_this43.onAfterRenderAsync(fNext,tmpRenderable);});}tmpAnticipate.wait(tmpCallback);}/**
+	 * Renders the default renderable.
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 */},{key:"renderDefaultAsync",value:function renderDefaultAsync(fCallback){// Render the default renderable
+this.renderAsync(fCallback);}/**
+	 * @param {string} [pRenderableHash] - The hash of the renderable to render.
+	 * @param {string} [pRenderDestinationAddress] - The address where the renderable will be rendered.
+	 * @param {string|object} [pTemplateRecordAddress] - The address of (or actual obejct) where the data for the template is stored.
+	 */},{key:"basicRender",value:function basicRender(pRenderableHash,pRenderDestinationAddress,pTemplateRecordAddress){return this.basicRenderWithScope(this,pRenderableHash,pRenderDestinationAddress,pTemplateRecordAddress);}/**
+	 * @param {any} pScope - The scope to use for the template rendering.
+	 * @param {string} [pRenderableHash] - The hash of the renderable to render.
+	 * @param {string} [pRenderDestinationAddress] - The address where the renderable will be rendered.
+	 * @param {string|object} [pTemplateRecordAddress] - The address of (or actual obejct) where the data for the template is stored.
+	 */},{key:"basicRenderWithScope",value:function basicRenderWithScope(pScope,pRenderableHash,pRenderDestinationAddress,pTemplateRecordAddress){var tmpRenderOptions=this.buildRenderOptions(pRenderableHash,pRenderDestinationAddress,pTemplateRecordAddress);if(tmpRenderOptions.Valid){this.assignRenderContent(tmpRenderOptions.Renderable,tmpRenderOptions.DestinationAddress,this.pict.parseTemplateByHash(tmpRenderOptions.Renderable.TemplateHash,tmpRenderOptions.Record,null,[this],pScope,{RootRenderable:tmpRenderOptions.Renderable}));return true;}else{this.log.error("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," could not perform a basic render of ").concat(tmpRenderOptions.RenderableHash," because it is not valid."));return false;}}/**
+	 * @param {string|ErrorCallback} [pRenderableHash] - The hash of the renderable to render.
+	 * @param {string|ErrorCallback} [pRenderDestinationAddress] - The address where the renderable will be rendered.
+	 * @param {string|Object|ErrorCallback} [pTemplateRecordAddress] - The address of (or actual obejct) where the data for the template is stored.
+	 * @param {ErrorCallback} [fCallback] - The callback to call when the async operation is complete.
+	 */},{key:"basicRenderAsync",value:function basicRenderAsync(pRenderableHash,pRenderDestinationAddress,pTemplateRecordAddress,fCallback){return this.basicRenderWithScopeAsync(this,pRenderableHash,pRenderDestinationAddress,pTemplateRecordAddress,fCallback);}/**
+	 * @param {any} pScope - The scope to use for the template rendering.
+	 * @param {string|ErrorCallback} [pRenderableHash] - The hash of the renderable to render.
+	 * @param {string|ErrorCallback} [pRenderDestinationAddress] - The address where the renderable will be rendered.
+	 * @param {string|Object|ErrorCallback} [pTemplateRecordAddress] - The address of (or actual obejct) where the data for the template is stored.
+	 * @param {ErrorCallback} [fCallback] - The callback to call when the async operation is complete.
+	 */},{key:"basicRenderWithScopeAsync",value:function basicRenderWithScopeAsync(pScope,pRenderableHash,pRenderDestinationAddress,pTemplateRecordAddress,fCallback){var _this44=this;// Allow the callback to be passed in as the last parameter no matter what
+/** @type {ErrorCallback} */var tmpCallback=typeof fCallback==='function'?fCallback:typeof pTemplateRecordAddress==='function'?pTemplateRecordAddress:typeof pRenderDestinationAddress==='function'?pRenderDestinationAddress:typeof pRenderableHash==='function'?pRenderableHash:null;if(!tmpCallback){this.log.warn("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," basicRenderAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));tmpCallback=function tmpCallback(pError){if(pError){_this44.log.error("PictView [".concat(_this44.UUID,"]::[").concat(_this44.Hash,"] ").concat(_this44.options.Name," basicRenderAsync Auto Callback Error: ").concat(pError),pError);}};}var tmpRenderOptions=this.buildRenderOptions(pRenderableHash,pRenderDestinationAddress,pTemplateRecordAddress);if(tmpRenderOptions.Valid){this.pict.parseTemplateByHash(tmpRenderOptions.Renderable.TemplateHash,tmpRenderOptions.Record,/**
+				 * @param {Error} [pError] - The error that occurred during template parsing.
+				 * @param {string} [pContent] - The content that was rendered from the template.
+				 */function(pError,pContent){if(pError){_this44.log.error("PictView [".concat(_this44.UUID,"]::[").concat(_this44.Hash,"] ").concat(_this44.options.ViewIdentifier," could not render (asynchronously) ").concat(tmpRenderOptions.RenderableHash," because it did not parse the template."),pError);return tmpCallback(pError);}_this44.assignRenderContent(tmpRenderOptions.Renderable,tmpRenderOptions.DestinationAddress,pContent);return tmpCallback();},[this],pScope,{RootRenderable:tmpRenderOptions.Renderable});}else{var tmpErrorMessage="PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," could not perform a basic render of ").concat(tmpRenderOptions.RenderableHash," because it is not valid.");this.log.error(tmpErrorMessage);return tmpCallback(new Error(tmpErrorMessage));}}/**
+	 * @param {Renderable} pRenderable - The renderable that was rendered.
+	 */},{key:"onProject",value:function onProject(pRenderable){if(this.pict.LogNoisiness>3){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," onProject:"));}if(pRenderable.RenderMethod==='virtual-assignment'){this.pict.TransactionTracking.pushToTransactionQueue(pRenderable.TransactionHash,{ViewHash:this.Hash,Renderable:pRenderable},'Deferred-Post-Content-Assignment');}if(this.pict.LogNoisiness>0){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," Assigning Renderable[").concat(pRenderable.RenderableHash,"] content length ").concat(pRenderable.Content.length," to Destination [").concat(pRenderable.ContentDestinationAddress,"] using Async render method ").concat(pRenderable.RenderMethod,"."));}// Assign the content to the destination address
+this.pict.ContentAssignment.projectContent(pRenderable.RenderMethod,pRenderable.ContentDestinationAddress,pRenderable.Content,pRenderable.TestAddress);this.lastRenderedTimestamp=this.pict.log.getTimeStamp();}/**
+	 * Lifecycle hook that triggers after the view is projected into the DOM (async flow).
+	 *
+	 * @param {(error?: Error, content?: string) => void} fCallback - The callback to call when the async operation is complete.
+	 * @param {Renderable} pRenderable - The renderable that is being projected.
+	 */},{key:"onProjectAsync",value:function onProjectAsync(fCallback,pRenderable){this.onProject(pRenderable);return fCallback();}/**
+	 * Lifecycle hook that triggers after the view is rendered.
+	 *
+	 * @param {Renderable} pRenderable - The renderable that was rendered.
+	 */},{key:"onAfterRender",value:function onAfterRender(pRenderable){if(this.pict.LogNoisiness>3){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," onAfterRender:"));}if(pRenderable&&pRenderable.RootRenderableViewHash===this.Hash){var tmpTransactionQueue=this.pict.TransactionTracking.clearTransactionQueue(pRenderable.TransactionHash)||[];var _iterator=_createForOfIteratorHelper(tmpTransactionQueue),_step;try{for(_iterator.s();!(_step=_iterator.n()).done;){var tmpEvent=_step.value;var tmpView=this.pict.views[tmpEvent.Data.ViewHash];if(!tmpView){this.log.error("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," onAfterRender: Could not find view for transaction hash ").concat(pRenderable.TransactionHash," and ViewHash ").concat(tmpEvent.Data.ViewHash,"."));continue;}tmpView.onAfterProject();// Execute the developer-overridable post-render behavior
+tmpView.onAfterRender(tmpEvent.Data.Renderable);}// Queue is drained and nested child renders have each cleaned up
+// their own transactions; remove this root render's entry from
+// the tracking map so it does not leak.
+}catch(err){_iterator.e(err);}finally{_iterator.f();}this.pict.TransactionTracking.unregisterTransaction(pRenderable.TransactionHash);}return true;}/**
+	 * Lifecycle hook that triggers after the view is rendered (async flow).
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 * @param {Renderable} pRenderable - The renderable that was rendered.
+	 */},{key:"onAfterRenderAsync",value:function onAfterRenderAsync(fCallback,pRenderable){var _this45=this;// NOTE: this.onAfterRender(pRenderable) will itself clear the
+// transaction queue and unregister the transaction if this view is
+// the root renderable - see onAfterRender above. So by the time the
+// loop below runs, the queue is already empty and there is nothing
+// to drain. Keeping the async queue walk here defensively in case
+// future subclasses override onAfterRender in ways that skip the
+// drain, but the common path is now "sync drain, async no-op".
+this.onAfterRender(pRenderable);var tmpAnticipate=this.fable.newAnticipate();var tmpIsRootRenderable=pRenderable&&pRenderable.RootRenderableViewHash===this.Hash;if(tmpIsRootRenderable){var queue=this.pict.TransactionTracking.clearTransactionQueue(pRenderable.TransactionHash)||[];var _iterator2=_createForOfIteratorHelper(queue),_step2;try{var _loop3=function _loop3(){var event=_step2.value;/** @type {PictView} */var tmpView=_this45.pict.views[event.Data.ViewHash];if(!tmpView){_this45.log.error("PictView [".concat(_this45.UUID,"]::[").concat(_this45.Hash,"] ").concat(_this45.options.ViewIdentifier," onAfterRenderAsync: Could not find view for transaction hash ").concat(pRenderable.TransactionHash," and ViewHash ").concat(event.Data.ViewHash,"."));return 1;// continue
+}tmpAnticipate.anticipate(tmpView.onAfterProjectAsync.bind(tmpView));tmpAnticipate.anticipate(function(fNext){tmpView.onAfterRenderAsync(fNext,event.Data.Renderable);});// Execute the developer-overridable post-render behavior
+};for(_iterator2.s();!(_step2=_iterator2.n()).done;){if(_loop3())continue;}}catch(err){_iterator2.e(err);}finally{_iterator2.f();}}return tmpAnticipate.wait(function(pError){// Nested virtual-assignment children have now settled their own
+// onAfterRenderAsync chains (and unregistered their own
+// transactions along the way). Ensure this root render's entry
+// is also gone - unregisterTransaction is a no-op if the sync
+// onAfterRender above already removed it, so this is safe to
+// call unconditionally on the root path.
+if(tmpIsRootRenderable&&pRenderable&&pRenderable.TransactionHash){_this45.pict.TransactionTracking.unregisterTransaction(pRenderable.TransactionHash);}return fCallback(pError);});}/**
+	 * Lifecycle hook that triggers after the view is projected into the DOM.
+	 *
+	 * @param {Renderable} pRenderable - The renderable that was projected.
+	 */},{key:"onAfterProject",value:function onAfterProject(pRenderable){if(this.pict.LogNoisiness>3){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," onAfterProject:"));}return true;}/**
+	 * Lifecycle hook that triggers after the view is projected into the DOM (async flow).
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 * @param {Renderable} pRenderable - The renderable that was projected.
+	 */},{key:"onAfterProjectAsync",value:function onAfterProjectAsync(fCallback,pRenderable){return fCallback();}/* -------------------------------------------------------------------------- *//*                            Code Section: Solver                            *//* -------------------------------------------------------------------------- *//**
+	 * Lifecycle hook that triggers before the view is solved.
+	 */},{key:"onBeforeSolve",value:function onBeforeSolve(){if(this.pict.LogNoisiness>3){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," onBeforeSolve:"));}return true;}/**
+	 * Lifecycle hook that triggers before the view is solved (async flow).
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 */},{key:"onBeforeSolveAsync",value:function onBeforeSolveAsync(fCallback){this.onBeforeSolve();return fCallback();}/**
+	 * Lifecycle hook that triggers when the view is solved.
+	 */},{key:"onSolve",value:function onSolve(){if(this.pict.LogNoisiness>3){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," onSolve:"));}return true;}/**
+	 * Lifecycle hook that triggers when the view is solved (async flow).
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 */},{key:"onSolveAsync",value:function onSolveAsync(fCallback){this.onSolve();return fCallback();}/**
+	 * Performs view solving and triggers lifecycle hooks.
+	 *
+	 * @return {boolean} - True if the view was solved successfully, false otherwise.
+	 */},{key:"solve",value:function solve(){if(this.pict.LogNoisiness>2){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," executing solve() function..."));}this.onBeforeSolve();this.onSolve();this.onAfterSolve();this.lastSolvedTimestamp=this.pict.log.getTimeStamp();return true;}/**
+	 * Performs view solving and triggers lifecycle hooks (async flow).
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 */},{key:"solveAsync",value:function solveAsync(fCallback){var _this46=this;var tmpAnticipate=this.pict.instantiateServiceProviderWithoutRegistration('Anticipate');/** @type {ErrorCallback} */var tmpCallback=typeof fCallback==='function'?fCallback:null;if(!tmpCallback){this.log.warn("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," solveAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));tmpCallback=function tmpCallback(pError){if(pError){_this46.log.error("PictView [".concat(_this46.UUID,"]::[").concat(_this46.Hash,"] ").concat(_this46.options.Name," solveAsync Auto Callback Error: ").concat(pError),pError);}};}tmpAnticipate.anticipate(this.onBeforeSolveAsync.bind(this));tmpAnticipate.anticipate(this.onSolveAsync.bind(this));tmpAnticipate.anticipate(this.onAfterSolveAsync.bind(this));tmpAnticipate.wait(function(pError){if(_this46.pict.LogNoisiness>2){_this46.log.trace("PictView [".concat(_this46.UUID,"]::[").concat(_this46.Hash,"] ").concat(_this46.options.ViewIdentifier," solveAsync() complete."));}_this46.lastSolvedTimestamp=_this46.pict.log.getTimeStamp();return tmpCallback(pError);});}/**
+	 * Lifecycle hook that triggers after the view is solved.
+	 */},{key:"onAfterSolve",value:function onAfterSolve(){if(this.pict.LogNoisiness>3){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," onAfterSolve:"));}return true;}/**
+	 * Lifecycle hook that triggers after the view is solved (async flow).
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 */},{key:"onAfterSolveAsync",value:function onAfterSolveAsync(fCallback){this.onAfterSolve();return fCallback();}/* -------------------------------------------------------------------------- *//*                     Code Section: Marshal From View                        *//* -------------------------------------------------------------------------- *//**
+	 * Lifecycle hook that triggers before data is marshaled from the view.
+	 *
+	 * @return {boolean} - True if the operation was successful, false otherwise.
+	 */},{key:"onBeforeMarshalFromView",value:function onBeforeMarshalFromView(){if(this.pict.LogNoisiness>3){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," onBeforeMarshalFromView:"));}return true;}/**
+	 * Lifecycle hook that triggers before data is marshaled from the view (async flow).
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 */},{key:"onBeforeMarshalFromViewAsync",value:function onBeforeMarshalFromViewAsync(fCallback){this.onBeforeMarshalFromView();return fCallback();}/**
+	 * Lifecycle hook that triggers when data is marshaled from the view.
+	 */},{key:"onMarshalFromView",value:function onMarshalFromView(){if(this.pict.LogNoisiness>3){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," onMarshalFromView:"));}return true;}/**
+	 * Lifecycle hook that triggers when data is marshaled from the view (async flow).
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 */},{key:"onMarshalFromViewAsync",value:function onMarshalFromViewAsync(fCallback){this.onMarshalFromView();return fCallback();}/**
+	 * Marshals data from the view.
+	 *
+	 * @return {boolean} - True if the operation was successful, false otherwise.
+	 */},{key:"marshalFromView",value:function marshalFromView(){if(this.pict.LogNoisiness>2){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," executing solve() function..."));}this.onBeforeMarshalFromView();this.onMarshalFromView();this.onAfterMarshalFromView();this.lastMarshalFromViewTimestamp=this.pict.log.getTimeStamp();return true;}/**
+	 * Marshals data from the view (async flow).
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 */},{key:"marshalFromViewAsync",value:function marshalFromViewAsync(fCallback){var _this47=this;var tmpAnticipate=this.pict.instantiateServiceProviderWithoutRegistration('Anticipate');/** @type {ErrorCallback} */var tmpCallback=typeof fCallback==='function'?fCallback:null;if(!tmpCallback){this.log.warn("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," marshalFromViewAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));tmpCallback=function tmpCallback(pError){if(pError){_this47.log.error("PictView [".concat(_this47.UUID,"]::[").concat(_this47.Hash,"] ").concat(_this47.options.Name," marshalFromViewAsync Auto Callback Error: ").concat(pError),pError);}};}tmpAnticipate.anticipate(this.onBeforeMarshalFromViewAsync.bind(this));tmpAnticipate.anticipate(this.onMarshalFromViewAsync.bind(this));tmpAnticipate.anticipate(this.onAfterMarshalFromViewAsync.bind(this));tmpAnticipate.wait(function(pError){if(_this47.pict.LogNoisiness>2){_this47.log.trace("PictView [".concat(_this47.UUID,"]::[").concat(_this47.Hash,"] ").concat(_this47.options.ViewIdentifier," marshalFromViewAsync() complete."));}_this47.lastMarshalFromViewTimestamp=_this47.pict.log.getTimeStamp();return tmpCallback(pError);});}/**
+	 * Lifecycle hook that triggers after data is marshaled from the view.
+	 */},{key:"onAfterMarshalFromView",value:function onAfterMarshalFromView(){if(this.pict.LogNoisiness>3){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," onAfterMarshalFromView:"));}return true;}/**
+	 * Lifecycle hook that triggers after data is marshaled from the view (async flow).
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 */},{key:"onAfterMarshalFromViewAsync",value:function onAfterMarshalFromViewAsync(fCallback){this.onAfterMarshalFromView();return fCallback();}/* -------------------------------------------------------------------------- *//*                     Code Section: Marshal To View                          *//* -------------------------------------------------------------------------- *//**
+	 * Lifecycle hook that triggers before data is marshaled into the view.
+	 */},{key:"onBeforeMarshalToView",value:function onBeforeMarshalToView(){if(this.pict.LogNoisiness>3){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," onBeforeMarshalToView:"));}return true;}/**
+	 * Lifecycle hook that triggers before data is marshaled into the view (async flow).
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 */},{key:"onBeforeMarshalToViewAsync",value:function onBeforeMarshalToViewAsync(fCallback){this.onBeforeMarshalToView();return fCallback();}/**
+	 * Lifecycle hook that triggers when data is marshaled into the view.
+	 */},{key:"onMarshalToView",value:function onMarshalToView(){if(this.pict.LogNoisiness>3){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," onMarshalToView:"));}return true;}/**
+	 * Lifecycle hook that triggers when data is marshaled into the view (async flow).
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 */},{key:"onMarshalToViewAsync",value:function onMarshalToViewAsync(fCallback){this.onMarshalToView();return fCallback();}/**
+	 * Marshals data into the view.
+	 *
+	 * @return {boolean} - True if the operation was successful, false otherwise.
+	 */},{key:"marshalToView",value:function marshalToView(){if(this.pict.LogNoisiness>2){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," executing solve() function..."));}this.onBeforeMarshalToView();this.onMarshalToView();this.onAfterMarshalToView();this.lastMarshalToViewTimestamp=this.pict.log.getTimeStamp();return true;}/**
+	 * Marshals data into the view (async flow).
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 */},{key:"marshalToViewAsync",value:function marshalToViewAsync(fCallback){var _this48=this;var tmpAnticipate=this.pict.instantiateServiceProviderWithoutRegistration('Anticipate');/** @type {ErrorCallback} */var tmpCallback=typeof fCallback==='function'?fCallback:null;if(!tmpCallback){this.log.warn("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.Name," marshalToViewAsync was called without a valid callback.  A callback will be generated but this could lead to race conditions."));tmpCallback=function tmpCallback(pError){if(pError){_this48.log.error("PictView [".concat(_this48.UUID,"]::[").concat(_this48.Hash,"] ").concat(_this48.options.Name," marshalToViewAsync Auto Callback Error: ").concat(pError),pError);}};}tmpAnticipate.anticipate(this.onBeforeMarshalToViewAsync.bind(this));tmpAnticipate.anticipate(this.onMarshalToViewAsync.bind(this));tmpAnticipate.anticipate(this.onAfterMarshalToViewAsync.bind(this));tmpAnticipate.wait(function(pError){if(_this48.pict.LogNoisiness>2){_this48.log.trace("PictView [".concat(_this48.UUID,"]::[").concat(_this48.Hash,"] ").concat(_this48.options.ViewIdentifier," marshalToViewAsync() complete."));}_this48.lastMarshalToViewTimestamp=_this48.pict.log.getTimeStamp();return tmpCallback(pError);});}/**
+	 * Lifecycle hook that triggers after data is marshaled into the view.
+	 */},{key:"onAfterMarshalToView",value:function onAfterMarshalToView(){if(this.pict.LogNoisiness>3){this.log.trace("PictView [".concat(this.UUID,"]::[").concat(this.Hash,"] ").concat(this.options.ViewIdentifier," onAfterMarshalToView:"));}return true;}/**
+	 * Lifecycle hook that triggers after data is marshaled into the view (async flow).
+	 *
+	 * @param {ErrorCallback} fCallback - The callback to call when the async operation is complete.
+	 */},{key:"onAfterMarshalToViewAsync",value:function onAfterMarshalToViewAsync(fCallback){this.onAfterMarshalToView();return fCallback();}/** @return {boolean} - True if the object is a PictView. */},{key:"isPictView",get:function get(){return true;}}]);}(libFableServiceBase);module.exports=PictView;},{"../package.json":68,"fable-serviceproviderbase":2}],70:[function(require,module,exports){module.exports={"name":"parime-management","version":"1.0.0","description":"Parime Data Lake Management Console","main":"source/Pict-Application-ParimeManagement.js","scripts":{"brand":"node node_modules/pict-section-theme/bin/pict-section-theme-brand.js --palette cosmos --display-name \"Parime Management\" --tagline \"Simple data lake — record, binary, and combined storage\" --favicons html/favicons","prebuild":"npm run brand","build":"npx quack build && npx quack copy","test":"echo \"Error: no test specified\" && exit 0"},"author":"steven velozo <steven@velozo.com>","license":"MIT","dependencies":{"pict":"^1.0.343","pict-application":"^1.0.28","pict-provider":"^1.0.3","pict-provider-theme":"^1.0.0","pict-router":"^1.0.4","pict-section-modal":"^1.1.1","pict-section-theme":"^1.0.2","pict-view":"^1.0.64"},"devDependencies":{"quackage":"^1.0.59","retold-sharp":"^1.0.0"},"copyFilesSettings":{"whenFileExists":"overwrite"},"copyFiles":[{"from":"./html/*","to":"../management_web_app_built/"},{"from":"./css/**","to":"../management_web_app_built/css/"},{"from":"./node_modules/pict/dist/*","to":"../management_web_app_built/js/"},{"from":"./dist/parime-management*","to":"../management_web_app_built/"},{"from":"./html/favicons/*","to":"../management_web_app_built/favicons/"}],"retold":{"brand":{"Hash":"parime-management","Name":"Parime Management","Tagline":"Simple data lake — record, binary, and combined storage","Palette":"cosmos","Icon":"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 96 96\" width=\"96\" height=\"96\">\n\t\t<defs>\n\t\t\t<clipPath id=\"frame-parime-management-filled-light\">\n\t\t\t\t<path d=\"M 2 48\n\t\t\tC 2 18.0222416, 18.0222416 2, 48 2\n\t\t\tC 77.9777584 2, 94 18.0222416, 94 48\n\t\t\tC 94 77.9777584, 77.9777584 94, 48 94\n\t\t\tC 18.0222416 94, 2 77.9777584, 2 48 Z\"/>\n\t\t\t</clipPath>\n\t\t</defs>\n\t\t<path d=\"M 2 48\n\t\t\tC 2 18.0222416, 18.0222416 2, 48 2\n\t\t\tC 77.9777584 2, 94 18.0222416, 94 48\n\t\t\tC 94 77.9777584, 77.9777584 94, 48 94\n\t\t\tC 18.0222416 94, 2 77.9777584, 2 48 Z\" fill=\"#1e4acd\"/>\n\t\t<g clip-path=\"url(#frame-parime-management-filled-light)\"><circle cx=\"48\" cy=\"48\" r=\"39\" fill=\"none\" stroke=\"#e5b83a\" stroke-width=\"3\"/>\n\t\t\t\t\t<circle cx=\"48\" cy=\"48\" r=\"28\" fill=\"none\" stroke=\"rgba(255,255,255,0.18)\" stroke-width=\"3.5\"/>\n\t\t\t\t\t<circle cx=\"48\" cy=\"48\" r=\"17\" fill=\"#e5b83a\"/></g>\n\t\t<text x=\"48\" y=\"50\" text-anchor=\"middle\" dominant-baseline=\"central\"\n\t\t\tfont-family=\"-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif\"\n\t\t\tfont-size=\"38\" font-weight=\"600\"\n\t\t\tfill=\"#ffffff\" letter-spacing=\"-1\">PM</text>\n\t</svg>","IconType":"svg","Favicon":"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 96 96\" width=\"96\" height=\"96\">\n\t\t<defs>\n\t\t\t<clipPath id=\"fav-parime-management-light\">\n\t\t\t\t<path d=\"M 2 48\n\t\t\tC 2 18.0222416, 18.0222416 2, 48 2\n\t\t\tC 77.9777584 2, 94 18.0222416, 94 48\n\t\t\tC 94 77.9777584, 77.9777584 94, 48 94\n\t\t\tC 18.0222416 94, 2 77.9777584, 2 48 Z\"/>\n\t\t\t</clipPath>\n\t\t</defs>\n\t\t<path d=\"M 2 48\n\t\t\tC 2 18.0222416, 18.0222416 2, 48 2\n\t\t\tC 77.9777584 2, 94 18.0222416, 94 48\n\t\t\tC 94 77.9777584, 77.9777584 94, 48 94\n\t\t\tC 18.0222416 94, 2 77.9777584, 2 48 Z\" fill=\"#1e4acd\"/>\n\t\t<g clip-path=\"url(#fav-parime-management-light)\"><circle cx=\"48\" cy=\"48\" r=\"43\" fill=\"rgba(255,255,255,0.22)\"/></g>\n\t\t<text x=\"48\" y=\"50\" text-anchor=\"middle\" dominant-baseline=\"central\"\n\t\t\tfont-family=\"-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif\"\n\t\t\tfont-size=\"60\" font-weight=\"800\"\n\t\t\tfill=\"#ffffff\" letter-spacing=\"-1\">P</text>\n\t</svg>","FaviconDark":"<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 96 96\" width=\"96\" height=\"96\">\n\t\t<defs>\n\t\t\t<clipPath id=\"fav-parime-management-dark\">\n\t\t\t\t<path d=\"M 2 48\n\t\t\tC 2 18.0222416, 18.0222416 2, 48 2\n\t\t\tC 77.9777584 2, 94 18.0222416, 94 48\n\t\t\tC 94 77.9777584, 77.9777584 94, 48 94\n\t\t\tC 18.0222416 94, 2 77.9777584, 2 48 Z\"/>\n\t\t\t</clipPath>\n\t\t</defs>\n\t\t<path d=\"M 2 48\n\t\t\tC 2 18.0222416, 18.0222416 2, 48 2\n\t\t\tC 77.9777584 2, 94 18.0222416, 94 48\n\t\t\tC 94 77.9777584, 77.9777584 94, 48 94\n\t\t\tC 18.0222416 94, 2 77.9777584, 2 48 Z\" fill=\"#6484e2\"/>\n\t\t<g clip-path=\"url(#fav-parime-management-dark)\"><circle cx=\"48\" cy=\"48\" r=\"43\" fill=\"rgba(255,255,255,0.22)\"/></g>\n\t\t<text x=\"48\" y=\"50\" text-anchor=\"middle\" dominant-baseline=\"central\"\n\t\t\tfont-family=\"-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif\"\n\t\t\tfont-size=\"60\" font-weight=\"800\"\n\t\t\tfill=\"#101418\" letter-spacing=\"-1\">P</text>\n\t</svg>","Colors":{"Primary":"#1e4acd","Secondary":"#e5b83a","PrimaryLight":"#1e4acd","PrimaryDark":"#6484e2","SecondaryLight":"#e5b83a","SecondaryDark":"#ecd38f"}}}};},{}],71:[function(require,module,exports){var tmpPackage=require('../package.json');if(!tmpPackage.retold||!tmpPackage.retold.brand){throw new Error('parime-management: package.json is missing retold.brand — '+'run `npm run brand` (chained from prebuild) before building');}module.exports=tmpPackage.retold.brand;},{"../package.json":70}],72:[function(require,module,exports){module.exports={"Name":"Parime Management Console","Hash":"ParimeManagement","MainViewportViewIdentifier":"ParimeManagement-Layout","AutoSolveAfterInitialize":true,"AutoRenderMainViewportViewAfterInitialize":false,"AutoRenderViewsAfterInitialize":false,"pict_configuration":{"Product":"ParimeManagement-Pict-Application"}};},{}],73:[function(require,module,exports){var libPictApplication=require('pict-application');var libPictRouter=require('pict-router');var libPictSectionModal=require('pict-section-modal');var libPictSectionTheme=require('pict-section-theme');var libParimeManagementBrand=require('./ParimeManagement-Brand.js');// Views
+var libViewLayout=require('./views/PictView-ParimeManagement-Layout.js');var libViewTopBarNav=require('./views/PictView-ParimeManagement-TopBar-Nav.js');var libViewTopBarUser=require('./views/PictView-ParimeManagement-TopBar-User.js');var libViewStatusBar=require('./views/PictView-ParimeManagement-StatusBar.js');var libViewSettingsPanel=require('./views/PictView-ParimeManagement-SettingsPanel.js');var libViewLogin=require('./views/PictView-ParimeManagement-Login.js');var libViewDashboard=require('./views/PictView-ParimeManagement-Dashboard.js');var libViewLakes=require('./views/PictView-ParimeManagement-Lakes.js');var libViewConfiguration=require('./views/PictView-ParimeManagement-Configuration.js');var ParimeManagementApplication=/*#__PURE__*/function(_libPictApplication){function ParimeManagementApplication(pFable,pOptions,pServiceHash){var _this49;_classCallCheck(this,ParimeManagementApplication);_this49=_callSuper(this,ParimeManagementApplication,[pFable,pOptions,pServiceHash]);// Add the router provider with routes
+_this49.pict.addProvider('PictRouter',require('./providers/PictRouter-ParimeManagement-Configuration.json'),libPictRouter);// Modal system (confirm dialogs, shell panels)
+_this49.pict.addView('Pict-Section-Modal',libPictSectionModal.default_configuration,libPictSectionModal);// Layout shell
+_this49.pict.addView('ParimeManagement-Layout',libViewLayout.default_configuration,libViewLayout);// Theme system slot views — registered BEFORE the Theme-Section provider so its bootstrap can resolve them
+_this49.pict.addView('ParimeManagement-TopBar-Nav',libViewTopBarNav.default_configuration,libViewTopBarNav);_this49.pict.addView('ParimeManagement-TopBar-User',libViewTopBarUser.default_configuration,libViewTopBarUser);_this49.pict.addView('ParimeManagement-StatusBar',libViewStatusBar.default_configuration,libViewStatusBar);_this49.pict.addView('ParimeManagement-SettingsPanel',libViewSettingsPanel.default_configuration,libViewSettingsPanel);// Unified theme stack — Theme-Section provider drives the BrandMark + TopBar + BottomBar chrome,
+// and exposes Picker/ModeToggle/ScaleSelect controls for the settings overlay.
+_this49.pict.addProvider('Theme-Section',{ApplyDefault:'retold-default',DefaultMode:'system',DefaultScale:1.0,Brand:libParimeManagementBrand,Views:['Picker','ModeToggle','ScaleSelect','BrandMark','TopBar','BottomBar'],ViewOptions:{TopBar:{NavView:'ParimeManagement-TopBar-Nav',UserView:'ParimeManagement-TopBar-User',Height:56},BottomBar:{StatusView:'ParimeManagement-StatusBar',Height:32}}},libPictSectionTheme);// Content views
+_this49.pict.addView('ParimeManagement-Login',libViewLogin.default_configuration,libViewLogin);_this49.pict.addView('ParimeManagement-Dashboard',libViewDashboard.default_configuration,libViewDashboard);_this49.pict.addView('ParimeManagement-Lakes',libViewLakes.default_configuration,libViewLakes);_this49.pict.addView('ParimeManagement-Configuration',libViewConfiguration.default_configuration,libViewConfiguration);return _this49;}_inherits(ParimeManagementApplication,_libPictApplication);return _createClass(ParimeManagementApplication,[{key:"onAfterInitializeAsync",value:function onAfterInitializeAsync(fCallback){// Initialize application state
+this.pict.AppData.ParimeManagement={User:{LoggedIn:false,UserName:'',DisplayName:''},CurrentRoute:'Dashboard',CurrentView:'ParimeManagement-Dashboard',NavLinks:[{Route:'/Dashboard',Label:'Dashboard',View:'ParimeManagement-Dashboard',Active:true},{Route:'/Lakes',Label:'Lakes',View:'ParimeManagement-Lakes',Active:false},{Route:'/Configuration',Label:'Configuration',View:'ParimeManagement-Configuration',Active:false}],ServerInfo:{Product:'',Version:'',Port:0,Uptime:'',StartTime:''},Lakes:{Record:[],Binary:[],Combined:[]},Configuration:{},LakeBrowser:{ActiveTab:'Record',SelectedCategory:'',SelectedKey:'',CategoryKeys:[],KeyData:null}};// Render the layout shell first; the shell's onAfterRender builds the chrome panels,
+// renders the topbar/statusbar slot views, then resolves the router to load the initial view.
+this.pict.views['ParimeManagement-Layout'].render();return _superPropGet(ParimeManagementApplication,"onAfterInitializeAsync",this,3)([fCallback]);}/**
+	 * Re-render the topbar nav, topbar user area, and status bar after a state change.
+	 */},{key:"renderTopBar",value:function renderTopBar(){var tmpNav=this.pict.views['ParimeManagement-TopBar-Nav'];var tmpUser=this.pict.views['ParimeManagement-TopBar-User'];var tmpStatus=this.pict.views['ParimeManagement-StatusBar'];if(tmpNav){tmpNav.render();}if(tmpUser){tmpUser.render();}if(tmpStatus){tmpStatus.render();}}/**
+	 * Navigate to a route. Updates the browser URL hash via PictRouter
+	 * (for back/forward semantics + deep-link sharing) and fires showView
+	 * directly so the chrome + content update synchronously regardless of
+	 * router template-eval timing.
+	 *
+	 * @param {string} pRoute - The route path to navigate to (e.g. '/Dashboard')
+	 */},{key:"navigateTo",value:function navigateTo(pRoute){if(this.pict.providers.PictRouter){this.pict.providers.PictRouter.navigate(pRoute);}var tmpView=this._routeToView(pRoute);if(tmpView){this.showView(tmpView);}}},{key:"_routeToView",value:function _routeToView(pRoute){var tmpMap={'/Dashboard':'ParimeManagement-Dashboard','/Lakes':'ParimeManagement-Lakes','/Configuration':'ParimeManagement-Configuration','/Login':'ParimeManagement-Login'};return tmpMap[pRoute]||null;}/**
+	 * Render a specific content view into the main workspace area.
+	 * This is called by the router when a route is matched.
+	 *
+	 * @param {string} pViewIdentifier - The view identifier to render
+	 */},{key:"showView",value:function showView(pViewIdentifier){if(pViewIdentifier in this.pict.views){this.pict.AppData.ParimeManagement.CurrentRoute=pViewIdentifier;this.pict.AppData.ParimeManagement.CurrentView=pViewIdentifier;this.pict.views[pViewIdentifier].render();this.renderTopBar();}else{this.pict.log.warn("View [".concat(pViewIdentifier,"] not found; falling back to dashboard."));this.pict.AppData.ParimeManagement.CurrentRoute='ParimeManagement-Dashboard';this.pict.AppData.ParimeManagement.CurrentView='ParimeManagement-Dashboard';this.pict.views['ParimeManagement-Dashboard'].render();this.renderTopBar();}}/**
+	 * Handle user login attempt.
+	 *
+	 * @param {string} pUserName - The username
+	 * @param {string} pPassword - The password
+	 */},{key:"attemptLogin",value:function attemptLogin(pUserName,pPassword){this.pict.log.info("Login attempt for user [".concat(pUserName,"]"));// Accept any non-empty credentials for now
+if(pUserName&&pPassword){this.pict.AppData.ParimeManagement.User.LoggedIn=true;this.pict.AppData.ParimeManagement.User.UserName=pUserName;this.pict.AppData.ParimeManagement.User.DisplayName=pUserName;this.renderTopBar();this.navigateTo('/Dashboard');}else{this.pict.log.warn('Login failed: username and password are required.');}}/**
+	 * Handle user logout.
+	 */},{key:"logout",value:function logout(){this.pict.AppData.ParimeManagement.User.LoggedIn=false;this.pict.AppData.ParimeManagement.User.UserName='';this.pict.AppData.ParimeManagement.User.DisplayName='';this.renderTopBar();this.navigateTo('/Login');}/**
+	 * Fetch server info from the API and update AppData.
+	 *
+	 * @param {function} fCallback - Optional callback when data is loaded.
+	 */},{key:"refreshServerInfo",value:function refreshServerInfo(fCallback){var _this50=this;var tmpXHR=new XMLHttpRequest();tmpXHR.open('GET','/1.0/ServerInfo',true);tmpXHR.onreadystatechange=function(){if(tmpXHR.readyState===4){if(tmpXHR.status===200){try{var tmpData=JSON.parse(tmpXHR.responseText);_this50.pict.AppData.ParimeManagement.ServerInfo=tmpData;// Keep the status bar's server-version segment fresh
+var tmpStatus=_this50.pict.views['ParimeManagement-StatusBar'];if(tmpStatus){tmpStatus.render();}}catch(pError){_this50.pict.log.warn('Failed to parse server info response.');}}if(typeof fCallback==='function'){fCallback();}}};tmpXHR.send();}/**
+	 * Fetch lake summary from the API and update AppData.
+	 *
+	 * @param {function} fCallback - Optional callback when data is loaded.
+	 */},{key:"refreshLakesSummary",value:function refreshLakesSummary(fCallback){var _this51=this;var tmpXHR=new XMLHttpRequest();tmpXHR.open('GET','/1.0/ServerInfo/Lakes',true);tmpXHR.onreadystatechange=function(){if(tmpXHR.readyState===4){if(tmpXHR.status===200){try{var tmpData=JSON.parse(tmpXHR.responseText);if(tmpData.Lakes){_this51.pict.AppData.ParimeManagement.Lakes=tmpData.Lakes;}}catch(pError){_this51.pict.log.warn('Failed to parse lakes summary response.');}}if(typeof fCallback==='function'){fCallback();}}};tmpXHR.send();}/**
+	 * Fetch configuration from the API and update AppData.
+	 *
+	 * @param {function} fCallback - Optional callback when data is loaded.
+	 */},{key:"refreshConfiguration",value:function refreshConfiguration(fCallback){var _this52=this;var tmpXHR=new XMLHttpRequest();tmpXHR.open('GET','/1.0/ServerInfo',true);tmpXHR.onreadystatechange=function(){if(tmpXHR.readyState===4){if(tmpXHR.status===200){try{var tmpData=JSON.parse(tmpXHR.responseText);_this52.pict.AppData.ParimeManagement.Configuration=tmpData;}catch(pError){_this52.pict.log.warn('Failed to parse configuration response.');}}if(typeof fCallback==='function'){fCallback();}}};tmpXHR.send();}/**
+	 * Fetch keys for a specific lake category.
+	 *
+	 * @param {string} pLakeType - 'Record', 'Binary', or 'Combined'
+	 * @param {string} pCategory - The category name
+	 * @param {function} fCallback - Callback(pKeys)
+	 */},{key:"fetchCategoryKeys",value:function fetchCategoryKeys(pLakeType,pCategory,fCallback){var tmpXHR=new XMLHttpRequest();tmpXHR.open('GET',"/1.0/".concat(pLakeType,"/").concat(pCategory),true);tmpXHR.onreadystatechange=function(){if(tmpXHR.readyState===4){if(tmpXHR.status===200){try{var tmpData=JSON.parse(tmpXHR.responseText);fCallback(tmpData.Keys||[]);}catch(pError){fCallback([]);}}else{fCallback([]);}}};tmpXHR.send();}/**
+	 * Fetch a specific record from the API.
+	 *
+	 * @param {string} pCategory - The category name
+	 * @param {string} pKey - The record key
+	 * @param {function} fCallback - Callback(pData)
+	 */},{key:"fetchRecord",value:function fetchRecord(pCategory,pKey,fCallback){var tmpXHR=new XMLHttpRequest();tmpXHR.open('GET',"/1.0/Record/".concat(pCategory,"/").concat(pKey),true);tmpXHR.onreadystatechange=function(){if(tmpXHR.readyState===4){if(tmpXHR.status===200){try{fCallback(JSON.parse(tmpXHR.responseText));}catch(pError){fCallback(null);}}else{fCallback(null);}}};tmpXHR.send();}}]);}(libPictApplication);module.exports=ParimeManagementApplication;module.exports.default_configuration=require('./Pict-Application-ParimeManagement-Configuration.json');},{"./ParimeManagement-Brand.js":71,"./Pict-Application-ParimeManagement-Configuration.json":72,"./providers/PictRouter-ParimeManagement-Configuration.json":74,"./views/PictView-ParimeManagement-Configuration.js":75,"./views/PictView-ParimeManagement-Dashboard.js":76,"./views/PictView-ParimeManagement-Lakes.js":77,"./views/PictView-ParimeManagement-Layout.js":78,"./views/PictView-ParimeManagement-Login.js":79,"./views/PictView-ParimeManagement-SettingsPanel.js":80,"./views/PictView-ParimeManagement-StatusBar.js":81,"./views/PictView-ParimeManagement-TopBar-Nav.js":82,"./views/PictView-ParimeManagement-TopBar-User.js":83,"pict-application":5,"pict-router":13,"pict-section-modal":23,"pict-section-theme":24}],74:[function(require,module,exports){module.exports={"ProviderIdentifier":"Pict-Router","AutoInitialize":true,"AutoInitializeOrdinal":0,"Routes":[{"path":"/Dashboard","template":"{~LV:Pict.PictApplication.showView(`ParimeManagement-Dashboard`)~}"},{"path":"/Lakes","template":"{~LV:Pict.PictApplication.showView(`ParimeManagement-Lakes`)~}"},{"path":"/Configuration","template":"{~LV:Pict.PictApplication.showView(`ParimeManagement-Configuration`)~}"},{"path":"/Login","template":"{~LV:Pict.PictApplication.showView(`ParimeManagement-Login`)~}"}]};},{}],75:[function(require,module,exports){var libPictView=require('pict-view');var _ViewConfiguration={ViewIdentifier:"ParimeManagement-Configuration",DefaultRenderable:"ParimeManagement-Configuration-Content",DefaultDestinationAddress:"#ParimeManagement-Content-Container",AutoRender:false,CSS:/*css*/"\n\t\t.parime-config {\n\t\t\tpadding: 2em;\n\t\t\tmax-width: 1200px;\n\t\t\tmargin: 0 auto;\n\t\t}\n\t\t.parime-config-header {\n\t\t\tmargin: 0 0 1.5em 0;\n\t\t\tpadding-bottom: 1em;\n\t\t\tborder-bottom: 1px solid #DDD6CA;\n\t\t}\n\t\t.parime-config-header h1 {\n\t\t\tmargin: 0 0 0.25em 0;\n\t\t\tfont-size: 1.75em;\n\t\t\tfont-weight: 400;\n\t\t\tcolor: var(--theme-color-text-primary, #3D3229);\n\t\t}\n\t\t.parime-config-header p {\n\t\t\tmargin: 0;\n\t\t\tcolor: #7A7568;\n\t\t\tfont-size: 1em;\n\t\t}\n\t\t.parime-config-section {\n\t\t\tbackground: var(--theme-color-background-panel, #fff);\n\t\t\tborder: 1px solid #DDD6CA;\n\t\t\tborder-radius: 6px;\n\t\t\tmargin-bottom: 1.25em;\n\t\t\toverflow: hidden;\n\t\t}\n\t\t.parime-config-section-header {\n\t\t\tpadding: 0.75em 1.25em;\n\t\t\tbackground: var(--theme-color-background-secondary, #F0ECE4);\n\t\t\tcolor: var(--theme-color-text-secondary, #5E5549);\n\t\t\tfont-size: 0.85em;\n\t\t\tfont-weight: 600;\n\t\t\ttext-transform: uppercase;\n\t\t\tletter-spacing: 0.05em;\n\t\t\tborder-bottom: 1px solid #DDD6CA;\n\t\t}\n\t\t.parime-config-table {\n\t\t\twidth: 100%;\n\t\t\tborder-collapse: collapse;\n\t\t}\n\t\t.parime-config-table td {\n\t\t\tpadding: 0.6em 1.25em;\n\t\t\tborder-bottom: 1px solid #EAE3D8;\n\t\t\tfont-size: 0.9em;\n\t\t}\n\t\t.parime-config-table tr:last-child td {\n\t\t\tborder-bottom: none;\n\t\t}\n\t\t.parime-config-table td:first-child {\n\t\t\tcolor: var(--theme-color-text-secondary, #5E5549);\n\t\t\tfont-weight: 500;\n\t\t\twidth: 200px;\n\t\t}\n\t\t.parime-config-table td:last-child {\n\t\t\tcolor: #423D37;\n\t\t}\n\t\t.parime-config-value-code {\n\t\t\tfont-family: \"SF Mono\", \"Fira Code\", \"Fira Mono\", Menlo, Consolas, monospace;\n\t\t\tfont-size: 0.85em;\n\t\t\tcolor: #9E6B47;\n\t\t\tbackground: var(--theme-color-background-secondary, #F0ECE4);\n\t\t\tpadding: 0.15em 0.4em;\n\t\t\tborder-radius: 3px;\n\t\t}\n\t\t.parime-config-json {\n\t\t\tpadding: 1.25em;\n\t\t\tbackground: var(--theme-color-background-secondary, #F0ECE4);\n\t\t\tfont-family: \"SF Mono\", \"Fira Code\", \"Fira Mono\", Menlo, Consolas, monospace;\n\t\t\tfont-size: 0.85em;\n\t\t\tcolor: #423D37;\n\t\t\twhite-space: pre-wrap;\n\t\t\tword-break: break-word;\n\t\t\tmargin: 0;\n\t\t}\n\t\t.parime-config-endpoints {\n\t\t\tpadding: 1.25em;\n\t\t}\n\t\t.parime-config-endpoint-item {\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tgap: 0.75em;\n\t\t\tpadding: 0.4em 0;\n\t\t\tfont-size: 0.9em;\n\t\t}\n\t\t.parime-config-endpoint-badge {\n\t\t\tdisplay: inline-block;\n\t\t\tpadding: 0.15em 0.5em;\n\t\t\tborder-radius: 3px;\n\t\t\tfont-size: 0.75em;\n\t\t\tfont-weight: 600;\n\t\t\ttext-transform: uppercase;\n\t\t\tletter-spacing: 0.03em;\n\t\t\tbackground: #E0EDEB;\n\t\t\tcolor: #2E7D74;\n\t\t}\n\t",Templates:[{Hash:"ParimeManagement-Configuration-Template",Template:/*html*/"\n<div class=\"parime-config\">\n\t<div class=\"parime-config-header\">\n\t\t<h1>Configuration</h1>\n\t\t<p>Current server configuration and endpoint status.</p>\n\t</div>\n\t<div id=\"ParimeManagement-Configuration-Body\">\n\t\t<p style=\"color: #8A7F72;\">Loading configuration...</p>\n\t</div>\n</div>\n"}],Renderables:[{RenderableHash:"ParimeManagement-Configuration-Content",TemplateHash:"ParimeManagement-Configuration-Template",DestinationAddress:"#ParimeManagement-Content-Container",RenderMethod:"replace"}]};var ParimeManagementConfigurationView=/*#__PURE__*/function(_libPictView9){function ParimeManagementConfigurationView(pFable,pOptions,pServiceHash){_classCallCheck(this,ParimeManagementConfigurationView);return _callSuper(this,ParimeManagementConfigurationView,[pFable,pOptions,pServiceHash]);}_inherits(ParimeManagementConfigurationView,_libPictView9);return _createClass(ParimeManagementConfigurationView,[{key:"onAfterRender",value:function onAfterRender(pRenderable,pRenderDestinationAddress,pRecord,pContent){var _this53=this;this.pict.PictApplication.refreshConfiguration(function(){var tmpConfig=_this53.pict.AppData.ParimeManagement.Configuration;var tmpHTML='';// Server section
+tmpHTML+='<div class="parime-config-section">';tmpHTML+='<div class="parime-config-section-header">Server</div>';tmpHTML+='<table class="parime-config-table">';tmpHTML+="<tr><td>Product</td><td>".concat(_this53.escapeHTML(tmpConfig.Product||'Parime'),"</td></tr>");tmpHTML+="<tr><td>Version</td><td><span class=\"parime-config-value-code\">".concat(_this53.escapeHTML(tmpConfig.Version||'?'),"</span></td></tr>");tmpHTML+="<tr><td>Port</td><td><span class=\"parime-config-value-code\">".concat(tmpConfig.Port||'?',"</span></td></tr>");if(tmpConfig.Uptime){tmpHTML+="<tr><td>Uptime</td><td>".concat(_this53.escapeHTML(tmpConfig.Uptime),"</td></tr>");}if(tmpConfig.StartTime){tmpHTML+="<tr><td>Start Time</td><td>".concat(_this53.escapeHTML(tmpConfig.StartTime),"</td></tr>");}tmpHTML+='</table>';tmpHTML+='</div>';// Storage section
+tmpHTML+='<div class="parime-config-section">';tmpHTML+='<div class="parime-config-section-header">Storage</div>';tmpHTML+='<table class="parime-config-table">';tmpHTML+="<tr><td>Binary Storage Root</td><td><span class=\"parime-config-value-code\">".concat(_this53.escapeHTML(tmpConfig.BinaryStorageRoot||'?'),"</span></td></tr>");tmpHTML+='</table>';tmpHTML+='</div>';// Restify section
+if(tmpConfig.RestifyConfiguration){tmpHTML+='<div class="parime-config-section">';tmpHTML+='<div class="parime-config-section-header">Restify Configuration</div>';tmpHTML+="<pre class=\"parime-config-json\">".concat(_this53.escapeHTML(JSON.stringify(tmpConfig.RestifyConfiguration,null,2)),"</pre>");tmpHTML+='</div>';}// Endpoints section
+tmpHTML+='<div class="parime-config-section">';tmpHTML+='<div class="parime-config-section-header">Endpoints</div>';tmpHTML+='<div class="parime-config-endpoints">';var tmpEndpoints=[{Name:'Record Lake',Path:'/1.0/Record/:category/:hash'},{Name:'Binary Lake',Path:'/1.0/Binary/:category/:hash'},{Name:'Combined Lake',Path:'/1.0/Combined/:category/:hash'},{Name:'WebSocket',Path:'/1.0/WebSocket/Lake'},{Name:'Server Info',Path:'/1.0/ServerInfo'}];for(var i=0;i<tmpEndpoints.length;i++){var tmpEndpoint=tmpEndpoints[i];tmpHTML+="<div class=\"parime-config-endpoint-item\"><span class=\"parime-config-endpoint-badge\">Active</span> <strong>".concat(_this53.escapeHTML(tmpEndpoint.Name),"</strong> &mdash; <span class=\"parime-config-value-code\">").concat(_this53.escapeHTML(tmpEndpoint.Path),"</span></div>");}tmpHTML+='</div>';tmpHTML+='</div>';_this53.pict.ContentAssignment.assignContent('#ParimeManagement-Configuration-Body',tmpHTML);});return _superPropGet(ParimeManagementConfigurationView,"onAfterRender",this,3)([pRenderable,pRenderDestinationAddress,pRecord,pContent]);}},{key:"escapeHTML",value:function escapeHTML(pString){if(typeof pString!=='string'){return String(pString);}return pString.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}}]);}(libPictView);module.exports=ParimeManagementConfigurationView;module.exports.default_configuration=_ViewConfiguration;},{"pict-view":69}],76:[function(require,module,exports){var libPictView=require('pict-view');var _ViewConfiguration={ViewIdentifier:"ParimeManagement-Dashboard",DefaultRenderable:"ParimeManagement-Dashboard-Content",DefaultDestinationAddress:"#ParimeManagement-Content-Container",AutoRender:false,CSS:/*css*/"\n\t\t.parime-dashboard {\n\t\t\tpadding: 2em;\n\t\t\tmax-width: 1200px;\n\t\t\tmargin: 0 auto;\n\t\t}\n\t\t.parime-dashboard-header {\n\t\t\tmargin: 0 0 1.5em 0;\n\t\t\tpadding-bottom: 1em;\n\t\t\tborder-bottom: 1px solid #DDD6CA;\n\t\t}\n\t\t.parime-dashboard-header h1 {\n\t\t\tmargin: 0 0 0.25em 0;\n\t\t\tfont-size: 1.75em;\n\t\t\tfont-weight: 400;\n\t\t\tcolor: var(--theme-color-text-primary, #3D3229);\n\t\t}\n\t\t.parime-dashboard-header p {\n\t\t\tmargin: 0;\n\t\t\tcolor: #7A7568;\n\t\t\tfont-size: 1em;\n\t\t}\n\t\t.parime-dashboard-cards {\n\t\t\tdisplay: grid;\n\t\t\tgrid-template-columns: repeat(auto-fill, minmax(280px, 1fr));\n\t\t\tgap: 1.25em;\n\t\t\tmargin-top: 1.5em;\n\t\t}\n\t\t.parime-card {\n\t\t\tbackground: var(--theme-color-background-panel, #fff);\n\t\t\tborder: 1px solid #DDD6CA;\n\t\t\tborder-radius: 6px;\n\t\t\tpadding: 1.5em;\n\t\t\ttransition: box-shadow 0.2s, border-color 0.2s;\n\t\t}\n\t\t.parime-card:hover {\n\t\t\tbox-shadow: 0 4px 12px rgba(61, 50, 41, 0.08);\n\t\t\tborder-color: #B5AA9A;\n\t\t}\n\t\t.parime-card-icon {\n\t\t\tfont-size: 1.75em;\n\t\t\tmargin-bottom: 0.5em;\n\t\t}\n\t\t.parime-card h3 {\n\t\t\tmargin: 0 0 0.5em 0;\n\t\t\tfont-size: 1.1em;\n\t\t\tcolor: var(--theme-color-text-primary, #3D3229);\n\t\t}\n\t\t.parime-card p {\n\t\t\tmargin: 0;\n\t\t\tcolor: #7A7568;\n\t\t\tfont-size: 0.9em;\n\t\t\tline-height: 1.5;\n\t\t}\n\t\t.parime-card-value {\n\t\t\tfont-size: 1.75em;\n\t\t\tfont-weight: 600;\n\t\t\tcolor: #2E7D74;\n\t\t\tmargin: 0.25em 0;\n\t\t}\n\t\t.parime-card-label {\n\t\t\tfont-size: 0.8em;\n\t\t\tcolor: #8A7F72;\n\t\t\ttext-transform: uppercase;\n\t\t\tletter-spacing: 0.05em;\n\t\t}\n\t",Templates:[{Hash:"ParimeManagement-Dashboard-Template",Template:/*html*/"\n<div class=\"parime-dashboard\">\n\t<div class=\"parime-dashboard-header\">\n\t\t<h1>Dashboard</h1>\n\t\t<p>Overview of your Parime data lake server.</p>\n\t</div>\n\t<div class=\"parime-dashboard-cards\" id=\"ParimeManagement-Dashboard-Cards\">\n\t\t<div class=\"parime-card\">\n\t\t\t<div class=\"parime-card-icon\">&#9881;</div>\n\t\t\t<h3>Server Status</h3>\n\t\t\t<div id=\"ParimeManagement-Dashboard-ServerStatus\">\n\t\t\t\t<p>Loading...</p>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"parime-card\">\n\t\t\t<div class=\"parime-card-icon\">&#128203;</div>\n\t\t\t<h3>Record Lakes</h3>\n\t\t\t<div id=\"ParimeManagement-Dashboard-RecordLakes\">\n\t\t\t\t<p>Loading...</p>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"parime-card\">\n\t\t\t<div class=\"parime-card-icon\">&#128190;</div>\n\t\t\t<h3>Binary Lakes</h3>\n\t\t\t<div id=\"ParimeManagement-Dashboard-BinaryLakes\">\n\t\t\t\t<p>Loading...</p>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"parime-card\">\n\t\t\t<div class=\"parime-card-icon\">&#128451;</div>\n\t\t\t<h3>Combined Lakes</h3>\n\t\t\t<div id=\"ParimeManagement-Dashboard-CombinedLakes\">\n\t\t\t\t<p>Loading...</p>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"parime-card\">\n\t\t\t<div class=\"parime-card-icon\">&#128268;</div>\n\t\t\t<h3>WebSocket</h3>\n\t\t\t<div id=\"ParimeManagement-Dashboard-WebSocket\">\n\t\t\t\t<p class=\"parime-card-label\">Endpoint</p>\n\t\t\t\t<p>/1.0/WebSocket/Lake</p>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>\n"}],Renderables:[{RenderableHash:"ParimeManagement-Dashboard-Content",TemplateHash:"ParimeManagement-Dashboard-Template",DestinationAddress:"#ParimeManagement-Content-Container",RenderMethod:"replace"}]};var ParimeManagementDashboardView=/*#__PURE__*/function(_libPictView0){function ParimeManagementDashboardView(pFable,pOptions,pServiceHash){_classCallCheck(this,ParimeManagementDashboardView);return _callSuper(this,ParimeManagementDashboardView,[pFable,pOptions,pServiceHash]);}_inherits(ParimeManagementDashboardView,_libPictView0);return _createClass(ParimeManagementDashboardView,[{key:"onAfterRender",value:function onAfterRender(pRenderable,pRenderDestinationAddress,pRecord,pContent){var _this54=this;// Fetch server info and update the dashboard cards
+this.pict.PictApplication.refreshServerInfo(function(){var tmpInfo=_this54.pict.AppData.ParimeManagement.ServerInfo;var tmpServerHTML='';tmpServerHTML+="<p class=\"parime-card-label\">Product</p>";tmpServerHTML+="<p>".concat(tmpInfo.Product||'Parime'," v").concat(tmpInfo.Version||'?',"</p>");tmpServerHTML+="<p class=\"parime-card-label\">Port</p>";tmpServerHTML+="<p>".concat(tmpInfo.Port||'?',"</p>");if(tmpInfo.Uptime){tmpServerHTML+="<p class=\"parime-card-label\">Uptime</p>";tmpServerHTML+="<p>".concat(tmpInfo.Uptime,"</p>");}_this54.pict.ContentAssignment.assignContent('#ParimeManagement-Dashboard-ServerStatus',tmpServerHTML);});// Fetch lake summary and update the lake cards
+this.pict.PictApplication.refreshLakesSummary(function(){var tmpLakes=_this54.pict.AppData.ParimeManagement.Lakes;// Record Lakes
+var tmpRecordLakes=tmpLakes.Record||[];var tmpRecordHTML="<div class=\"parime-card-value\">".concat(tmpRecordLakes.length,"</div>");tmpRecordHTML+="<p class=\"parime-card-label\">Categories</p>";if(tmpRecordLakes.length>0){tmpRecordHTML+="<p>".concat(tmpRecordLakes.join(', '),"</p>");}_this54.pict.ContentAssignment.assignContent('#ParimeManagement-Dashboard-RecordLakes',tmpRecordHTML);// Binary Lakes
+var tmpBinaryLakes=tmpLakes.Binary||[];var tmpBinaryHTML="<div class=\"parime-card-value\">".concat(tmpBinaryLakes.length,"</div>");tmpBinaryHTML+="<p class=\"parime-card-label\">Categories</p>";if(tmpBinaryLakes.length>0){tmpBinaryHTML+="<p>".concat(tmpBinaryLakes.join(', '),"</p>");}_this54.pict.ContentAssignment.assignContent('#ParimeManagement-Dashboard-BinaryLakes',tmpBinaryHTML);// Combined Lakes
+var tmpCombinedLakes=tmpLakes.Combined||[];var tmpCombinedHTML="<div class=\"parime-card-value\">".concat(tmpCombinedLakes.length,"</div>");tmpCombinedHTML+="<p class=\"parime-card-label\">Categories</p>";if(tmpCombinedLakes.length>0){tmpCombinedHTML+="<p>".concat(tmpCombinedLakes.join(', '),"</p>");}_this54.pict.ContentAssignment.assignContent('#ParimeManagement-Dashboard-CombinedLakes',tmpCombinedHTML);});return _superPropGet(ParimeManagementDashboardView,"onAfterRender",this,3)([pRenderable,pRenderDestinationAddress,pRecord,pContent]);}}]);}(libPictView);module.exports=ParimeManagementDashboardView;module.exports.default_configuration=_ViewConfiguration;},{"pict-view":69}],77:[function(require,module,exports){var libPictView=require('pict-view');var _ViewConfiguration={ViewIdentifier:"ParimeManagement-Lakes",DefaultRenderable:"ParimeManagement-Lakes-Content",DefaultDestinationAddress:"#ParimeManagement-Content-Container",AutoRender:false,CSS:/*css*/"\n\t\t.parime-lakes {\n\t\t\tpadding: 2em;\n\t\t\tmax-width: 1200px;\n\t\t\tmargin: 0 auto;\n\t\t}\n\t\t.parime-lakes-header {\n\t\t\tmargin: 0 0 1.5em 0;\n\t\t\tpadding-bottom: 1em;\n\t\t\tborder-bottom: 1px solid #DDD6CA;\n\t\t}\n\t\t.parime-lakes-header h1 {\n\t\t\tmargin: 0 0 0.25em 0;\n\t\t\tfont-size: 1.75em;\n\t\t\tfont-weight: 400;\n\t\t\tcolor: var(--theme-color-text-primary, #3D3229);\n\t\t}\n\t\t.parime-lakes-header p {\n\t\t\tmargin: 0;\n\t\t\tcolor: #7A7568;\n\t\t\tfont-size: 1em;\n\t\t}\n\t\t.parime-lakes-tabs {\n\t\t\tdisplay: flex;\n\t\t\tgap: 0;\n\t\t\tborder-bottom: 2px solid #DDD6CA;\n\t\t\tmargin-bottom: 1.5em;\n\t\t}\n\t\t.parime-lakes-tab {\n\t\t\tpadding: 0.6em 1.25em;\n\t\t\tcursor: pointer;\n\t\t\tcolor: #7A7568;\n\t\t\tfont-size: 0.95em;\n\t\t\tfont-weight: 500;\n\t\t\tborder-bottom: 2px solid transparent;\n\t\t\tmargin-bottom: -2px;\n\t\t\ttransition: color 0.15s, border-color 0.15s;\n\t\t\tbackground: none;\n\t\t\tborder-top: none;\n\t\t\tborder-left: none;\n\t\t\tborder-right: none;\n\t\t}\n\t\t.parime-lakes-tab:hover {\n\t\t\tcolor: var(--theme-color-text-primary, #3D3229);\n\t\t}\n\t\t.parime-lakes-tab.active {\n\t\t\tcolor: #2E7D74;\n\t\t\tborder-bottom-color: #2E7D74;\n\t\t}\n\t\t.parime-lakes-body {\n\t\t\tdisplay: flex;\n\t\t\tgap: 1.5em;\n\t\t\tmin-height: 400px;\n\t\t}\n\t\t.parime-lakes-sidebar {\n\t\t\twidth: 260px;\n\t\t\tflex-shrink: 0;\n\t\t}\n\t\t.parime-lakes-main {\n\t\t\tflex: 1;\n\t\t\tmin-width: 0;\n\t\t}\n\t\t.parime-lakes-list {\n\t\t\tbackground: var(--theme-color-background-panel, #fff);\n\t\t\tborder: 1px solid #DDD6CA;\n\t\t\tborder-radius: 6px;\n\t\t\toverflow: hidden;\n\t\t}\n\t\t.parime-lakes-list-header {\n\t\t\tpadding: 0.75em 1em;\n\t\t\tbackground: var(--theme-color-background-secondary, #F0ECE4);\n\t\t\tcolor: var(--theme-color-text-secondary, #5E5549);\n\t\t\tfont-size: 0.8em;\n\t\t\tfont-weight: 600;\n\t\t\ttext-transform: uppercase;\n\t\t\tletter-spacing: 0.05em;\n\t\t\tborder-bottom: 1px solid #DDD6CA;\n\t\t}\n\t\t.parime-lakes-list-item {\n\t\t\tpadding: 0.6em 1em;\n\t\t\tcursor: pointer;\n\t\t\tborder-bottom: 1px solid #EAE3D8;\n\t\t\tcolor: #423D37;\n\t\t\tfont-size: 0.9em;\n\t\t\ttransition: background-color 0.1s;\n\t\t}\n\t\t.parime-lakes-list-item:hover {\n\t\t\tbackground-color: #F7F5F0;\n\t\t}\n\t\t.parime-lakes-list-item.active {\n\t\t\tbackground-color: #E0EDEB;\n\t\t\tcolor: #2E7D74;\n\t\t\tfont-weight: 500;\n\t\t}\n\t\t.parime-lakes-list-item:last-child {\n\t\t\tborder-bottom: none;\n\t\t}\n\t\t.parime-lakes-list-empty {\n\t\t\tpadding: 1.5em 1em;\n\t\t\tcolor: #8A7F72;\n\t\t\tfont-size: 0.9em;\n\t\t\ttext-align: center;\n\t\t}\n\t\t.parime-lakes-detail {\n\t\t\tbackground: var(--theme-color-background-panel, #fff);\n\t\t\tborder: 1px solid #DDD6CA;\n\t\t\tborder-radius: 6px;\n\t\t\tpadding: 1.5em;\n\t\t\tmin-height: 300px;\n\t\t}\n\t\t.parime-lakes-detail-header {\n\t\t\tfont-size: 0.8em;\n\t\t\tfont-weight: 600;\n\t\t\ttext-transform: uppercase;\n\t\t\tletter-spacing: 0.05em;\n\t\t\tcolor: var(--theme-color-text-secondary, #5E5549);\n\t\t\tmargin-bottom: 1em;\n\t\t\tpadding-bottom: 0.5em;\n\t\t\tborder-bottom: 1px solid #EAE3D8;\n\t\t}\n\t\t.parime-lakes-json {\n\t\t\tbackground: var(--theme-color-background-secondary, #F0ECE4);\n\t\t\tborder: 1px solid #DDD6CA;\n\t\t\tborder-radius: 4px;\n\t\t\tpadding: 1em;\n\t\t\tfont-family: \"SF Mono\", \"Fira Code\", \"Fira Mono\", Menlo, Consolas, monospace;\n\t\t\tfont-size: 0.85em;\n\t\t\tcolor: #423D37;\n\t\t\twhite-space: pre-wrap;\n\t\t\tword-break: break-word;\n\t\t\toverflow-x: auto;\n\t\t\tmax-height: 500px;\n\t\t\toverflow-y: auto;\n\t\t}\n\t\t.parime-lakes-placeholder {\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tjustify-content: center;\n\t\t\tmin-height: 300px;\n\t\t\tcolor: #8A7F72;\n\t\t\tfont-size: 0.95em;\n\t\t}\n\t",Templates:[{Hash:"ParimeManagement-Lakes-Template",Template:/*html*/"\n<div class=\"parime-lakes\">\n\t<div class=\"parime-lakes-header\">\n\t\t<h1>Lakes</h1>\n\t\t<p>Browse and inspect record, binary and combined lake data.</p>\n\t</div>\n\t<div class=\"parime-lakes-tabs\" id=\"ParimeManagement-Lakes-Tabs\"></div>\n\t<div class=\"parime-lakes-body\">\n\t\t<div class=\"parime-lakes-sidebar\">\n\t\t\t<div class=\"parime-lakes-list\" id=\"ParimeManagement-Lakes-CategoryList\">\n\t\t\t\t<div class=\"parime-lakes-list-header\">Categories</div>\n\t\t\t\t<div class=\"parime-lakes-list-empty\">Loading...</div>\n\t\t\t</div>\n\t\t\t<div class=\"parime-lakes-list\" id=\"ParimeManagement-Lakes-KeyList\" style=\"margin-top: 1em; display: none;\">\n\t\t\t\t<div class=\"parime-lakes-list-header\">Keys</div>\n\t\t\t</div>\n\t\t</div>\n\t\t<div class=\"parime-lakes-main\">\n\t\t\t<div class=\"parime-lakes-detail\" id=\"ParimeManagement-Lakes-Detail\">\n\t\t\t\t<div class=\"parime-lakes-placeholder\">Select a category and key to view data.</div>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n</div>\n"}],Renderables:[{RenderableHash:"ParimeManagement-Lakes-Content",TemplateHash:"ParimeManagement-Lakes-Template",DestinationAddress:"#ParimeManagement-Content-Container",RenderMethod:"replace"}]};var ParimeManagementLakesView=/*#__PURE__*/function(_libPictView1){function ParimeManagementLakesView(pFable,pOptions,pServiceHash){_classCallCheck(this,ParimeManagementLakesView);return _callSuper(this,ParimeManagementLakesView,[pFable,pOptions,pServiceHash]);}_inherits(ParimeManagementLakesView,_libPictView1);return _createClass(ParimeManagementLakesView,[{key:"onAfterRender",value:function onAfterRender(pRenderable,pRenderDestinationAddress,pRecord,pContent){var _this55=this;var tmpBrowser=this.pict.AppData.ParimeManagement.LakeBrowser;// `getClientSideReferenceForPict()` was removed in newer pict; the
+// inline onclick handlers want the runtime global expression.
+var tmpPictRef='window._Pict';// Render tabs
+var tmpTabs=['Record','Binary','Combined'];var tmpTabsHTML='';for(var i=0;i<tmpTabs.length;i++){var tmpTab=tmpTabs[i];var tmpActiveClass=tmpBrowser.ActiveTab===tmpTab?' active':'';tmpTabsHTML+="<button class=\"parime-lakes-tab".concat(tmpActiveClass,"\" onclick=\"").concat(tmpPictRef,".views['ParimeManagement-Lakes'].switchTab('").concat(tmpTab,"')\">").concat(tmpTab,"</button>");}this.pict.ContentAssignment.assignContent('#ParimeManagement-Lakes-Tabs',tmpTabsHTML);// Fetch lake categories
+this.pict.PictApplication.refreshLakesSummary(function(){_this55.renderCategoryList();});return _superPropGet(ParimeManagementLakesView,"onAfterRender",this,3)([pRenderable,pRenderDestinationAddress,pRecord,pContent]);}},{key:"switchTab",value:function switchTab(pTab){var tmpBrowser=this.pict.AppData.ParimeManagement.LakeBrowser;tmpBrowser.ActiveTab=pTab;tmpBrowser.SelectedCategory='';tmpBrowser.SelectedKey='';tmpBrowser.CategoryKeys=[];tmpBrowser.KeyData=null;this.render();}},{key:"renderCategoryList",value:function renderCategoryList(){var tmpBrowser=this.pict.AppData.ParimeManagement.LakeBrowser;var tmpLakes=this.pict.AppData.ParimeManagement.Lakes;var tmpCategories=tmpLakes[tmpBrowser.ActiveTab]||[];// `getClientSideReferenceForPict()` was removed in newer pict; the
+// inline onclick handlers want the runtime global expression.
+var tmpPictRef='window._Pict';var tmpHTML='<div class="parime-lakes-list-header">Categories</div>';if(tmpCategories.length===0){tmpHTML+='<div class="parime-lakes-list-empty">No categories found.</div>';}else{for(var i=0;i<tmpCategories.length;i++){var tmpCategory=tmpCategories[i];var tmpActiveClass=tmpBrowser.SelectedCategory===tmpCategory?' active':'';tmpHTML+="<div class=\"parime-lakes-list-item".concat(tmpActiveClass,"\" onclick=\"").concat(tmpPictRef,".views['ParimeManagement-Lakes'].selectCategory('").concat(tmpCategory,"')\">").concat(tmpCategory,"</div>");}}this.pict.ContentAssignment.assignContent('#ParimeManagement-Lakes-CategoryList',tmpHTML);// Hide key list and detail when no category selected
+var tmpKeyListEl=document.getElementById('ParimeManagement-Lakes-KeyList');if(tmpKeyListEl){tmpKeyListEl.style.display=tmpBrowser.SelectedCategory?'block':'none';}}},{key:"selectCategory",value:function selectCategory(pCategory){var _this56=this;var tmpBrowser=this.pict.AppData.ParimeManagement.LakeBrowser;tmpBrowser.SelectedCategory=pCategory;tmpBrowser.SelectedKey='';tmpBrowser.KeyData=null;// Update the category list to show active state
+this.renderCategoryList();// Show loading in key list
+var tmpKeyListEl=document.getElementById('ParimeManagement-Lakes-KeyList');if(tmpKeyListEl){tmpKeyListEl.style.display='block';}this.pict.ContentAssignment.assignContent('#ParimeManagement-Lakes-KeyList','<div class="parime-lakes-list-header">Keys</div><div class="parime-lakes-list-empty">Loading...</div>');// Clear detail
+this.pict.ContentAssignment.assignContent('#ParimeManagement-Lakes-Detail','<div class="parime-lakes-placeholder">Select a key to view data.</div>');// Fetch keys for this category
+this.pict.PictApplication.fetchCategoryKeys(tmpBrowser.ActiveTab,pCategory,function(pKeys){tmpBrowser.CategoryKeys=pKeys;_this56.renderKeyList();});}},{key:"renderKeyList",value:function renderKeyList(){var tmpBrowser=this.pict.AppData.ParimeManagement.LakeBrowser;var tmpKeys=tmpBrowser.CategoryKeys||[];// `getClientSideReferenceForPict()` was removed in newer pict; the
+// inline onclick handlers want the runtime global expression.
+var tmpPictRef='window._Pict';var tmpHTML='<div class="parime-lakes-list-header">Keys</div>';if(tmpKeys.length===0){tmpHTML+='<div class="parime-lakes-list-empty">No keys found.</div>';}else{for(var i=0;i<tmpKeys.length;i++){var tmpKey=tmpKeys[i];// Combined lake keys are objects with a Key property
+var tmpKeyDisplay=_typeof(tmpKey)==='object'&&tmpKey.Key?tmpKey.Key:tmpKey;var tmpActiveClass=tmpBrowser.SelectedKey===tmpKeyDisplay?' active':'';var tmpEscapedKey=tmpKeyDisplay.replace(/'/g,"\\'");tmpHTML+="<div class=\"parime-lakes-list-item".concat(tmpActiveClass,"\" onclick=\"").concat(tmpPictRef,".views['ParimeManagement-Lakes'].selectKey('").concat(tmpEscapedKey,"')\">").concat(tmpKeyDisplay,"</div>");}}this.pict.ContentAssignment.assignContent('#ParimeManagement-Lakes-KeyList',tmpHTML);}},{key:"selectKey",value:function selectKey(pKey){var _this57=this;var tmpBrowser=this.pict.AppData.ParimeManagement.LakeBrowser;tmpBrowser.SelectedKey=pKey;this.renderKeyList();// Show loading in detail
+this.pict.ContentAssignment.assignContent('#ParimeManagement-Lakes-Detail','<div class="parime-lakes-detail-header">Loading...</div>');if(tmpBrowser.ActiveTab==='Record'){this.pict.PictApplication.fetchRecord(tmpBrowser.SelectedCategory,pKey,function(pData){tmpBrowser.KeyData=pData;_this57.renderDetail();});}else if(tmpBrowser.ActiveTab==='Binary'){// For binary, fetch stat info
+var tmpXHR=new XMLHttpRequest();tmpXHR.open('GET',"/1.0/Binary/".concat(tmpBrowser.SelectedCategory,"/").concat(pKey,"/Stat"),true);tmpXHR.onreadystatechange=function(){if(tmpXHR.readyState===4){if(tmpXHR.status===200){try{tmpBrowser.KeyData=JSON.parse(tmpXHR.responseText);}catch(pError){tmpBrowser.KeyData={Error:'Failed to parse response.'};}}else{tmpBrowser.KeyData={Error:"HTTP ".concat(tmpXHR.status)};}_this57.renderDetail();}};tmpXHR.send();}else if(tmpBrowser.ActiveTab==='Combined'){// For combined, fetch the record sub-endpoint
+this.pict.PictApplication.fetchRecord(tmpBrowser.SelectedCategory,"".concat(pKey),function(pData){tmpBrowser.KeyData=pData;_this57.renderDetail();});}}},{key:"renderDetail",value:function renderDetail(){var tmpBrowser=this.pict.AppData.ParimeManagement.LakeBrowser;var tmpData=tmpBrowser.KeyData;var tmpHTML='';tmpHTML+="<div class=\"parime-lakes-detail-header\">".concat(tmpBrowser.ActiveTab," / ").concat(tmpBrowser.SelectedCategory," / ").concat(tmpBrowser.SelectedKey,"</div>");if(tmpData){tmpHTML+="<div class=\"parime-lakes-json\">".concat(JSON.stringify(tmpData,null,2),"</div>");}else{tmpHTML+='<p style="color: #8A7F72;">No data available.</p>';}this.pict.ContentAssignment.assignContent('#ParimeManagement-Lakes-Detail',tmpHTML);}}]);}(libPictView);module.exports=ParimeManagementLakesView;module.exports.default_configuration=_ViewConfiguration;},{"pict-view":69}],78:[function(require,module,exports){var libPictView=require('pict-view');/**
+ * ParimeManagement-Layout — application chrome.
+ *
+ * Built on pict-section-modal's shell() API. Every chrome surface lives
+ * in a panel; the content views render into the shell-managed center.
+ *
+ *   ┌──────────────────────────────────────────────────────────────┐
+ *   │ #Theme-TopBar  (top, fixed, 56px) — BrandMark + Nav + User   │
+ *   ├──────────────────────────────────────────────────────────────┤
+ *   │ #ParimeManagement-Content-Container                          │
+ *   │ (center — Dashboard / Lakes / Configuration / Login render   │
+ *   │  into this destination; only the active view is visible)     │
+ *   ├──────────────────────────────────────────────────────────────┤
+ *   │ #Theme-BottomBar (bottom, fixed, 32px) — StatusBar slot      │
+ *   └──────────────────────────────────────────────────────────────┘
+ *
+ * Plus #ParimeManagement-Settings-Panel — a Hidden overlay panel
+ * revealed only by the gear button in the User slot.
+ */var _ViewConfiguration={ViewIdentifier:'ParimeManagement-Layout',DefaultRenderable:'ParimeManagement-Layout-Renderable',DefaultDestinationAddress:'#ParimeManagement-Application-Container',AutoRender:false,CSS:/*css*/"\n\t\t/* height: 100% (NOT 100vh) \u2014 Theme-Scale applies CSS zoom to\n\t\t   <html>; vh renders against the un-zoomed viewport and pushes\n\t\t   panels off-screen. */\n\t\thtml, body { height: 100%; margin: 0; padding: 0; }\n\t\t#ParimeManagement-Application-Container { height: 100%; min-height: 0; overflow: hidden; }\n\n\t\t/* Shell-managed surfaces inherit themed colors. */\n\t\t.pict-modal-shell-host   { height: 100%; }\n\t\t.pict-modal-shell        { background: var(--theme-color-background-primary, #F5F0E8); }\n\t\t.pict-modal-shell-panel  { background: var(--theme-color-background-panel,   #FFFFFF); }\n\t\t.pict-modal-shell-center { background: var(--theme-color-background-primary, #F5F0E8); }\n\n\t\t/* Center workspace destination. Existing content views target\n\t\t   #ParimeManagement-Content-Container \u2014 we keep the ID so they\n\t\t   render unchanged into the shell center. */\n\t\t#ParimeManagement-Content-Container { height: 100%; min-height: 0; overflow: auto; }\n\n\t\t/* Settings (Hidden overlay) panel destination. */\n\t\t#ParimeManagement-Settings-Panel\n\t\t{\n\t\t\theight: 100%;\n\t\t\tmin-height: 0;\n\t\t\toverflow-y: auto;\n\t\t\tbackground: var(--theme-color-background-panel, #FFFFFF);\n\t\t\tcolor: var(--theme-color-text-primary, #3D3229);\n\t\t\tborder-left: 1px solid var(--theme-color-border-default, #DDD6CA);\n\t\t}\n\t",Templates:[{Hash:'ParimeManagement-Layout-Template',// Minimal mount div — the shell replaces its children with its
+// own row/side/center/overlay DOM.
+Template:/*html*/"<div id=\"ParimeManagement-Layout-Mount\" style=\"height:100%\"></div>"}],Renderables:[{RenderableHash:'ParimeManagement-Layout-Renderable',TemplateHash:'ParimeManagement-Layout-Template',DestinationAddress:'#ParimeManagement-Application-Container',RenderMethod:'replace'}]};var ParimeManagementLayoutView=/*#__PURE__*/function(_libPictView10){function ParimeManagementLayoutView(pFable,pOptions,pServiceHash){var _this58;_classCallCheck(this,ParimeManagementLayoutView);_this58=_callSuper(this,ParimeManagementLayoutView,[pFable,pOptions,pServiceHash]);_this58._shell=null;_this58._shellPanelsBuilt=false;return _this58;}_inherits(ParimeManagementLayoutView,_libPictView10);return _createClass(ParimeManagementLayoutView,[{key:"onAfterRender",value:function onAfterRender(pRenderable,pRenderDestinationAddress,pRecord,pContent){this.pict.CSSMap.injectCSS();if(!this._shellPanelsBuilt){this._buildShell();this._shellPanelsBuilt=true;// Now that the shell has created #ParimeManagement-Content-Container,
+// render the topbar slot views and seed the initial content view.
+// Dashboard renders first as a safe default; the router then
+// resolves the current hash (if any) and may navigate to a
+// different view, overwriting the dashboard.
+if(this.pict.PictApplication&&typeof this.pict.PictApplication.showView==='function'){this.pict.PictApplication.showView('ParimeManagement-Dashboard');}if(this.pict.providers.PictRouter){this.pict.providers.PictRouter.resolve();}}return _superPropGet(ParimeManagementLayoutView,"onAfterRender",this,3)([pRenderable,pRenderDestinationAddress,pRecord,pContent]);}},{key:"_buildShell",value:function _buildShell(){var tmpModal=this.pict.views['Pict-Section-Modal'];if(!tmpModal||typeof tmpModal.shell!=='function'){this.pict.log.warn('ParimeManagement-Layout: pict-section-modal.shell not available');return;}var tmpMount=document.getElementById('ParimeManagement-Layout-Mount');if(!tmpMount){this.pict.log.warn('ParimeManagement-Layout: #ParimeManagement-Layout-Mount not in DOM yet');return;}this._shell=tmpModal.shell(tmpMount,{PersistenceKey:'parime-management-shell'});// Top — Theme-TopBar (BrandMark + Nav slot + User slot). Size MUST
+// equal ViewOptions.TopBar.Height in the Theme-Section provider config.
+this._shell.addPanel({Hash:'topbar',Side:'top',Mode:'fixed',Size:56,ContentDestinationId:'Theme-TopBar',ContentView:'Theme-TopBar'});// Bottom — Theme-BottomBar with our StatusView slot. Add before
+// the center so it anchors at the viewport's bottom edge.
+this._shell.addPanel({Hash:'statusbar',Side:'bottom',Mode:'fixed',Size:32,MinSize:20,ContentDestinationId:'Theme-BottomBar',ContentView:'Theme-BottomBar'});// Right (Hidden + Overlay) — settings panel. No edge affordance;
+// the gear button in the User slot is the only way in.
+this._shell.addPanel({Hash:'settings',Side:'right',Mode:'resizable',Position:'overlay',Size:380,MinSize:300,MaxSize:560,Hidden:true,Collapsed:true,ContentDestinationId:'ParimeManagement-Settings-Panel',ContentView:'ParimeManagement-SettingsPanel'});// Center — reuse the existing ID so Dashboard / Lakes / Configuration /
+// Login render unchanged into the shell center.
+this._shell.center({ContentDestinationId:'ParimeManagement-Content-Container'});}},{key:"getSettingsPanel",value:function getSettingsPanel(){return this._shell?this._shell.getPanel('settings'):null;}},{key:"toggleSettingsPanel",value:function toggleSettingsPanel(){var tmpPanel=this.getSettingsPanel();if(tmpPanel){tmpPanel.toggle();}}}]);}(libPictView);module.exports=ParimeManagementLayoutView;module.exports.default_configuration=_ViewConfiguration;},{"pict-view":69}],79:[function(require,module,exports){var libPictView=require('pict-view');var _ViewConfiguration={ViewIdentifier:"ParimeManagement-Login",DefaultRenderable:"ParimeManagement-Login-Content",DefaultDestinationAddress:"#ParimeManagement-Content-Container",AutoRender:false,CSS:/*css*/"\n\t\t.parime-login {\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tjustify-content: center;\n\t\t\tmin-height: 100%;\n\t\t\tpadding: 2em;\n\t\t}\n\t\t.parime-login-card {\n\t\t\tbackground: var(--bg-panel);\n\t\t\tborder: 1px solid var(--border-default);\n\t\t\tborder-radius: 8px;\n\t\t\tpadding: 2.5em;\n\t\t\twidth: 100%;\n\t\t\tmax-width: 400px;\n\t\t\tbox-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);\n\t\t}\n\t\t.parime-login-card h2 {\n\t\t\tmargin: 0 0 0.25em 0;\n\t\t\tfont-size: 1.5em;\n\t\t\tfont-weight: 600;\n\t\t\tcolor: var(--text-primary);\n\t\t}\n\t\t.parime-login-card p {\n\t\t\tmargin: 0 0 1.5em 0;\n\t\t\tcolor: var(--text-muted);\n\t\t\tfont-size: 0.9em;\n\t\t}\n\t\t.parime-login-field {\n\t\t\tmargin-bottom: 1em;\n\t\t}\n\t\t.parime-login-field label {\n\t\t\tdisplay: block;\n\t\t\tmargin-bottom: 0.35em;\n\t\t\tfont-size: 0.85em;\n\t\t\tfont-weight: 500;\n\t\t\tcolor: var(--text-secondary);\n\t\t}\n\t\t.parime-login-field input {\n\t\t\twidth: 100%;\n\t\t\tpadding: 0.6em 0.75em;\n\t\t\tborder: 1px solid var(--border-default);\n\t\t\tborder-radius: 4px;\n\t\t\tfont-size: 0.95em;\n\t\t\tcolor: var(--text-primary);\n\t\t\tbackground: var(--bg-panel);\n\t\t\ttransition: border-color 0.15s;\n\t\t}\n\t\t.parime-login-field input:focus {\n\t\t\toutline: none;\n\t\t\tborder-color: var(--accent);\n\t\t\tbox-shadow: 0 0 0 2px var(--accent-bg);\n\t\t}\n\t\t.parime-login-button {\n\t\t\twidth: 100%;\n\t\t\tpadding: 0.7em;\n\t\t\tbackground-color: var(--accent);\n\t\t\tcolor: var(--bg-panel);\n\t\t\tborder: none;\n\t\t\tborder-radius: 4px;\n\t\t\tfont-size: 1em;\n\t\t\tfont-weight: 500;\n\t\t\tcursor: pointer;\n\t\t\ttransition: background-color 0.15s;\n\t\t\tmargin-top: 0.5em;\n\t\t}\n\t\t.parime-login-button:hover {\n\t\t\tbackground-color: var(--accent-hover);\n\t\t}\n\t",Templates:[{Hash:"ParimeManagement-Login-Template",Template:/*html*/"\n<div class=\"parime-login\">\n\t<div class=\"parime-login-card\">\n\t\t<h2>Parime Management</h2>\n\t\t<p>Sign in to manage your data lake.</p>\n\t\t<div class=\"parime-login-field\">\n\t\t\t<label for=\"parime-login-username\">Username</label>\n\t\t\t<input type=\"text\" id=\"parime-login-username\" placeholder=\"Enter username\" />\n\t\t</div>\n\t\t<div class=\"parime-login-field\">\n\t\t\t<label for=\"parime-login-password\">Password</label>\n\t\t\t<input type=\"password\" id=\"parime-login-password\" placeholder=\"Enter password\" onkeypress=\"if (event.key === 'Enter') { {~P~}.views['ParimeManagement-Login'].submit(); }\" />\n\t\t</div>\n\t\t<button class=\"parime-login-button\" id=\"parime-login-submit\" onclick=\"{~P~}.views['ParimeManagement-Login'].submit()\">Sign In</button>\n\t</div>\n</div>\n"}],Renderables:[{RenderableHash:"ParimeManagement-Login-Content",TemplateHash:"ParimeManagement-Login-Template",DestinationAddress:"#ParimeManagement-Content-Container",RenderMethod:"replace"}]};var ParimeManagementLoginView=/*#__PURE__*/function(_libPictView11){function ParimeManagementLoginView(pFable,pOptions,pServiceHash){_classCallCheck(this,ParimeManagementLoginView);return _callSuper(this,ParimeManagementLoginView,[pFable,pOptions,pServiceHash]);}_inherits(ParimeManagementLoginView,_libPictView11);return _createClass(ParimeManagementLoginView,[{key:"submit",value:function submit(){var tmpUserField=document.getElementById('parime-login-username');var tmpPassField=document.getElementById('parime-login-password');var tmpUserName=tmpUserField?tmpUserField.value:'';var tmpPassword=tmpPassField?tmpPassField.value:'';this.pict.PictApplication.attemptLogin(tmpUserName,tmpPassword);}},{key:"onAfterRender",value:function onAfterRender(pRenderable,pRenderDestinationAddress,pRecord,pContent){this.pict.CSSMap.injectCSS();return _superPropGet(ParimeManagementLoginView,"onAfterRender",this,3)([pRenderable,pRenderDestinationAddress,pRecord,pContent]);}}]);}(libPictView);module.exports=ParimeManagementLoginView;module.exports.default_configuration=_ViewConfiguration;},{"pict-view":69}],80:[function(require,module,exports){var libPictView=require('pict-view');/**
+ * ParimeManagement-SettingsPanel — content of the Hidden right-side
+ * settings overlay managed by the shell. The panel itself is built in
+ * Layout._buildShell() with Hidden:true; the gear button in
+ * TopBar-User toggles its visibility. This view renders the interior.
+ *
+ * Theme / mode / scale are owned by pict-section-theme (its own
+ * localStorage scope). The Appearance section hosts the mount point;
+ * Theme-Section.mount() renders Picker / ModeToggle / ScaleSelect into
+ * it on every render (the template rewrite erases the previously-mounted
+ * views, so we re-mount each time).
+ */var _ViewConfiguration={ViewIdentifier:'ParimeManagement-SettingsPanel',DefaultRenderable:'ParimeManagement-SettingsPanel-Display',DefaultDestinationAddress:'#ParimeManagement-Settings-Panel',AutoRender:false,CSS:/*css*/"\n\t\t#ParimeManagement-Settings-Panel .parime-settings-body\n\t\t{\n\t\t\tpadding: 16px;\n\t\t\tfont-size: 0.85rem;\n\t\t\tcolor: var(--theme-color-text-primary, #3D3229);\n\t\t}\n\t\t.parime-settings-section { margin-bottom: 18px; }\n\t\t.parime-settings-label\n\t\t{\n\t\t\tfont-size: 0.72rem;\n\t\t\tfont-weight: 700;\n\t\t\ttext-transform: uppercase;\n\t\t\tletter-spacing: 0.6px;\n\t\t\tcolor: var(--theme-color-text-muted, #8A7F72);\n\t\t\tmargin-bottom: 8px;\n\t\t}\n\t\t#ParimeManagement-Settings-Theme .pict-theme-mount\n\t\t{\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\tgap: 10px;\n\t\t}\n\t\t#ParimeManagement-Settings-Theme .pict-theme-mount-row\n\t\t{\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tjustify-content: flex-start;\n\t\t}\n\t",Templates:[{Hash:'ParimeManagement-SettingsPanel-Template',Template:/*html*/"\n<div class=\"parime-settings-body\">\n\t<div class=\"parime-settings-section\">\n\t\t<div class=\"parime-settings-label\">Appearance</div>\n\t\t<div id=\"ParimeManagement-Settings-Theme\"></div>\n\t</div>\n</div>"}],Renderables:[{RenderableHash:'ParimeManagement-SettingsPanel-Display',TemplateHash:'ParimeManagement-SettingsPanel-Template',DestinationAddress:'#ParimeManagement-Settings-Panel',RenderMethod:'replace'}]};var ParimeManagementSettingsPanelView=/*#__PURE__*/function(_libPictView12){function ParimeManagementSettingsPanelView(pFable,pOptions,pServiceHash){_classCallCheck(this,ParimeManagementSettingsPanelView);return _callSuper(this,ParimeManagementSettingsPanelView,[pFable,pOptions,pServiceHash]);}_inherits(ParimeManagementSettingsPanelView,_libPictView12);return _createClass(ParimeManagementSettingsPanelView,[{key:"onAfterRender",value:function onAfterRender(pRenderable,pRenderDestinationAddress,pRecord,pContent){this.pict.CSSMap.injectCSS();var tmpThemeProvider=this.pict.providers&&this.pict.providers['Theme-Section'];if(tmpThemeProvider&&typeof tmpThemeProvider.mount==='function'){tmpThemeProvider.mount({Container:'#ParimeManagement-Settings-Theme',Views:['Picker','ModeToggle','ScaleSelect']});}return _superPropGet(ParimeManagementSettingsPanelView,"onAfterRender",this,3)([pRenderable,pRenderDestinationAddress,pRecord,pContent]);}}]);}(libPictView);module.exports=ParimeManagementSettingsPanelView;module.exports.default_configuration=_ViewConfiguration;},{"pict-view":69}],81:[function(require,module,exports){var libPictView=require('pict-view');/**
+ * ParimeManagement-StatusBar — slot view rendered into Theme-BottomBar's
+ * StatusView slot (#Theme-BottomBar-Status). Shows the current route,
+ * logged-in user, and server version separated by dots.
+ *
+ * Re-rendered by renderTopBar() on navigation, login/logout, and after
+ * refreshServerInfo() updates AppData.ParimeManagement.ServerInfo.
+ */// Map raw view identifiers → human-readable labels for the status segment.
+var _RouteLabels={'ParimeManagement-Dashboard':'Dashboard','ParimeManagement-Lakes':'Lakes','ParimeManagement-Configuration':'Configuration','ParimeManagement-Login':'Sign in'};var _ViewConfiguration={ViewIdentifier:'ParimeManagement-StatusBar',DefaultRenderable:'ParimeManagement-StatusBar-Display',DefaultDestinationAddress:'#Theme-BottomBar-Status',AutoRender:false,CSS:/*css*/"\n\t\t.parime-status\n\t\t{\n\t\t\tdisplay: inline-flex;\n\t\t\talign-items: center;\n\t\t\tgap: 6px;\n\t\t\tmax-width: 100%;\n\t\t\toverflow: hidden;\n\t\t\ttext-overflow: ellipsis;\n\t\t\twhite-space: nowrap;\n\t\t\tfont-size: 0.78rem;\n\t\t\tcolor: var(--theme-color-text-muted, #8A7F72);\n\t\t}\n\t\t.parime-status-separator\n\t\t{\n\t\t\tcolor: var(--theme-color-border-default, #DDD6CA);\n\t\t}\n\t",Templates:[{Hash:'ParimeManagement-StatusBar-Template',Template:/*html*/"<span class=\"parime-status\"><span class=\"parime-status-route\">{~D:AppData.ParimeManagement.StatusBar.RouteLabel~}</span><span class=\"parime-status-separator\">\xB7</span><span class=\"parime-status-user\">{~D:AppData.ParimeManagement.StatusBar.UserLabel~}</span><span class=\"parime-status-separator\">\xB7</span><span class=\"parime-status-version\">Parime v{~D:AppData.ParimeManagement.StatusBar.VersionLabel~}</span></span>"}],Renderables:[{RenderableHash:'ParimeManagement-StatusBar-Display',TemplateHash:'ParimeManagement-StatusBar-Template',DestinationAddress:'#Theme-BottomBar-Status',RenderMethod:'replace'}]};var ParimeManagementStatusBarView=/*#__PURE__*/function(_libPictView13){function ParimeManagementStatusBarView(pFable,pOptions,pServiceHash){_classCallCheck(this,ParimeManagementStatusBarView);return _callSuper(this,ParimeManagementStatusBarView,[pFable,pOptions,pServiceHash]);}_inherits(ParimeManagementStatusBarView,_libPictView13);return _createClass(ParimeManagementStatusBarView,[{key:"onBeforeRender",value:function onBeforeRender(pRenderable,pRenderDestinationAddress,pRecord){var tmpAppData=this.pict.AppData.ParimeManagement;if(tmpAppData){var tmpView=tmpAppData.CurrentView||'';var tmpUser=tmpAppData.User&&tmpAppData.User.DisplayName?tmpAppData.User.DisplayName:'anonymous';var tmpVersion=tmpAppData.ServerInfo&&tmpAppData.ServerInfo.Version?tmpAppData.ServerInfo.Version:'—';tmpAppData.StatusBar={RouteLabel:_RouteLabels[tmpView]||tmpView||'Loading…',UserLabel:tmpUser,VersionLabel:tmpVersion};}return _superPropGet(ParimeManagementStatusBarView,"onBeforeRender",this,3)([pRenderable,pRenderDestinationAddress,pRecord]);}},{key:"onAfterRender",value:function onAfterRender(pRenderable,pRenderDestinationAddress,pRecord,pContent){this.pict.CSSMap.injectCSS();return _superPropGet(ParimeManagementStatusBarView,"onAfterRender",this,3)([pRenderable,pRenderDestinationAddress,pRecord,pContent]);}}]);}(libPictView);module.exports=ParimeManagementStatusBarView;module.exports.default_configuration=_ViewConfiguration;},{"pict-view":69}],82:[function(require,module,exports){var libPictView=require('pict-view');/**
+ * ParimeManagement-TopBar-Nav — slot view rendered into Theme-TopBar's
+ * NavView slot (#Theme-TopBar-Nav). parime has no sidebar, so the top
+ * bar hosts the primary navigation: Dashboard / Lakes / Configuration.
+ *
+ * Re-rendered by renderTopBar() at the end of showView() whenever the
+ * active view changes; onBeforeRender stamps an Active flag onto each
+ * NavLink and pre-builds a ClassString so the template stays trivial.
+ */var _ViewConfiguration={ViewIdentifier:'ParimeManagement-TopBar-Nav',DefaultRenderable:'ParimeManagement-TopBar-Nav-Display',DefaultDestinationAddress:'#Theme-TopBar-Nav',AutoRender:false,CSS:/*css*/"\n\t\t.parime-nav\n\t\t{\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\theight: 100%;\n\t\t\tgap: 4px;\n\t\t\tpadding: 0 14px;\n\t\t\tcolor: var(--theme-color-text-on-brand, var(--theme-color-text-primary, #e0ebe8));\n\t\t}\n\t\t.parime-nav-link\n\t\t{\n\t\t\tdisplay: inline-flex;\n\t\t\talign-items: center;\n\t\t\theight: 32px;\n\t\t\tpadding: 0 12px;\n\t\t\tborder-radius: 4px;\n\t\t\tcursor: pointer;\n\t\t\tfont-size: 0.88rem;\n\t\t\tfont-weight: 500;\n\t\t\ttext-decoration: none;\n\t\t\tcolor: var(--theme-color-text-on-brand, var(--theme-color-text-secondary, #b5aa9a));\n\t\t\ttransition: background-color 0.15s, color 0.15s;\n\t\t}\n\t\t.parime-nav-link:hover\n\t\t{\n\t\t\tbackground: var(--theme-color-background-hover, rgba(255, 255, 255, 0.08));\n\t\t\tcolor: var(--theme-color-text-on-brand, var(--theme-color-text-primary, #f5f0e8));\n\t\t}\n\t\t.parime-nav-link.active\n\t\t{\n\t\t\tbackground: var(--theme-color-background-selected, var(--theme-color-brand-primary, #2E7D74));\n\t\t\tcolor: var(--theme-color-text-on-brand, var(--theme-color-text-primary, #ffffff));\n\t\t}\n\t",Templates:[{Hash:'ParimeManagement-TopBar-Nav-Link',Template:/*html*/"<a class=\"{~D:Record.ClassString~}\" onclick=\"{~P~}.PictApplication.navigateTo('{~D:Record.Route~}')\" title=\"{~D:Record.Label~}\">{~D:Record.Label~}</a>"},{Hash:'ParimeManagement-TopBar-Nav-Template',Template:/*html*/"<div class=\"parime-nav\">{~TS:ParimeManagement-TopBar-Nav-Link:AppData.ParimeManagement.NavLinks~}</div>"}],Renderables:[{RenderableHash:'ParimeManagement-TopBar-Nav-Display',TemplateHash:'ParimeManagement-TopBar-Nav-Template',DestinationAddress:'#Theme-TopBar-Nav',RenderMethod:'replace'}]};var ParimeManagementTopBarNavView=/*#__PURE__*/function(_libPictView14){function ParimeManagementTopBarNavView(pFable,pOptions,pServiceHash){_classCallCheck(this,ParimeManagementTopBarNavView);return _callSuper(this,ParimeManagementTopBarNavView,[pFable,pOptions,pServiceHash]);}_inherits(ParimeManagementTopBarNavView,_libPictView14);return _createClass(ParimeManagementTopBarNavView,[{key:"onBeforeRender",value:function onBeforeRender(pRenderable,pRenderDestinationAddress,pRecord){var tmpAppData=this.pict.AppData.ParimeManagement;if(tmpAppData&&Array.isArray(tmpAppData.NavLinks)){var tmpCurrent=tmpAppData.CurrentView||'';for(var i=0;i<tmpAppData.NavLinks.length;i++){var tmpLink=tmpAppData.NavLinks[i];tmpLink.Active=tmpLink.View===tmpCurrent;tmpLink.ClassString=tmpLink.Active?'parime-nav-link active':'parime-nav-link';}}return _superPropGet(ParimeManagementTopBarNavView,"onBeforeRender",this,3)([pRenderable,pRenderDestinationAddress,pRecord]);}},{key:"onAfterRender",value:function onAfterRender(pRenderable,pRenderDestinationAddress,pRecord,pContent){this.pict.CSSMap.injectCSS();return _superPropGet(ParimeManagementTopBarNavView,"onAfterRender",this,3)([pRenderable,pRenderDestinationAddress,pRecord,pContent]);}}]);}(libPictView);module.exports=ParimeManagementTopBarNavView;module.exports.default_configuration=_ViewConfiguration;},{"pict-view":69}],83:[function(require,module,exports){var libPictView=require('pict-view');/**
+ * ParimeManagement-TopBar-User — slot view rendered into Theme-TopBar's
+ * UserView slot (#Theme-TopBar-User). Shows either a Login link (when
+ * logged out) or DisplayName + Logout (when logged in), plus the gear
+ * button that reveals the Hidden settings overlay.
+ *
+ * Conditional render uses the one-or-zero-element-array TS trick:
+ * onBeforeRender stamps LoggedInWrapper / LoggedOutWrapper arrays onto
+ * AppData with the right length so each conditional template runs the
+ * right number of times.
+ */var _ViewConfiguration={ViewIdentifier:'ParimeManagement-TopBar-User',DefaultRenderable:'ParimeManagement-TopBar-User-Display',DefaultDestinationAddress:'#Theme-TopBar-User',AutoRender:false,CSS:/*css*/"\n\t\t.parime-user\n\t\t{\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\theight: 100%;\n\t\t\tgap: 8px;\n\t\t\tpadding: 0 12px;\n\t\t\tcolor: var(--theme-color-text-on-brand, var(--theme-color-text-primary, #e0ebe8));\n\t\t\tfont-size: 0.85rem;\n\t\t}\n\t\t.parime-user-display\n\t\t{\n\t\t\tcolor: var(--theme-color-text-on-brand, var(--theme-color-text-muted, #8a7f72));\n\t\t\tmax-width: 140px;\n\t\t\toverflow: hidden;\n\t\t\ttext-overflow: ellipsis;\n\t\t\twhite-space: nowrap;\n\t\t}\n\t\t.parime-user-btn\n\t\t{\n\t\t\theight: 32px;\n\t\t\tpadding: 0 12px;\n\t\t\tdisplay: inline-flex;\n\t\t\talign-items: center;\n\t\t\tjustify-content: center;\n\t\t\tgap: 6px;\n\t\t\tline-height: 1;\n\t\t\tborder-radius: 4px;\n\t\t\tcursor: pointer;\n\t\t\tfont-size: 0.8rem;\n\t\t\tfont-weight: 600;\n\t\t\tbackground: transparent;\n\t\t\tcolor: var(--theme-color-text-on-brand, var(--theme-color-text-secondary, #b5aa9a));\n\t\t\tborder: 1px solid var(--theme-color-border-default, #524438);\n\t\t\tbox-sizing: border-box;\n\t\t\ttext-decoration: none;\n\t\t}\n\t\t.parime-user-btn:hover\n\t\t{\n\t\t\tcolor: var(--theme-color-text-on-brand, var(--theme-color-text-primary, #f5f0e8));\n\t\t\tborder-color: var(--theme-color-brand-primary, #2E7D74);\n\t\t\tbackground: var(--theme-color-background-hover, rgba(255, 255, 255, 0.06));\n\t\t}\n\t\t.parime-user-btn-gear\n\t\t{\n\t\t\tpadding: 0 8px;\n\t\t}\n\t\t.parime-user-btn-gear .pict-icon { font-size: 1.25em; }\n\t",Templates:[{Hash:'ParimeManagement-TopBar-User-LoggedIn',Template:/*html*/"<span class=\"parime-user-display\" title=\"{~D:Record.DisplayName~}\">{~D:Record.DisplayName~}</span><a class=\"parime-user-btn\" onclick=\"{~P~}.PictApplication.logout()\" title=\"Sign out\" aria-label=\"Sign out\">Logout</a>"},{Hash:'ParimeManagement-TopBar-User-LoggedOut',Template:/*html*/"<a class=\"parime-user-btn\" onclick=\"{~P~}.PictApplication.navigateTo('/Login')\" title=\"Sign in\" aria-label=\"Sign in\">Login</a>"},{Hash:'ParimeManagement-TopBar-User-Template',Template:/*html*/"\n<div class=\"parime-user\">\n\t{~TS:ParimeManagement-TopBar-User-LoggedIn:AppData.ParimeManagement.LoggedInWrapper~}{~TS:ParimeManagement-TopBar-User-LoggedOut:AppData.ParimeManagement.LoggedOutWrapper~}\n\t<button class=\"parime-user-btn parime-user-btn-gear\" onclick=\"{~P~}.views['ParimeManagement-Layout'].toggleSettingsPanel()\" title=\"Settings\" aria-label=\"Settings\">{~I:Settings~}</button>\n</div>"}],Renderables:[{RenderableHash:'ParimeManagement-TopBar-User-Display',TemplateHash:'ParimeManagement-TopBar-User-Template',DestinationAddress:'#Theme-TopBar-User',RenderMethod:'replace'}]};var ParimeManagementTopBarUserView=/*#__PURE__*/function(_libPictView15){function ParimeManagementTopBarUserView(pFable,pOptions,pServiceHash){_classCallCheck(this,ParimeManagementTopBarUserView);return _callSuper(this,ParimeManagementTopBarUserView,[pFable,pOptions,pServiceHash]);}_inherits(ParimeManagementTopBarUserView,_libPictView15);return _createClass(ParimeManagementTopBarUserView,[{key:"onBeforeRender",value:function onBeforeRender(pRenderable,pRenderDestinationAddress,pRecord){var tmpAppData=this.pict.AppData.ParimeManagement;if(tmpAppData){var tmpLoggedIn=!!(tmpAppData.User&&tmpAppData.User.LoggedIn);tmpAppData.LoggedInWrapper=tmpLoggedIn?[tmpAppData.User]:[];tmpAppData.LoggedOutWrapper=tmpLoggedIn?[]:[{}];}return _superPropGet(ParimeManagementTopBarUserView,"onBeforeRender",this,3)([pRenderable,pRenderDestinationAddress,pRecord]);}},{key:"onAfterRender",value:function onAfterRender(pRenderable,pRenderDestinationAddress,pRecord,pContent){this.pict.CSSMap.injectCSS();return _superPropGet(ParimeManagementTopBarUserView,"onAfterRender",this,3)([pRenderable,pRenderDestinationAddress,pRecord,pContent]);}}]);}(libPictView);module.exports=ParimeManagementTopBarUserView;module.exports.default_configuration=_ViewConfiguration;},{"pict-view":69}]},{},[73])(73);});
 //# sourceMappingURL=parime-management.compatible.js.map

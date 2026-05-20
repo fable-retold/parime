@@ -14,27 +14,27 @@ const _ViewConfiguration =
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			min-height: calc(100vh - 56px - 48px);
+			min-height: 100%;
 			padding: 2em;
 		}
 		.parime-login-card {
-			background: var(--theme-color-background-panel, #fff);
-			border: 1px solid #DDD6CA;
+			background: var(--bg-panel);
+			border: 1px solid var(--border-default);
 			border-radius: 8px;
 			padding: 2.5em;
 			width: 100%;
 			max-width: 400px;
-			box-shadow: 0 2px 8px rgba(61, 50, 41, 0.08);
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 		}
 		.parime-login-card h2 {
 			margin: 0 0 0.25em 0;
 			font-size: 1.5em;
 			font-weight: 600;
-			color: var(--theme-color-text-primary, #3D3229);
+			color: var(--text-primary);
 		}
 		.parime-login-card p {
 			margin: 0 0 1.5em 0;
-			color: #7A7568;
+			color: var(--text-muted);
 			font-size: 0.9em;
 		}
 		.parime-login-field {
@@ -45,28 +45,28 @@ const _ViewConfiguration =
 			margin-bottom: 0.35em;
 			font-size: 0.85em;
 			font-weight: 500;
-			color: var(--theme-color-text-secondary, #5E5549);
+			color: var(--text-secondary);
 		}
 		.parime-login-field input {
 			width: 100%;
 			padding: 0.6em 0.75em;
-			border: 1px solid #DDD6CA;
+			border: 1px solid var(--border-default);
 			border-radius: 4px;
 			font-size: 0.95em;
-			color: #423D37;
-			background: var(--theme-color-background-panel, #fff);
+			color: var(--text-primary);
+			background: var(--bg-panel);
 			transition: border-color 0.15s;
 		}
 		.parime-login-field input:focus {
 			outline: none;
-			border-color: #2E7D74;
-			box-shadow: 0 0 0 2px #E0EDEB;
+			border-color: var(--accent);
+			box-shadow: 0 0 0 2px var(--accent-bg);
 		}
 		.parime-login-button {
 			width: 100%;
 			padding: 0.7em;
-			background-color: #2E7D74;
-			color: var(--theme-color-background-panel, #fff);
+			background-color: var(--accent);
+			color: var(--bg-panel);
 			border: none;
 			border-radius: 4px;
 			font-size: 1em;
@@ -76,7 +76,7 @@ const _ViewConfiguration =
 			margin-top: 0.5em;
 		}
 		.parime-login-button:hover {
-			background-color: #256861;
+			background-color: var(--accent-hover);
 		}
 	`,
 
@@ -95,9 +95,9 @@ const _ViewConfiguration =
 		</div>
 		<div class="parime-login-field">
 			<label for="parime-login-password">Password</label>
-			<input type="password" id="parime-login-password" placeholder="Enter password" />
+			<input type="password" id="parime-login-password" placeholder="Enter password" onkeypress="if (event.key === 'Enter') { {~P~}.views['ParimeManagement-Login'].submit(); }" />
 		</div>
-		<button class="parime-login-button" id="parime-login-submit">Sign In</button>
+		<button class="parime-login-button" id="parime-login-submit" onclick="{~P~}.views['ParimeManagement-Login'].submit()">Sign In</button>
 	</div>
 </div>
 `
@@ -122,35 +122,18 @@ class ParimeManagementLoginView extends libPictView
 		super(pFable, pOptions, pServiceHash);
 	}
 
+	submit()
+	{
+		let tmpUserField = document.getElementById('parime-login-username');
+		let tmpPassField = document.getElementById('parime-login-password');
+		let tmpUserName = tmpUserField ? tmpUserField.value : '';
+		let tmpPassword = tmpPassField ? tmpPassField.value : '';
+		this.pict.PictApplication.attemptLogin(tmpUserName, tmpPassword);
+	}
+
 	onAfterRender(pRenderable, pRenderDestinationAddress, pRecord, pContent)
 	{
-		// Wire up the login button click handler
-		let tmpLoginButton = document.getElementById('parime-login-submit');
-		if (tmpLoginButton)
-		{
-			tmpLoginButton.addEventListener('click', () =>
-			{
-				let tmpUserName = document.getElementById('parime-login-username').value;
-				let tmpPassword = document.getElementById('parime-login-password').value;
-				this.pict.PictApplication.attemptLogin(tmpUserName, tmpPassword);
-			});
-		}
-
-		// Wire up Enter key on password field
-		let tmpPasswordField = document.getElementById('parime-login-password');
-		if (tmpPasswordField)
-		{
-			tmpPasswordField.addEventListener('keypress', (pEvent) =>
-			{
-				if (pEvent.key === 'Enter')
-				{
-					let tmpUserName = document.getElementById('parime-login-username').value;
-					let tmpPassword = document.getElementById('parime-login-password').value;
-					this.pict.PictApplication.attemptLogin(tmpUserName, tmpPassword);
-				}
-			});
-		}
-
+		this.pict.CSSMap.injectCSS();
 		return super.onAfterRender(pRenderable, pRenderDestinationAddress, pRecord, pContent);
 	}
 }

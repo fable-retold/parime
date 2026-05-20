@@ -206,7 +206,9 @@ class ParimeManagementLakesView extends libPictView
 	onAfterRender(pRenderable, pRenderDestinationAddress, pRecord, pContent)
 	{
 		let tmpBrowser = this.pict.AppData.ParimeManagement.LakeBrowser;
-		let tmpPictRef = this.pict.getClientSideReferenceForPict();
+		// `getClientSideReferenceForPict()` was removed in newer pict; the
+		// inline onclick handlers want the runtime global expression.
+		let tmpPictRef = 'window._Pict';
 
 		// Render tabs
 		let tmpTabs = ['Record', 'Binary', 'Combined'];
@@ -244,7 +246,9 @@ class ParimeManagementLakesView extends libPictView
 		let tmpBrowser = this.pict.AppData.ParimeManagement.LakeBrowser;
 		let tmpLakes = this.pict.AppData.ParimeManagement.Lakes;
 		let tmpCategories = tmpLakes[tmpBrowser.ActiveTab] || [];
-		let tmpPictRef = this.pict.getClientSideReferenceForPict();
+		// `getClientSideReferenceForPict()` was removed in newer pict; the
+		// inline onclick handlers want the runtime global expression.
+		let tmpPictRef = 'window._Pict';
 
 		let tmpHTML = '<div class="parime-lakes-list-header">Categories</div>';
 
@@ -308,7 +312,9 @@ class ParimeManagementLakesView extends libPictView
 	{
 		let tmpBrowser = this.pict.AppData.ParimeManagement.LakeBrowser;
 		let tmpKeys = tmpBrowser.CategoryKeys || [];
-		let tmpPictRef = this.pict.getClientSideReferenceForPict();
+		// `getClientSideReferenceForPict()` was removed in newer pict; the
+		// inline onclick handlers want the runtime global expression.
+		let tmpPictRef = 'window._Pict';
 
 		let tmpHTML = '<div class="parime-lakes-list-header">Keys</div>';
 

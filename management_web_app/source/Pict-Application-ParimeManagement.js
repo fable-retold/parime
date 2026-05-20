@@ -1,10 +1,17 @@
 const libPictApplication = require('pict-application');
 const libPictRouter = require('pict-router');
 
+const libPictSectionModal = require('pict-section-modal');
+const libPictSectionTheme = require('pict-section-theme');
+
+const libParimeManagementBrand = require('./ParimeManagement-Brand.js');
+
 // Views
 const libViewLayout = require('./views/PictView-ParimeManagement-Layout.js');
-const libViewTopBar = require('./views/PictView-ParimeManagement-TopBar.js');
-const libViewBottomBar = require('./views/PictView-ParimeManagement-BottomBar.js');
+const libViewTopBarNav = require('./views/PictView-ParimeManagement-TopBar-Nav.js');
+const libViewTopBarUser = require('./views/PictView-ParimeManagement-TopBar-User.js');
+const libViewStatusBar = require('./views/PictView-ParimeManagement-StatusBar.js');
+const libViewSettingsPanel = require('./views/PictView-ParimeManagement-SettingsPanel.js');
 const libViewLogin = require('./views/PictView-ParimeManagement-Login.js');
 const libViewDashboard = require('./views/PictView-ParimeManagement-Dashboard.js');
 const libViewLakes = require('./views/PictView-ParimeManagement-Lakes.js');
@@ -19,14 +26,35 @@ class ParimeManagementApplication extends libPictApplication
 		// Add the router provider with routes
 		this.pict.addProvider('PictRouter', require('./providers/PictRouter-ParimeManagement-Configuration.json'), libPictRouter);
 
-		// Add the layout view (the shell that contains top bar, workspace, bottom bar)
+		// Modal system (confirm dialogs, shell panels)
+		this.pict.addView('Pict-Section-Modal', libPictSectionModal.default_configuration, libPictSectionModal);
+
+		// Layout shell
 		this.pict.addView('ParimeManagement-Layout', libViewLayout.default_configuration, libViewLayout);
 
-		// Add the top bar and bottom bar views
-		this.pict.addView('ParimeManagement-TopBar', libViewTopBar.default_configuration, libViewTopBar);
-		this.pict.addView('ParimeManagement-BottomBar', libViewBottomBar.default_configuration, libViewBottomBar);
+		// Theme system slot views — registered BEFORE the Theme-Section provider so its bootstrap can resolve them
+		this.pict.addView('ParimeManagement-TopBar-Nav', libViewTopBarNav.default_configuration, libViewTopBarNav);
+		this.pict.addView('ParimeManagement-TopBar-User', libViewTopBarUser.default_configuration, libViewTopBarUser);
+		this.pict.addView('ParimeManagement-StatusBar', libViewStatusBar.default_configuration, libViewStatusBar);
+		this.pict.addView('ParimeManagement-SettingsPanel', libViewSettingsPanel.default_configuration, libViewSettingsPanel);
 
-		// Add the content views
+		// Unified theme stack — Theme-Section provider drives the BrandMark + TopBar + BottomBar chrome,
+		// and exposes Picker/ModeToggle/ScaleSelect controls for the settings overlay.
+		this.pict.addProvider('Theme-Section',
+			{
+				ApplyDefault: 'retold-default',
+				DefaultMode:  'system',
+				DefaultScale: 1.0,
+				Brand:        libParimeManagementBrand,
+				Views: ['Picker', 'ModeToggle', 'ScaleSelect', 'BrandMark', 'TopBar', 'BottomBar'],
+				ViewOptions:
+				{
+					TopBar:    { NavView: 'ParimeManagement-TopBar-Nav', UserView: 'ParimeManagement-TopBar-User', Height: 56 },
+					BottomBar: { StatusView: 'ParimeManagement-StatusBar', Height: 32 }
+				}
+			}, libPictSectionTheme);
+
+		// Content views
 		this.pict.addView('ParimeManagement-Login', libViewLogin.default_configuration, libViewLogin);
 		this.pict.addView('ParimeManagement-Dashboard', libViewDashboard.default_configuration, libViewDashboard);
 		this.pict.addView('ParimeManagement-Lakes', libViewLakes.default_configuration, libViewLakes);
@@ -45,6 +73,13 @@ class ParimeManagementApplication extends libPictApplication
 				DisplayName: ''
 			},
 			CurrentRoute: 'Dashboard',
+			CurrentView: 'ParimeManagement-Dashboard',
+			NavLinks:
+			[
+				{ Route: '/Dashboard',     Label: 'Dashboard',     View: 'ParimeManagement-Dashboard',     Active: true  },
+				{ Route: '/Lakes',         Label: 'Lakes',         View: 'ParimeManagement-Lakes',         Active: false },
+				{ Route: '/Configuration', Label: 'Configuration', View: 'ParimeManagement-Configuration', Active: false }
+			],
 			ServerInfo:
 			{
 				Product: '',
@@ -70,20 +105,57 @@ class ParimeManagementApplication extends libPictApplication
 			}
 		};
 
-		// Render the layout shell first, then the initial content
+		// Render the layout shell first; the shell's onAfterRender builds the chrome panels,
+		// renders the topbar/statusbar slot views, then resolves the router to load the initial view.
 		this.pict.views['ParimeManagement-Layout'].render();
 
 		return super.onAfterInitializeAsync(fCallback);
 	}
 
 	/**
-	 * Navigate to a route using the pict-router.
+	 * Re-render the topbar nav, topbar user area, and status bar after a state change.
+	 */
+	renderTopBar()
+	{
+		let tmpNav = this.pict.views['ParimeManagement-TopBar-Nav'];
+		let tmpUser = this.pict.views['ParimeManagement-TopBar-User'];
+		let tmpStatus = this.pict.views['ParimeManagement-StatusBar'];
+		if (tmpNav) { tmpNav.render(); }
+		if (tmpUser) { tmpUser.render(); }
+		if (tmpStatus) { tmpStatus.render(); }
+	}
+
+	/**
+	 * Navigate to a route. Updates the browser URL hash via PictRouter
+	 * (for back/forward semantics + deep-link sharing) and fires showView
+	 * directly so the chrome + content update synchronously regardless of
+	 * router template-eval timing.
 	 *
 	 * @param {string} pRoute - The route path to navigate to (e.g. '/Dashboard')
 	 */
 	navigateTo(pRoute)
 	{
-		this.pict.providers.PictRouter.navigate(pRoute);
+		if (this.pict.providers.PictRouter)
+		{
+			this.pict.providers.PictRouter.navigate(pRoute);
+		}
+		let tmpView = this._routeToView(pRoute);
+		if (tmpView)
+		{
+			this.showView(tmpView);
+		}
+	}
+
+	_routeToView(pRoute)
+	{
+		const tmpMap =
+		{
+			'/Dashboard':     'ParimeManagement-Dashboard',
+			'/Lakes':         'ParimeManagement-Lakes',
+			'/Configuration': 'ParimeManagement-Configuration',
+			'/Login':         'ParimeManagement-Login'
+		};
+		return tmpMap[pRoute] || null;
 	}
 
 	/**
@@ -97,14 +169,17 @@ class ParimeManagementApplication extends libPictApplication
 		if (pViewIdentifier in this.pict.views)
 		{
 			this.pict.AppData.ParimeManagement.CurrentRoute = pViewIdentifier;
+			this.pict.AppData.ParimeManagement.CurrentView = pViewIdentifier;
 			this.pict.views[pViewIdentifier].render();
-			// Re-render top bar to update active nav state
-			this.pict.views['ParimeManagement-TopBar'].render();
+			this.renderTopBar();
 		}
 		else
 		{
 			this.pict.log.warn(`View [${pViewIdentifier}] not found; falling back to dashboard.`);
+			this.pict.AppData.ParimeManagement.CurrentRoute = 'ParimeManagement-Dashboard';
+			this.pict.AppData.ParimeManagement.CurrentView = 'ParimeManagement-Dashboard';
 			this.pict.views['ParimeManagement-Dashboard'].render();
+			this.renderTopBar();
 		}
 	}
 
@@ -125,8 +200,7 @@ class ParimeManagementApplication extends libPictApplication
 			this.pict.AppData.ParimeManagement.User.UserName = pUserName;
 			this.pict.AppData.ParimeManagement.User.DisplayName = pUserName;
 
-			// Re-render the top bar to show logged-in state, then navigate to dashboard
-			this.pict.views['ParimeManagement-TopBar'].render();
+			this.renderTopBar();
 			this.navigateTo('/Dashboard');
 		}
 		else
@@ -144,8 +218,7 @@ class ParimeManagementApplication extends libPictApplication
 		this.pict.AppData.ParimeManagement.User.UserName = '';
 		this.pict.AppData.ParimeManagement.User.DisplayName = '';
 
-		// Re-render the top bar and navigate to login
-		this.pict.views['ParimeManagement-TopBar'].render();
+		this.renderTopBar();
 		this.navigateTo('/Login');
 	}
 
@@ -168,6 +241,9 @@ class ParimeManagementApplication extends libPictApplication
 					{
 						let tmpData = JSON.parse(tmpXHR.responseText);
 						this.pict.AppData.ParimeManagement.ServerInfo = tmpData;
+						// Keep the status bar's server-version segment fresh
+						let tmpStatus = this.pict.views['ParimeManagement-StatusBar'];
+						if (tmpStatus) { tmpStatus.render(); }
 					}
 					catch (pError)
 					{

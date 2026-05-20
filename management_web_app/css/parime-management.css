@@ -1,7 +1,26 @@
 /* ============================================================================
    Parime Management Console - Base Styles
-   Pict Ecosystem Color Palette (from pict-docuserve)
+   ----------------------------------------------------------------------------
+   :root bridge — aliases the app's local vocabulary onto the
+   --theme-color-* tokens driven by pict-section-theme. Each alias keeps
+   the original hex as a fallback so any view CSS that hasn't migrated to
+   the new vocabulary still renders the original palette when no theme
+   provider is mounted (e.g. test harnesses).
    ============================================================================ */
+
+:root {
+	--bg-primary:     var(--theme-color-background-primary,   #F5F0E8);
+	--bg-secondary:   var(--theme-color-background-secondary, #F0ECE4);
+	--bg-panel:       var(--theme-color-background-panel,     #FFFFFF);
+	--bg-hover:       var(--theme-color-background-hover,     #E8E2D5);
+	--text-primary:   var(--theme-color-text-primary,         #3D3229);
+	--text-secondary: var(--theme-color-text-secondary,       #5E5549);
+	--text-muted:     var(--theme-color-text-muted,           #8A7F72);
+	--accent:         var(--theme-color-brand-primary,        #2E7D74);
+	--accent-hover:   var(--theme-color-brand-primary-hover,  #256861);
+	--accent-bg:      var(--theme-color-background-selected,  #E0EDEB);
+	--border-default: var(--theme-color-border-default,       #DDD6CA);
+}
 
 /* Reset and base */
 *, *::before, *::after {
@@ -11,11 +30,12 @@
 html, body {
 	margin: 0;
 	padding: 0;
+	height: 100%;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 	font-size: 16px;
 	line-height: 1.5;
-	color: #423D37;
-	background-color: #F5F0E8;
+	color: var(--text-primary);
+	background-color: var(--bg-primary);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
@@ -24,21 +44,16 @@ html, body {
 h1, h2, h3, h4, h5, h6 {
 	margin-top: 0;
 	line-height: 1.3;
-	color: var(--theme-color-text-primary, #3D3229);
+	color: var(--text-primary);
 }
 
 a {
-	color: #2E7D74;
+	color: var(--accent);
 	text-decoration: none;
 }
 
 a:hover {
-	color: #256861;
-}
-
-/* Application container */
-#ParimeManagement-Application-Container {
-	min-height: 100vh;
+	color: var(--accent-hover);
 }
 
 /* Utility: scrollbar styling */
@@ -47,16 +62,16 @@ a:hover {
 }
 
 ::-webkit-scrollbar-track {
-	background: #F5F0E8;
+	background: var(--bg-secondary);
 }
 
 ::-webkit-scrollbar-thumb {
-	background: #D4CCBE;
+	background: var(--text-muted);
 	border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: #B5AA9A;
+	background: var(--text-secondary);
 }
 
 /* Responsive adjustments */
