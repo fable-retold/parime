@@ -1,7 +1,7 @@
 {
 	"Name": "parime",
-	"Version": "1.0.3",
+	"Version": "1.0.6",
 	"Description": "Simple generic data lake behaviors.",
-	"GeneratedAt": "2026-04-10T17:22:14.270Z",
-	"GitCommit": "78aad84"
+	"GeneratedAt": "2026-05-22T05:40:36.448Z",
+	"GitCommit": "42f87a6"
 }
