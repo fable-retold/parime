@@ -1,5 +1,7 @@
 # Parime
 
+> **[&#9654; Read the Parime Documentation](https://stevenvelozo.github.io/parime/)** &mdash; interactive docs with the full API reference.
+
 > Simple generic data lake behaviors for record, binary and combined storage
 
 Parime is a data lake service that provides scoped, category-based storage for JSON records and binary files through a unified REST API. It sits on top of Orator and the Fable ecosystem, giving you record lakes backed by Bibliograph, binary lakes on the local filesystem with HTTP byte-range support, and combined lakes that pair a JSON record with a binary file under the same key. A WebSocket interface provides real-time access to all three lake types.
