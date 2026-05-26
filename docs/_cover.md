@@ -7,5 +7,5 @@
 - Combined lakes pairing records with binary files
 - Real-time WebSocket access to all lake types
 
-[GitHub](https://github.com/stevenvelozo/parime)
+[GitHub](https://github.com/fable-retold/parime)
 [Get Started](#parime)

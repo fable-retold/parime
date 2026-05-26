@@ -1,6 +1,6 @@
 # Parime
 
-> **[&#9654; Read the Parime Documentation](https://stevenvelozo.github.io/parime/)** &mdash; interactive docs with the full API reference.
+> **[&#9654; Read the Parime Documentation](https://fable-retold.github.io/parime/)** &mdash; interactive docs with the full API reference.
 
 > Simple generic data lake behaviors for record, binary and combined storage
 
@@ -157,9 +157,9 @@ npm test
 
 ## Related Packages
 
-- [bibliograph](https://github.com/stevenvelozo/bibliograph) - Raw record filing and change tracking
-- [orator](https://github.com/stevenvelozo/orator) - API server abstraction
-- [fable](https://github.com/stevenvelozo/fable) - Application services framework
+- [bibliograph](https://github.com/fable-retold/bibliograph) - Raw record filing and change tracking
+- [orator](https://github.com/fable-retold/orator) - API server abstraction
+- [fable](https://github.com/fable-retold/fable) - Application services framework
 
 ## License
 

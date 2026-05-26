@@ -67,8 +67,8 @@ Fable (Core)
 
 ## Related Packages
 
-- [bibliograph](https://github.com/stevenvelozo/bibliograph) - Raw record filing and change tracking
-- [orator](https://github.com/stevenvelozo/orator) - API server abstraction for REST and IPC services
-- [orator-serviceserver-restify](https://github.com/stevenvelozo/orator-serviceserver-restify) - Restify service server implementation
-- [fable](https://github.com/stevenvelozo/fable) - Service provider framework
-- [meadow](https://github.com/stevenvelozo/meadow) - Data access layer with automatic REST endpoints
+- [bibliograph](https://github.com/fable-retold/bibliograph) - Raw record filing and change tracking
+- [orator](https://github.com/fable-retold/orator) - API server abstraction for REST and IPC services
+- [orator-serviceserver-restify](https://github.com/fable-retold/orator-serviceserver-restify) - Restify service server implementation
+- [fable](https://github.com/fable-retold/fable) - Service provider framework
+- [meadow](https://github.com/fable-retold/meadow) - Data access layer with automatic REST endpoints
