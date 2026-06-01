@@ -1,6 +1,6 @@
 # Parime
 
-> **[&#9654; Read the Parime Documentation](https://fable-retold.github.io/parime/)** &mdash; interactive docs with the full API reference.
+> **[Read the Parime Documentation](https://fable-retold.github.io/parime/)** - interactive docs with the full API reference.
 
 > Simple generic data lake behaviors for record, binary and combined storage
 
