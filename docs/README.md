@@ -51,19 +51,8 @@ tmpServer.initialize(
 
 Parime registers itself as a Fable service and wires up Orator with a Restify service server. During initialization it sets up the Bibliograph record store, the binary filesystem storage, and registers all REST endpoints. The server is then ready to accept HTTP and WebSocket connections.
 
-```
-Fable (Core)
-  └── Parime (Data Lake Server)
-        ├── Orator + Restify (HTTP/WebSocket)
-        ├── Bibliograph (Record Storage)
-        ├── BinaryStorage (Filesystem)
-        ├── LakeValidation (Input Validation)
-        └── Endpoints
-              ├── Record Lake   /1.0/Record/...
-              ├── Binary Lake   /1.0/Binary/...
-              ├── Combined Lake /1.0/Combined/...
-              └── WebSocket     /1.0/WebSocket/Lake
-```
+<!-- bespoke diagram: edit diagrams/how-it-works.mmd or .hints.json, then: npx pict-renderer-graph build modules/meadow/parime/docs -->
+![How It Works](diagrams/how-it-works.svg)
 
 ## Related Packages
 

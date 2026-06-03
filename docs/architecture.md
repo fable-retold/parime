@@ -4,16 +4,8 @@ Parime is structured as a set of Fable services and Orator endpoints that togeth
 
 ## Service Architecture
 
-```
-Fable Instance
-  ├── ParimeServer (main service, wires everything together)
-  ├── Orator + OratorServiceServerRestify (HTTP server)
-  ├── Bibliograph (record storage backend)
-  ├── ParimeBibliographHelpers (extended record operations)
-  ├── ParimeLakeValidation (input validation)
-  ├── ParimeBinaryStorage (filesystem binary storage)
-  └── ParimeWebSocketHandler (WebSocket frame parsing)
-```
+<!-- bespoke diagram: edit diagrams/service-architecture.mmd or .hints.json, then: npx pict-renderer-graph build modules/meadow/parime/docs -->
+![Service Architecture](diagrams/service-architecture.svg)
 
 ## Lake Types
 
