@@ -26,6 +26,7 @@ const libFableServiceBase = require('fable-serviceproviderbase');
 
 const libParimeLakeValidation = require('./services/Parime-LakeValidation.js');
 const libParimeBinaryStorage = require('./services/Parime-BinaryStorage.js');
+const libParimeTieredBinaryStorage = require('./services/Parime-TieredBinaryStorage.js');
 const libBibliograph = require('bibliograph');
 const libParimeBibliographHelpers = require('./services/Parime-BibliographHelpers.js');
 
@@ -45,7 +46,14 @@ class ParimeStorage extends libFableServiceBase
 
 		if (!('ParimeBinaryStorage' in this.fable))
 		{
-			this.fable.addServiceType('ParimeBinaryStorage', libParimeBinaryStorage);
+			// When a durable backend is configured (ParimeDurableBackend.Type is set and
+			// not 'none'), ParimeBinaryStorage is the TIERED store: a local filesystem
+			// cache in front of S3/R2 or another durable backend. Otherwise it is the
+			// plain local store, byte-for-byte as before. Either way it registers under
+			// the same name, so every consumer (fable.ParimeBinaryStorage) is unchanged.
+			let tmpDurableBackend = this.fable.settings.ParimeDurableBackend;
+			let tmpUseTiered = !!(tmpDurableBackend && tmpDurableBackend.Type && (String(tmpDurableBackend.Type).toLowerCase() !== 'none'));
+			this.fable.addServiceType('ParimeBinaryStorage', tmpUseTiered ? libParimeTieredBinaryStorage : libParimeBinaryStorage);
 			this.fable.instantiateServiceProvider('ParimeBinaryStorage');
 		}
 
