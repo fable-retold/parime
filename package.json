@@ -1,6 +1,6 @@
 {
     "name": "parime",
-    "version": "1.0.6",
+    "version": "1.1.0",
     "description": "Simple generic data lake behaviors.",
     "main": "source/Parime-Server.js",
     "exports": {
@@ -40,6 +40,7 @@
         ]
     },
     "dependencies": {
+        "aws4fetch": "^1.0.20",
         "bibliograph": "^1.0.0",
         "orator": "^6.1.2",
         "orator-serviceserver-restify": "^2.0.11",
